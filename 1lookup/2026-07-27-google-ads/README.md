@@ -102,3 +102,20 @@ Free tools: /tools/carrier-lookup, /tools/email-verifier, /tools/phone-number-lo
 | bulk phone number validation | 150 | $4.00 |
 | zerobounce alternative | 70 | $12.00 |
 | neverbounce alternative | 70 | $7.00 |
+
+## Deployment log (2026-07-27, deployed via API)
+
+Deployed directly to Google Ads account 8715389296 (via the connected Ads API + Porter Metrics) the same day. Live state verified against these CSVs after build: 8 campaigns ENABLED at exactly $329/day ($10,002/mo), 33 ad groups, 143/143 keywords, 31 search ads + 2 display ads, 14 extension assets, 9 uploaded images, geo US+CA presence-only, English, UTM suffix set.
+
+Campaign IDs: Phone & Carrier API 24071111678, Email Verification 24075914368, New Products 24071101169, Competitors 24075916549, Free Tools 24066174645, Brand 24066175641, Display Remarketing 24075926581, Display Prospecting 24075922684.
+
+Cutover done: legacy search-intent-global, search-brand ($80/day) and search-competitors PAUSED (not removed, history kept).
+
+Deviations from the spec above, all deliberate:
+1. **Display Remarketing runs Manual CPC ($0.60), not Maximize Conversions.** The account has two junk PRIMARY conversion goals ("Booked Meeting" fires on a page view, "YouTube follow-on views") that smart bidding would chase. Demote both from primary in the UI (Goals > Conversions), then switch the campaign to Maximize Conversions.
+2. Remarketing targets the existing "All visitors (AdWords)" (2,300 users) and "Pricing Page + Signup Page" (880) lists, excludes "All Converters"; Prospecting targets a new custom audience "1L Competitor & Validation Intent" (competitor sites + validation search terms). Audience targeting restricts serving (not observation).
+3. The account-level negative list contained "free" which would have blocked the whole Free Tools campaign; removed there, kept as a campaign-level negative on campaigns 1-4 via the new "1L - Consumer & Junk" shared list.
+4. [batch skip tracing] exact triggered Google's exemptible "Evasive Ad Content" policy; created with a policy exemption request, may sit in review briefly.
+5. Frequency cap 3/day set on Remarketing.
+
+Still open: gclid capture + Stripe offline conversion import (dev task, Afaq) so the $150 CAC gate reads Stripe truth instead of the pixel; weekly search-terms/negative review cadence.
