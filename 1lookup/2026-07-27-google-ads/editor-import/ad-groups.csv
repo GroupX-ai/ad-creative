@@ -1,0 +1,32 @@
+Campaign,Ad Group,Max CPC,Ad Group Status
+1L Search - Phone & Carrier API,Phone Validation API,6.00,Enabled
+1L Search - Phone & Carrier API,Bulk Phone Validation,5.00,Enabled
+1L Search - Phone & Carrier API,Carrier Lookup API,5.00,Enabled
+1L Search - Phone & Carrier API,HLR Lookup,4.00,Enabled
+1L Search - Phone & Carrier API,Reverse Phone Lookup API,6.00,Enabled
+1L Search - Email Verification,Email Verification API,8.00,Enabled
+1L Search - Email Verification,Bulk Email List Cleaning,9.00,Enabled
+1L Search - Email Verification,Email Append & Finder,6.00,Enabled
+1L Search - New Products,Skip Tracing,2.50,Enabled
+1L Search - New Products,DNC & Phone Scrub,4.00,Enabled
+1L Search - New Products,Phone Spam & Risk,2.00,Enabled
+1L Search - New Products,Fraud Detection,10.00,Enabled
+1L Search - New Products,IP Intelligence,4.00,Enabled
+1L Search - New Products,Data Enrichment & B2B Append,10.00,Enabled
+1L Search - New Products,Website Scrapers,3.00,Enabled
+1L Search - New Products,SEO Data APIs,7.00,Enabled
+1L Search - New Products,Audio Transcription,2.50,Enabled
+1L Search - Competitors,Numverify,6.00,Enabled
+1L Search - Competitors,Twilio Lookup,8.00,Enabled
+1L Search - Competitors,Telesign,8.00,Enabled
+1L Search - Competitors,ZeroBounce,12.00,Enabled
+1L Search - Competitors,NeverBounce,8.00,Enabled
+1L Search - Competitors,Kickbox,8.00,Enabled
+1L Search - Competitors,IPQualityScore,8.00,Enabled
+1L Search - Competitors,Melissa,6.00,Enabled
+1L Search - Competitors,HLR Lookups,5.00,Enabled
+1L Search - Free Tools,Carrier Lookup Free,0.80,Enabled
+1L Search - Free Tools,Email Verifier Free,0.80,Enabled
+1L Search - Free Tools,Phone Validator Free,0.70,Enabled
+1L Search - Free Tools,Reverse Email Lookup,0.70,Enabled
+1L Search - Brand,Brand,1.50,Enabled

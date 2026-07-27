@@ -1,0 +1,56 @@
+Scope,Campaign,Keyword,Criterion Type
+SHARED: Consumer & Junk (attach to campaigns 1-4),,who called me,Phrase
+SHARED: Consumer & Junk (attach to campaigns 1-4),,who called,Phrase
+SHARED: Consumer & Junk (attach to campaigns 1-4),,whose number is this,Phrase
+SHARED: Consumer & Junk (attach to campaigns 1-4),,who is this number,Phrase
+SHARED: Consumer & Junk (attach to campaigns 1-4),,app,Phrase
+SHARED: Consumer & Junk (attach to campaigns 1-4),,apk,Phrase
+SHARED: Consumer & Junk (attach to campaigns 1-4),,download,Phrase
+SHARED: Consumer & Junk (attach to campaigns 1-4),,free,Phrase
+SHARED: Consumer & Junk (attach to campaigns 1-4),,open source,Phrase
+SHARED: Consumer & Junk (attach to campaigns 1-4),,github,Phrase
+SHARED: Consumer & Junk (attach to campaigns 1-4),,tutorial,Phrase
+SHARED: Consumer & Junk (attach to campaigns 1-4),,course,Phrase
+SHARED: Consumer & Junk (attach to campaigns 1-4),,what is,Phrase
+SHARED: Consumer & Junk (attach to campaigns 1-4),,meaning,Phrase
+SHARED: Consumer & Junk (attach to campaigns 1-4),,definition,Phrase
+SHARED: Consumer & Junk (attach to campaigns 1-4),,wikipedia,Phrase
+SHARED: Consumer & Junk (attach to campaigns 1-4),,jobs,Phrase
+SHARED: Consumer & Junk (attach to campaigns 1-4),,salary,Phrase
+SHARED: Consumer & Junk (attach to campaigns 1-4),,career,Phrase
+SHARED: Consumer & Junk (attach to campaigns 1-4),,truecaller,Phrase
+SHARED: Consumer & Junk (attach to campaigns 1-4),,textnow,Phrase
+SHARED: Brand routing (attach to campaigns 1-5),,1lookup,Phrase
+SHARED: Brand routing (attach to campaigns 1-5),,1 lookup,Phrase
+CAMPAIGN,1L Search - Phone & Carrier API,numverify,Phrase
+CAMPAIGN,1L Search - Phone & Carrier API,twilio,Phrase
+CAMPAIGN,1L Search - Phone & Carrier API,telesign,Phrase
+CAMPAIGN,1L Search - Phone & Carrier API,ipqualityscore,Phrase
+CAMPAIGN,1L Search - Phone & Carrier API,melissa,Phrase
+CAMPAIGN,1L Search - Phone & Carrier API,hlrlookup,Phrase
+CAMPAIGN,1L Search - Email Verification,zerobounce,Phrase
+CAMPAIGN,1L Search - Email Verification,neverbounce,Phrase
+CAMPAIGN,1L Search - Email Verification,kickbox,Phrase
+CAMPAIGN,1L Search - Email Verification,emailable,Phrase
+CAMPAIGN,1L Search - Email Verification,hunter io,Phrase
+CAMPAIGN,1L Search - New Products,zoominfo,Phrase
+CAMPAIGN,1L Search - New Products,apollo,Phrase
+CAMPAIGN,1L Search - New Products,clearbit,Phrase
+CAMPAIGN,1L Search - New Products,ahrefs,Phrase
+CAMPAIGN,1L Search - New Products,semrush,Phrase
+CAMPAIGN,1L Search - New Products,moz,Phrase
+CAMPAIGN,1L Search - New Products,deepgram,Phrase
+CAMPAIGN,1L Search - New Products,assemblyai,Phrase
+CAMPAIGN,1L Search - New Products,rev,Exact
+CAMPAIGN,1L Search - New Products,otter,Phrase
+CAMPAIGN,1L Search - Competitors,login,Phrase
+CAMPAIGN,1L Search - Competitors,log in,Phrase
+CAMPAIGN,1L Search - Competitors,sign in,Phrase
+CAMPAIGN,1L Search - Competitors,careers,Phrase
+CAMPAIGN,1L Search - Competitors,support,Phrase
+CAMPAIGN,1L Search - Free Tools,who called me,Phrase
+CAMPAIGN,1L Search - Free Tools,apk,Phrase
+CAMPAIGN,1L Search - Free Tools,truecaller,Phrase
+CAMPAIGN,1L Search - Free Tools,textnow,Phrase
+CAMPAIGN,1L Search - Free Tools,burner,Phrase
+CAMPAIGN,1L Search - Free Tools,fake number,Phrase

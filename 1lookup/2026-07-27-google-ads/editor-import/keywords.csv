@@ -1,0 +1,144 @@
+Campaign,Ad Group,Keyword,Criterion Type
+1L Search - Phone & Carrier API,Phone Validation API,phone validation api,Exact
+1L Search - Phone & Carrier API,Phone Validation API,phone number validation api,Exact
+1L Search - Phone & Carrier API,Phone Validation API,phone number verification api,Exact
+1L Search - Phone & Carrier API,Phone Validation API,phone verification api,Exact
+1L Search - Phone & Carrier API,Phone Validation API,phone number lookup api,Exact
+1L Search - Phone & Carrier API,Phone Validation API,phone validation api,Phrase
+1L Search - Phone & Carrier API,Phone Validation API,phone number validation service,Phrase
+1L Search - Phone & Carrier API,Phone Validation API,validate phone numbers api,Phrase
+1L Search - Phone & Carrier API,Bulk Phone Validation,bulk phone number validation,Exact
+1L Search - Phone & Carrier API,Bulk Phone Validation,bulk phone validation,Exact
+1L Search - Phone & Carrier API,Bulk Phone Validation,validate phone number list,Phrase
+1L Search - Phone & Carrier API,Bulk Phone Validation,bulk phone number checker,Phrase
+1L Search - Phone & Carrier API,Bulk Phone Validation,phone list cleaning,Phrase
+1L Search - Phone & Carrier API,Bulk Phone Validation,clean phone number list,Phrase
+1L Search - Phone & Carrier API,Carrier Lookup API,carrier lookup api,Exact
+1L Search - Phone & Carrier API,Carrier Lookup API,phone carrier api,Exact
+1L Search - Phone & Carrier API,Carrier Lookup API,bulk carrier lookup,Exact
+1L Search - Phone & Carrier API,Carrier Lookup API,carrier lookup api,Phrase
+1L Search - Phone & Carrier API,Carrier Lookup API,carrier detection api,Phrase
+1L Search - Phone & Carrier API,HLR Lookup,hlr lookup,Exact
+1L Search - Phone & Carrier API,HLR Lookup,hlr lookup api,Exact
+1L Search - Phone & Carrier API,HLR Lookup,hlr check,Exact
+1L Search - Phone & Carrier API,HLR Lookup,hlr lookup service,Phrase
+1L Search - Phone & Carrier API,HLR Lookup,bulk hlr lookup,Phrase
+1L Search - Phone & Carrier API,Reverse Phone Lookup API,reverse phone lookup api,Exact
+1L Search - Phone & Carrier API,Reverse Phone Lookup API,reverse phone api,Exact
+1L Search - Phone & Carrier API,Reverse Phone Lookup API,caller id api,Exact
+1L Search - Phone & Carrier API,Reverse Phone Lookup API,reverse phone append,Phrase
+1L Search - Phone & Carrier API,Reverse Phone Lookup API,bulk reverse phone lookup,Phrase
+1L Search - Email Verification,Email Verification API,email verification api,Exact
+1L Search - Email Verification,Email Verification API,email validation api,Exact
+1L Search - Email Verification,Email Verification API,verify email address api,Exact
+1L Search - Email Verification,Email Verification API,email checker api,Exact
+1L Search - Email Verification,Email Verification API,disposable email checker api,Exact
+1L Search - Email Verification,Email Verification API,email verification api,Phrase
+1L Search - Email Verification,Email Verification API,email deliverability api,Phrase
+1L Search - Email Verification,Bulk Email List Cleaning,bulk email verification,Exact
+1L Search - Email Verification,Bulk Email List Cleaning,email list cleaning,Exact
+1L Search - Email Verification,Bulk Email List Cleaning,email list verification,Exact
+1L Search - Email Verification,Bulk Email List Cleaning,bulk email verifier,Exact
+1L Search - Email Verification,Bulk Email List Cleaning,clean email list,Phrase
+1L Search - Email Verification,Bulk Email List Cleaning,email list cleaning service,Phrase
+1L Search - Email Verification,Bulk Email List Cleaning,email hygiene service,Phrase
+1L Search - Email Verification,Email Append & Finder,email finder api,Exact
+1L Search - Email Verification,Email Append & Finder,email append,Exact
+1L Search - Email Verification,Email Append & Finder,email append service,Exact
+1L Search - Email Verification,Email Append & Finder,b2b email append,Phrase
+1L Search - Email Verification,Email Append & Finder,business email finder api,Phrase
+1L Search - New Products,Skip Tracing,skip tracing api,Exact
+1L Search - New Products,Skip Tracing,skip trace api,Exact
+1L Search - New Products,Skip Tracing,batch skip tracing,Exact
+1L Search - New Products,Skip Tracing,bulk skip tracing,Exact
+1L Search - New Products,Skip Tracing,skip tracing data,Phrase
+1L Search - New Products,Skip Tracing,skip tracing software,Phrase
+1L Search - New Products,DNC & Phone Scrub,dnc scrubbing,Exact
+1L Search - New Products,DNC & Phone Scrub,dnc list scrubbing,Exact
+1L Search - New Products,DNC & Phone Scrub,dnc scrub,Exact
+1L Search - New Products,DNC & Phone Scrub,scrub against dnc,Phrase
+1L Search - New Products,DNC & Phone Scrub,phone number scrubbing,Phrase
+1L Search - New Products,DNC & Phone Scrub,tcpa scrubbing,Phrase
+1L Search - New Products,Phone Spam & Risk,phone spam checker,Exact
+1L Search - New Products,Phone Spam & Risk,check if number is spam,Exact
+1L Search - New Products,Phone Spam & Risk,phone reputation api,Exact
+1L Search - New Products,Phone Spam & Risk,spam number lookup,Phrase
+1L Search - New Products,Phone Spam & Risk,caller id reputation,Phrase
+1L Search - New Products,Fraud Detection,fraud detection api,Exact
+1L Search - New Products,Fraud Detection,risk scoring api,Exact
+1L Search - New Products,Fraud Detection,fraud score api,Phrase
+1L Search - New Products,Fraud Detection,fraud prevention api,Phrase
+1L Search - New Products,IP Intelligence,ip lookup api,Exact
+1L Search - New Products,IP Intelligence,ip geolocation api,Exact
+1L Search - New Products,IP Intelligence,ip address lookup api,Exact
+1L Search - New Products,IP Intelligence,vpn detection api,Exact
+1L Search - New Products,IP Intelligence,proxy detection api,Phrase
+1L Search - New Products,IP Intelligence,ip intelligence api,Phrase
+1L Search - New Products,Data Enrichment & B2B Append,data enrichment api,Exact
+1L Search - New Products,Data Enrichment & B2B Append,contact enrichment api,Exact
+1L Search - New Products,Data Enrichment & B2B Append,b2b data enrichment,Exact
+1L Search - New Products,Data Enrichment & B2B Append,company firmographics api,Exact
+1L Search - New Products,Data Enrichment & B2B Append,lead enrichment api,Phrase
+1L Search - New Products,Data Enrichment & B2B Append,firmographic data api,Phrase
+1L Search - New Products,Website Scrapers,website scraper api,Exact
+1L Search - New Products,Website Scrapers,website contacts scraper,Exact
+1L Search - New Products,Website Scrapers,extract emails from website,Phrase
+1L Search - New Products,Website Scrapers,website contact scraper,Phrase
+1L Search - New Products,SEO Data APIs,backlink api,Exact
+1L Search - New Products,SEO Data APIs,domain authority api,Exact
+1L Search - New Products,SEO Data APIs,keyword research api,Exact
+1L Search - New Products,SEO Data APIs,seo data api,Phrase
+1L Search - New Products,SEO Data APIs,keyword data api,Phrase
+1L Search - New Products,Audio Transcription,bulk audio transcription,Exact
+1L Search - New Products,Audio Transcription,audio transcription api,Exact
+1L Search - New Products,Audio Transcription,bulk transcription service,Phrase
+1L Search - Competitors,Numverify,numverify,Exact
+1L Search - Competitors,Numverify,numverify alternative,Exact
+1L Search - Competitors,Numverify,numverify pricing,Exact
+1L Search - Competitors,Numverify,numverify api,Phrase
+1L Search - Competitors,Twilio Lookup,twilio lookup,Exact
+1L Search - Competitors,Twilio Lookup,twilio lookup pricing,Exact
+1L Search - Competitors,Twilio Lookup,twilio lookup alternative,Exact
+1L Search - Competitors,Twilio Lookup,twilio phone validation,Phrase
+1L Search - Competitors,Telesign,telesign alternative,Exact
+1L Search - Competitors,Telesign,telesign pricing,Exact
+1L Search - Competitors,Telesign,telesign phone id,Phrase
+1L Search - Competitors,ZeroBounce,zerobounce alternative,Exact
+1L Search - Competitors,ZeroBounce,zerobounce pricing,Exact
+1L Search - Competitors,ZeroBounce,zerobounce vs,Phrase
+1L Search - Competitors,NeverBounce,neverbounce alternative,Exact
+1L Search - Competitors,NeverBounce,neverbounce pricing,Exact
+1L Search - Competitors,NeverBounce,neverbounce vs,Phrase
+1L Search - Competitors,Kickbox,kickbox alternative,Exact
+1L Search - Competitors,Kickbox,kickbox pricing,Exact
+1L Search - Competitors,Kickbox,kickbox email verification,Phrase
+1L Search - Competitors,IPQualityScore,ipqualityscore alternative,Exact
+1L Search - Competitors,IPQualityScore,ipqs lookup,Exact
+1L Search - Competitors,IPQualityScore,ipqualityscore pricing,Exact
+1L Search - Competitors,IPQualityScore,ipqs alternative,Phrase
+1L Search - Competitors,Melissa,melissa data alternative,Exact
+1L Search - Competitors,Melissa,melissa pricing,Exact
+1L Search - Competitors,Melissa,melissa data pricing,Exact
+1L Search - Competitors,HLR Lookups,hlrlookup alternative,Exact
+1L Search - Competitors,HLR Lookups,hlrlookup pricing,Exact
+1L Search - Competitors,HLR Lookups,hlr lookups alternative,Phrase
+1L Search - Free Tools,Carrier Lookup Free,carrier lookup,Phrase
+1L Search - Free Tools,Carrier Lookup Free,free carrier lookup,Phrase
+1L Search - Free Tools,Carrier Lookup Free,phone carrier lookup,Phrase
+1L Search - Free Tools,Carrier Lookup Free,cell phone carrier lookup,Phrase
+1L Search - Free Tools,Carrier Lookup Free,what carrier is this number,Phrase
+1L Search - Free Tools,Email Verifier Free,email verifier,Phrase
+1L Search - Free Tools,Email Verifier Free,verify email address,Phrase
+1L Search - Free Tools,Email Verifier Free,email checker free,Phrase
+1L Search - Free Tools,Phone Validator Free,phone number validator,Phrase
+1L Search - Free Tools,Phone Validator Free,validate phone number,Phrase
+1L Search - Free Tools,Phone Validator Free,phone validation,Phrase
+1L Search - Free Tools,Reverse Email Lookup,reverse email lookup,Phrase
+1L Search - Free Tools,Reverse Email Lookup,reverse email search,Phrase
+1L Search - Free Tools,Reverse Email Lookup,email address lookup,Phrase
+1L Search - Brand,Brand,1lookup,Exact
+1L Search - Brand,Brand,1lookup,Phrase
+1L Search - Brand,Brand,1 lookup,Exact
+1L Search - Brand,Brand,1lookup api,Exact
+1L Search - Brand,Brand,1lookup pricing,Exact
+1L Search - Brand,Brand,1lookup.io,Exact
