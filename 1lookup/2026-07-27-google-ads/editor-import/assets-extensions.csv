@@ -1,0 +1,15 @@
+Asset Type,Text,Description Line 1,Description Line 2,Final URL,Apply To
+Sitelink,Pricing,Simple universal credits.,Plans from $99/month.,https://www.1lookup.io/pricing,All campaigns
+Sitelink,Free Trial,7-day free trial.,Nothing charged up front.,https://www.1lookup.io/free-trial,All campaigns
+Sitelink,All Products,"Phone, email, IP and more.",One API for every lookup.,https://www.1lookup.io/products,All campaigns
+Sitelink,Free Tools,Try a lookup free.,No signup required.,https://www.1lookup.io/tools,All campaigns
+Sitelink,Compare,1Lookup vs the rest.,"Pricing, coverage, speed.",https://www.1lookup.io/compare,1L Search - Competitors
+Callout,7-Day Free Trial,,,,All campaigns
+Callout,No Contracts,,,,All campaigns
+Callout,Cancel Anytime,,,,All campaigns
+Callout,5-Minute Setup,,,,All campaigns
+Callout,Daily FCC Data Updates,,,,All campaigns
+Callout,Bulk CSV Uploads,,,,All campaigns
+Callout,1000 Requests/Min,,,,All campaigns
+Callout,200+ Countries,,,,All campaigns
+Structured snippet (Services),Phone Validation;Email Verification;Carrier Lookup;HLR Lookup;Skip Tracing;IP Intelligence;Fraud Scoring;DNC Scrubbing,,,,All campaigns
