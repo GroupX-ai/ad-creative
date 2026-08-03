@@ -29,6 +29,18 @@ All six squares are live as Meta ads in ad account 1431808552119912 (ad set "EC 
 
 **They are unverified.** The session that made them could not decode H.264 to inspect frames (the bundled ffmpeg is a stripped Playwright build, and headless Chromium has no proprietary codec support), so nobody has actually watched them. Image-to-video models routinely warp lettering. Please watch both at full size before uploading either to Meta; if the text holds, they are the account's first video assets and fill the Reels/Stories gap.
 
+## Reddit deployment (2026-08-03)
+
+Three of the squares are now also live as Reddit ads on the Emailchaser account (`a2_jfl3jq44ak4p`), campaign `2557856086225288971`, $25/day, SIGN_UP goal, community-targeted (r/sales, r/agency, r/Emailmarketing, r/Entrepreneur, r/SaaS, r/startups, r/smallbusiness, r/digital_marketing, r/EntrepreneurRideAlong, r/salestechniques, r/marketing):
+
+| File | Reddit post | Ad ID |
+|---|---|---|
+| ec-c9-receipt-square.png | `t3_1ven355` | `2560639697993561424` |
+| ec-c6-morgue-square.png | `t3_1ven39n` | `2560639772031550568` |
+| ec-c5-primary-square.png | `t3_1ven3ef` | `2560639835689522427` |
+
+Media was staged via the fal CDN (Reddit ingests and rehosts to i.redd.it). Post headlines are the approved on-image copy verbatim. The 2026-08-01 ad built from a render with a fabricated logo stays paused; the c6 comment-sentiment watch from the claim-safety notes applies doubly on Reddit, where ads take comments by default.
+
 ## Prompts
 
 Prompts follow the playbook template and end with the standard no-extra-text constraint. Full prompt text is in the generator script preserved with this batch's session notes; each concept's background and visual description is reproduced verbatim in the vault note [[emailchaser-ads-launch]].
