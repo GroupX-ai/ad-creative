@@ -1,9 +1,25 @@
 # voicedrop — 2026-08-09-interstellar-parody
 
 Parody of the Interstellar "make him stay, Murph" bookshelf scene, rebuilt for VoiceDrop.
-One deliverable: `voicedrop-interstellar-parody-vertical.mp4`, 59.6s, 720x1280 (9:16), 24fps,
-AAC 48kHz, -13.2 LUFS integrated, ~16 MB. Vertical because that is where the VoiceDrop Meta
-spend runs (Reels/Stories/feed); a 16:9 pass is a re-render, not a re-shoot.
+59.6s, 720x1280 (9:16), 24fps, AAC 48kHz, ~16 MB each. Vertical because that is where the
+VoiceDrop Meta spend runs (Reels/Stories/feed); a 16:9 pass is a re-render, not a re-shoot.
+
+## Which file to upload
+
+**Two cuts. Identical picture and dialogue. Only the music differs.**
+
+| File | Music | Use |
+|---|---|---|
+| `voicedrop-interstellar-parody-vertical.mp4` | original score, cleared | **This is the one that ships.** |
+| `voicedrop-interstellar-TEMP-TRACK-reference-DO-NOT-SHIP.mp4` | the film's actual main theme | Internal reference only. Never upload. |
+
+The reference cut exists because Robby asked to see how the cut plays against the real cue
+before deciding what to license. It is an advertising **temp track**: standard for judging
+intent, never for release. It carries a commercially released recording, so putting it on a
+Meta ad account needs a sync licence from the publisher and label, and Meta's Rights Manager
+fingerprints that catalogue: an unlicensed upload gets muted, blocked or taken down, and puts
+the ad account at risk. If the real cue is genuinely wanted, the route is a sync licence, or a
+cleared production-music cue in that style. Do not resolve it by uploading this file.
 
 Generated with fal. Video: `bytedance/seedance-2.5/reference-to-video` (720p, native
 synchronised dialogue audio, ~$0.4730/s). Stills: `openai/gpt-image-2` and
@@ -187,14 +203,18 @@ between the first and second plea. Take 2 pins the dialogue to exactly four line
 
 `fal-ai/elevenlabs/music`, `force_instrumental: true`.
 
-**The score is original and cleared for commercial use.** The film's actual main theme is a
-commercially released recording; putting it under a paid ad needs a sync licence from the
-publisher and label, and Meta's Rights Manager fingerprints that catalogue, so an unlicensed
-upload gets muted, blocked or taken down on the ad account. Instead the reference recording
-was measured (**E minor, ~92 BPM**, `step9_analyse_ref.py`: chroma-to-Krumhansl key match plus
+These three beds are the score on the **shippable** cut. They are original and cleared for
+commercial use. Rather than copy the film cue, the supplied reference recording was measured
+(**E minor, ~92 BPM**, `step9_analyse_ref.py`: chroma-to-Krumhansl key match plus
 onset-autocorrelation tempo) and all three beds were written to that key and tempo, so the
 cuts between them sound like one score and the ostinato carries the same relentless-build
-character. If the real cue is ever wanted, the route is a sync licence, not a re-render.
+character.
+
+The temp-track reference cut instead runs the supplied recording continuously from 0:22
+across the whole 59.6s: contiguous slices with per-shot gain (ghost 1.00, desk 0.68, payoff
+1.05, crossfaded), levelled to -23 LUFS before the mix because the source is a loud master,
+then the same ducking and -14 LUFS master as the shippable cut so the A/B is fair. Same
+picture, same dialogue, same subtitles.
 
 **`bed-ghost`** (76s, under every ghost shot). Measured build: -12.1 LUFS at the top to
 -9.3 LUFS by 70s.
