@@ -9,7 +9,8 @@ that is explicitly **not AI slop**, with a $20 experiment budget.
 
 | File | Spec | Use |
 |---|---|---|
-| `voicedrop-c39-cold-callers-anonymous-1080p.mp4` | 1080x1920, 30.0s, 30fps, AAC audio | **Upload this one.** Reels / Stories / TikTok 9:16 |
+| `voicedrop-c39-cold-callers-anonymous-1080p-captioned.mp4` | 1080x1918, 30.0s | **Upload this one.** One-word centre captions burned in |
+| `voicedrop-c39-cold-callers-anonymous-1080p.mp4` | 1080x1918, 30.0s, 30fps, AAC audio | Clean 1080p, no captions |
 | `voicedrop-c39-cold-callers-anonymous-480p.mp4` | 480x854, 30.0s, 24fps, AAC audio | Seedance master, kept for reference and re-upscaling |
 
 Model `bytedance/seedance-2.5/text-to-video`, 480p, 30s, 9:16, audio on, **seed 1715835244**.
@@ -65,11 +66,12 @@ described in the prompt. It reads more real, not less. No action needed.
 
 ## Before it runs
 
-- **Add captions in post.** The ad is dialogue-driven and Meta autoplays muted. Captions were
-  deliberately kept out of the render because video models garble burned-in type, and a garbled
-  headline is worse than none. Use Meta's auto-captions or burn your own.
-- **Add an end card in post** if you want the wordmark and CTA on screen. The brand is currently
-  spoken only.
+- **Captions are already burned in** on the `-captioned.mp4` file: one word at a time, centred,
+  Liberation Sans Bold with a heavy outline. Word timings come from a speech-to-text pass, and
+  the brand name is rejoined into one word because the transcriber splits it. Rebuild with
+  `node _scripts/seedance-captions.mjs <video.mp4> <audio.mp3>`. Use the clean 1080p file instead
+  if you would rather caption it yourself.
+- **Add an end card in post** if you want the wordmark and CTA on screen.
 
 ## Prompt
 

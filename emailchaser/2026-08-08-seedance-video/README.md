@@ -9,7 +9,8 @@ disruptive video that is explicitly **not AI slop**, with a $20 experiment budge
 
 | File | Spec | Use |
 |---|---|---|
-| `emailchaser-c11-missing-1080p.mp4` | 1080x1920, 30.0s, 30fps, AAC audio | **Upload this one.** Reels / Stories / TikTok 9:16 |
+| `emailchaser-c11-missing-1080p-captioned.mp4` | 1080x1918, 30.0s | **Upload this one.** One-word centre captions burned in |
+| `emailchaser-c11-missing-1080p.mp4` | 1080x1918, 30.0s, 30fps, AAC audio | Clean 1080p, no captions |
 | `emailchaser-c11-missing-480p.mp4` | 480x854, 30.0s, 24fps, AAC audio | Seedance master, kept for reference and re-upscaling |
 
 Model `bytedance/seedance-2.5/text-to-video`, 480p, 30s, 9:16, audio on, **seed 1710683338**.
@@ -63,10 +64,12 @@ environment's bundled ffmpeg is a stripped Playwright build with no H.264 decode
 
 ## Before it runs
 
-- **Add captions in post.** The ad is dialogue-driven and Meta autoplays muted. Captions were
-  deliberately kept out of the render because video models garble burned-in type. Use Meta's
-  auto-captions or burn your own.
-- **Add an end card in post** if you want the wordmark and CTA on screen. The brand is spoken only.
+- **Captions are already burned in** on the `-captioned.mp4` file: one word at a time, centred,
+  Liberation Sans Bold with a heavy outline. Word timings come from a speech-to-text pass, and
+  the brand name is rejoined into one word because the transcriber splits it. Rebuild with
+  `node _scripts/seedance-captions.mjs <video.mp4> <audio.mp3>`. Use the clean 1080p file instead
+  if you would rather caption it yourself.
+- **Add an end card in post** if you want the wordmark and CTA on screen.
 - The tone is bleak on purpose. If it runs on Reddit, where ads take comments by default, the
   same comment-sentiment watch that applies to `ec-c6` applies here.
 

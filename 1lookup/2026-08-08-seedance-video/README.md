@@ -12,7 +12,8 @@ disruptive video that is explicitly **not AI slop**, with a $20 experiment budge
 
 | File | Spec | Use |
 |---|---|---|
-| `1lookup-c3-ghost-leads-1080p-trimmed.mp4` | 1080x1918, 27.4s, AAC audio | **Use this one.** Brand mispronunciation cut off the end |
+| `1lookup-c3-ghost-leads-1080p-trimmed-captioned.mp4` | 1080x1918, 27.4s | **Use this one.** Trimmed, with one-word centre captions |
+| `1lookup-c3-ghost-leads-1080p-trimmed.mp4` | 1080x1918, 27.4s, AAC audio | Trimmed, no captions |
 | `1lookup-c3-ghost-leads-1080p.mp4` | 1080x1920, 30.0s, 30fps, AAC audio | Full cut, carries the "One look" defect |
 | `1lookup-c3-ghost-leads-480p.mp4` | 480x854, 30.0s, 24fps, AAC audio | Seedance master, kept for reference and re-upscaling |
 
@@ -85,10 +86,13 @@ but the reveal does not. Trimming per option 1 removes this weak tail as a side 
 
 ## Before it runs
 
-- **Add captions in post.** Dialogue-driven, and Meta autoplays muted. Captions were deliberately
-  kept out of the render because video models garble burned-in type.
-- **Add an end card in post.** Required if you use the trimmed cut, since it has no brand mention
-  at all once the last line is gone.
+- **Captions are already burned in** on the `-captioned.mp4` file: one word at a time, centred,
+  Liberation Sans Bold with a heavy outline. Word timings come from a speech-to-text pass, and
+  the brand name is rejoined into one word because the transcriber splits it. Rebuild with
+  `node _scripts/seedance-captions.mjs <video.mp4> <audio.mp3>`. Use the clean 1080p file instead
+  if you would rather caption it yourself.
+- **Add an end card in post.** Required on the trimmed cut, since it has no brand mention at all
+  once the last line is gone.
 
 ## Prompt
 
