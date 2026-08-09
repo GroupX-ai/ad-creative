@@ -187,22 +187,32 @@ between the first and second plea. Take 2 pins the dialogue to exactly four line
 
 `fal-ai/elevenlabs/music`, `force_instrumental: true`.
 
-**`bed-ghost`** (70s, under every ghost shot)
+**The score is original and cleared for commercial use.** The film's actual main theme is a
+commercially released recording; putting it under a paid ad needs a sync licence from the
+publisher and label, and Meta's Rights Manager fingerprints that catalogue, so an unlicensed
+upload gets muted, blocked or taken down on the ad account. Instead the reference recording
+was measured (**E minor, ~92 BPM**, `step9_analyse_ref.py`: chroma-to-Krumhansl key match plus
+onset-autocorrelation tempo) and all three beds were written to that key and tempo, so the
+cuts between them sound like one score and the ostinato carries the same relentless-build
+character. If the real cue is ever wanted, the route is a sync licence, not a re-render.
+
+**`bed-ghost`** (76s, under every ghost shot). Measured build: -12.1 LUFS at the top to
+-9.3 LUFS by 70s.
 
 ```text
-Epic cinematic orchestral film score. An enormous church pipe organ plays a slow rising minor arpeggio over deep sustained string swells, with an insistent ticking clock pulse underneath. It builds relentlessly and patiently in intensity and volume from quiet and ominous to overwhelming and enormous. Desperate, urgent, emotional, vast, cosmic. Fully instrumental, no vocals, no drum kit, no snare, no percussion other than the ticking pulse.
+Original epic cinematic score in E minor at 92 BPM, in the tradition of minimalist space-film scoring. A huge church pipe organ plays a repeating arpeggiated ostinato figure in steady eighth notes, the same short cell cycling over and over without resolving, while low sustained strings hold underneath and a soft ticking pulse keeps time. It starts hushed and ominous on organ alone and adds a layer roughly every eight bars, growing relentlessly into an overwhelming wall of organ and strings. Patient, hypnotic, desperate, vast, awe-struck. Fully instrumental, no vocals, no drum kit, no snare, no cymbals, no melody line on top, no brass fanfare, no resolution.
 ```
 
-**`bed-caller`** (50s, under every present-day shot)
+**`bed-caller`** (52s, under every present-day shot). Deliberately flat at ~-20 LUFS throughout.
 
 ```text
-Sparse, lonely, mundane background music. A single dry melancholy piano note repeating slowly with a lot of empty space between notes, a quiet ticking wall clock, and a faint low room drone. Sad, flat, defeated, tedious: the sound of wasting your life in a beige office. Very quiet, very minimal, almost nothing happening. Fully instrumental, no vocals, no drums, no build, no climax.
+Original sparse ambient underscore in E minor at 92 BPM. A single dry felt-piano note repeating slowly with long empty gaps between notes, a quiet ticking wall clock at the same tempo, and a faint low room drone. Flat, lonely, tedious, defeated: the sound of a man wasting his life in a beige office. Almost nothing happens and it never builds. Fully instrumental, no vocals, no drums, no swell, no climax, no melody.
 ```
 
-**`bed-payoff`** (32s, the turn and the end card)
+**`bed-payoff`** (34s, the turn and the end card). Lifts -16.0 to -9.5 LUFS.
 
 ```text
-Triumphant modern cinematic electronic music. A huge church pipe organ resolves out of a minor key into a bright major chord, then a driving confident synth pulse and punchy electronic drums kick in and lift into a bright euphoric finish. Victorious, energetic, clean, expensive, the sound of a modern tech commercial paying off. Fully instrumental, no vocals.
+Original triumphant cinematic score at 92 BPM that resolves from E minor into E major. The same church pipe organ ostinato from before finally lands on a bright major chord, then a confident driving synth pulse and punchy modern electronic drums enter and lift it into a clean euphoric finish with a big final organ and string chord. Victorious, released, expensive, modern. Fully instrumental, no vocals.
 ```
 
 ## End card
@@ -219,8 +229,20 @@ Copy: **STOP COLD CALLING.** / **VoiceDrop** / **Get Free Access** / **voicedrop
 - Music sits under the dialogue via a sidechain compressor keyed off the speech, so it is
   audible the whole way through and never fights a line.
 - Master: loudnorm to -14 LUFS with a limiter; delivered at -13.2 LUFS integrated, 6.5 LU range.
-- Subtitles: ASS, Poppins Bold 54, heavy outline, 235px bottom margin to clear the Reels UI.
-  Timings come from Scribe v2 word timings on the rendered audio, so cues sit on the word.
+- Subtitles: **one word at a time, dead centre** (`\an5\pos(360,640)`), Poppins Bold, heavy
+  outline, each word popping in with a fast 78%→100% scale so a cut between words reads as a
+  beat. 95 cues, all timed from Scribe v2 word timings on the rendered audio.
+  Three emphasis tiers (`step7b_word_subs.py`):
+
+  | Tier | Colour | Size | Words |
+  |---|---|---|---|
+  | brand | gold `#ffd874` | 126 | VoiceDrop, thousands, once |
+  | shout | hot red | 118, forced caps | DON'T, IT, WASTING, TELEMARKETING, COLD, CALLING, ANSWERING, NOBODY, HEARS, MESSAGE, LIFE |
+  | accent | brand purple `#9746ff` | 118 | voicemails, again, time |
+  | base | white | 86 | everything else |
+
+  Tiering is keyword-driven with a small per-clip override map, so a word like "it" only
+  shouts inside "DON'T DO IT" and stays plain in ordinary speech.
 
 ## Notes for the next version
 
