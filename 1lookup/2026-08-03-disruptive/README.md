@@ -382,3 +382,63 @@ Professional square display ad banner for 1Lookup, a phone, email, domain and IP
 
 **Nothing is live.** These are upload-ready files only. 1Lookup's Meta ad account (`2333276243857483`) is still Ads-MCP-gated ("gradually being rolled out"), same as the 2026-07-12 and 2026-07-16 checks, so ads cannot be created there programmatically; the account is ACTIVE with a payment method, so a human can upload in Ads Manager. Google Ads account 8715389296 is live at $329/day and can take the landscape and square cuts as additional responsive display assets.
 
+## Deployment log — Google Ads (2026-08-09)
+
+Deployed live to Google Ads account **8715389296** via the Ads API (v25; v21 is deprecated for
+mutates and rejects them outright).
+
+- 12 image assets uploaded, then **12 responsive display ads created and ENABLED**, one per concept
+  per ad group, so each concept's performance is attributable rather than blended.
+- Concepts used: **c4, c6, c8, c9** from this batch and **c18, c20** from the sibling
+  `../2026-08-03-analog-neg/` batch. These are the six that ship in *both* 1.91:1 landscape and 1:1
+  square, which is what a responsive display ad requires.
+- Ad groups: `198780745597` (1L Display - Prospecting) and `207170935348` (1L Display - Remarketing).
+- **`1L Display - Prospecting` (24075922684) was re-enabled**; it had been paused. Combined display
+  budget is now $31.01/day ($13.01 prospecting + $18.00 remarketing). No budget was changed.
+- Headlines, long headline, descriptions and business name all drawn from the approved claim bank and
+  asserted against Google's limits (30 / 90 / 90 / 25 chars) before the mutate.
+- Ads are ENABLED and in Google's review queue.
+
+**Account context measured at deploy time.** Stating the money event first, per the reporting rule:
+
+- **Paid subscriptions attributed in the last 30 days: zero.** `Paid Subscription [Offline]` and
+  `Trial Started [Offline]` both exist as conversion actions but recorded **0** conversions, so the
+  gclid-keyed Stripe import is still not delivering data. The binding **$150 Stripe-verified paid CAC
+  gate cannot be read at all** right now. That is the open dev task on Afaq.
+- Trial starts (not a money event, counted separately and not blended): **17** over the same 30 days
+  on **$4,011** of spend, so **$236 per trial start**. Counted from `Free Trial Started [Pixel]` (15)
+  plus `Free Trial Started [Event]` (2). The 4 `Free Signup` conversions are a different, looser event
+  and are deliberately excluded rather than averaged in.
+- Do not convert $236 per trial into a paid CAC here. The trial-to-paid rate on record is stale and
+  the offline import that would settle it is the thing that is broken.
+
+That is the number this creative has to beat, and the measurement gap is what has to be fixed before
+any of it can be judged against the gate.
+
+## Deployment status — Meta (2026-08-09): BLOCKED, needs one dashboard change
+
+The campaign and ad set are built and correct on ad account **act_2333276243857483**, but **no ads
+could be created**, so nothing is live.
+
+- Campaign `52568543711721` "1L | Aug 2026 Disruptive + Analog Creative | Trial Signups",
+  OUTCOME_SALES, CBO **$50/day**, lowest-cost bidding. PAUSED.
+- Ad set `52568543734921` "1L | Broad | US | Free Trial Started", OFFSITE_CONVERSIONS optimizing the
+  **"Free Trial Started" custom conversion** (`1556534182263768`, fires on
+  `/dashboard?trial_started=true`), broad US, Advantage+ audience on. PAUSED.
+- 13 creative images already uploaded to the account (10 squares + 3 verticals).
+
+**The blocker:** every ad-creative call is rejected with error subcode 1885183, *"Ads creative post
+was created by an app that is in development mode. It must be in public to create this ad."* The app
+behind the system user token is **"Momentum Labs Ads Manager" (1101085768912203)** and it is in
+Development mode. This was confirmed with a minimal creative payload, so it is the app mode and not
+the request.
+
+Switching an app to Live is a dashboard action at developers.facebook.com and cannot be done through
+the API. Once an app admin flips it, the 13 ads create in a single run against the campaign and ad set
+above, which are deliberately left in place for exactly that.
+
+> **On the folder date:** these batches were produced and deployed on **2026-08-09**. The
+> `2026-08-03` in the directory name came from a skewed container clock during the build session
+> (the host reported Aug 3; Reddit's API, GitHub and the vault all reported Aug 9). The folder
+> names are left alone because they are already merged and referenced; the dates in this log are
+> the real ones.
