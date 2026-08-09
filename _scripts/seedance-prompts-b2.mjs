@@ -405,9 +405,11 @@ PEOPLE. TWO LINE WORKERS in white coats, hairnets and blue gloves, standing at t
 
 On the belt, moving steadily: small plain white plastic tokens, unmarked. ${REALISM}
 
+SPEECH RULE. Only two lines are ever spoken in this film, both written below in quotation marks. Nobody says anything else at any point: no counting, no narration, no muttering, no commentary, and none of the stage directions in this prompt are ever said out loud. The two line workers are completely silent apart from the one line assigned to one of them.
+
 BEATS.
-0-7s. The belt runs at a brisk, steady pace. The two workers pick tokens off almost faster than the eye follows, glance at each one and either let it pass or flick it into the reject chute. Nobody speaks. The chute rattles constantly.
-7-13s. Closer handheld on the hands: pick, glance, flick, pick, glance, pass. The rhythm is relentless and even.
+0-7s. The belt runs at a brisk, steady pace. The two workers lift tokens off it almost faster than the eye can follow, look at each one for an instant, and either let it continue or drop it into the reject chute. They work in total silence. The chute rattles constantly.
+7-13s. Closer handheld on their hands working at speed, the same relentless even rhythm, still silent.
 13-18s. The supervisor, watching the line, says flatly to the operator: "Point three seconds each."
 18-23s. Wide again. The reject bin at the end of the chute is overflowing onto the floor. Nobody has stopped to deal with it.
 23-27s. One worker, without looking up or slowing down, says: "It's mostly rejects."
