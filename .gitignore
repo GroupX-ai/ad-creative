@@ -1,0 +1,4 @@
+# QA artifacts: contact sheets and extracted audio used to review video before
+# delivery. Regenerate with _scripts/seedance-qa.mjs; never a deliverable.
+_qa/
+**/_qa/
