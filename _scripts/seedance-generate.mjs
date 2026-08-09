@@ -9,7 +9,6 @@
 // Cost model (fal, 2026-08-08): $0.0214 per 1000 tokens, tokens = w*h*duration*24/1024.
 //   480p 30s = $6.17   720p 30s = $13.87   1080p upscale = $0.0072/s = $0.22 per 30s.
 
-import { ADS } from "./seedance-prompts.mjs";
 import { mkdir, writeFile } from "node:fs/promises";
 import { existsSync } from "node:fs";
 import path from "node:path";
@@ -20,7 +19,6 @@ if (!KEY) throw new Error("FAL_KEY is not set");
 const T2V = "bytedance/seedance-2.5/text-to-video";
 const UPSCALER = "fal-ai/bytedance-upscaler/upscale/video";
 const ROOT = path.resolve(import.meta.dirname, "..");
-const BATCH = "2026-08-08-seedance-video";
 
 const argv = process.argv.slice(2);
 const flag = (n, d) => {
@@ -32,6 +30,9 @@ const has = (n) => argv.includes(`--${n}`);
 const DURATION = flag("duration", "30");
 const RESOLUTION = flag("resolution", "480p");
 const ONLY = flag("only", null);
+const BATCH = flag("batch", "2026-08-08-seedance-video");
+const CONCURRENCY = Number(flag("concurrency", "5"));
+const { ADS } = await import(`./${flag("prompts", "seedance-prompts.mjs")}`);
 
 const DIMS = { "480p": [480, 854], "720p": [720, 1280] };
 const cost = (res, secs) => {
@@ -97,8 +98,24 @@ log(
   ).toFixed(2)} + upscale $${(0.0072 * secs * ads.length).toFixed(2)}`,
 );
 
-const results = await Promise.allSettled(
-  ads.map(async (ad) => {
+// Run at most CONCURRENCY jobs at once: a 14-clip batch fired all at once risks
+// throttling, and a rate-limit rejection after generation would waste real money.
+async function pool(items, limit, fn) {
+  const out = new Array(items.length);
+  let next = 0;
+  await Promise.all(
+    Array.from({ length: Math.min(limit, items.length) }, async () => {
+      while (next < items.length) {
+        const i = next++;
+        try { out[i] = { status: "fulfilled", value: await fn(items[i]) }; }
+        catch (e) { out[i] = { status: "rejected", reason: e }; }
+      }
+    }),
+  );
+  return out;
+}
+
+const results = await pool(ads, CONCURRENCY, (async (ad) => {
     const dir = path.join(ROOT, ad.company, BATCH);
     await mkdir(dir, { recursive: true });
     const raw = path.join(dir, `${ad.id}-480p.mp4`);
@@ -145,14 +162,13 @@ const results = await Promise.allSettled(
     }
 
     return { id: ad.id, company: ad.company, seed: out.seed, sourceUrl, raw, upscaled };
-  }),
-);
+}));
 
 const ok = results.filter((r) => r.status === "fulfilled").map((r) => r.value);
 const bad = results.filter((r) => r.status === "rejected");
 
 await writeFile(
-  path.join(ROOT, "_scripts", "seedance-run-log.json"),
+  path.join(ROOT, "_scripts", `seedance-run-log-${BATCH}.json`),
   JSON.stringify(
     {
       ranAt: new Date().toISOString(),
