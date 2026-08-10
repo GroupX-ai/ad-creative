@@ -2,3 +2,13 @@
 # delivery. Regenerate with _scripts/seedance-qa.mjs; never a deliverable.
 _qa/
 **/_qa/
+
+# Batch 2 (2026-08-09) clean uncaptioned 1080p intermediates. The captioned
+# *-captioned.mp4 files are the deliverable and ARE committed; these masters are
+# 318 MB and would push the repo past 1.2 GB. Re-derive any of them by re-running
+# the upscale from the committed 480p master (~$0.22 each):
+#   node _scripts/seedance-generate.mjs --prompts seedance-prompts-b2.mjs \
+#     --batch 2026-08-09-seedance-video-b2 --only <id>
+*/2026-08-09-seedance-video-b2/*-1080p.mp4
+*/2026-08-09-seedance-video-b2/*-1080p-fixed.mp4
+*/2026-08-09-seedance-video-b2/*-1080p-trimmed.mp4

@@ -9,6 +9,7 @@
 // captions are real subtitles burned to pixels, not model-generated text.
 
 import { execFileSync } from "node:child_process";
+import { BRAND, EMPHASIS, NUMBER_WORDS, adIdFromPath, companyFromPath } from "./seedance-emphasis.mjs";
 import { readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 
@@ -17,6 +18,7 @@ if (!KEY) throw new Error("FAL_KEY is not set");
 
 const FF = execFileSync("python3", ["-c", "import imageio_ffmpeg;print(imageio_ffmpeg.get_ffmpeg_exe())"])
   .toString().trim();
+const ROOT = path.resolve(import.meta.dirname, "..");
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 const headers = { Authorization: `Key ${KEY}`, "Content-Type": "application/json" };
 
@@ -88,16 +90,74 @@ const ts = (s) => {
 // stray marks. Question and exclamation marks carry tone, so they stay.
 const esc = (t) => t.replace(/[{}\\]/g, "").replace(/[,.]+$/, "").toUpperCase();
 
+// Three tiers: plain white, emphasised (numbers + this ad's punchline words) and
+// the brand name itself. Emphasis is the brand colour and a step up in size, so
+// the eye catches the number or the turn while scrolling with sound off.
+const adId = adIdFromPath(video);
+const company = companyFromPath(path.relative(ROOT, video));
+const brand = BRAND[company] ?? { ass: "&H0000D7FF" };
+const keywords = new Set((EMPHASIS[adId] ?? []).map((k) => k.toLowerCase()));
+if (!EMPHASIS[adId]) console.log(`  note: no emphasis list for "${adId}", numbers and brand only`);
+
+const BRAND_NAMES = new Set(["voicedrop", "emailchaser", "1lookup"]);
+const tierOf = (text) => {
+  const b = bare(text);
+  if (BRAND_NAMES.has(b)) return "brand";
+  if (/\d/.test(text) || NUMBER_WORDS.has(b) || keywords.has(b)) return "emph";
+  return "plain";
+};
+
+const fontSize = Math.round(W * 0.115); // ~124px on a 1080-wide frame
+const SIZE = { plain: fontSize, emph: Math.round(fontSize * 1.32), brand: Math.round(fontSize * 1.4) };
+
+// Measure every word in the real font. Character-count estimates are not safe
+// here: the per-character advance runs from 0.64 to 0.95 em depending on the
+// letters, and "DISCONNECTED" at the emphasis size renders 1312px wide on a
+// 1080px frame. Anything too wide is shrunk until it fits with a clear margin,
+// so no caption is ever clipped by the frame edge.
+const FONT = "/usr/share/fonts/truetype/liberation/LiberationSans-Bold.ttf";
+const REF = 100;
+const MAX_W = W - Math.round(W * 0.104); // ~56px of margin each side
+const measured = JSON.parse(
+  execFileSync("python3", ["-c", `
+import json,sys
+from PIL import ImageFont
+f = ImageFont.truetype(${JSON.stringify(FONT)}, ${REF})
+out = {}
+for w in json.load(sys.stdin):
+    b = f.getbbox(w)
+    out[w] = b[2] - b[0]
+print(json.dumps(out))
+`], { input: JSON.stringify([...new Set(words.map((w) => esc(w.text)))]) }).toString(),
+);
+const fit = (text, size) => {
+  const wRef = measured[text] || 0;
+  if (!wRef) return size;
+  const maxForWord = Math.floor((MAX_W * REF) / wRef);
+  return Math.min(size, maxForWord);
+};
+
+const counts = { plain: 0, emph: 0, brand: 0 };
+let shrunk = 0;
 const lines = words.map((w, i) => {
   const next = words[i + 1];
   // Hold the word until the next one starts, but never longer than 0.6s past
   // its own end, so a pause does not leave a word stranded on screen.
   const end = Math.min(next ? next.start : w.end + 0.4, w.end + 0.6);
-  const pop = "{\\fscx86\\fscy86\\t(0,90,\\fscx100\\fscy100)}";
-  return `Dialogue: 0,${ts(w.start)},${ts(Math.max(end, w.start + 0.08))},Word,,0,0,0,,${pop}${esc(w.text)}`;
+  const tier = tierOf(w.text);
+  counts[tier]++;
+  const text = esc(w.text);
+  const size = fit(text, SIZE[tier]);
+  if (size < SIZE[tier]) shrunk++;
+  // Emphasised words punch in slightly harder than plain ones.
+  const from = tier === "plain" ? 86 : 78;
+  const override =
+    `{\\fscx${from}\\fscy${from}\\t(0,90,\\fscx100\\fscy100)\\fs${size}` +
+    (tier === "plain" ? "" : `\\c${brand.ass}&`) +
+    "}";
+  return `Dialogue: 0,${ts(w.start)},${ts(Math.max(end, w.start + 0.08))},Word,,0,0,0,,${override}${text}`;
 });
-
-const fontSize = Math.round(W * 0.115); // ~124px on a 1080-wide frame
+console.log(`  ${counts.plain} plain · ${counts.emph} emphasised · ${counts.brand} brand · ${shrunk} shrunk to fit`);
 const ass = `[Script Info]
 ScriptType: v4.00+
 PlayResX: ${W}
