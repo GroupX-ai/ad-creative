@@ -1,4 +1,4 @@
-# Emailchaser scroll-stopper batch (2026-08-03)
+# Emailchaser scroll-stopper batch (2026-08-10)
 
 Twelve new concepts, 27 upload-ready assets, built after Robby asked to "go nuts... wild, disruptive, scroll stopping" and to test a lot at once. Generated with fal `openai/gpt-image-2` (quality high, ~$0.20/image) per the recipe and guardrails in the www repo's `AD_CREATIVE_PLAYBOOK.md`. Roughly $6.40 of renders including three re-rolls.
 
