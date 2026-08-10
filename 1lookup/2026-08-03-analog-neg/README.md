@@ -325,27 +325,28 @@ Deployed live to Reddit ad account **a2_jdktuzsu7mws** (1Lookup) via the Reddit 
 both ways with negging creative: it is where the concept earns its reach, and it is where it will get
 tested. Watch comment sentiment in week one, the same watch the Emailchaser c6 concept carries.
 
-## Deployment status — Meta (2026-08-09): BLOCKED, needs one dashboard change
+## Deployment log — Meta (2026-08-09): LIVE
 
-The campaign and ad set are built and correct on ad account **act_2333276243857483**, but **no ads
-could be created**, so nothing is live.
+Live on ad account **act_2333276243857483**.
 
-- Campaign `52568543711721` "1L | Aug 2026 Disruptive + Analog Creative | Trial Signups",
-  OUTCOME_SALES, CBO **$50/day**, lowest-cost bidding. PAUSED.
+- Campaign `52568543711721` "1L | Aug 2026 Disruptive + Analog Creative | Trial Signups", OUTCOME_SALES,
+  CBO **$50/day**, lowest-cost bidding. ACTIVE.
 - Ad set `52568543734921` "1L | Broad | US | Free Trial Started", OFFSITE_CONVERSIONS optimizing the
-  **"Free Trial Started" custom conversion** (`1556534182263768`, fires on
-  `/dashboard?trial_started=true`), broad US, Advantage+ audience on. PAUSED.
-- 13 creative images already uploaded to the account (10 squares + 3 verticals).
+  **"Free Trial Started" custom conversion** (`1556534182263768`, fires on `/dashboard?trial_started=true`),
+  broad US, Advantage+ audience on. ACTIVE.
+- **13 ads**, all ACTIVE: 10 squares (c4, c5, c7, c8, c11, c15, c16, c17, c22, c23) and 3 verticals
+  (c5, c7, c17) for Stories and Reels.
 
-**The blocker:** every ad-creative call is rejected with error subcode 1885183, *"Ads creative post
-was created by an app that is in development mode. It must be in public to create this ad."* The app
-behind the system user token is **"Momentum Labs Ads Manager" (1101085768912203)** and it is in
-Development mode. This was confirmed with a minimal creative payload, so it is the app mode and not
-the request.
+**What unblocked it:** the app behind the system user token had to be published. Meta blocks apps in
+Development mode from creating ad creatives (subcode 1885183) regardless of who uses the app, so
+publishing was the price of building ads through the API rather than by hand in Ads Manager. Publishing
+does not expose the ad account, the Page or any data: the access path is the System User token, which is
+unchanged. Two further API notes for next time: `degrees_of_freedom_spec.standard_enhancements` is now
+deprecated and rejects the whole creative, and a custom conversion must be passed in `promoted_object`
+**alone** (pairing it with `pixel_id` fails as an invalid combination).
 
-Switching an app to Live is a dashboard action at developers.facebook.com and cannot be done through
-the API. Once an app admin flips it, the 13 ads create in a single run against the campaign and ad set
-above, which are deliberately left in place for exactly that.
+The created ads are ad-account objects, not app objects, so they keep serving independently of the app's
+published state. Re-publishing is only needed when new creative goes up.
 
 > **On the folder date:** these batches were produced and deployed on **2026-08-09**. The
 > `2026-08-03` in the directory name came from a skewed container clock during the build session
