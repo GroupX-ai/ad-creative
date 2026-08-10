@@ -47,6 +47,10 @@ export const EMPHASIS = {
   "1lookup-c5-security-scanner": ["disconnected", "real", "mailbox", "instantly"],
   "1lookup-c6-quality-control": ["seconds", "each"],
   "1lookup-c7-one-key": ["doors", "sets", "api"],
+
+  // ── batch 3, the UGC corrective batch ──
+  "voicedrop-c45-ugc-watch-this": ["stopped", "watch", "me", "back", "chasing"],
+  "emailchaser-c17-ugc-promotions": ["zero", "promotions", "nobody", "primary", "free"],
 };
 
 // Resolve an ad id from a file path, tolerating the -fixed / -trimmed / -1080p suffixes.

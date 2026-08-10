@@ -48,9 +48,14 @@ for (const [company, list] of Object.entries(byCompany)) {
     console.log(`  row ${i + 1}: ${path.basename(clip)}`);
   }
   const out = path.join(outDir, `${company}-review.jpg`);
-  const cmd = ["-hide_banner", "-loglevel", "error", "-y"];
-  rows.forEach((r) => cmd.push("-i", r));
-  cmd.push("-filter_complex", `${rows.map((_, k) => `[${k}:v]`).join("")}vstack=inputs=${rows.length}`, out);
-  ff(cmd);
+  if (rows.length === 1) {
+    // vstack requires 2+ inputs, so a single-clip company is just its own row.
+    ff(["-hide_banner", "-loglevel", "error", "-y", "-i", rows[0], "-q:v", "4", out]);
+  } else {
+    const cmd = ["-hide_banner", "-loglevel", "error", "-y"];
+    rows.forEach((r) => cmd.push("-i", r));
+    cmd.push("-filter_complex", `${rows.map((_, k) => `[${k}:v]`).join("")}vstack=inputs=${rows.length}`, out);
+    ff(cmd);
+  }
   console.log(`${company}: ${list.length} clips -> ${out}`);
 }
