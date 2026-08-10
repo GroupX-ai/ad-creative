@@ -118,7 +118,7 @@ async function pool(items, limit, fn) {
 const results = await pool(ads, CONCURRENCY, (async (ad) => {
     const dir = path.join(ROOT, ad.company, BATCH);
     await mkdir(dir, { recursive: true });
-    const raw = path.join(dir, `${ad.id}-480p.mp4`);
+    const raw = path.join(dir, `${ad.id}-${RESOLUTION}.mp4`);
     const final = path.join(dir, `${ad.id}-1080p.mp4`);
 
     let sourceUrl;
@@ -131,7 +131,7 @@ const results = await pool(ads, CONCURRENCY, (async (ad) => {
       {
         prompt: ad.prompt,
         resolution: RESOLUTION,
-        duration: DURATION,
+        duration: ad.duration ?? DURATION,
         aspect_ratio: ad.aspect_ratio,
         generate_audio: true,
       },
@@ -142,7 +142,7 @@ const results = await pool(ads, CONCURRENCY, (async (ad) => {
     log(`${ad.id} generated · seed ${out.seed}`);
     await download(sourceUrl, raw);
 
-    // Upscale the 480p master to 1080p so it is upload-ready for Reels/Stories.
+    // Upscale the master to 1080p so it is upload-ready for Reels/Stories.
     let upscaled = null;
     try {
       const up = await run(
@@ -158,7 +158,7 @@ const results = await pool(ads, CONCURRENCY, (async (ad) => {
       const u = up.video?.url;
       if (u) upscaled = await download(u, final);
     } catch (e) {
-      log(`${ad.id} upscale failed (keeping 480p master): ${e.message.slice(0, 200)}`);
+      log(`${ad.id} upscale failed (keeping ${RESOLUTION} master): ${e.message.slice(0, 200)}`);
     }
 
     return { id: ad.id, company: ad.company, seed: out.seed, sourceUrl, raw, upscaled };
