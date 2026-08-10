@@ -302,3 +302,53 @@ A photograph, not a designed graphic and not an advertisement layout. Shot on a 
 
 **Nothing is live.** Upload-ready files only. 1Lookup's Meta ad account (`2333276243857483`) is still Ads-MCP-gated, so ads cannot be created there programmatically; the account is ACTIVE with a payment method, so a human can upload in Ads Manager. Google Ads account 8715389296 is live at $329/day and can take the landscape and square cuts as responsive display assets.
 
+## Deployment log — Reddit Ads (2026-08-09)
+
+Deployed live to Reddit ad account **a2_jdktuzsu7mws** (1Lookup) via the Reddit Ads API v3.
+
+- 6 posts created on profile `t2_4xm4m1l9`, each becoming one ad in ad group `2559001032421657878`
+  ("US Broad - SignUp") under campaign `2557856098062241615` (objective CONVERSIONS).
+- Concepts used: **c15, c17, c23** from this batch and **c5, c8, c11** from the sibling
+  `../2026-08-03-disruptive/` batch. The analog and negging concepts are deliberately over-weighted
+  here: Reddit's audience is the most ad-hostile of the three channels, which is exactly what that
+  register is built for.
+- Ad group: SIGN_UP optimization, **$25/day**, US, 11 communities (sales, salestechniques, SaaS,
+  startups, Entrepreneur, EntrepreneurRideAlong, smallbusiness, marketing, digital_marketing, agency,
+  Emailmarketing). The community list was empty before this deploy; it reuses the validated set the
+  Emailchaser campaign runs on, since it is the same sales/marketing-ops buyer.
+- Post headlines are the approved on-image copy verbatim, same convention as the Emailchaser batch.
+- Media staged through the fal CDN; Reddit ingests and rehosts to i.redd.it.
+- All 6 ads are **ACTIVE and processing through Reddit's review**. They are not delivering yet.
+- The previous batch's ad `2559001980318720106` stays PAUSED on purpose: it carries a fabricated logo.
+
+**Comments are on**, which is the Reddit default and matches the Emailchaser deployment. That cuts
+both ways with negging creative: it is where the concept earns its reach, and it is where it will get
+tested. Watch comment sentiment in week one, the same watch the Emailchaser c6 concept carries.
+
+## Deployment status — Meta (2026-08-09): BLOCKED, needs one dashboard change
+
+The campaign and ad set are built and correct on ad account **act_2333276243857483**, but **no ads
+could be created**, so nothing is live.
+
+- Campaign `52568543711721` "1L | Aug 2026 Disruptive + Analog Creative | Trial Signups",
+  OUTCOME_SALES, CBO **$50/day**, lowest-cost bidding. PAUSED.
+- Ad set `52568543734921` "1L | Broad | US | Free Trial Started", OFFSITE_CONVERSIONS optimizing the
+  **"Free Trial Started" custom conversion** (`1556534182263768`, fires on
+  `/dashboard?trial_started=true`), broad US, Advantage+ audience on. PAUSED.
+- 13 creative images already uploaded to the account (10 squares + 3 verticals).
+
+**The blocker:** every ad-creative call is rejected with error subcode 1885183, *"Ads creative post
+was created by an app that is in development mode. It must be in public to create this ad."* The app
+behind the system user token is **"Momentum Labs Ads Manager" (1101085768912203)** and it is in
+Development mode. This was confirmed with a minimal creative payload, so it is the app mode and not
+the request.
+
+Switching an app to Live is a dashboard action at developers.facebook.com and cannot be done through
+the API. Once an app admin flips it, the 13 ads create in a single run against the campaign and ad set
+above, which are deliberately left in place for exactly that.
+
+> **On the folder date:** these batches were produced and deployed on **2026-08-09**. The
+> `2026-08-03` in the directory name came from a skewed container clock during the build session
+> (the host reported Aug 3; Reddit's API, GitHub and the vault all reported Aug 9). The folder
+> names are left alone because they are already merged and referenced; the dates in this log are
+> the real ones.

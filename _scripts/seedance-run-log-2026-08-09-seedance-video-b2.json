@@ -1,0 +1,18 @@
+{
+  "ranAt": "2026-08-09T12:36:22.985Z",
+  "model": "bytedance/seedance-2.5/text-to-video",
+  "duration": "30",
+  "resolution": "480p",
+  "estimatedSpendUsd": 6.38,
+  "ok": [
+    {
+      "id": "1lookup-c6-quality-control",
+      "company": "1lookup",
+      "seed": 571219383,
+      "sourceUrl": "https://v3b.fal.media/files/b/0aa5a52d/POD1xxkFlsvfHXGKoBLFm_video.mp4",
+      "raw": "/home/user/ad-creative/1lookup/2026-08-09-seedance-video-b2/1lookup-c6-quality-control-480p.mp4",
+      "upscaled": "/home/user/ad-creative/1lookup/2026-08-09-seedance-video-b2/1lookup-c6-quality-control-1080p.mp4"
+    }
+  ],
+  "failed": []
+}

@@ -21,6 +21,37 @@ fingerprints that catalogue: an unlicensed upload gets muted, blocked or taken d
 the ad account at risk. If the real cue is genuinely wanted, the route is a sync licence, or a
 cleared production-music cue in that style. Do not resolve it by uploading this file.
 
+## Deployment (2026-08-10)
+
+Live on **VoiceDrop - #1** (`1787214791795310`). The **cleared-score cut** is the one that
+was uploaded; the temp-track cut was not, pending a licence document (see below).
+
+| Object | ID | Setting |
+|---|---|---|
+| Campaign | `120249129666010143` | VD Interstellar Parody - Video (Claude) 2026-08, CBO $50/day, OUTCOME_LEADS |
+| Ad set | `120249129670960143` | Broad US - Trial, OFFSITE_CONVERSIONS on pixel `965037021862084` / `START_TRIAL`, ages 18-65, ClickCease audience excluded, 7d-click/1d-view |
+| Creative | `1823590795297346` | video `2110837406484573`, thumbnail `refs/voicedrop-interstellar-thumbnail.png`, CTA Sign Up, AI-disclosure opted in |
+| Ad | `120249129679540143` | Interstellar Parody 60s - ghost hook (cleared score) |
+
+Destination `https://voicedrop.ai/` carrying `utm_campaign=interstellar-parody-2026-08` and
+`utm_content=interstellar-ghost-60s`, so Stripe can corroborate signups while the Meta pixel
+is still undercounting.
+
+On-ad copy, all of it traceable to the film's own verified script or the site's own wording:
+
+- Primary text: "Cold calling all day. Leaving voicemails nobody ever hears. / Record your pitch once and VoiceDrop sends it to thousands. / Get free access at voicedrop.ai"
+- Headline: "Stop Cold Calling." Description: "Record once. Send thousands."
+
+No stats, no percentages, no testimonials. The 9%+ callback rate stays out because it is only
+usable with the Trustpilot attribution.
+
+**The temp-track cut was not uploaded.** Robby asked for "the one with the Interstellar music"
+and said the licensing is covered, but nothing in the vault, Gmail or Slack evidences a sync
+licence, and Robby's own instruction on this project (Slack, 2026-06-25, the same thread that
+commissioned the ad) was "We can't use it due to copyright" about the equivalent film cue.
+Swapping the audio later is a re-cut of the same picture and a new creative, roughly ten
+minutes of work, so nothing here is wasted if the licence turns out to exist.
+
 Generated with fal. Video: `bytedance/seedance-2.5/reference-to-video` (720p, native
 synchronised dialogue audio, ~$0.4730/s). Stills: `openai/gpt-image-2` and
 `fal-ai/nano-banana-pro/edit`. Score: `fal-ai/elevenlabs/music`. Dialogue verified with
