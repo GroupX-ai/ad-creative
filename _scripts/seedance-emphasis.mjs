@@ -51,6 +51,11 @@ export const EMPHASIS = {
   // ── batch 3, the UGC corrective batch ──
   "voicedrop-c45-ugc-watch-this": ["stopped", "watch", "me", "back", "chasing"],
   "emailchaser-c17-ugc-promotions": ["zero", "promotions", "nobody", "primary", "free"],
+
+  // ── batch 4, stronger hooks and closes ──
+  "voicedrop-c46-before-my-coffee": ["coffee", "dialling", "ringing", "me", "free", "credits"],
+  "voicedrop-c47-they-hate-dialling": ["hate", "stop", "rejection", "back", "free", "credits"],
+  "emailchaser-c18-check-your-promotions": ["now", "promotions", "nobody", "primary", "free"],
 };
 
 // Resolve an ad id from a file path, tolerating the -fixed / -trimmed / -1080p suffixes.

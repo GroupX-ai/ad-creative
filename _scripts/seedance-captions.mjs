@@ -99,10 +99,13 @@ const brand = BRAND[company] ?? { ass: "&H0000D7FF" };
 const keywords = new Set((EMPHASIS[adId] ?? []).map((k) => k.toLowerCase()));
 if (!EMPHASIS[adId]) console.log(`  note: no emphasis list for "${adId}", numbers and brand only`);
 
-const BRAND_NAMES = new Set(["voicedrop", "emailchaser", "1lookup"]);
+// Match by containment, not equality: speech-to-text returns the spoken URL as
+// "voicedrop.ai", which bares to "voicedropai" and would otherwise render as a
+// plain white word. That word is the CTA payoff and must carry the brand tier.
+const BRAND_NAMES = ["voicedrop", "emailchaser", "1lookup"];
 const tierOf = (text) => {
   const b = bare(text);
-  if (BRAND_NAMES.has(b)) return "brand";
+  if (BRAND_NAMES.some((n) => b.includes(n))) return "brand";
   if (/\d/.test(text) || NUMBER_WORDS.has(b) || keywords.has(b)) return "emph";
   return "plain";
 };

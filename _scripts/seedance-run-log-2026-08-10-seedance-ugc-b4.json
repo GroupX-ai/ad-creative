@@ -1,0 +1,18 @@
+{
+  "ranAt": "2026-08-11T14:31:58.557Z",
+  "model": "bytedance/seedance-2.5/text-to-video",
+  "duration": "15",
+  "resolution": "720p",
+  "estimatedSpendUsd": 7.04,
+  "ok": [
+    {
+      "id": "emailchaser-c18-check-your-promotions",
+      "company": "emailchaser",
+      "seed": 262328475,
+      "sourceUrl": "https://v3b.fal.media/files/b/0aa5eb5d/G8NNPtRCwP6gckJ0Hq4g__video.mp4",
+      "raw": "/home/user/ad-creative/emailchaser/2026-08-10-seedance-ugc-b4/emailchaser-c18-check-your-promotions-720p.mp4",
+      "upscaled": "/home/user/ad-creative/emailchaser/2026-08-10-seedance-ugc-b4/emailchaser-c18-check-your-promotions-1080p.mp4"
+    }
+  ],
+  "failed": []
+}
