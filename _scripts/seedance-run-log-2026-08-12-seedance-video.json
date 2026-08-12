@@ -1,49 +1,25 @@
 {
-  "ranAt": "2026-08-12T21:44:56.387Z",
+  "ranAt": "2026-08-12T21:57:17.362Z",
   "model": "bytedance/seedance-2.5/text-to-video",
   "duration": "15",
   "resolution": "720p",
-  "estimatedSpendUsd": 35.21,
+  "estimatedSpendUsd": 14.08,
   "ok": [
-    {
-      "id": "voicedrop-c48-never-dialed-once",
-      "company": "voicedrop",
-      "seed": 19935544,
-      "sourceUrl": "https://v3b.fal.media/files/b/0aa6173d/lshj6ivGmsmKaeQcL-iER_video.mp4",
-      "raw": "/home/user/ad-creative/voicedrop/2026-08-12-seedance-video/voicedrop-c48-never-dialed-once-720p.mp4",
-      "upscaled": "/home/user/ad-creative/voicedrop/2026-08-12-seedance-video/voicedrop-c48-never-dialed-once-1080p.mp4"
-    },
     {
       "id": "voicedrop-c49-another-callback",
       "company": "voicedrop",
-      "seed": 308319997,
-      "sourceUrl": "https://v3b.fal.media/files/b/0aa6173d/E0ByOXo_hiU3zJaSdWYQT_video.mp4",
+      "seed": 1748730611,
+      "sourceUrl": "https://v3b.fal.media/files/b/0aa6178b/Q5Z8Bso7-uo27WT3xejDU_video.mp4",
       "raw": "/home/user/ad-creative/voicedrop/2026-08-12-seedance-video/voicedrop-c49-another-callback-720p.mp4",
       "upscaled": "/home/user/ad-creative/voicedrop/2026-08-12-seedance-video/voicedrop-c49-another-callback-1080p.mp4"
     },
     {
-      "id": "emailchaser-c19-invisible",
-      "company": "emailchaser",
-      "seed": 230500193,
-      "sourceUrl": "https://v3b.fal.media/files/b/0aa6173e/CcHrWxNyxP77HBbWAfIx5_video.mp4",
-      "raw": "/home/user/ad-creative/emailchaser/2026-08-12-seedance-video/emailchaser-c19-invisible-720p.mp4",
-      "upscaled": "/home/user/ad-creative/emailchaser/2026-08-12-seedance-video/emailchaser-c19-invisible-1080p.mp4"
-    },
-    {
       "id": "emailchaser-c20-eight-thousand-emails",
       "company": "emailchaser",
-      "seed": 1066034981,
-      "sourceUrl": "https://v3b.fal.media/files/b/0aa61751/q8Xze_c4ANGoqPJKLmYrl_video.mp4",
+      "seed": 20580519,
+      "sourceUrl": "https://v3b.fal.media/files/b/0aa61790/BNObQsdPovz_W91ng5eVI_video.mp4",
       "raw": "/home/user/ad-creative/emailchaser/2026-08-12-seedance-video/emailchaser-c20-eight-thousand-emails-720p.mp4",
       "upscaled": "/home/user/ad-creative/emailchaser/2026-08-12-seedance-video/emailchaser-c20-eight-thousand-emails-1080p.mp4"
-    },
-    {
-      "id": "emailchaser-c21-agency-callout",
-      "company": "emailchaser",
-      "seed": 2143017952,
-      "sourceUrl": "https://v3b.fal.media/files/b/0aa61750/r0XKgz8qCDMc_xPlemylm_video.mp4",
-      "raw": "/home/user/ad-creative/emailchaser/2026-08-12-seedance-video/emailchaser-c21-agency-callout-720p.mp4",
-      "upscaled": "/home/user/ad-creative/emailchaser/2026-08-12-seedance-video/emailchaser-c21-agency-callout-1080p.mp4"
     }
   ],
   "failed": []
