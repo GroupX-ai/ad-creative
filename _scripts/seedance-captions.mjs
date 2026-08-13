@@ -58,6 +58,9 @@ const BRAND_JOINS = [
   [["one", "lookup"], "1Lookup"],
   [["one", "look"], "1Lookup"],
   [["esa", "card"], "ESA Card"],
+  // scribe-v2 splits this one too: one batch-7 clip transcribed as "Bit Predict"
+  // even though the spoken delivery was correct.
+  [["bit", "predict"], "BitPredict"],
 ];
 const bare = (s) => s.toLowerCase().replace(/[^a-z0-9]/g, "");
 const words = [];
@@ -89,7 +92,10 @@ const ts = (s) => {
 };
 // Strip trailing commas and periods: in one-word-at-a-time captions they read as
 // stray marks. Question and exclamation marks carry tone, so they stay.
-const esc = (t) => t.replace(/[{}\\]/g, "").replace(/[,.]+$/, "").toUpperCase();
+// Colons and semicolons go too: scribe-v2 punctuates the brand name as
+// "BitPredict:" when it introduces a list, and a burned-in "BITPREDICT:" hanging
+// on the CTA payoff frame reads as a typo.
+const esc = (t) => t.replace(/[{}\\]/g, "").replace(/[,.:;]+$/, "").toUpperCase();
 
 // Three tiers: plain white, emphasised (numbers + this ad's punchline words) and
 // the brand name itself. Emphasis is the brand colour and a step up in size, so
@@ -103,7 +109,7 @@ if (!EMPHASIS[adId]) console.log(`  note: no emphasis list for "${adId}", number
 // Match by containment, not equality: speech-to-text returns the spoken URL as
 // "voicedrop.ai", which bares to "voicedropai" and would otherwise render as a
 // plain white word. That word is the CTA payoff and must carry the brand tier.
-const BRAND_NAMES = ["voicedrop", "emailchaser", "1lookup", "esacard"];
+const BRAND_NAMES = ["voicedrop", "emailchaser", "1lookup", "esacard", "bitpredict"];
 const tierOf = (text) => {
   const b = bare(text);
   if (BRAND_NAMES.some((n) => b.includes(n))) return "brand";

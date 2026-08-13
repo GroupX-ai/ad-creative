@@ -1,0 +1,18 @@
+{
+  "ranAt": "2026-08-13T17:35:05.846Z",
+  "model": "bytedance/seedance-2.5/text-to-video",
+  "duration": "15",
+  "resolution": "720p",
+  "estimatedSpendUsd": 7.04,
+  "ok": [
+    {
+      "id": "bitpredict-c2-screenshot-or-it-didnt-happen",
+      "company": "bitpredict",
+      "seed": 1656138059,
+      "sourceUrl": "https://v3b.fal.media/files/b/0aa63326/pMALx85kReF0LkdslmJ7L_video.mp4",
+      "raw": "/home/user/ad-creative/bitpredict/2026-08-13-reddit-video/bitpredict-c2-screenshot-or-it-didnt-happen-720p.mp4",
+      "upscaled": "/home/user/ad-creative/bitpredict/2026-08-13-reddit-video/bitpredict-c2-screenshot-or-it-didnt-happen-1080p.mp4"
+    }
+  ],
+  "failed": []
+}

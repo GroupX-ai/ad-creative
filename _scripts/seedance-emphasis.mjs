@@ -14,6 +14,7 @@ export const BRAND = {
   emailchaser: { hex: "#1179FC", ass: "&H00FC7911" }, // brand blue
   "1lookup": { hex: "#22D3EE", ass: "&H00EED322" }, // brand cyan
   esacard: { hex: "#f2a93b", ass: "&H003BA9F2" }, // marigold, reads on warm daylight footage
+  bitpredict: { hex: "#01DD82", ass: "&H0082DD01" }, // neon green, the brand's only accent
 };
 
 // Anything containing a digit, plus spelled-out numbers, is emphasised.
@@ -101,6 +102,20 @@ export const EMPHASIS = {
   "e3-back-sunday": ["sunday", "emotional", "support", "animal", "card", "sofa", "told"],
   "e4-cottage": ["six", "hours", "emotional", "support", "animal", "card"],
   "e5-haircut": ["never", "haircut", "life", "emotional", "support", "animal", "card", "ridiculous"],
+
+  // ── batch 6, BitPredict on Reddit ──
+  // "crypto" is emphasised in every BitPredict ad: it is the one word that tells a
+  // scroller with the sound off what this is even about, and Robby asked for it in
+  // all of them.
+  "bitpredict-c1-that-group-chat": ["crypto", "didn't", "deleted", "timestamped", "public", "free", "stake"],
+  "bitpredict-c2-screenshot-or-it-didnt-happen": ["crypto", "screenshot", "genius", "proof", "edit", "free"],
+  "bitpredict-c3-worst-idea-ever": ["crypto", "public", "worst", "climbing", "record", "free"],
+
+  // ── batch 7, round 2: higher energy, men, at the desk ──
+  "bitpredict-c4-worst-idea-ever-loud": ["crypto", "public", "worst", "genius", "climbing", "record", "free"],
+  "bitpredict-c5-three-weeks-in": ["crypto", "destroyed", "accuracy", "prove", "timestamped", "stake", "free"],
+  "bitpredict-c6-humbling": ["crypto", "brutal", "humbling", "public", "timestamped", "better", "free"],
+  "bitpredict-c7-just-locked-it": ["crypto", "locked", "regret", "edit", "record", "free", "stake"],
 };
 
 // Resolve an ad id from a file path, tolerating the -fixed / -trimmed / -1080p suffixes.
