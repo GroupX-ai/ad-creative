@@ -49,10 +49,24 @@ passed a size check. All 20 pass. Checked every image: the acronym appears nowhe
 inside the domain, the button label is correct and uncropped, and no invented badges, seals
 or percentages.
 
-## Still to do
+## The ten shipped videos were already compliant
 
-The ten videos all close on the spoken line "E-S-A Card" and need re-rendering to match this
-rule. That is the expensive half of the change, so it is not done here.
+An earlier version of this note claimed the ten videos in `2026-08-14-approved/` and
+`2026-08-14-batch2/` close on the spoken line "E-S-A Card" and needed re-rendering. That was
+wrong, and it was written from assumption rather than from the files.
+
+Checked three ways on 2026-08-13, all ten clips:
+
+1. Every burned caption track in `_qa/*.ass` renders the phrase as `EMOTIONAL SUPPORT ANIMAL
+   CARD`, four separate caption events, in all ten. The acronym appears in no caption event in
+   any clip.
+2. Neither batch has an end card. Robby's note was "no weird pause at the end with a pitch," so
+   the price and CTA live in the platform's own headline fields, not in the video. Every clip
+   ends mid-scene on a wordless beat.
+3. Both source READMEs record the same ElevenLabs scribe-v2 transcription gate at delivery,
+   with the garbled rolls re-rolled until clean.
+
+Nothing needs re-rendering. All ten are shippable as they stand.
 
 ---
 
