@@ -89,7 +89,61 @@ for a logo.
 Every clip gets a 2.2s end card built from the real logo SVG plus `bitpredict.io` set in a
 tall condensed grotesque ([`seedance-endcard.mjs`](seedance-endcard.mjs)). Two jobs: the brand
 is legible even when spoken delivery is unreliable, and it is the free repair if a future take
-garbles the name (mute the word, the card still says it). Final runtime 17.2s per clip.
+garbles the name (mute the word, the card still says it). Final runtime 17.3s per clip.
+
+## Round 3 changes (same day): "crypto" everywhere, and captions
+
+Robby: *"Make sure to use the word Crypto in all videos (some of them already do). Add
+subtitles to the videos - 1 word subtitles. in the center/middle of the screen. Appropriate
+size to read on a phone. You can change font color and size to emphasize specific words."*
+
+### "Crypto" in all four
+
+`c4` and `c5` already said it. `c6` and `c7` did not, so both were re-rolled with it written
+into the opening line, which is the strongest position for it: it tells a scroller what the ad
+is even about inside the first two seconds.
+
+- `c6`: "I genuinely thought I was good at **crypto**. So I started logging every call."
+- `c7`: "I just locked a **crypto** call I am going to regret."
+
+Both re-rolls came back word-perfect, said "BitPredict" correctly, and carried no wardrobe
+logo. Cost $14.08.
+
+### Captions
+
+Burned in with the existing [`seedance-captions.mjs`](seedance-captions.mjs) pipeline from
+batches 3-5, which already does exactly what was asked: one word at a time, ASS
+`Alignment: 5` (true middle-centre), font size `W * 0.115` (~124px on a 1080-wide frame), and
+each word held until the next one starts. Real burned subtitles rendered by libass, not
+model-generated text.
+
+Three visual tiers, so the eye catches the turn while scrolling with the sound off:
+
+| Tier | Look | What gets it |
+|---|---|---|
+| plain | white, base size | everything else |
+| emphasis | neon green `#01DD82`, 1.32x | numbers, **"crypto"**, and each ad's punchline words |
+| brand | neon green, 1.4x | "BitPredict" |
+
+**"crypto" is on the emphasis list for every BitPredict ad**, so it always lands green and
+oversized. BitPredict was added to the shared `BRAND` map (`&H0082DD01`, the ASS byte order for
+the brand green) and to `BRAND_NAMES` so the brand word gets the top tier.
+
+Two fixes to the shared pipeline came out of this:
+
+1. **`"bit" + "predict"` added to `BRAND_JOINS`.** scribe-v2 splits the name in two on some
+   takes even when the delivery is correct, and a caption reading "BIT" then "PREDICT" is
+   worse than none.
+2. **`esc()` now strips trailing colons and semicolons**, not just commas and periods. Two
+   clips transcribed the close as "BitPredict:" and burned "BITPREDICT:" onto the CTA payoff
+   frame, which reads as a typo. Caught by extracting the actual brand frame from each
+   finished file rather than trusting the word counts.
+
+Both fixes are in the shared scripts, so every future batch on any brand gets them.
+
+**Caption placement note:** dead centre is what was asked for and what shipped, but at that
+position the word sits over the speaker's mouth. If it turns out to hide too much of the
+performance, `MarginV` in the ASS style is the single value to change.
 
 ## Banners: eight new propositions, eight new visual territories
 
@@ -137,11 +191,12 @@ verifiable skill." to `AboutHeading.tsx`.
 | 4 clips, 15s, native 720p | $27.73 |
 | 4 upscales to 1080p | ~$0.43 |
 | 1 re-roll (`c6` wardrobe logo) + upscale | ~$7.04 |
+| 2 re-rolls (`c6`, `c7` for "crypto") + upscales | ~$14.08 |
 | 11 banners, GPT Image 2, quality high | ~$2.20 |
-| Transcription | ~$0.05 |
-| **Total** | **~$37.5** |
+| Transcription + caption word timings | ~$0.15 |
+| **Total** | **~$51.6** |
 
-Running total across both BitPredict batches: **~$68**.
+Running total across both BitPredict batches: **~$82**.
 
 ## The three launch blockers are unchanged
 

@@ -14,15 +14,20 @@ Seeds: `_scripts/seedance-run-log-2026-08-13-reddit-video-b7.json`.
 
 The confession script Robby picked is fixed. What varies is where in the story you catch him.
 
-| File | The moment | Setting |
+| File (`-1080p-captioned.mp4`) | The moment | Setting |
 |---|---|---|
-| `bitpredict-c4-worst-idea-ever-loud-1080p.mp4` | day one, pure regret. Robby's script verbatim | home-office desk, swivel chair |
-| `bitpredict-c5-three-weeks-in-1080p.mp4` | getting beaten but improving | flat corner desk, cap backwards |
-| `bitpredict-c6-humbling-1080p.mp4` | admits he was never good | living room, pacing, no desk |
-| `bitpredict-c7-just-locked-it-1080p.mp4` | present tense, the call is live now | bedroom desk at night |
+| `bitpredict-c4-worst-idea-ever-loud` | day one, pure regret. Robby's script verbatim | home-office desk, swivel chair |
+| `bitpredict-c5-three-weeks-in` | getting beaten but improving | flat corner desk, cap backwards |
+| `bitpredict-c6-humbling` | admits he was never good at crypto | living room, pacing, no desk |
+| `bitpredict-c7-just-locked-it` | present tense, the call is live now | bedroom desk at night |
 
-All 1080x1920, **17.3s** (15s clip plus a 2.2s branded end card). Native 720p masters kept
-alongside. All four presenters are men; three of four are at a computer.
+All 1080x1920, **17.3s** (15s clip plus a 2.2s branded end card). All four presenters are men;
+three of four are at a computer. **Every clip says the word "crypto" in its opening line.**
+
+**Ship the `-captioned.mp4` files.** They carry burned-in one-word captions, centred in the
+middle of the frame, with "crypto", the numbers and each ad's punchline words in neon green at
+a larger size, and "BitPredict" larger still. The clean uncaptioned 1080p and the native 720p
+masters are kept alongside if you would rather caption them differently.
 
 **The monitor is always turned away from camera** so no display surface is ever in shot. That
 is deliberate rather than incidental: a visible screen would invent leaderboard names and

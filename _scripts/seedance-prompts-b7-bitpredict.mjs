@@ -166,7 +166,7 @@ ${HOOK}
 ${SPEECH_RULE}
 
 BEATS.
-0-3s. Already shouting through a laugh, walking straight at the lens: "I genuinely thought I was good at this. So I started logging it."
+0-3s. Already shouting through a laugh, walking straight at the lens: "I genuinely thought I was good at crypto. So I started logging every call."
 3-8s. He stops dead, throws his head back, both hands on top of his head: "First week? Brutal. Absolutely humbling."
 8-12s. He drops his hands, points at the lens, walking backwards now, delighted: "It's public, it's timestamped, and I actually got better."
 12-15s. He stops walking, stands still, drops his voice, and looks straight down the lens. Slower and much clearer than everything before: "BitPredict. No trading, no gambling, and it's free." He points once at the lens on the last words.
@@ -206,7 +206,7 @@ ${HOOK}
 ${SPEECH_RULE}
 
 BEATS.
-0-3s. Already loud, both hands raking back through his hair, laughing at himself: "I just locked a call I am going to regret."
+0-3s. Already loud, both hands raking back through his hair, laughing at himself: "I just locked a crypto call I am going to regret."
 3-8s. He grabs the edge of the desk with both hands and shakes it slightly, voice climbing: "Twenty four hours, up or down, and I can't edit it."
 8-12s. He lets go, sits back, both palms up, shaking his head and grinning: "That's the point. It's on my record either way."
 12-15s. He leans in, goes still and quiet, and looks straight down the lens. Slower and much clearer than everything before: "BitPredict. Free, and nothing to stake." He points once at the lens on the last words.
