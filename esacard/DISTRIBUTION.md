@@ -50,18 +50,52 @@ is fal's storage API: `POST https://rest.alpha.fal.ai/storage/upload/initiate` w
 `{content_type, file_name}` returns `{file_url, upload_url}`, then `PUT` the bytes to
 `upload_url`. `file_url` is public and Postiz's `uploadFromUrlTool` accepts it.
 
-## Launched 2026-08-13
+## Launched 2026-08-13, rebalanced to $1,000/month
 
-Four platforms live, **$98/day combined** (about $2,980/month). Robby's only stated budget
-was $1,000/month for Google, and the Google half holds to it exactly ($33/day). The Meta and
-Reddit numbers are chosen, not sanctioned, and are the first thing to cut.
+Four platforms live, **$32.88/day combined = $1,000/month**, which is the total Robby set
+across every ad account.
 
-| platform | campaign | daily | optimising for | creative |
-| --- | --- | --- | --- | --- |
-| Google Search | `ESA Card \| Search \| US \| Core` | $23 | Purchase (site tag) | 3 RSAs, ~70 keywords |
-| Google Demand Gen | `ESA Card \| Demand Gen \| US \| YouTube` | $10 | Purchase (site tag) | 2 ads × 5 YouTube clips |
-| Meta | `ESA Card \| Meta \| US \| Cold \| Sales` | $50 | InitiateCheckout | 20 images + 10 videos |
-| Reddit | `ESA Card \| Reddit \| Pet + Housing \| Launch` | $15 | PageVisit | 20 images + 10 videos |
+| platform | campaign | daily | monthly | optimising for | creative |
+| --- | --- | --- | --- | --- | --- |
+| Meta | `ESA Card \| Meta \| US \| Cold \| Sales` | $13.88 | $422 | InitiateCheckout | 20 images + 10 videos |
+| Google Search | `ESA Card \| Search \| US \| Core` | $9.00 | $274 | Purchase (site tag) | 3 RSAs, ~70 keywords |
+| Google Demand Gen | `ESA Card \| Demand Gen \| US \| YouTube` | $5.00 | $152 | Purchase (site tag) | 2 ads × 5 YouTube clips |
+| Reddit | `ESA Card \| Reddit \| Pet + Housing \| Launch` | $5.00 | $152 | PageVisit | 20 images + 10 videos |
+
+### Why the split is shaped this way
+
+**Two of the four are pinned at a platform floor, not chosen.** Google Demand Gen and Reddit
+both reject any daily budget under **$5.00**:
+
+- Demand Gen: `BUDGET_BELOW_PER_DAY_MINIMUM`, `minimumBudgetAmountMicros: 5000000`
+- Reddit: `"Daily spend goals must be at least $5.00."`
+
+That fixes $10/day. The remaining $22.88 splits between the two channels that can actually
+convert, weighted to Meta because it carries all 30 creatives and now reaches Instagram
+Reels, where the vertical videos were designed to run.
+
+**Honest caveat.** `docs/ads/meta-ads.md` section 7 says a minimum honest Meta test is two
+weeks at $50/day, and that below that you are paying for learning-phase delivery and reading
+noise. At $13.88/day Meta is well under that line. Spread across four platforms, $1,000/month
+funds presence on all of them rather than a readable test on any one. Concentrating the whole
+$1,000 on Meta alone would come closer to a real read.
+
+### US-only targeting, verified per platform
+
+| platform | setting | verified |
+| --- | --- | --- |
+| Google Search | `positive_geo_target_type: PRESENCE` | yes, physical presence only, not interest |
+| Google Demand Gen | `positive_geo_target_type: PRESENCE` | yes, set on the ad group (Demand Gen rejects campaign-level geo criteria) |
+| Meta | `geo_locations.countries: ["US"]` | yes |
+| Reddit | `geolocations: ["US"]`, no exclusions | yes |
+
+Google defaults to PRESENCE now rather than the older "presence or interest", so no US-interested
+foreign traffic is bought. Both campaigns were explicitly set anyway.
+
+**Meta will not accept `location_types: ["home"]` alone at country level.** Writing it returns
+`success: true` and reads back as `["frequently_in", "home"]`, with Advantage+ Audience on or
+off. Both values mean physically in the United States, so there is no interest-based leakage;
+Meta simply does not expose a stricter country-level setting.
 
 ### Why nothing optimises for Purchase except Google
 
@@ -110,10 +144,22 @@ not an edit). The two earlier clicks-optimised ad groups are archived.
 
 ### Known gaps at launch
 
-1. **No Instagram account is linked to the Meta ad account.** `instagram_accounts` returns
-   empty, so the ads are Facebook-only. The ten videos are vertical 9:16 and were built for
-   Reels and Stories, which is the single best surface they have. Connecting the Instagram
-   account is the highest-value unblock on Meta.
+1. **Instagram delivery works, but under the Facebook Page identity.** Robby connected the
+   ESA Card Instagram account on 2026-08-13. It now shows on
+   `/act_.../connected_instagram_accounts` as `17841438094553997`, and an
+   `INSTAGRAM_REELS` ad preview renders correctly, so the vertical videos do reach Reels.
+
+   What does **not** work yet is attaching that account as the ad's *identity*. Rebuilding all
+   30 creatives with `instagram_user_id` failed 30/30 with `error_subcode 1815199`,
+   "Ad Account Has No Access To Instagram Account". The same token also cannot read
+   `/{business}/instagram_accounts`: "requires that you can VIEW_INSTAGRAM_ACCOUNTS for this
+   business account". So the account is *connected* but not *shared as an asset* the ad
+   account may use, which is a Business Settings assignment, not a code change.
+
+   Consequence while it stays this way: the ads run on Instagram showing the Facebook Page
+   name rather than the ESA Card Instagram handle. Fix by assigning the Instagram account to
+   the ad account in Business Settings → Accounts → Instagram accounts → Add assets, then
+   re-run the creative rebuild.
 2. **Domain verification for `esacard.com` is not done** on Meta (Business Settings → Brand
    Safety → Domains) or TikTok (Business Center → Assets → Domains).
 3. **The ESA Card Facebook Page has 0 fans and no posts.** A page with no content is a
