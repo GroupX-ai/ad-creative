@@ -56,6 +56,13 @@ export const EMPHASIS = {
   "voicedrop-c46-before-my-coffee": ["coffee", "dialling", "ringing", "me", "free", "credits"],
   "voicedrop-c47-they-hate-dialling": ["hate", "stop", "rejection", "back", "free", "credits"],
   "emailchaser-c18-check-your-promotions": ["now", "promotions", "nobody", "primary", "free"],
+
+  // ── batch 5, research-driven hooks ──
+  "voicedrop-c48-never-dialed-once": ["boss", "zero", "dialed", "rejection", "back", "free", "credits"],
+  "voicedrop-c49-another-callback": ["callback", "weeks", "voicemails", "ringing", "me", "free", "credits"],
+  "emailchaser-c19-invisible": ["invisible", "promotions", "coupons", "primary", "reply", "free"],
+  "emailchaser-c20-eight-thousand-emails": ["spam", "promotions", "landed", "primary", "inbox", "free"],
+  "emailchaser-c21-agency-callout": ["grand", "clients", "promotions", "primary", "replies", "free"],
 };
 
 // Resolve an ad id from a file path, tolerating the -fixed / -trimmed / -1080p suffixes.

@@ -1,0 +1,26 @@
+{
+  "ranAt": "2026-08-12T21:57:17.362Z",
+  "model": "bytedance/seedance-2.5/text-to-video",
+  "duration": "15",
+  "resolution": "720p",
+  "estimatedSpendUsd": 14.08,
+  "ok": [
+    {
+      "id": "voicedrop-c49-another-callback",
+      "company": "voicedrop",
+      "seed": 1748730611,
+      "sourceUrl": "https://v3b.fal.media/files/b/0aa6178b/Q5Z8Bso7-uo27WT3xejDU_video.mp4",
+      "raw": "/home/user/ad-creative/voicedrop/2026-08-12-seedance-video/voicedrop-c49-another-callback-720p.mp4",
+      "upscaled": "/home/user/ad-creative/voicedrop/2026-08-12-seedance-video/voicedrop-c49-another-callback-1080p.mp4"
+    },
+    {
+      "id": "emailchaser-c20-eight-thousand-emails",
+      "company": "emailchaser",
+      "seed": 20580519,
+      "sourceUrl": "https://v3b.fal.media/files/b/0aa61790/BNObQsdPovz_W91ng5eVI_video.mp4",
+      "raw": "/home/user/ad-creative/emailchaser/2026-08-12-seedance-video/emailchaser-c20-eight-thousand-emails-720p.mp4",
+      "upscaled": "/home/user/ad-creative/emailchaser/2026-08-12-seedance-video/emailchaser-c20-eight-thousand-emails-1080p.mp4"
+    }
+  ],
+  "failed": []
+}
