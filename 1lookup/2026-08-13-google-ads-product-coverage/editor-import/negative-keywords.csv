@@ -1,0 +1,51 @@
+Scope,Campaign,Keyword,Criterion Type,Why
+SHARED: Consumer & Junk,,who called me,Phrase,Specced 2026-07-27 and never attached in the live account
+SHARED: Consumer & Junk,,who called,Phrase,Specced 2026-07-27 and never attached in the live account
+SHARED: Consumer & Junk,,whose number is this,Phrase,Specced 2026-07-27 and never attached in the live account
+SHARED: Consumer & Junk,,who is this number,Phrase,Specced 2026-07-27 and never attached in the live account
+SHARED: Consumer & Junk,,app,Phrase,Specced 2026-07-27 and never attached in the live account
+SHARED: Consumer & Junk,,apk,Phrase,Specced 2026-07-27 and never attached in the live account
+SHARED: Consumer & Junk,,download,Phrase,Specced 2026-07-27 and never attached in the live account
+SHARED: Consumer & Junk,,free,Phrase,Specced 2026-07-27 and never attached; do NOT attach to Free Tools
+SHARED: Consumer & Junk,,open source,Phrase,Specced 2026-07-27 and never attached in the live account
+SHARED: Consumer & Junk,,github,Phrase,Specced 2026-07-27 and never attached in the live account
+SHARED: Consumer & Junk,,tutorial,Phrase,Specced 2026-07-27 and never attached in the live account
+SHARED: Consumer & Junk,,course,Phrase,Specced 2026-07-27 and never attached in the live account
+SHARED: Consumer & Junk,,what is,Phrase,Specced 2026-07-27 and never attached in the live account
+SHARED: Consumer & Junk,,meaning,Phrase,Specced 2026-07-27 and never attached in the live account
+SHARED: Consumer & Junk,,definition,Phrase,Specced 2026-07-27 and never attached in the live account
+SHARED: Consumer & Junk,,wikipedia,Phrase,Specced 2026-07-27 and never attached in the live account
+SHARED: Consumer & Junk,,jobs,Phrase,Specced 2026-07-27 and never attached in the live account
+SHARED: Consumer & Junk,,salary,Phrase,Specced 2026-07-27 and never attached in the live account
+SHARED: Consumer & Junk,,career,Phrase,Specced 2026-07-27 and never attached in the live account
+SHARED: Consumer & Junk,,truecaller,Phrase,Specced 2026-07-27 and never attached in the live account
+SHARED: Consumer & Junk,,textnow,Phrase,Specced 2026-07-27 and never attached in the live account
+SHARED: Consumer intent (new 08-13),,is this number,Phrase,"Bought live: is this number legit, is this number real"
+SHARED: Consumer intent (new 08-13),,is this phone number,Phrase,Bought live: is this phone number legitimate
+SHARED: Consumer intent (new 08-13),,check if a phone number,Phrase,Bought live: check if a phone number is real
+SHARED: Consumer intent (new 08-13),,fake number,Phrase,Bought live: fake number checker
+SHARED: Consumer intent (new 08-13),,scammer,Phrase,Bought live: list of scammer phone numbers
+SHARED: Consumer intent (new 08-13),,phonevalidator,Phrase,Bought live: consumer lookup site brand
+SHARED: Consumer intent (new 08-13),,is this legit,Phrase,Consumer trust-check intent
+SHARED: Consumer intent (new 08-13),,prank,Phrase,Consumer intent
+SHARED: Consumer intent (new 08-13),,spoof,Phrase,Consumer intent
+SHARED: Consumer intent (new 08-13),,unknown number,Phrase,Consumer intent
+SHARED: Consumer intent (new 08-13),,harassing,Phrase,Consumer intent
+SHARED: Consumer intent (new 08-13),,robocall,Phrase,Consumer complaint intent
+CAMPAIGN,1L Search - New Products,ipqualityscore,Phrase,"$98 spent in New Products on the term; belongs in the Competitors campaign"
+CAMPAIGN,1L Search - New Products,ipqs,Phrase,"$30 spent in New Products on ipqs terms; belongs in the Competitors campaign"
+CAMPAIGN,1L Search - New Products,ipinfo,Phrase,"$28 spent in New Products; now has its own IP Data Competitors ad group"
+CAMPAIGN,1L Search - New Products,maxmind,Phrase,Route to the IP Data Competitors ad group
+CAMPAIGN,1L Search - New Products,serpapi,Phrase,Route to the SERP & Scraper Competitors ad group
+CAMPAIGN,1L Search - New Products,dataforseo,Phrase,Route to the SERP & Scraper Competitors ad group
+CAMPAIGN,1L Search - New Products,tloxp,Phrase,Route to the Skip Trace Competitors ad group
+CAMPAIGN,1L Search - New Products,batchskiptracing,Phrase,Route to the Skip Trace Competitors ad group
+CAMPAIGN,1L Search - New Products,lusha,Phrase,Route to the B2B Data Competitors ad group
+CAMPAIGN,1L Search - New Products,seamless ai,Phrase,Route to the B2B Data Competitors ad group
+CAMPAIGN,1L Search - Data Competitors,login,Phrase,Competitor-brand campaigns pull navigational traffic
+CAMPAIGN,1L Search - Data Competitors,log in,Phrase,Competitor-brand campaigns pull navigational traffic
+CAMPAIGN,1L Search - Data Competitors,sign in,Phrase,Competitor-brand campaigns pull navigational traffic
+CAMPAIGN,1L Search - Data Competitors,careers,Phrase,Competitor-brand campaigns pull navigational traffic
+CAMPAIGN,1L Search - Data Competitors,support,Phrase,Competitor-brand campaigns pull navigational traffic
+CAMPAIGN,1L Search - Data Competitors,customer service,Phrase,Competitor-brand campaigns pull navigational traffic
+CAMPAIGN,1L Search - Data Competitors,refund,Phrase,Competitor-brand campaigns pull navigational traffic
