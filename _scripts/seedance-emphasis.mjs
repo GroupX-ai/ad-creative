@@ -13,6 +13,7 @@ export const BRAND = {
   voicedrop: { hex: "#FFD874", ass: "&H0074D8FF" }, // CTA gold, reads on dark footage
   emailchaser: { hex: "#1179FC", ass: "&H00FC7911" }, // brand blue
   "1lookup": { hex: "#22D3EE", ass: "&H00EED322" }, // brand cyan
+  esacard: { hex: "#f2a93b", ass: "&H003BA9F2" }, // marigold, reads on warm daylight footage
 };
 
 // Anything containing a digit, plus spelled-out numbers, is emphasised.
@@ -63,6 +64,19 @@ export const EMPHASIS = {
   "emailchaser-c19-invisible": ["invisible", "promotions", "coupons", "primary", "reply", "free"],
   "emailchaser-c20-eight-thousand-emails": ["spam", "promotions", "landed", "primary", "inbox", "free"],
   "emailchaser-c21-agency-callout": ["grand", "clients", "promotions", "primary", "replies", "free"],
+
+  // ── ESA Card, the B2C batch. Emphasis is the warm turn, not a metric:
+  //    these ads sell a feeling, so the punched words are the ones that land it.
+  "w1-window-seat": ["building", "him", "card", "minute", "window"],
+  "w2-best-part": ["reason", "early", "best", "part", "name", "certificate", "wallet"],
+  "w3-three-minutes": ["terrible", "photo", "name", "breed", "birthday", "inbox", "kettle", "renewals"],
+  "x1-cat-photo": ["photo", "worst", "model", "done", "renewals"],
+  "x2-interview": ["job", "hired", "role", "started", "immediately"],
+  "x3-jealous": ["both", "fair", "his", "hers", "two"],
+  "x4-paw-print": ["signed", "paw", "official", "framed"],
+  "x5-senior": ["fourteen", "years", "finally", "his", "name"],
+  "x6-wallet-reveal": ["kids", "guess", "show", "everyone", "wallet"],
+  "x7-puppy-first": ["first", "day", "grown", "photo", "tiny"],
 };
 
 // Resolve an ad id from a file path, tolerating the -fixed / -trimmed / -1080p suffixes.

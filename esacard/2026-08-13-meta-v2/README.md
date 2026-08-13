@@ -79,3 +79,67 @@ rather than doubling the spend on concepts that may not survive.
 
 `prompts.mjs` holds every prompt, `generate.mjs` reproduces the batch, `qa/` holds contact
 sheets and extracted audio.
+
+---
+
+# Wave 2 (same day): captions, 7 more videos, 12 more banners
+
+Robby approved w1-w3 and b1-b4, asked for one-word captions, and raised the target to
+about 20 banners and 10 videos.
+
+## Captions
+
+Burned with the existing `_scripts/seedance-captions.mjs`, the same tool batch 5 used, so
+ESA Card inherits a proven renderer rather than a new one. Three additions to the shared
+config, all backwards compatible:
+
+- `BRAND.esacard` = marigold `#f2a93b`, ASS `&H003BA9F2`, which reads on warm daylight footage.
+- A `["esa","card"] -> "ESA Card"` brand join, because speech-to-text splits it in two and a
+  caption reading just "ESA" loses the brand. `esacard` added to `BRAND_NAMES` so the joined
+  word gets the brand tier.
+- The script now creates its own `_qa/` directory instead of assuming one exists.
+
+One word at a time, centred, ~124px on a 1080-wide frame, held until the next word starts.
+Three tiers: white plain, marigold and 1.32x for numbers and the punchline words, marigold
+and 1.4x for the brand. Every word is measured in the real font and shrunk if it would
+otherwise touch the frame edge.
+
+## The seven new videos
+
+Brief was "the cutest, most viral videos you can think of".
+
+| id | idea |
+| --- | --- |
+| `x1-cat-photo` | the registration photo, sabotaged by the cat. "She needed one photo. One." |
+| `x2-interview` | deadpan job interview with a beagle. "You start immediately." |
+| `x3-jealous` | second dog notices the first one got something. "Fine. Both of them." |
+| `x4-paw-print` | puppy presses a paw onto the certificate and signs it |
+| `x5-senior` | 14-year-old spaniel, quiet and emotional. "Took me long enough to put his name on something." |
+| `x6-wallet-reveal` | what's actually in the wallet. "This is the one I show people." |
+| `x7-puppy-first` | first-day-of-school energy for a very small dachshund |
+
+`x4-paw-print` is the most shareable: the paw mark lands on the paper in the first three
+seconds and the puppy immediately flops onto its back on top of it. `x5-senior` is the one
+most likely to be sent to somebody rather than scrolled past.
+
+## QA
+
+- All ten videos transcribed against script. Nine matched on the first pass; `x1` hit a
+  transient fal download error and matched on a retry through a data URI.
+- Contact sheets checked frame by frame. Cards and certificates render clean in all ten: the
+  only mark on the `x4` certificate is the paw print, which is the point.
+- `x2-interview` is framed side-on and wide, which reads a little distant at feed size. It is
+  the weakest of the seven but the joke lands.
+- **`n3-verifiable` first rendered as a solid black frame** and passed the 10KB size guard,
+  which would have shipped a blank ad. Re-rendered, and every banner is now checked with a
+  standard-deviation test that catches a uniform frame regardless of file size.
+
+## Inventory
+
+**20 banners** worth shipping: `m1-carry` and `m3-offer` (square + vertical), `b1-b4`
+(square + vertical), `n1-n8`. The batch-1 Meta concepts that led with disclaimers are left in
+place for the record but are not part of the twenty.
+
+**10 videos**, all captioned: `w1-w3` and `x1-x7`.
+
+Total fal spend across every ESA Card batch: about **$98**.
