@@ -1,0 +1,76 @@
+[
+ {
+  "kind": "banner",
+  "id": "m2-three-minutes",
+  "shape": "vertical",
+  "file": "m2-three-minutes-vertical.png",
+  "bytes": 22
+ },
+ {
+  "kind": "banner",
+  "id": "m4-honest",
+  "shape": "vertical",
+  "file": "m4-honest-vertical.png",
+  "bytes": 22
+ },
+ {
+  "kind": "banner",
+  "id": "m3-offer",
+  "shape": "vertical",
+  "file": "m3-offer-vertical.png",
+  "bytes": 22
+ },
+ {
+  "kind": "banner",
+  "id": "m1-carry",
+  "shape": "vertical",
+  "file": "m1-carry-vertical.png",
+  "bytes": 973787
+ },
+ {
+  "kind": "banner",
+  "id": "m2-three-minutes",
+  "shape": "square",
+  "file": "m2-three-minutes-square.png",
+  "bytes": 22
+ },
+ {
+  "kind": "banner",
+  "id": "m3-offer",
+  "shape": "square",
+  "file": "m3-offer-square.png",
+  "bytes": 22
+ },
+ {
+  "kind": "banner",
+  "id": "m4-honest",
+  "shape": "square",
+  "file": "m4-honest-square.png",
+  "bytes": 965424
+ },
+ {
+  "kind": "banner",
+  "id": "m1-carry",
+  "shape": "square",
+  "file": "m1-carry-square.png",
+  "bytes": 1407072
+ },
+ {
+  "kind": "video",
+  "id": "v1-front-desk",
+  "file": "v1-front-desk.mp4",
+  "bytes": 4664815
+ },
+ {
+  "kind": "video",
+  "id": "v2-talk-you-out",
+  "file": "v2-talk-you-out.mp4",
+  "bytes": 3874355
+ },
+ {
+  "kind": "video",
+  "id": "v3-wallet",
+  "file": "v3-wallet.mp4",
+  "bytes": 7941150
+ }
+]
