@@ -86,6 +86,14 @@ export const EMPHASIS = {
   "c3-window-wait": ["window", "every", "day", "waiting", "emotional", "support", "animal", "card"],
   "c4-first-night": ["first", "night", "floor", "home", "emotional", "support", "animal", "card"],
   "c5-kitchen-table": ["minutes", "name", "breed", "birthday", "inbox", "emotional", "support", "animal", "card"],
+
+  // ── the approved slice-of-life batch. No spoken pitch and no end card, so the
+  //    emphasis carries the brand phrase where it falls naturally mid-clip.
+  "d1-viewing": ["fourth", "emotional", "support", "animal", "card", "emails", "week", "waiting"],
+  "d2-lobby": ["yours", "emotional", "support", "animal", "card", "ruined", "morning"],
+  "d3-bench": ["ask", "allowed", "explaining", "emotional", "support", "animal", "card"],
+  "d4-section-four": ["pets", "emotional", "support", "animal", "card", "week"],
+  "d5-hotel": ["emotional", "support", "animal", "card", "bed", "every", "time"],
 };
 
 // Resolve an ad id from a file path, tolerating the -fixed / -trimmed / -1080p suffixes.
