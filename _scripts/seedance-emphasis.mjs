@@ -13,6 +13,7 @@ export const BRAND = {
   voicedrop: { hex: "#FFD874", ass: "&H0074D8FF" }, // CTA gold, reads on dark footage
   emailchaser: { hex: "#1179FC", ass: "&H00FC7911" }, // brand blue
   "1lookup": { hex: "#22D3EE", ass: "&H00EED322" }, // brand cyan
+  esacard: { hex: "#f2a93b", ass: "&H003BA9F2" }, // marigold, reads on warm daylight footage
   bitpredict: { hex: "#01DD82", ass: "&H0082DD01" }, // neon green, the brand's only accent
 };
 
@@ -64,6 +65,43 @@ export const EMPHASIS = {
   "emailchaser-c19-invisible": ["invisible", "promotions", "coupons", "primary", "reply", "free"],
   "emailchaser-c20-eight-thousand-emails": ["spam", "promotions", "landed", "primary", "inbox", "free"],
   "emailchaser-c21-agency-callout": ["grand", "clients", "promotions", "primary", "replies", "free"],
+
+  // ── ESA Card, the B2C batch. Emphasis is the warm turn, not a metric:
+  //    these ads sell a feeling, so the punched words are the ones that land it.
+  "w1-window-seat": ["building", "him", "card", "minute", "window"],
+  "w2-best-part": ["reason", "early", "best", "part", "name", "certificate", "wallet"],
+  "w3-three-minutes": ["terrible", "photo", "name", "breed", "birthday", "inbox", "kettle", "renewals"],
+  "x1-cat-photo": ["photo", "worst", "model", "done", "renewals"],
+  "x2-interview": ["job", "hired", "role", "started", "immediately"],
+  "x3-jealous": ["both", "fair", "his", "hers", "two"],
+  "x4-paw-print": ["signed", "paw", "official", "framed"],
+  "x5-senior": ["fourteen", "years", "finally", "his", "name"],
+  "x6-wallet-reveal": ["kids", "guess", "show", "everyone", "wallet"],
+  "x7-puppy-first": ["first", "day", "grown", "photo", "tiny"],
+
+  // ── the spelled-out rebuild. Robby: use "Emotional Support Animal", never the
+  //    acronym. The four closing words are emphasised together so the full name
+  //    lands in brand colour rather than flashing past in plain white.
+  "c1-four-days": ["four", "days", "sat", "next", "me", "emotional", "support", "animal", "card"],
+  "c2-alarm-clock": ["alarm", "clock", "snooze", "face", "emotional", "support", "animal", "card"],
+  "c3-window-wait": ["window", "every", "day", "waiting", "emotional", "support", "animal", "card"],
+  "c4-first-night": ["first", "night", "floor", "home", "emotional", "support", "animal", "card"],
+  "c5-kitchen-table": ["minutes", "name", "breed", "birthday", "inbox", "emotional", "support", "animal", "card"],
+
+  // ── the approved slice-of-life batch. No spoken pitch and no end card, so the
+  //    emphasis carries the brand phrase where it falls naturally mid-clip.
+  "d1-viewing": ["fourth", "emotional", "support", "animal", "card", "emails", "week", "waiting"],
+  "d2-lobby": ["yours", "emotional", "support", "animal", "card", "ruined", "morning"],
+  "d3-bench": ["ask", "allowed", "explaining", "emotional", "support", "animal", "card"],
+  "d4-section-four": ["pets", "emotional", "support", "animal", "card", "week"],
+  "d5-hotel": ["emotional", "support", "animal", "card", "bed", "every", "time"],
+
+  // ── batch 2 of the slice-of-life set ──
+  "e1-first-day": ["first", "day", "five", "emotional", "support", "animal", "card", "miss"],
+  "e2-keys": ["two", "months", "forms", "emotional", "support", "animal", "card"],
+  "e3-back-sunday": ["sunday", "emotional", "support", "animal", "card", "sofa", "told"],
+  "e4-cottage": ["six", "hours", "emotional", "support", "animal", "card"],
+  "e5-haircut": ["never", "haircut", "life", "emotional", "support", "animal", "card", "ridiculous"],
 
   // ── batch 6, BitPredict on Reddit ──
   // "crypto" is emphasised in every BitPredict ad: it is the one word that tells a

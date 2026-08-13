@@ -57,6 +57,7 @@ const BRAND_JOINS = [
   [["email", "chaser"], "Emailchaser"],
   [["one", "lookup"], "1Lookup"],
   [["one", "look"], "1Lookup"],
+  [["esa", "card"], "ESA Card"],
   // scribe-v2 splits this one too: one batch-7 clip transcribed as "Bit Predict"
   // even though the spoken delivery was correct.
   [["bit", "predict"], "BitPredict"],
@@ -108,7 +109,7 @@ if (!EMPHASIS[adId]) console.log(`  note: no emphasis list for "${adId}", number
 // Match by containment, not equality: speech-to-text returns the spoken URL as
 // "voicedrop.ai", which bares to "voicedropai" and would otherwise render as a
 // plain white word. That word is the CTA payoff and must carry the brand tier.
-const BRAND_NAMES = ["voicedrop", "emailchaser", "1lookup", "bitpredict"];
+const BRAND_NAMES = ["voicedrop", "emailchaser", "1lookup", "esacard", "bitpredict"];
 const tierOf = (text) => {
   const b = bare(text);
   if (BRAND_NAMES.some((n) => b.includes(n))) return "brand";
@@ -183,7 +184,9 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
 ${lines.join("\n")}
 `;
 
-const assPath = path.join(path.dirname(video), "_qa", `${path.basename(video, ".mp4")}.ass`);
+const assDir = path.join(path.dirname(video), "_qa");
+await (await import("node:fs/promises")).mkdir(assDir, { recursive: true });
+const assPath = path.join(assDir, `${path.basename(video, ".mp4")}.ass`);
 await writeFile(assPath, ass);
 
 // ---- 3. burn ---------------------------------------------------------------
