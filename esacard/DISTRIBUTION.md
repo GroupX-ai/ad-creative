@@ -144,22 +144,28 @@ not an edit). The two earlier clicks-optimised ad groups are archived.
 
 ### Known gaps at launch
 
-1. **Instagram delivery works, but under the Facebook Page identity.** Robby connected the
-   ESA Card Instagram account on 2026-08-13. It now shows on
-   `/act_.../connected_instagram_accounts` as `17841438094553997`, and an
-   `INSTAGRAM_REELS` ad preview renders correctly, so the vertical videos do reach Reels.
+1. ~~No Instagram identity on the Meta ads.~~ **Resolved 2026-08-13.** All 30 ads now run
+   under the `@esa_card` Instagram identity (`17841438094553997`), confirmed by reading
+   `creative{instagram_user_id}` back on all 30 and by rendering Instagram Feed and Reels
+   previews.
 
-   What does **not** work yet is attaching that account as the ad's *identity*. Rebuilding all
-   30 creatives with `instagram_user_id` failed 30/30 with `error_subcode 1815199`,
-   "Ad Account Has No Access To Instagram Account". The same token also cannot read
-   `/{business}/instagram_accounts`: "requires that you can VIEW_INSTAGRAM_ACCOUNTS for this
-   business account". So the account is *connected* but not *shared as an asset* the ad
-   account may use, which is a Business Settings assignment, not a code change.
+   Worth keeping, because it cost a full failed pass. The account first appeared on
+   `/act_.../connected_instagram_accounts` while still failing every creative create with
+   `error_subcode 1815199`, "Ad Account Has No Access To Instagram Account".
+   **`connected_instagram_accounts` is not the readiness check; `/act_.../instagram_accounts`
+   is.** The latter stayed empty until the account was assigned to the ad account in Business
+   Settings, and once it returned `{"id": "...", "username": "esa_card"}` every create
+   succeeded. Test that edge before rebuilding creatives, not the connected one.
 
-   Consequence while it stays this way: the ads run on Instagram showing the Facebook Page
-   name rather than the ESA Card Instagram handle. Fix by assigning the Instagram account to
-   the ad account in Business Settings → Accounts → Instagram accounts → Add assets, then
-   re-run the creative rebuild.
+   Second trap on the same pass: `instagram_user_id` cannot be added to a live creative
+   (`Failed to update the creative. Please specify name, status or associated adlabels`), so
+   the creatives must be rebuilt and the ads repointed. When rebuilding from a fetched
+   `object_story_spec`, Meta returns `video_data` carrying **both** `image_url` and
+   `image_hash` and then rejects a spec containing both with `ObjectStorySpecRedundant`
+   (subcode 1443051). Drop `image_url` and keep the hash. That is what failed the 10 video
+   ads while all 20 image ads went through.
+
+   Swapping creatives sends the ads back through review, which is expected.
 2. **Domain verification for `esacard.com` is not done** on Meta (Business Settings → Brand
    Safety → Domains) or TikTok (Business Center → Assets → Domains).
 3. **The ESA Card Facebook Page has 0 fans and no posts.** A page with no content is a
