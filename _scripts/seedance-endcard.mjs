@@ -46,13 +46,24 @@ for (const clip of clips) {
   const listFile = path.join(tmp, `${base}-concat.txt`);
   const outFile = path.join(tmp, `${base}-out.mp4`);
 
+  // Read the clip's real dimensions instead of assuming 1080x1920. Seedance
+  // upscales come back 1080x1918, and encoding the card at a different size
+  // makes the concat demuxer drop the tail: the card silently never plays.
+  let dims = "1080:1920";
+  try {
+    execFileSync(FF, ["-i", clip], { stdio: ["ignore", "pipe", "pipe"] });
+  } catch (e) {
+    const m = /, (\d+)x(\d+)[ ,\[]/.exec(e.stderr?.toString() ?? "");
+    if (m) dims = `${m[1]}:${m[2]}`;
+  }
+
   ff([
     "-y", "-loglevel", "error",
     "-loop", "1", "-i", card,
     "-f", "lavfi", "-i", "anullsrc=r=44100:cl=stereo",
     "-t", DURATION,
     "-c:v", "libx264", "-pix_fmt", "yuv420p", "-r", "30",
-    "-vf", "scale=1080:1920",
+    "-vf", `scale=${dims}`,
     "-c:a", "aac", "-b:a", "192k", "-shortest",
     cardMp4,
   ]);
