@@ -1,0 +1,58 @@
+{
+  "ranAt": "2026-08-13T23:46:34.558Z",
+  "model": "bytedance/seedance-2.5/text-to-video",
+  "duration": "15",
+  "resolution": "720p",
+  "estimatedSpendUsd": 42.25,
+  "ok": [
+    {
+      "id": "teampredict-v1-keep-scrolling",
+      "company": "teampredict",
+      "seed": 390486606,
+      "sourceUrl": "https://v3b.fal.media/files/b/0aa63bb0/1fugdrjGFiNuM-m9V5_uI_video.mp4",
+      "raw": "/home/user/ad-creative/teampredict/2026-08-13-paid-launch-video/teampredict-v1-keep-scrolling-720p.mp4",
+      "upscaled": "/home/user/ad-creative/teampredict/2026-08-13-paid-launch-video/teampredict-v1-keep-scrolling-1080p.mp4"
+    },
+    {
+      "id": "teampredict-v2-two-weeks",
+      "company": "teampredict",
+      "seed": 1529064363,
+      "sourceUrl": "https://v3b.fal.media/files/b/0aa63bae/3bquMxjgZKKfZVL4Spqp2_video.mp4",
+      "raw": "/home/user/ad-creative/teampredict/2026-08-13-paid-launch-video/teampredict-v2-two-weeks-720p.mp4",
+      "upscaled": "/home/user/ad-creative/teampredict/2026-08-13-paid-launch-video/teampredict-v2-two-weeks-1080p.mp4"
+    },
+    {
+      "id": "teampredict-v3-open-to-work",
+      "company": "teampredict",
+      "seed": 1396014722,
+      "sourceUrl": "https://v3b.fal.media/files/b/0aa63b99/iYzNejmUIUal6j0E3Frp__video.mp4",
+      "raw": "/home/user/ad-creative/teampredict/2026-08-13-paid-launch-video/teampredict-v3-open-to-work-720p.mp4",
+      "upscaled": "/home/user/ad-creative/teampredict/2026-08-13-paid-launch-video/teampredict-v3-open-to-work-1080p.mp4"
+    },
+    {
+      "id": "teampredict-v4-pizza-party",
+      "company": "teampredict",
+      "seed": 309188955,
+      "sourceUrl": "https://v3b.fal.media/files/b/0aa63bad/0kWCf6UThTeGFfVcSjfCq_video.mp4",
+      "raw": "/home/user/ad-creative/teampredict/2026-08-13-paid-launch-video/teampredict-v4-pizza-party-720p.mp4",
+      "upscaled": "/home/user/ad-creative/teampredict/2026-08-13-paid-launch-video/teampredict-v4-pizza-party-1080p.mp4"
+    },
+    {
+      "id": "teampredict-v5-psychic",
+      "company": "teampredict",
+      "seed": 951575141,
+      "sourceUrl": "https://v3b.fal.media/files/b/0aa63bae/bu__aLFXIoZw987OYGTtx_video.mp4",
+      "raw": "/home/user/ad-creative/teampredict/2026-08-13-paid-launch-video/teampredict-v5-psychic-720p.mp4",
+      "upscaled": "/home/user/ad-creative/teampredict/2026-08-13-paid-launch-video/teampredict-v5-psychic-1080p.mp4"
+    },
+    {
+      "id": "teampredict-v6-my-competitors",
+      "company": "teampredict",
+      "seed": 984262755,
+      "sourceUrl": "https://v3b.fal.media/files/b/0aa63bac/db1rN3kikWoUcDZM4GtQx_video.mp4",
+      "raw": "/home/user/ad-creative/teampredict/2026-08-13-paid-launch-video/teampredict-v6-my-competitors-720p.mp4",
+      "upscaled": "/home/user/ad-creative/teampredict/2026-08-13-paid-launch-video/teampredict-v6-my-competitors-1080p.mp4"
+    }
+  ],
+  "failed": []
+}
