@@ -37,15 +37,18 @@ OAuth scope, so Google under-counts. Stripe's total is not blind, and the total 
 
 ## The three findings that matter
 
-### 1. The consumer-intent negative list was specced on 7/27 and never attached
+### 1. The consumer-intent negative list is attached but too generic to catch the leak
 
-`2026-07-27-google-ads/editor-import/negative-keywords.csv` defines a 21-term
-"SHARED: Consumer & Junk" list to attach to campaigns 1-4. The live account has **only** the
-per-campaign competitor-brand negatives. Verified against the API: 32 campaign negatives, all
-brand names, zero ad-group negatives.
+**Correction to the first version of this file, which said the list was never attached. It
+was.** The 7/27 list lives as a shared negative set `1L - Consumer & Junk`, all 21 terms
+present, attached to Phone & Carrier API, Email Verification, New Products and Competitors.
+The first read looked only at `campaign_criterion` and missed `campaign_shared_set`, so it
+saw 32 brand negatives and concluded wrongly.
 
-This is confirmed, not a hypothesis, and it is what the money is leaking into. Real search
-terms bought in the $6 to $9 CPC API ad groups over 17 days:
+The leak is real, the cause is not. The 21 terms are generic web-junk blocks (`what is`,
+`free`, `download`, `tutorial`, `github`, `jobs`, `apk`, `truecaller`, `who called me`).
+**None of them match the phrasing people actually search**, so consumer traffic walked
+straight through into the $6 to $9 CPC API ad groups over 17 days:
 
 | Search term | Ad group | Spend |
 |---|---|--:|
@@ -57,8 +60,15 @@ terms bought in the $6 to $9 CPC API ad groups over 17 days:
 | phonevalidator | Phone Validation API | $11.99 |
 | list of scammer phone numbers | Phone Spam & Risk | $17.73 |
 
-None of those people are buying an API. The Free Tools campaign has consumer negatives; the
-expensive API campaigns do not.
+None of those people are buying an API. The fix is not "attach the list", it is "the list
+needs the 12 terms that describe how consumers actually phrase it": `is this number`,
+`is this phone number`, `check if a phone number`, `is this legit`, `fake number`, `scammer`,
+`phonevalidator`, `robocall`, `unknown number`, `prank`, `spoof`, `harassing`.
+
+**Deployed 2026-08-13.** A second shared set `1L | Consumer & Junk (2026-08-13)` carrying all
+33 terms (the original 21 plus those 12) is live and attached to the same four campaigns.
+Free Tools is deliberately excluded: it bids on "free carrier lookup" and the list blocks
+`free`.
 
 ### 2. Competitor terms are being bought inside product ad groups at product bids
 
@@ -189,8 +199,11 @@ budget 13 more ways.
 
 **Order of operations:**
 
-1. **Attach the negatives** (`negative-keywords.csv`). Free money: it stops consumer traffic
-   at $6 to $9 a click. Do not attach the `free` negative to `1L Search - Free Tools`.
+1. ~~**Attach the negatives**~~ **DONE, live 2026-08-13.** Shared set
+   `1L | Consumer & Junk (2026-08-13)`, 33 terms, on Phone & Carrier API, Email Verification,
+   New Products and Competitors, plus 10 competitor-routing negatives on New Products. Applied
+   with `second-brain/scripts/1lookup-google-ads-coverage-deploy.mjs --phase=negatives --live`
+   and verified back out of the API. Free Tools excluded on purpose.
 2. **Pause `1L Display - Prospecting`.** $295 over 17 days, 963 clicks, 0 conversions, and the
    7/28 placement report found the spend going to a teen video-chat app, dating sites and
    made-for-advertising news farms. The vault flagged this on 7/29 and it is still running.
@@ -204,7 +217,24 @@ fix the reason trials are flat. 90 people reach the trial page and 5 to 6 start 
 (`1lookup.md`, CRO attack prompt, open since 8/03). At that rate more clicks mostly buy more
 non-starters. The landing and trial flow is the higher-leverage problem.
 
-## Import steps
+## Deployment status (2026-08-13)
+
+A scripted deployer exists so this does not have to go through Editor by hand:
+`second-brain/scripts/1lookup-google-ads-coverage-deploy.mjs`. It reads these CSVs directly,
+runs every phase as a Google validate-only call first, and applies nothing without `--live`.
+
+| Phase | State |
+|---|---|
+| `--phase=negatives` | **Applied live**, 48 operations, verified back out of the API |
+| `--phase=pause` (Display Prospecting) | Validated clean, **not applied**: blocked by the session permission classifier |
+| `--phase=build` (campaign, 13 ad groups, 82 keywords, 13 ads) | Validated clean, **not applied**: blocked by the session permission classifier |
+
+Both blocked phases pass Google's own validation, so the remaining step is a permission grant,
+not a fix. One keyword, `batch skip tracing alternative`, trips Google's `EVASIVE_AD_CONTENT`
+filter; Google marks it exemptible and the deployer requests the exemption automatically. The
+same flag hit `[batch skip tracing]` on the 7/27 launch.
+
+## Import steps (manual alternative)
 
 Google Ads Editor, account 871-538-9296:
 
