@@ -17,14 +17,17 @@ This is the first time this repo's creative has run anywhere other than Meta.
 |---|---|
 | YouTube channel | `@voicedrop-ai` (`UCXS0_Mr8HQtZkO6Do9bW83w`), via the Postiz integration `cmss08czg035bqb0ysan4x6nb` |
 | Google Ads account | VoiceDrop `7171404080` (MCC `3410674045`) |
-| Campaign | `23147031812` "YouTube - Cold 1.2", DEMAND_GEN, MAXIMIZE_CONVERSIONS, **ENABLED**, $7.83/day |
+| Campaign | `23147031812` "YouTube - Cold 1.2", DEMAND_GEN, MAXIMIZE_CONVERSIONS, **ENABLED**, **$25/day** (raised from $7.83 on 2026-08-13) |
 | Ad group | `201727686390` "Cold: Business + Finance + Real Estate - 3.0", ENABLED |
 | Ad status | Built PAUSED, **all 13 ENABLED 2026-08-13** on Robby's approval, in Google review |
 | Destination | `https://www.voicedrop.ai/` |
 
-No campaign was created and no budget was touched. The 13 ads compete for the campaign's
-existing **$7.83/day**, so account spend does not rise; the ad group now carries 16 ads
-(3 existing plus these 13) against that budget.
+No campaign was created. The ad group now carries 16 ads (3 existing plus these 13), and
+the campaign's daily budget was **raised from $7.83 to $25** on Robby's call, because
+$7.83/day across 16 ads would take weeks to produce a readable result per creative and
+Demand Gen would quietly settle on two or three of them long before that. Budget
+`15043561813` is not shared (`explicitly_shared: false`, reference count 1), so the raise
+touches only this campaign. Account spend rises by **$17.17/day**, about $515/month.
 
 **Why Demand Gen and not a video campaign.** Google Ads API v23 can no longer create
 VIDEO campaigns; YouTube video inventory now sits inside DEMAND_GEN. The account's only
