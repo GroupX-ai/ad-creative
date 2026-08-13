@@ -1,0 +1,48 @@
+[
+ {
+  "kind": "banner",
+  "id": "b4-forever",
+  "shape": "square",
+  "file": "b4-forever-square.png",
+  "bytes": 974981
+ },
+ {
+  "kind": "banner",
+  "id": "b2-instant-certificate",
+  "shape": "square",
+  "file": "b2-instant-certificate-square.png",
+  "bytes": 1257933
+ },
+ {
+  "kind": "banner",
+  "id": "b3-three-minutes",
+  "shape": "square",
+  "file": "b3-three-minutes-square.png",
+  "bytes": 1568638
+ },
+ {
+  "kind": "banner",
+  "id": "b1-keeps-you-well",
+  "shape": "square",
+  "file": "b1-keeps-you-well-square.png",
+  "bytes": 1689465
+ },
+ {
+  "kind": "video",
+  "id": "w1-window-seat",
+  "file": "w1-window-seat.mp4",
+  "bytes": 5839634
+ },
+ {
+  "kind": "video",
+  "id": "w2-best-part",
+  "file": "w2-best-part.mp4",
+  "bytes": 4015955
+ },
+ {
+  "kind": "video",
+  "id": "w3-three-minutes",
+  "file": "w3-three-minutes.mp4",
+  "bytes": 3920529
+ }
+]
