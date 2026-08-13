@@ -1,0 +1,18 @@
+{
+  "ranAt": "2026-08-13T18:47:52.958Z",
+  "model": "bytedance/seedance-2.5/text-to-video",
+  "duration": "15",
+  "resolution": "720p",
+  "estimatedSpendUsd": 7.04,
+  "ok": [
+    {
+      "id": "bitpredict-c7-just-locked-it",
+      "company": "bitpredict",
+      "seed": 1803913710,
+      "sourceUrl": "https://v3b.fal.media/files/b/0aa634e0/JLLWKCzS6EO3iTlqPHB2d_video.mp4",
+      "raw": "/home/user/ad-creative/bitpredict/2026-08-13-reddit-video-b7/bitpredict-c7-just-locked-it-720p.mp4",
+      "upscaled": "/home/user/ad-creative/bitpredict/2026-08-13-reddit-video-b7/bitpredict-c7-just-locked-it-1080p.mp4"
+    }
+  ],
+  "failed": []
+}
