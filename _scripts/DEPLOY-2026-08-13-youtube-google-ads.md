@@ -2,8 +2,12 @@
 
 Robby added the VoiceDrop YouTube channel to Postiz and asked for the video ads to be
 uploaded and put into Google Ads. Every shippable VoiceDrop video ad in this repo (13 of
-them, batches 1 to 5 plus the Interstellar parody) is now live on the channel and wired
-into the live Google Ads cold campaign as **paused** ads.
+them, batches 1 to 5 plus the Interstellar parody) is now live on the channel and running
+in the live Google Ads cold campaign.
+
+**Activated 2026-08-13 on Robby's approval ("You can enable all of them").** All 13 were
+built paused, then switched to ENABLED the same day; all 13 confirmed ENABLED with
+`review_status: REVIEW_IN_PROGRESS`.
 
 This is the first time this repo's creative has run anywhere other than Meta.
 
@@ -15,11 +19,12 @@ This is the first time this repo's creative has run anywhere other than Meta.
 | Google Ads account | VoiceDrop `7171404080` (MCC `3410674045`) |
 | Campaign | `23147031812` "YouTube - Cold 1.2", DEMAND_GEN, MAXIMIZE_CONVERSIONS, **ENABLED**, $7.83/day |
 | Ad group | `201727686390` "Cold: Business + Finance + Real Estate - 3.0", ENABLED |
-| Ad status | **All 13 PAUSED**, per the standing "build paused, Robby flips live" rule |
+| Ad status | Built PAUSED, **all 13 ENABLED 2026-08-13** on Robby's approval, in Google review |
 | Destination | `https://www.voicedrop.ai/` |
 
-No campaign was created and no budget was touched, so this deploy adds **$0/day** of new
-spend until Robby enables the ads.
+No campaign was created and no budget was touched. The 13 ads compete for the campaign's
+existing **$7.83/day**, so account spend does not rise; the ad group now carries 16 ads
+(3 existing plus these 13) against that budget.
 
 **Why Demand Gen and not a video campaign.** Google Ads API v23 can no longer create
 VIDEO campaigns; YouTube video inventory now sits inside DEMAND_GEN. The account's only
