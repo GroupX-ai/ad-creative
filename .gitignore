@@ -13,3 +13,9 @@ _qa/
 */2026-08-09-seedance-video-b2/*-1080p-fixed.mp4
 */2026-08-09-seedance-video-b2/*-1080p-trimmed.mp4
 _review-*/
+
+# Banner batches: raw/ is the un-composited render straight off fal and is a
+# byte-for-byte duplicate of banners-nologo/, which IS committed. fonts/ are
+# Google Fonts fetched at build time. Both are re-derivable from the prompts.
+**/_work/raw/
+**/_work/fonts/
