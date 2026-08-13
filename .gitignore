@@ -19,3 +19,6 @@ _review-*/
 # Google Fonts fetched at build time. Both are re-derivable from the prompts.
 **/_work/raw/
 **/_work/fonts/
+# Generated review page: 2.9 MB of base64-inlined copies of banners/ that are
+# already committed. Re-derive with _work/build-review-page.py.
+**/_work/review-page.html
