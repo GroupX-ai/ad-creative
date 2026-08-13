@@ -1,0 +1,66 @@
+[
+ {
+  "concept": "c2-offer-poster",
+  "family": "loud-direct-response",
+  "shape": "landscape",
+  "size": "landscape_4_3",
+  "file": "c2-offer-poster-landscape.png",
+  "bytes": 750259
+ },
+ {
+  "concept": "c4-product",
+  "family": "product-shot",
+  "shape": "landscape",
+  "size": "landscape_4_3",
+  "file": "c4-product-landscape.png",
+  "bytes": 987514
+ },
+ {
+  "concept": "c3-honest",
+  "family": "loud-direct-response",
+  "shape": "landscape",
+  "size": "landscape_4_3",
+  "file": "c3-honest-landscape.png",
+  "bytes": 730422
+ },
+ {
+  "concept": "c3-honest",
+  "family": "loud-direct-response",
+  "shape": "square",
+  "size": "square_hd",
+  "file": "c3-honest-square.png",
+  "bytes": 916442
+ },
+ {
+  "concept": "c1-legalpad",
+  "family": "native-organic",
+  "shape": "landscape",
+  "size": "landscape_4_3",
+  "file": "c1-legalpad-landscape.png",
+  "bytes": 1267060
+ },
+ {
+  "concept": "c2-offer-poster",
+  "family": "loud-direct-response",
+  "shape": "square",
+  "size": "square_hd",
+  "file": "c2-offer-poster-square.png",
+  "bytes": 936030
+ },
+ {
+  "concept": "c4-product",
+  "family": "product-shot",
+  "shape": "square",
+  "size": "square_hd",
+  "file": "c4-product-square.png",
+  "bytes": 1215843
+ },
+ {
+  "concept": "c1-legalpad",
+  "family": "native-organic",
+  "shape": "square",
+  "size": "square_hd",
+  "file": "c1-legalpad-square.png",
+  "bytes": 1827053
+ }
+]
