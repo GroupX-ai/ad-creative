@@ -1,25 +1,25 @@
 Scope,Campaign,Keyword,Criterion Type,Why
-SHARED: Consumer & Junk,,who called me,Phrase,Specced 2026-07-27 and never attached in the live account
-SHARED: Consumer & Junk,,who called,Phrase,Specced 2026-07-27 and never attached in the live account
-SHARED: Consumer & Junk,,whose number is this,Phrase,Specced 2026-07-27 and never attached in the live account
-SHARED: Consumer & Junk,,who is this number,Phrase,Specced 2026-07-27 and never attached in the live account
-SHARED: Consumer & Junk,,app,Phrase,Specced 2026-07-27 and never attached in the live account
-SHARED: Consumer & Junk,,apk,Phrase,Specced 2026-07-27 and never attached in the live account
-SHARED: Consumer & Junk,,download,Phrase,Specced 2026-07-27 and never attached in the live account
-SHARED: Consumer & Junk,,free,Phrase,Specced 2026-07-27 and never attached; do NOT attach to Free Tools
-SHARED: Consumer & Junk,,open source,Phrase,Specced 2026-07-27 and never attached in the live account
-SHARED: Consumer & Junk,,github,Phrase,Specced 2026-07-27 and never attached in the live account
-SHARED: Consumer & Junk,,tutorial,Phrase,Specced 2026-07-27 and never attached in the live account
-SHARED: Consumer & Junk,,course,Phrase,Specced 2026-07-27 and never attached in the live account
-SHARED: Consumer & Junk,,what is,Phrase,Specced 2026-07-27 and never attached in the live account
-SHARED: Consumer & Junk,,meaning,Phrase,Specced 2026-07-27 and never attached in the live account
-SHARED: Consumer & Junk,,definition,Phrase,Specced 2026-07-27 and never attached in the live account
-SHARED: Consumer & Junk,,wikipedia,Phrase,Specced 2026-07-27 and never attached in the live account
-SHARED: Consumer & Junk,,jobs,Phrase,Specced 2026-07-27 and never attached in the live account
-SHARED: Consumer & Junk,,salary,Phrase,Specced 2026-07-27 and never attached in the live account
-SHARED: Consumer & Junk,,career,Phrase,Specced 2026-07-27 and never attached in the live account
-SHARED: Consumer & Junk,,truecaller,Phrase,Specced 2026-07-27 and never attached in the live account
-SHARED: Consumer & Junk,,textnow,Phrase,Specced 2026-07-27 and never attached in the live account
+SHARED: Consumer & Junk,,who called me,Phrase,In the 7/27 shared set already; kept so this list is self-contained
+SHARED: Consumer & Junk,,who called,Phrase,In the 7/27 shared set already; kept so this list is self-contained
+SHARED: Consumer & Junk,,whose number is this,Phrase,In the 7/27 shared set already; kept so this list is self-contained
+SHARED: Consumer & Junk,,who is this number,Phrase,In the 7/27 shared set already; kept so this list is self-contained
+SHARED: Consumer & Junk,,app,Phrase,In the 7/27 shared set already; kept so this list is self-contained
+SHARED: Consumer & Junk,,apk,Phrase,In the 7/27 shared set already; kept so this list is self-contained
+SHARED: Consumer & Junk,,download,Phrase,In the 7/27 shared set already; kept so this list is self-contained
+SHARED: Consumer & Junk,,free,Phrase,In the 7/27 shared set already; do NOT attach to Free Tools
+SHARED: Consumer & Junk,,open source,Phrase,In the 7/27 shared set already; kept so this list is self-contained
+SHARED: Consumer & Junk,,github,Phrase,In the 7/27 shared set already; kept so this list is self-contained
+SHARED: Consumer & Junk,,tutorial,Phrase,In the 7/27 shared set already; kept so this list is self-contained
+SHARED: Consumer & Junk,,course,Phrase,In the 7/27 shared set already; kept so this list is self-contained
+SHARED: Consumer & Junk,,what is,Phrase,In the 7/27 shared set already; kept so this list is self-contained
+SHARED: Consumer & Junk,,meaning,Phrase,In the 7/27 shared set already; kept so this list is self-contained
+SHARED: Consumer & Junk,,definition,Phrase,In the 7/27 shared set already; kept so this list is self-contained
+SHARED: Consumer & Junk,,wikipedia,Phrase,In the 7/27 shared set already; kept so this list is self-contained
+SHARED: Consumer & Junk,,jobs,Phrase,In the 7/27 shared set already; kept so this list is self-contained
+SHARED: Consumer & Junk,,salary,Phrase,In the 7/27 shared set already; kept so this list is self-contained
+SHARED: Consumer & Junk,,career,Phrase,In the 7/27 shared set already; kept so this list is self-contained
+SHARED: Consumer & Junk,,truecaller,Phrase,In the 7/27 shared set already; kept so this list is self-contained
+SHARED: Consumer & Junk,,textnow,Phrase,In the 7/27 shared set already; kept so this list is self-contained
 SHARED: Consumer intent (new 08-13),,is this number,Phrase,"Bought live: is this number legit, is this number real"
 SHARED: Consumer intent (new 08-13),,is this phone number,Phrase,Bought live: is this phone number legitimate
 SHARED: Consumer intent (new 08-13),,check if a phone number,Phrase,Bought live: check if a phone number is real
