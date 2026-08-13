@@ -35,10 +35,13 @@ const AD_GROUP_NAME = "BP | US | Broad | SignUp v1";
 const DAILY_MICROS = 10_000_000; // $10.00/day
 const LANDING = "https://www.bitpredict.io/";
 
-const RAW = "https://raw.githubusercontent.com/GroupX-ai/ad-creative";
-const BRANCH = "claude/bitpredict-reddit-ads-xq8ocu";
-const B2 = `${RAW}/${BRANCH}/bitpredict/2026-08-13-reddit-b2`;
-const V7 = `${RAW}/${BRANCH}/bitpredict/2026-08-13-reddit-video-b7`;
+// Pinned to `main`, not to the feature branch. Reddit fetches these URLs itself
+// at post-creation time, which can be days after the code is written, and a
+// merged branch gets deleted: a branch URL is a launch that breaks silently
+// later. Anything referenced here must be on main before the script is run.
+const RAW = "https://raw.githubusercontent.com/GroupX-ai/ad-creative/main";
+const B2 = `${RAW}/bitpredict/2026-08-13-reddit-b2`;
+const V7 = `${RAW}/bitpredict/2026-08-13-reddit-video-b7`;
 
 const LIVE = process.argv.includes("--live");
 const ACTIVATE = process.argv.includes("--activate");
