@@ -30,6 +30,23 @@ Test before sending: would Robby reply "make that shorter," "simpler please," or
 
 ---
 
+## Before making any ad creative (blocking)
+
+Do not script, generate, edit, or deploy any ad from this repo until you have read, in
+this order:
+
+1. **`resources/paid-ads-creative-playbook.md` in the `second-brain` vault.** The master
+   playbook: process, claim-safety rules, brand kits, and the full Seedance video recipe.
+   If the vault is not attached to this session, stop and ask Robby for it. Never proceed
+   from memory of what it says.
+2. **The company's `AD-CREATIVE-PLAYBOOK.md` in its own marketing repo.** The
+   approved-claims bank for that brand. No claim ships that is not in it.
+3. **`_scripts/RESEARCH-2026-08-12-b2b-scripts-synthesis.md` and the `_scripts/BATCH-*.md`
+   docs here.** What converts (script formulas, hooks, closes) and what every prior batch
+   already learned, so no mistake is repeated.
+
+---
+
 ## Repo context
 
 Setup, commands, and architecture for this repo live in [`README.md`](README.md).
