@@ -53,3 +53,41 @@ or percentages.
 
 The ten videos all close on the spoken line "E-S-A Card" and need re-rendering to match this
 rule. That is the expensive half of the change, so it is not done here.
+
+---
+
+# Video rebuild (5 clips)
+
+Robby picked `w1`/`w2`/`w3` as the cuter set over the gag-led batch, so the register here is
+theirs: one real person and their animal, one genuine warm moment, phone-shot, light humour or
+real feeling. No comedy premises, no concept ads.
+
+Every clip closes on the words **"Emotional support animal card. Thirty-nine dollars."** spoken
+in full. The prompt carries an explicit brand rule forbidding the three-letter form, and all
+five were transcribed to confirm it.
+
+| id | register | hook | the moment |
+| --- | --- | --- | --- |
+| `c1-four-days` | w2, emotional | "Four days he stayed over there." | the rescue lurcher finally sits against her |
+| `c2-alarm-clock` | w3, light | "This is my alarm clock." | the cat takes his warm patch the second he moves |
+| `c3-window-wait` | w1, warm | "Every single day. That window." | the spaniel explodes out of the front door |
+| `c4-first-night` | w1, cosy | "First night. He has taken the bed." | "No furniture. No curtains. Do not care." |
+| `c5-kitchen-table` | w3, fast | "Okay. Three minutes, she said." | in the inbox before the toast popped |
+
+`c1-four-days` is the strongest. The arc is visible without sound: the dog watching from across
+the room, crossing it, then pressed against her shoulder while she talks.
+
+## Captions
+
+Same renderer, with the four closing words `emotional`, `support`, `animal`, `card` added to the
+emphasis list for each clip, so the full name lands in marigold at the end rather than flashing
+past in plain white. The old `["esa","card"]` brand join no longer fires, by design.
+
+## QA
+
+All five transcribed on ElevenLabs scribe-v2 and matched to script. The closing phrase renders
+as "Emotional support animal card" in every one, with the acronym appearing nowhere in any clip.
+Contact sheets checked frame by frame: cards and certificates render clean, no stray on-screen
+text.
+
+Total fal spend across every ESA Card batch to date: about **$137**.

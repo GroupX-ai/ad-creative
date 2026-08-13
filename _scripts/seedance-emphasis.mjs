@@ -77,6 +77,15 @@ export const EMPHASIS = {
   "x5-senior": ["fourteen", "years", "finally", "his", "name"],
   "x6-wallet-reveal": ["kids", "guess", "show", "everyone", "wallet"],
   "x7-puppy-first": ["first", "day", "grown", "photo", "tiny"],
+
+  // ── the spelled-out rebuild. Robby: use "Emotional Support Animal", never the
+  //    acronym. The four closing words are emphasised together so the full name
+  //    lands in brand colour rather than flashing past in plain white.
+  "c1-four-days": ["four", "days", "sat", "next", "me", "emotional", "support", "animal", "card"],
+  "c2-alarm-clock": ["alarm", "clock", "snooze", "face", "emotional", "support", "animal", "card"],
+  "c3-window-wait": ["window", "every", "day", "waiting", "emotional", "support", "animal", "card"],
+  "c4-first-night": ["first", "night", "floor", "home", "emotional", "support", "animal", "card"],
+  "c5-kitchen-table": ["minutes", "name", "breed", "birthday", "inbox", "emotional", "support", "animal", "card"],
 };
 
 // Resolve an ad id from a file path, tolerating the -fixed / -trimmed / -1080p suffixes.
