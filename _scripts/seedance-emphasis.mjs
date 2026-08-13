@@ -94,6 +94,13 @@ export const EMPHASIS = {
   "d3-bench": ["ask", "allowed", "explaining", "emotional", "support", "animal", "card"],
   "d4-section-four": ["pets", "emotional", "support", "animal", "card", "week"],
   "d5-hotel": ["emotional", "support", "animal", "card", "bed", "every", "time"],
+
+  // ── batch 2 of the slice-of-life set ──
+  "e1-first-day": ["first", "day", "five", "emotional", "support", "animal", "card", "miss"],
+  "e2-keys": ["two", "months", "forms", "emotional", "support", "animal", "card"],
+  "e3-back-sunday": ["sunday", "emotional", "support", "animal", "card", "sofa", "told"],
+  "e4-cottage": ["six", "hours", "emotional", "support", "animal", "card"],
+  "e5-haircut": ["never", "haircut", "life", "emotional", "support", "animal", "card", "ridiculous"],
 };
 
 // Resolve an ad id from a file path, tolerating the -fixed / -trimmed / -1080p suffixes.
