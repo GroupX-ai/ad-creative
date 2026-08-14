@@ -65,6 +65,22 @@ const RAW =
 const B8 = `${RAW}/teampredict/2026-08-13-paid-launch`;
 const V9 = `${RAW}/teampredict/2026-08-13-paid-launch-video`;
 
+// ---------------------------------------------------------------------------
+// Reporting note, learned the expensive way on 2026-08-14.
+//
+// Report field names are UPPER_CASE in the REQUEST and lowercase in the
+// RESPONSE. You ask for ["SPEND","IMPRESSIONS","CLICKS"] and rows come back as
+// {ad_id, spend, impressions, clicks}. Reading the response by the name you
+// requested returns undefined on every field, which sums to a confident zero
+// rather than erroring, and that zero is indistinguishable from a dead campaign.
+// It produced two false "not delivering" reports before a control query against
+// a known-spending account caught it.
+//
+// Before believing a zero, run the same query against an account you KNOW is
+// spending. If that also reads zero, the instrument is broken, not the campaign.
+// Also: ends_at must be hourly granularity (YYYY-MM-DDTHH:00:00Z) or it 400s.
+// ---------------------------------------------------------------------------
+
 const LIVE = process.argv.includes("--live");
 const ACTIVATE = process.argv.includes("--activate");
 
