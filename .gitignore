@@ -31,3 +31,6 @@ _review-*/
 #     --batch 2026-08-13-paid-launch-video --duration 15 --resolution 720p --only <id>
 teampredict/2026-08-13-paid-launch-video/*-1080p.mp4
 teampredict/2026-08-13-paid-launch-video/*-1080p-trimmed.mp4
+# Generated status page: 372 KB of base64-inlined copies of thumbnails/ and the
+# brand fonts, all already present. Re-derive with _work/build-status-page.py.
+teampredict/2026-08-13-paid-launch-video/_work/status-page.html
