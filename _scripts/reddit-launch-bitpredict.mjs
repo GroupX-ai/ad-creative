@@ -186,7 +186,14 @@ if (group) {
 }
 
 // 2. One post per asset, then one ad pointing at it.
+//
+// Both levels are reused independently, because they fail independently: an ad
+// create that errors after its post succeeded leaves an orphan post, and posts
+// cannot be deleted either. Matching posts on headline (unique per asset) means
+// a re-run adopts the orphan instead of publishing a second copy of the same
+// creative to the brand's profile.
 const existingAds = api("GET", `/ad_accounts/${ACCOUNT}/ads`);
+const existingPosts = api("GET", `/profiles/${PROFILE}/structured_posts`);
 const results = [];
 
 for (const asset of ASSETS) {
@@ -194,6 +201,20 @@ for (const asset of ASSETS) {
   if (already) {
     console.log(`  reused   ${asset.name.padEnd(34)} ad ${already.id}`);
     results.push({ ...asset, adId: already.id, postId: already.post_id, reused: true });
+    continue;
+  }
+
+  const orphan = existingPosts.find((p) => p.creative?.headline === asset.creative.headline);
+  if (orphan) {
+    const ad = api("POST", `/ad_accounts/${ACCOUNT}/ads`, {
+      ad_group_id: group.id,
+      name: asset.name,
+      post_id: orphan.id,
+      configured_status: "PAUSED",
+      type: "UNSPECIFIED",
+    });
+    console.log(`  adopted  ${asset.name.padEnd(34)} post ${orphan.id} ad ${ad.id}`);
+    results.push({ ...asset, adId: ad.id, postId: orphan.id });
     continue;
   }
 
@@ -220,25 +241,33 @@ for (const asset of ASSETS) {
   }
   if (!postId) throw new Error(`post job timed out for ${asset.name}`);
 
+  // `type` takes exactly one value, the literal "UNSPECIFIED". It is not a
+  // placeholder to omit and not a promoted-post enum: anything else returns
+  // `data/type: 'UNSPECIFIED' was expected`.
   const ad = api("POST", `/ad_accounts/${ACCOUNT}/ads`, {
     ad_group_id: group.id,
     name: asset.name,
     post_id: postId,
     configured_status: "PAUSED",
-    type: "PROMOTED_USER_POST",
+    type: "UNSPECIFIED",
   });
   console.log(`  created  ${asset.name.padEnd(34)} post ${postId} ad ${ad.id}`);
   results.push({ ...asset, adId: ad.id, postId });
 }
 
 // 3. Activate, children first, so nothing can deliver before its creative is on.
+//
+// Updates are NOT nested under the ad account even though creates and lists are:
+// PATCH /ads/{id}, not PATCH /ad_accounts/{id}/ads/{id}, which 404s with a bare
+// "Not Found" body that reads like a missing entity rather than a wrong path.
+// Same inconsistency as the pixel last-fired endpoint.
 if (ACTIVATE) {
   console.log("\nactivating");
   for (const r of results) {
-    api("PATCH", `/ad_accounts/${ACCOUNT}/ads/${r.adId}`, { configured_status: "ACTIVE" });
+    api("PATCH", `/ads/${r.adId}`, { configured_status: "ACTIVE" });
   }
-  api("PATCH", `/ad_accounts/${ACCOUNT}/ad_groups/${group.id}`, { configured_status: "ACTIVE" });
-  api("PATCH", `/ad_accounts/${ACCOUNT}/campaigns/${CAMPAIGN}`, { configured_status: "ACTIVE" });
+  api("PATCH", `/ad_groups/${group.id}`, { configured_status: "ACTIVE" });
+  api("PATCH", `/campaigns/${CAMPAIGN}`, { configured_status: "ACTIVE" });
   console.log("  campaign, ad group and all ads set ACTIVE");
 }
 
