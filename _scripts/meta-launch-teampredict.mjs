@@ -47,7 +47,72 @@ const CUSTOM_CONVERSION_SIGNUP = "1386618896736601";
 const DAILY_BUDGET_CENTS = 1300; // $13.00/day ≈ $395/month of the $1,000 pool
 
 const CAMPAIGN_NAME = "TP | Meta | Free Trial Conversions (Claude) 2026-08";
-const ADSET_NAME = "HR & People + Founders — US Broad-ish 1.0";
+
+// Superseded 2026-08-17. Robby: "I want one audience for founders and one for
+// HR." The v1.0 ad set mixed both behind Advantage Audience, so the two buyers
+// could never be told apart in reporting. It is paused, not deleted, so its
+// ads stay comparable.
+const LEGACY_ADSET_ID = "120251662616880233";
+
+// TWO ad sets, one per buyer, and Advantage Audience is OFF in both. That is the
+// whole point: with it on, Meta treats the interests and job titles as
+// suggestions and quietly blends the two audiences back together, which would
+// make the split decorative. Off costs some reach on $13/day and buys a real
+// read on which buyer converts.
+const AD_SETS = [
+  {
+    name: "HR & People — US 2.0",
+    targeting: {
+      geo_locations: { countries: ["US"] },
+      age_min: 25,
+      flexible_spec: [
+        {
+          interests: [
+            { id: "6003069499982", name: "Human resource management" },
+            { id: "6003485146398", name: "Employee engagement" },
+            { id: "6003508907986", name: "Professional in Human Resources" },
+          ],
+          work_positions: [
+            { id: "104033229633392", name: "Human resources" },
+            { id: "105612759471878", name: "Human resource management" },
+            { id: "776463239104506", name: "Human Resources Specialist" },
+          ],
+        },
+      ],
+      targeting_automation: { advantage_audience: 0 },
+    },
+    // The HR-process angles: the badge, the notice period, Slack team health,
+    // the scramble after an exit.
+    banners: ["t5-open-to-work", "t8-two-weeks", "t18-whiteboard", "t16-panic-hiring"],
+    videos: ["v1-keep-scrolling", "v3-open-to-work", "v4-pizza-party", "v5-psychic"],
+  },
+  {
+    name: "Founders & Owners — US 2.0",
+    targeting: {
+      geo_locations: { countries: ["US"] },
+      age_min: 25,
+      flexible_spec: [
+        {
+          interests: [
+            { id: "6003325004380", name: "Startup company" },
+            { id: "6003284619527", name: "Venture capital" },
+          ],
+          work_positions: [
+            { id: "849873341726582", name: "Founder" },
+            { id: "221853711359062", name: "CEO & Founder" },
+            { id: "138050029568986", name: "Owner and Founder" },
+          ],
+          behaviors: [{ id: "6002714898572", name: "Small business owners" }],
+        },
+      ],
+      targeting_automation: { advantage_audience: 0 },
+    },
+    // Competitor tracking is founder-only and nothing in the category runs it.
+    // Price and the dare travel well to an owner who IS the HR department.
+    banners: ["t1-keep-scrolling", "t9-five-dollars", "t13-competitor-radar"],
+    videos: ["v2-two-weeks", "v6-my-competitors"],
+  },
+];
 
 const LANDING = "https://www.teampredict.ai/";
 const utm = (content) =>
@@ -59,7 +124,10 @@ const VIDEO_DIR = path.join(ROOT, "teampredict/2026-08-13-paid-launch-video");
 // ---------------------------------------------------------------------------
 // curl wrapper
 // ---------------------------------------------------------------------------
-function curl(args) {
+// Meta rate-limits per ad account, and a 13-ad build with video uploads hits it
+// reliably (code 17 / subcode 2446079). It is a wait, not a failure, so back off
+// and retry rather than dropping the run half-built.
+function curl(args, attempt = 0) {
   const out = execFileSync("curl", ["-sS", ...args], {
     encoding: "utf8",
     maxBuffer: 64 * 1024 * 1024,
@@ -69,6 +137,12 @@ function curl(args) {
     parsed = JSON.parse(out);
   } catch {
     throw new Error(`non-JSON response: ${out.slice(0, 500)}`);
+  }
+  if (parsed.error && (parsed.error.code === 17 || parsed.error.code === 4) && attempt < 8) {
+    const wait = Math.min(300, 30 * 2 ** attempt);
+    console.log(`  rate limited, waiting ${wait}s (attempt ${attempt + 1}/8)`);
+    execFileSync("sleep", [String(wait)]);
+    return curl(args, attempt + 1);
   }
   if (parsed.error) {
     throw new Error(
@@ -191,8 +265,7 @@ const BANNER_ADS = [
 const VIDEO_ADS = [
   {
     slug: "v1-keep-scrolling",
-    file: "teampredict-v1-keep-scrolling-1080p.mp4",
-    fallback: "teampredict-v1-keep-scrolling-720p.mp4",
+    file: "teampredict-v1-keep-scrolling-1080p-captioned.mp4",
     message:
       "Not worried about anyone on your team quitting? Keep scrolling.\n\n" +
       "New headshot, fresh skills, suddenly \"networking a lot\": those are public LinkedIn signals, and TeamPredict flags them early, often weeks before someone hands in their notice.\n\n" +
@@ -202,8 +275,7 @@ const VIDEO_ADS = [
   },
   {
     slug: "v2-two-weeks",
-    file: "teampredict-v2-two-weeks-1080p.mp4",
-    fallback: "teampredict-v2-two-weeks-720p.mp4",
+    file: "teampredict-v2-two-weeks-1080p-captioned.mp4",
     message:
       "By the time you are negotiating, the decision was made weeks ago.\n\n" +
       "Don't wait for the resignation letter. TeamPredict spots rising resignation risk early, so you can fix the problem or plan ahead without the panic.\n\n" +
@@ -213,8 +285,7 @@ const VIDEO_ADS = [
   },
   {
     slug: "v3-open-to-work",
-    file: "teampredict-v3-open-to-work-1080p.mp4",
-    fallback: "teampredict-v3-open-to-work-720p.mp4",
+    file: "teampredict-v3-open-to-work-1080p-trimmed-captioned.mp4",
     message:
       "Recruiters can see it. Their whole network can see it. You cannot.\n\n" +
       "TeamPredict checks every tracked profile daily for a new headline or title, an \"Open to Work\" badge, fresh skills or a profile refresh, and emails you when the risk rises.\n\n" +
@@ -224,8 +295,7 @@ const VIDEO_ADS = [
   },
   {
     slug: "v4-pizza-party",
-    file: "teampredict-v4-pizza-party-1080p.mp4",
-    fallback: "teampredict-v4-pizza-party-720p.mp4",
+    file: "teampredict-v4-pizza-party-1080p-captioned.mp4",
     message:
       "A pizza party is not a retention strategy.\n\n" +
       "When a key employee leaves unexpectedly, you lose months of productivity scrambling to replace them under pressure. TeamPredict flags rising resignation risk early, so you can address concerns and keep your people, or plan ahead without the panic.\n\n" +
@@ -235,8 +305,7 @@ const VIDEO_ADS = [
   },
   {
     slug: "v5-psychic",
-    file: "teampredict-v5-psychic-1080p.mp4",
-    fallback: "teampredict-v5-psychic-720p.mp4",
+    file: "teampredict-v5-psychic-1080p-captioned.mp4",
     message:
       "You do not need a crystal ball. The signals are already public.\n\n" +
       "TeamPredict reads the public LinkedIn signals your team already shares, plus weekly Slack message counts per person if you switch that on, and flags resignation risk early.\n\n" +
@@ -246,8 +315,7 @@ const VIDEO_ADS = [
   },
   {
     slug: "v6-my-competitors",
-    file: "teampredict-v6-my-competitors-1080p.mp4",
-    fallback: "teampredict-v6-my-competitors-720p.mp4",
+    file: "teampredict-v6-my-competitors-1080p-captioned.mp4",
     message:
       "Everyone uses this on their own team. Point the same radar at your competitors.\n\n" +
       "TeamPredict scans for your competitors at signup and suggests them. High signals at a competitor surface as poaching opportunities, with alerts.\n\n" +
@@ -267,11 +335,17 @@ log(`  optimise  custom conversion ${CUSTOM_CONVERSION_SIGNUP} (free trial signu
 log(`  budget    $${(DAILY_BUDGET_CENTS / 100).toFixed(2)}/day\n`);
 
 if (!LIVE) {
+  const byBanner = Object.fromEntries(BANNER_ADS.map((b) => [b.slug, b]));
+  const byVideo = Object.fromEntries(VIDEO_ADS.map((v) => [v.slug, v]));
   log("Would create:");
   log(`  campaign  ${CAMPAIGN_NAME}`);
-  log(`  ad set    ${ADSET_NAME}`);
-  for (const a of BANNER_ADS) log(`  banner ad TP ${a.slug}  <- ${a.file}`);
-  for (const a of VIDEO_ADS) log(`  video ad  TP ${a.slug}  <- ${a.file}`);
+  log(`  pause     legacy ad set ${LEGACY_ADSET_ID}`);
+  for (const def of AD_SETS) {
+    const prefix = def.name.startsWith("HR") ? "TP HR" : "TP FDR";
+    log(`\n  ad set    ${def.name}  (advantage_audience ${def.targeting.targeting_automation.advantage_audience})`);
+    for (const s of def.banners) log(`    banner  ${prefix} ${s}  <- ${byBanner[s]?.file ?? "MISSING"}`);
+    for (const s of def.videos) log(`    video   ${prefix} ${s}  <- ${byVideo[s]?.file ?? "MISSING"}`);
+  }
   process.exit(0);
 }
 
@@ -291,188 +365,177 @@ if (campaign) {
   log(`campaign created ${campaign.id}`);
 }
 
-// --- ad set ----------------------------------------------------------------
-// Conversion settings on a published ad set are immutable, even paused, so this
-// payload has to be right the first time or the ad set has to be recreated.
-let adset = findByName(
-  get(`${campaign.id}/adsets`, "id,name,status,optimization_goal,promoted_object"),
-  ADSET_NAME,
-);
-if (adset) {
-  log(`ad set exists    ${adset.id}  (goal ${adset.optimization_goal})`);
-} else {
-  adset = post(`${ACT}/adsets`, {
-    name: ADSET_NAME,
-    campaign_id: campaign.id,
-    status: "PAUSED",
-    billing_event: "IMPRESSIONS",
-    optimization_goal: "OFFSITE_CONVERSIONS",
-    destination_type: "WEBSITE",
-    // A custom conversion carries its own pixel, and sending pixel_id
-    // alongside it is rejected outright with "invalid combination of
-    // parameters" (code 100 / subcode 1885014). Custom conversion id ALONE.
-    promoted_object: { custom_conversion_id: CUSTOM_CONVERSION_SIGNUP },
-    targeting: {
-      geo_locations: { countries: ["US"] },
-      // No age_max: with Advantage Audience on, Meta treats age and interests
-      // as suggestions and rejects an upper cap outright (100/1870189).
-      age_min: 25,
-      // Employers, not candidates. "Recruitment" (58M) was deliberately left
-      // out: it is mostly job seekers, which is the wrong side of this market.
-      flexible_spec: [
-        {
-          interests: [
-            { id: "6003069499982", name: "Human resource management" },
-            { id: "6003485146398", name: "Employee engagement" },
-            { id: "6003508907986", name: "Professional in Human Resources" },
-          ],
-        },
-      ],
-      targeting_automation: { advantage_audience: 1 },
-    },
-  });
-  log(`ad set created   ${adset.id}`);
+// --- retire the mixed v1.0 ad set ------------------------------------------
+// Paused rather than deleted: its 13 ads carry the same creative and stay
+// available for comparison. Its conversion settings are immutable anyway, so it
+// could never have been re-targeted in place.
+try {
+  const legacy = get(LEGACY_ADSET_ID, "id,name,status");
+  if (legacy.status !== "PAUSED") {
+    post(LEGACY_ADSET_ID, { status: "PAUSED" });
+    log(`legacy ad set ${LEGACY_ADSET_ID} paused (${legacy.name})`);
+  } else {
+    log(`legacy ad set ${LEGACY_ADSET_ID} already paused`);
+  }
+} catch (e) {
+  log(`legacy ad set: ${e.message.slice(0, 120)}`);
 }
 
-// --- creatives and ads -----------------------------------------------------
-const existingAds = get(`${adset.id}/ads`, "id,name,status");
+// --- creative caches -------------------------------------------------------
+// One upload per asset, shared across both ad sets. Meta dedupes identical image
+// bytes by hash anyway, but a video re-upload is tens of megabytes, and both ad
+// sets can legitimately want the same clip.
+const bannerBySlug = Object.fromEntries(BANNER_ADS.map((b) => [b.slug, b]));
+const videoBySlug = Object.fromEntries(VIDEO_ADS.map((v) => [v.slug, v]));
+const imageHashes = new Map();
+const videoIds = new Map();
+
+function uploadImage(file) {
+  if (imageHashes.has(file)) return imageHashes.get(file);
+  const up = curl(["-X", "POST", `${API}/${ACT}/adimages`, "-F", `filename=@${file}`, "-F", `access_token=${TOKEN}`]);
+  const hash = Object.values(up.images)[0].hash;
+  imageHashes.set(file, hash);
+  return hash;
+}
+
+function uploadVideo(file, label) {
+  if (videoIds.has(file)) return videoIds.get(file);
+  const up = curl(["-X", "POST", `${API}/${ACT}/advideos`, "-F", `source=@${file}`, "-F", `title=${label}`, "-F", `access_token=${TOKEN}`]);
+  // Meta generates thumbnails asynchronously, so poll rather than assume.
+  let thumb = null;
+  for (let i = 0; i < 40 && !thumb; i++) {
+    execFileSync("sleep", ["4"]);
+    try {
+      const t = get(`${up.id}`, "thumbnails{uri,is_preferred},status");
+      const list = t.thumbnails?.data ?? [];
+      thumb = (list.find((x) => x.is_preferred) ?? list[0])?.uri ?? null;
+    } catch {
+      /* still processing */
+    }
+  }
+  if (!thumb) throw new Error("no thumbnail after ~2.5 min of processing");
+  const rec = { id: up.id, thumb };
+  videoIds.set(file, rec);
+  return rec;
+}
+
+// --- build both ad sets ----------------------------------------------------
 const made = [];
 const skipped = [];
 const failed = [];
+const builtAdSets = [];
 
-function ensureAd(spec, buildCreative) {
-  const adName = `TP ${spec.slug}`;
-  const already = findByName(existingAds, adName);
-  if (already) {
-    skipped.push(`${adName} (${already.id})`);
-    return;
-  }
-  try {
-    const creative = buildCreative(adName);
-    const ad = post(`${ACT}/ads`, {
-      name: adName,
-      adset_id: adset.id,
-      creative: { creative_id: creative.id },
+for (const def of AD_SETS) {
+  let adset = findByName(get(`${campaign.id}/adsets`, "id,name,status,optimization_goal"), def.name);
+  if (adset) {
+    log(`\nad set exists    ${adset.id}  ${def.name}`);
+  } else {
+    adset = post(`${ACT}/adsets`, {
+      name: def.name,
+      campaign_id: campaign.id,
       status: "PAUSED",
+      billing_event: "IMPRESSIONS",
+      optimization_goal: "OFFSITE_CONVERSIONS",
+      destination_type: "WEBSITE",
+      // A custom conversion carries its own pixel; sending pixel_id alongside it
+      // is rejected with "invalid combination of parameters" (100/1885014).
+      promoted_object: { custom_conversion_id: CUSTOM_CONVERSION_SIGNUP },
+      targeting: def.targeting,
     });
-    made.push(`${adName}  ad ${ad.id}  creative ${creative.id}`);
-    log(`  + ${adName}  ad ${ad.id}`);
-  } catch (e) {
-    failed.push(`${adName}: ${e.message}`);
-    console.error(`  ! ${adName}: ${e.message}`);
+    log(`\nad set created   ${adset.id}  ${def.name}`);
   }
-}
+  builtAdSets.push({ id: adset.id, name: def.name });
 
-// Banners
-if (!VIDEOS_ONLY) {
-  for (const spec of BANNER_ADS) {
-    const file = path.join(BANNER_DIR, spec.file);
-    if (!existsSync(file)) {
-      failed.push(`TP ${spec.slug}: missing ${spec.file}`);
+  const existingAds = get(`${adset.id}/ads`, "id,name,status");
+  // Ad names are prefixed per audience so the two sets never collide by name,
+  // and so a glance at reporting says which buyer a row belongs to.
+  const prefix = def.name.startsWith("HR") ? "TP HR" : "TP FDR";
+
+  const specs = [
+    ...(VIDEOS_ONLY ? [] : def.banners.map((s) => ({ kind: "image", spec: bannerBySlug[s], slug: s }))),
+    ...(SKIP_VIDEOS ? [] : def.videos.map((s) => ({ kind: "video", spec: videoBySlug[s], slug: s }))),
+  ];
+
+  for (const { kind, spec, slug } of specs) {
+    const adName = `${prefix} ${slug}`;
+    if (!spec) {
+      failed.push(`${adName}: no creative defined for slug "${slug}"`);
       continue;
     }
-    ensureAd(spec, (adName) => {
-      const up = curl([
-        "-X",
-        "POST",
-        `${API}/${ACT}/adimages`,
-        "-F",
-        `filename=@${file}`,
-        "-F",
-        `access_token=${TOKEN}`,
-      ]);
-      const hash = Object.values(up.images)[0].hash;
-      return post(`${ACT}/adcreatives`, {
-        name: `${adName} creative`,
-        object_story_spec: {
-          page_id: PAGE_ID,
-          link_data: {
-            image_hash: hash,
-            link: utm(spec.slug),
-            message: spec.message,
-            name: spec.headline,
-            description: spec.description,
-            call_to_action: { type: "SIGN_UP", value: { link: utm(spec.slug) } },
-          },
-        },
-        // `standard_enhancements` is deprecated (100/3858504); features are set
-        // individually now. text_optimizations is the one that matters here: it
-        // lets Meta rewrite and reposition the copy, and every line in this
-        // account has to trace to the approved bank, so it is opted out.
-        degrees_of_freedom_spec: {
-          creative_features_spec: {
-            text_optimizations: { enroll_status: "OPT_OUT" },
-            image_touchups: { enroll_status: "OPT_OUT" },
-          },
-        },
-      });
-    });
-  }
-}
-
-// Videos. Uploading by file rather than URL: the mp4s are deliberately not
-// committed (binaries stay out of the repo), so there is no raw link to hand
-// Meta the way the banners have.
-for (const spec of SKIP_VIDEOS ? [] : VIDEO_ADS) {
-  let file = path.join(VIDEO_DIR, spec.file);
-  if (!existsSync(file)) file = path.join(VIDEO_DIR, spec.fallback);
-  if (!existsSync(file)) {
-    failed.push(`TP ${spec.slug}: no video on disk yet`);
-    continue;
-  }
-  ensureAd(spec, (adName) => {
-    const up = curl([
-      "-X",
-      "POST",
-      `${API}/${ACT}/advideos`,
-      "-F",
-      `source=@${file}`,
-      "-F",
-      `title=${adName}`,
-      "-F",
-      `access_token=${TOKEN}`,
-    ]);
-    // Meta needs a thumbnail; it generates them asynchronously, so poll briefly.
-    let thumb = null;
-    for (let i = 0; i < 30 && !thumb; i++) {
-      execFileSync("sleep", ["4"]);
-      try {
-        const t = get(`${up.id}`, "thumbnails{uri,is_preferred},status");
-        const list = t.thumbnails?.data ?? [];
-        thumb = (list.find((x) => x.is_preferred) ?? list[0])?.uri ?? null;
-      } catch {
-        /* video still processing */
-      }
+    const already = findByName(existingAds, adName);
+    if (already) {
+      skipped.push(`${adName} (${already.id})`);
+      log(`  = ${adName}`);
+      continue;
     }
-    if (!thumb) throw new Error("no thumbnail after ~2 min of processing");
-    return post(`${ACT}/adcreatives`, {
-      name: `${adName} creative`,
-      object_story_spec: {
-        page_id: PAGE_ID,
-        video_data: {
-          video_id: up.id,
-          image_url: thumb,
-          message: spec.message,
-          title: spec.headline,
-          link_description: spec.description,
-          call_to_action: {
-            type: "SIGN_UP",
-            value: { link: utm(spec.slug) },
+    const dir = kind === "image" ? BANNER_DIR : VIDEO_DIR;
+    const file = path.join(dir, spec.file);
+    if (!existsSync(file)) {
+      failed.push(`${adName}: missing ${spec.file}`);
+      console.error(`  ! ${adName}: missing ${spec.file}`);
+      continue;
+    }
+    try {
+      let creative;
+      if (kind === "image") {
+        creative = post(`${ACT}/adcreatives`, {
+          name: `${adName} creative`,
+          object_story_spec: {
+            page_id: PAGE_ID,
+            link_data: {
+              image_hash: uploadImage(file),
+              link: utm(slug),
+              message: spec.message,
+              name: spec.headline,
+              description: spec.description,
+              call_to_action: { type: "SIGN_UP", value: { link: utm(slug) } },
+            },
           },
-        },
-      },
-      // Every clip is fully AI-generated video with realistic people. This is
-      // the same declaration set on every generated creative since batch 3.
-      authorization_category: "NONE",
-      degrees_of_freedom_spec: {
-        creative_features_spec: { text_optimizations: { enroll_status: "OPT_OUT" } },
-      },
-    });
-  });
+          degrees_of_freedom_spec: {
+            creative_features_spec: {
+              text_optimizations: { enroll_status: "OPT_OUT" },
+              image_touchups: { enroll_status: "OPT_OUT" },
+            },
+          },
+        });
+      } else {
+        const v = uploadVideo(file, adName);
+        creative = post(`${ACT}/adcreatives`, {
+          name: `${adName} creative`,
+          object_story_spec: {
+            page_id: PAGE_ID,
+            video_data: {
+              video_id: v.id,
+              image_url: v.thumb,
+              message: spec.message,
+              title: spec.headline,
+              link_description: spec.description,
+              call_to_action: { type: "SIGN_UP", value: { link: utm(slug) } },
+            },
+          },
+          authorization_category: "NONE",
+          degrees_of_freedom_spec: {
+            creative_features_spec: { text_optimizations: { enroll_status: "OPT_OUT" } },
+          },
+        });
+      }
+      const ad = post(`${ACT}/ads`, {
+        name: adName,
+        adset_id: adset.id,
+        creative: { creative_id: creative.id },
+        status: "PAUSED",
+      });
+      made.push(`${adName}  ad ${ad.id}`);
+      log(`  + ${adName}  ad ${ad.id}`);
+    } catch (e) {
+      failed.push(`${adName}: ${e.message}`);
+      console.error(`  ! ${adName}: ${e.message.slice(0, 200)}`);
+    }
+  }
 }
 
 log("\n--- result ---");
-log(`campaign ${campaign.id} · ad set ${adset.id}`);
+log(`campaign ${campaign.id}`);
+for (const a of builtAdSets) log(`  ad set ${a.id}  ${a.name}`);
 log(`created ${made.length} · already there ${skipped.length} · failed ${failed.length}`);
-for (const s of skipped) log(`  = ${s}`);
 for (const f of failed) log(`  ! ${f}`);

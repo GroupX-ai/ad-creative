@@ -188,3 +188,60 @@ eat the shared pool.
 | **Total** | **~$42.29** |
 
 Batch 8's banners were ~$7.40, so the whole TeamPredict launch creative is under $50.
+
+## Update 2026-08-17: two audiences on Meta, and a caption bug Robby caught
+
+Robby, after Meta went live: *"I want one audience for founders and one for HR. Please add
+one-word subtitles to all of the videos, use font-size and color to emphasize specific
+words."*
+
+### The subtitles existed. They just never reached Facebook.
+
+The second ask read like a new feature request and was actually a bug report. Every clip has
+carried one-word captions in three tiers since the day it was made (plain white, emphasis
+words a step larger in brand indigo, the brand name largest), and Reddit got them correctly
+because `reddit-launch-teampredict.mjs` references `*-1080p-captioned.mp4`.
+
+`meta-launch-teampredict.mjs` referenced `*-1080p.mp4`, which is the **uncaptioned upscale**.
+So Facebook got six clips with no subtitles, and v3 additionally shipped its untrimmed cut
+with the garbled tail word that had already been repaired. Confirmed by length rather than by
+eye: the deliverable is 17.33s (captions plus end card) and the raw upscale is 15.07s, and
+every video on the account read 15.07s.
+
+**Two fixes, and the second matters more than the first.** The filenames were repointed, and
+the `fallback: "*-720p.mp4"` entries were **deleted outright**. Those fallbacks were the real
+defect: they silently substituted the uncaptioned generation master whenever the intended file
+was missing, which is exactly how a wrong cut ships without anything erroring. A missing
+deliverable should now fail loudly.
+
+**General rule: when a shipped asset has variants, never let the upload path fall back to
+one.** The whole point of a `-captioned` suffix is that the un-suffixed file is not shippable,
+and a fallback quietly reverses that.
+
+### One ad set per buyer, with Advantage Audience OFF
+
+The v1.0 ad set mixed both buyers behind Meta's Advantage Audience, so HR and founders could
+never be told apart in reporting. It is PAUSED, not deleted, so its ads stay comparable.
+
+| Ad set | Targeting | Creative |
+|---|---|---|
+| **HR & People — US 2.0** (`120251755786840233`) | interests: HR management, employee engagement, Professional in HR · job titles: Human resources, HR management, HR Specialist | t5, t8, t18, t16 + v1, v3, v4, v5 |
+| **Founders & Owners — US 2.0** (`120251755806730233`) | interests: startup company, venture capital · job titles: Founder, CEO & Founder, Owner and Founder · behaviour: small business owners | t1, t9, t13 + v2, v6 |
+
+**Advantage Audience is off in both, deliberately.** With it on, Meta treats the interests and
+job titles as suggestions and blends the two audiences back together, which would make the
+split decorative. Off costs reach on $13/day and buys a real read on which buyer converts.
+Campaign budget optimisation stays on, so the two ad sets compete for the same $13/day and
+Meta allocates.
+
+Creative is split by who the joke is for rather than evenly: competitor tracking is
+founder-only and nothing in the category advertises it, while the Slack team-health and
+exit-interview angles are HR-process jokes. No creative appears in both, so the two ad sets
+never bid against each other for the same impression with the same asset.
+
+### Meta rate-limits a build this size
+
+A 13-ad build with six video uploads reliably hits `17/2446079 "User request limit reached"`,
+which is a wait rather than a failure. The script now backs off exponentially (30s doubling to
+a 300s cap, eight attempts) instead of dropping the run half-built. The first attempt died
+after the HR ad set and was resumed cleanly by the name-based idempotency.
