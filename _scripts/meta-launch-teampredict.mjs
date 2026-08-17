@@ -44,7 +44,7 @@ const PIXEL_ID = "1985966148722482"; // "TeamPredict Pixel", last_fired 2026-08-
 // with zero history. So: bid on the signup, report on the trial.
 const CUSTOM_CONVERSION_SIGNUP = "1386618896736601";
 
-const DAILY_BUDGET_CENTS = 1500; // $15.00/day ≈ $456/month of the $1,000 pool
+const DAILY_BUDGET_CENTS = 1300; // $13.00/day ≈ $395/month of the $1,000 pool
 
 const CAMPAIGN_NAME = "TP | Meta | Free Trial Conversions (Claude) 2026-08";
 const ADSET_NAME = "HR & People + Founders — US Broad-ish 1.0";
