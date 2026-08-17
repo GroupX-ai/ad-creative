@@ -1,134 +1,206 @@
-# ESA Card on TikTok Ads: prompt for a fresh session
+# ESA Card paid ads: prompt for a fresh session
 
-Paste the block below into a new conversation that has the **TikTok Ads connector**
-attached, plus the `ad-creative` and `esacard.com` repos. Everything the session needs
-is in the prompt; it does not depend on this one.
+Paste the block below into a new conversation that has the **TikTok Ads connector** and the
+**Meta Ads connector** attached, plus the `ad-creative`, `esacard.com` and `second-brain`
+repos. Google Ads, Reddit Ads and Stripe credentials are already in the agent environment.
+Everything the session needs is in the prompt; it does not depend on this one.
+
+Scope set by Robby on 2026-08-14: review the live campaigns, move optimisation to
+purchases, launch TikTok, and pitch new heart-tugging creative.
 
 ---
 
-Launch TikTok Ads for ESA Card. Everything below is already built and verified, so do not
-rebuild any of it. Read the two policy docs before you write a single line of ad copy.
+You are picking up ESA Card paid acquisition. Four campaigns are already live (Google
+Search, Google Demand Gen, Meta, Reddit) and there are already purchases. Four jobs, in
+this order:
+
+1. **Full review of the live campaigns.**
+2. **Move optimisation to purchases.** Robby: "I think we can start optimizing around
+   purchases - it's clearly converting." That decision is made; execute it, do not
+   re-litigate it.
+3. **Launch TikTok Ads.**
+4. **Pitch new creative** (banners and videos): "really creative heart tugging angles."
+   Pitch first, render nothing without approval.
 
 **The product.** esacard.com sells one thing: a $39 one-time emotional support animal
-registration kit, delivered as two print-ready PDFs (a wallet ID card with the animal's
-photo, and a certificate) plus a registration number anyone can verify at
-esacard.com/verify. No subscription, no renewal fees, 30-day money-back guarantee on the
-product. There is no second product: a $69 printed kit exists in the codebase but is not
-shipping, so it must never appear in ad copy.
+registration kit, two print-ready PDFs (a wallet ID card with the animal's photo, and a
+certificate) plus a registration number anyone can verify at esacard.com/verify. No
+subscription, no renewal fees, 30-day money-back guarantee. Net per sale after payment
+processing: **$37.57**. A $69 printed kit exists in the codebase but is not shipping and
+must never appear in ad copy.
 
-**Read first, in this order.**
-1. `docs/ads/policy.md` in the `esacard.com` repo. This is the binding claim-safety
-   document. The rule of thumb is: the ad may describe *what the customer receives*, it
-   may not describe *what the customer will be allowed to do*.
-2. `docs/ads/meta-ads.md` in the same repo, section 3 and section 5. The optimisation-event
-   reasoning and the five creative concepts both transfer to TikTok directly.
-3. `esacard/DISTRIBUTION.md` in the `ad-creative` repo. The per-asset, per-platform ledger.
-   Update it when TikTok ships so nothing gets uploaded twice.
+**Read before touching anything, in this order.**
+1. `resources/paid-ads-creative-playbook.md` in `second-brain`. The master playbook; its
+   claim-safety section is binding on every batch.
+2. `docs/ads/policy.md` in `esacard.com`. What we may not claim.
+3. `docs/ads/meta-ads.md` in `esacard.com`, sections 3 and 5. Section 5 opens with a
+   blocking rule ("ads sell, they never disclaim") that overrides anything else you read.
+4. `esacard/DISTRIBUTION.md` in `ad-creative`. The per-asset, per-platform ledger. Update
+   it with everything you ship.
 
-**Hard copy rules, no exceptions.**
-- Never abbreviate to the three-letter acronym. Write "emotional support animal" in full.
-  Robby's note: *"My partner said nobody knows what an ESA card is. Use Emotional Support
-  Animal, never ESA."* The only permitted appearance of those letters is inside the domain
-  `esacard.com`.
-- No claim about housing, landlords, airlines, public access, or legal force. Banned
-  outright: "official registry", "government-approved", "landlords must accept",
-  "avoid pet fees", "get your animal approved for housing", and anything pairing
-  "guaranteed" with a housing, airline or legal outcome.
-- No personal-attributes framing. Never address the reader as someone with a condition:
-  no "struggling with anxiety", no "the support you need", no "do you need an emotional
-  support animal". This is the single most common cause of disapproval in this category.
-- Safe and already true of the site: "a registration number anyone can verify",
-  "a convenience credential, not a legal document", "housing rights come from a letter
-  written by a licensed mental health professional", "$39 once, no renewal fees ever",
-  "registered in about three minutes, no appointments and no health questions".
-- Never invent a testimonial, a customer count, or a star rating. The site launched with
-  zero testimonials on purpose.
+---
 
-**What already exists.**
+## Job 1: the review
+
+Stripe is the system of record, not the ad platforms. `STRIPE_KEY_ESA_CARD` is in the
+environment.
+
+1. Pull Stripe day by day since 2026-08-13. Count real $39 purchases (ignore $0.50 card
+   checks). Read each charge's metadata (`utm_*`, `fbclid`) to attribute purchases to a
+   platform where possible.
+2. Per platform, report at absolute level: spend, impressions, clicks, checkouts started,
+   purchases, cost per purchase against **$37.57**. One row per event type, never blended.
+   Lead with the level, not a trend.
+3. Check delivery health: Meta ad review states, Reddit ad approval states, Google serving
+   status and search terms (add negatives if junk queries are buying clicks), Demand Gen
+   actually serving.
+4. Verdict per platform: scale, hold, fix, or kill. Blunt.
+
+## Job 2: move optimisation to purchases
+
+Current state and what to do on each:
+
+- **Google Search + Demand Gen: already optimise for Purchase.** No change. Verify
+  conversions are recording against `AW-18387903752 / Y4F_CN7rlOEcEIjKhMBE`.
+- **Meta: currently optimises for InitiateCheckout.** Update the ad set's promoted_object
+  to `{"pixel_id":"4305407809789395","custom_event_type":"PURCHASE"}`. This resets the
+  learning phase; that is accepted, Robby made the call.
+- **Reddit: currently PageVisit, and the goal is immutable after creation.** First check
+  `GET /pixels/a2_ji9rrnreyf0d/last_fired_at`. If `purchase` is non-null, build a NEW ad
+  group with `optimization_goal: PURCHASE`, recreate the 30 ads against the same post ids
+  (posts are reusable), then archive the old ad group. If `purchase` is still null, Reddit
+  physically cannot do it yet; say so and leave it.
+- **TikTok: build it purchase-optimised from day one** (job 3), provided its pixel has
+  seen Purchase events; verify that first.
+
+## Job 3: launch TikTok
+
+What already exists. Do not rebuild any of it:
 
 | | value |
 | --- | --- |
-| TikTok ad account | `7673589031742701586` |
-| TikTok pixel | `esacard.com`, code `D9V1HSBC77UBUCS23800` |
-| Pixel setup | manual / developer mode, first-party cookies ON, Automatic Advanced Matching OFF |
-| Events API token | already set in Vercel as `TIKTOK_EVENTS_ACCESS_TOKEN`, production deployed |
-| Billing | auction billing, funded, no blocker |
+| Ad account | `7673589031742701586` |
+| Pixel | `esacard.com`, code `D9V1HSBC77UBUCS23800` |
+| Pixel setup | manual/developer mode, first-party cookies ON, Automatic Advanced Matching OFF |
+| Events API token | live in Vercel as `TIKTOK_EVENTS_ACCESS_TOKEN`, production deployed |
+| Billing | auction billing, funded |
 
-The site already fires TikTok events client-side through `src/lib/analytics.ts`:
-`ViewContent` at the card preview step, `InitiateCheckout` at the Stripe handoff, and
-`Purchase` on completion, each with a deduplication `event_id` shared with the server side.
+The site fires TikTok events client-side from `src/lib/analytics.ts`: `ViewContent`,
+`InitiateCheckout`, `Purchase`, each with a dedup `event_id` shared with the server side.
+**Do not create rule-based pixel events in TikTok Events Manager**; the events are
+instrumented in code and a rule-based duplicate would double-count (decided, in
+`docs/ads/README.md`).
 
-**Do not create rule-based pixel events in TikTok Events Manager for this site.** The
-events are instrumented in code. A rule-based duplicate would double-count. This is
-written down in `docs/ads/README.md` and has already been decided.
-
-**The creative, all approved and already live elsewhere.**
-
-- **20 banners**: `esacard/2026-08-14-spelled-out/p*.png` in the `ad-creative` repo, square
-  and vertical. Public raw URLs work and TikTok can fetch them:
-  `https://raw.githubusercontent.com/GroupX-ai/ad-creative/main/esacard/2026-08-14-spelled-out/<name>.png`
-- **10 videos**: `esacard/2026-08-14-approved/d*-captioned.mp4` and
-  `esacard/2026-08-14-batch2/e*-captioned.mp4`. Vertical 9:16, 720x1280, 15 seconds, with
-  burned one-word captions, which means they read correctly with the sound off. Same raw
-  URL pattern. These are the highest-value assets you have for TikTok: they are
-  slice-of-life phone-shot clips of real-looking people and genuinely cute animals, with
-  no pitch beat and no end card.
-- **5 reserve videos**: `esacard/2026-08-14-spelled-out/c*-captioned.mp4`. A different
-  register (one person talking to a phone). Held back deliberately. Do not ship these
-  without asking.
-
-The ten videos are also published publicly on the ESA Card YouTube channel
-(`UCMzoIiRibLPRtDoQjF3L9mw`), so do not re-render anything.
-
-**Standing rule from Robby, which has already been broken once:**
-*"Please never create video ads again without sending me the script first!"* If you decide
-new creative is needed, write the scripts, send them, and wait. Do not render.
-
-**What to build.**
-
-One campaign, resist launching five.
+Build one campaign, resist launching five:
 
 ```
 Campaign: ESA Card | TikTok | US | Web Conversions
-  Objective: Website conversions
-  Budget: $30/day to start, campaign-level
-  Ad group 1: US, 25-55, broad, no interest stack
-  Ads: start with the 10 videos, then add the strongest banners
+  Ad group: US only, 25-55, broad, no interest stack
+  Optimise: Purchase (verify the pixel has seen it; else InitiateCheckout and say so)
+  Ads: the 10 videos first, best banners after
 ```
 
-**The optimisation-event decision, which matters more than anything else here.**
+Creative is ready and approved: 10 vertical videos (9:16, 720x1280, 15s, burned one-word
+captions) at `esacard/2026-08-14-approved/d*-captioned.mp4` and
+`esacard/2026-08-14-batch2/e*-captioned.mp4`, 20 banners at
+`esacard/2026-08-14-spelled-out/p*.png`. TikTok can fetch the public raw URLs:
+`https://raw.githubusercontent.com/GroupX-ai/ad-creative/main/esacard/<dir>/<file>`.
+5 reserve videos (`c*-captioned.mp4`) are held back deliberately; do not ship without
+asking.
 
-Do not optimise for `Purchase` on day one. TikTok, like Meta, needs roughly 50 optimisation
-events per week to leave the learning phase. Break-even cost per purchase is **$37.57** net
-of payment processing, so 50 purchases a week is about $1,878 a week, which is far above
-this budget. A Purchase-optimised ad group at $30/day will sit in learning indefinitely and
-deliver badly.
+Before spending: verify `esacard.com` domain in TikTok Business Center (Assets → Domains),
+and confirm the pixel is receiving real events, not just PageView. On Reddit that exact
+check failed and blocked every conversion goal.
 
-Optimise for `InitiateCheckout` instead, which fires at the Stripe handoff and is already
-instrumented. Step up to `Purchase` only when the account genuinely produces the volume.
+**Budget: the standing cap is $1,000/month across ALL ad accounts**, currently fully
+allocated (Meta $13.88/day, Google Search $9, Demand Gen $5, Reddit $5). Adding TikTok
+breaks the cap unless something gives. Propose a rebalanced split to Robby and get his OK
+before activating TikTok spend. Note the floors: Demand Gen and Reddit each refuse below
+$5.00/day.
 
-**Measure `Purchase` the whole time regardless.** The optimisation target and the success
-metric are different things. The success metric is cost per purchase against $37.57, and
-**Stripe is the system of record**, not TikTok's reported conversions. Reconcile weekly and
-expect a gap; that gap is attribution modelling, not a bug.
+Tag links: `utm_source=tiktok&utm_medium=paid_social&utm_campaign=<campaign>&utm_content=<ad>`.
 
-When you report results back, report the money event at its absolute level. Do not lead
-with a week-over-week change, and never blend two different event types into one blended
-cost per result.
+Build everything paused, show Robby previews, activate on his OK.
 
-**Tag the links** so Stripe metadata stays readable months from now:
+## Job 4: new creative, heart-tugging angles
 
-```
-utm_source=tiktok&utm_medium=paid_social&utm_campaign=<campaign>&utm_content=<ad>
-```
+Robby wants more banners and videos: "we just need really creative heart tugging angles."
 
-**Two things to check before you spend anything.**
-1. Domain verification for `esacard.com` in TikTok Business Center under Assets → Domains.
-   Without it, web-conversion optimisation is degraded.
-2. That the pixel is actually receiving `InitiateCheckout`, not just `PageView`. On Reddit
-   this exact check failed: its pixel had only ever seen `page_visit`, which made every
-   real conversion goal unavailable at the API level. Verify the same thing on TikTok
-   before you build the ad group, because the optimisation goal cannot be changed after
-   creation on some platforms and you do not want to find out late.
+- **Pitch before you produce.** Send Robby a numbered list of angles (one line each) and
+  full scripts for any video. Standing rule, already broken once: *"Please never create
+  video ads again without sending me the script first!"* Render only after his OK.
+- The register that won, per Robby: `d1-viewing` and `d5-hotel`. "The most authentic
+  feeling, and the animals are genuinely wholesome and cute... very authentic, wholesome,
+  cute, interesting." Slice-of-life, phone-shot, one warm moment, the animal is the star,
+  ends inside the moment. No pitch beat, no end card, no concept ads.
+- Emotional beats that worked in batch 2: the daycare drop-off where she stays at the
+  fence, the first flat with the puppy in the one patch of sun, forehead-to-forehead with
+  the sitter. Aim there.
+- Production mechanics live in the playbook: Seedance recipe, the phrase-in-the-main-
+  speaker's-mouth finding, the ElevenLabs transcription gate (nothing ships unverified),
+  caption tooling in `_scripts/` (the `esacard` brand kit is already in
+  `seedance-emphasis.mjs`), banner QA including the luminance check.
 
-**Leave everything paused and show Robby the ad previews before activating.**
+---
+
+## Hard copy rules, no exceptions
+
+- **ADS SELL. ADS NEVER DISCLAIM. Broken twice already.** On 2026-08-13 a live ad opened
+  with "There is no official government registry for emotional support animals. Ours
+  included." Robby: *"The ads should only talk about positives. They should not be used
+  for disclaimers."* Earlier, on the first Meta batch: *"You're supposed to market this
+  and get people interested, not waste my money on disclaimars."* Concretely:
+  - Never open on what the product is not. No "there is no official registry", no "ours
+    included", no "not a legal document", no "we do not sell letters".
+  - Never sell against a competitor's behaviour. Say "$39 once" and stop.
+  - Never append a closing honesty paragraph.
+  - Say what the buyer gets, in the first line.
+  - `policy.md` lists what you may not CLAIM. It is not a requirement to DISCLAIM.
+  - Before shipping, grep your copy for
+    `no official|not a legal|do not sell|legal weight|ours included|charge you every year`.
+    Zero hits or it does not ship.
+- **Never the three-letter acronym.** Write "emotional support animal" in full,
+  everywhere. Robby: "Use Emotional Support Animal, never ESA." Only exception: the domain
+  `esacard.com`.
+- No claim about housing, landlords, airlines, public access or legal force. Banned:
+  "official registry", "government-approved", "landlords must accept", "avoid pet fees",
+  "guaranteed" near any housing/airline/legal outcome.
+- No personal-attributes framing: never address the reader as someone with a condition.
+  No "struggling with anxiety", no "the support you need".
+- **Build copy from these, all true of the site:** a wallet card with your animal's photo,
+  a certificate for the wall, a registration number anyone can verify, print-ready PDFs in
+  about three minutes, $39 once, no renewal fees, no subscription, no appointments, 30-day
+  money-back guarantee.
+- No invented testimonials, customer counts or star ratings.
+
+## Live account state (2026-08-14)
+
+| platform | ids |
+| --- | --- |
+| Meta | account `3530109303824417`, campaign `120247770766350605`, ad set `120247770766910605`, page `1238464462686774`, Instagram `17841438094553997` (@esa_card), pixel `4305407809789395` |
+| Google | customer `3800595805` under manager `3410674045`, Search campaign `24128254302`, Demand Gen `24134740046` |
+| Reddit | account `a2_ji9rrnreyf0d`, campaign `2567783104065621570`, ad group `2567956092694490967` (PageVisit bootstrap), profile `t2_2kl3hjgu1c`, pixel id = account id |
+| YouTube | channel `UCMzoIiRibLPRtDoQjF3L9mw`, the 10 clips are public there |
+
+## API traps already hit once. Do not rediscover them
+
+- Reddit ad `type` is `UNSPECIFIED`, not `PROMOTED_USER_POST`. Ads are backed by posts:
+  `POST /profiles/{id}/structured_posts/jobs`, poll the job, create the ad on the returned
+  `post_id`. Updates are `PATCH /ad_groups/{id}` with NO `/ad_accounts` prefix. There is
+  no DELETE; pause and rename.
+- Reddit only allows optimisation goals its pixel has actually fired. Check
+  `last_fired_at` first.
+- Meta: `connected_instagram_accounts` is not the readiness check;
+  `/act_.../instagram_accounts` is. `instagram_user_id` cannot be patched onto a live
+  creative. A refetched `video_data` carries both `image_url` and `image_hash` and Meta
+  rejects specs with both; drop the url, keep the hash.
+- Google removed `VIDEO_ACTION` in API v25; video conversions are Demand Gen, targeting on
+  the ad group, `contains_eu_political_advertising` required.
+- Everything is US-only. Google both campaigns `positive_geo_target_type: PRESENCE`; Meta
+  reads back `["frequently_in","home"]` and will not go stricter at country level.
+
+## Reporting discipline
+
+Report the money event at its absolute level: purchases and cost per purchase against
+$37.57, Stripe as the source. Never lead with a week-over-week change, never blend event
+types into one cost per result, and label any guess as a guess.
