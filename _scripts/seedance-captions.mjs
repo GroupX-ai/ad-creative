@@ -61,6 +61,18 @@ const BRAND_JOINS = [
   // scribe-v2 splits this one too: one batch-7 clip transcribed as "Bit Predict"
   // even though the spoken delivery was correct.
   [["bit", "predict"], "BitPredict"],
+  // Same split on the batch-9 TeamPredict clips: the delivery was correct on all
+  // four that speak it, scribe-v2 just writes it as two words.
+  [["team", "predict"], "TeamPredict"],
+  // "Protect" is scribe-v2 MIS-HEARING "Predict", not the actor saying it wrong:
+  // batch 9's v6 captioned as "Team Protect" on one pass while four other passes
+  // of the same audio returned "Team Predict". Batch 6 saw the identical slip on
+  // "BitPredict". Joining it here makes a burned-in brand typo impossible
+  // whichever way the fluke lands.
+  //
+  // This fixes the CAPTION only. It does not tell you the audio is right, so the
+  // separate transcription cross-check still has to be run on every clip.
+  [["team", "protect"], "TeamPredict"],
 ];
 const bare = (s) => s.toLowerCase().replace(/[^a-z0-9]/g, "");
 const words = [];
@@ -109,7 +121,7 @@ if (!EMPHASIS[adId]) console.log(`  note: no emphasis list for "${adId}", number
 // Match by containment, not equality: speech-to-text returns the spoken URL as
 // "voicedrop.ai", which bares to "voicedropai" and would otherwise render as a
 // plain white word. That word is the CTA payoff and must carry the brand tier.
-const BRAND_NAMES = ["voicedrop", "emailchaser", "1lookup", "esacard", "bitpredict"];
+const BRAND_NAMES = ["voicedrop", "emailchaser", "1lookup", "esacard", "bitpredict", "teampredict"];
 const tierOf = (text) => {
   const b = bare(text);
   if (BRAND_NAMES.some((n) => b.includes(n))) return "brand";

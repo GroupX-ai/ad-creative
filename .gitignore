@@ -13,3 +13,24 @@ _qa/
 */2026-08-09-seedance-video-b2/*-1080p-fixed.mp4
 */2026-08-09-seedance-video-b2/*-1080p-trimmed.mp4
 _review-*/
+
+# Banner batches: raw/ is the un-composited render straight off fal and is a
+# byte-for-byte duplicate of banners-nologo/, which IS committed. fonts/ are
+# Google Fonts fetched at build time. Both are re-derivable from the prompts.
+**/_work/raw/
+**/_work/fonts/
+# Generated review page: 2.9 MB of base64-inlined copies of banners/ that are
+# already committed. Re-derive with _work/build-review-page.py.
+**/_work/review-page.html
+
+# Batch 9 (2026-08-13) TeamPredict video: the uncaptioned 1080p upscales and the
+# v3 trim intermediate, 94 MB. The *-captioned.mp4 files are the deliverable and
+# ARE committed, as are the cheap 720p masters. Re-derive an intermediate by
+# re-running the upscale from the committed 720p master (~$0.11 each):
+#   node _scripts/seedance-generate.mjs --prompts seedance-prompts-b9-teampredict.mjs \
+#     --batch 2026-08-13-paid-launch-video --duration 15 --resolution 720p --only <id>
+teampredict/2026-08-13-paid-launch-video/*-1080p.mp4
+teampredict/2026-08-13-paid-launch-video/*-1080p-trimmed.mp4
+# Generated status page: 372 KB of base64-inlined copies of thumbnails/ and the
+# brand fonts, all already present. Re-derive with _work/build-status-page.py.
+teampredict/2026-08-13-paid-launch-video/_work/status-page.html

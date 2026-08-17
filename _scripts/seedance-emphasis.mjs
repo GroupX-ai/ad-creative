@@ -15,6 +15,7 @@ export const BRAND = {
   "1lookup": { hex: "#22D3EE", ass: "&H00EED322" }, // brand cyan
   esacard: { hex: "#f2a93b", ass: "&H003BA9F2" }, // marigold, reads on warm daylight footage
   bitpredict: { hex: "#01DD82", ass: "&H0082DD01" }, // neon green, the brand's only accent
+  teampredict: { hex: "#4B56FF", ass: "&H00FF564B" }, // brand indigo
 };
 
 // Anything containing a digit, plus spelled-out numbers, is emphasised.
@@ -116,6 +117,17 @@ export const EMPHASIS = {
   "bitpredict-c5-three-weeks-in": ["crypto", "destroyed", "accuracy", "prove", "timestamped", "stake", "free"],
   "bitpredict-c6-humbling": ["crypto", "brutal", "humbling", "public", "timestamped", "better", "free"],
   "bitpredict-c7-just-locked-it": ["crypto", "locked", "regret", "edit", "record", "free", "stake"],
+
+  // ── batch 9, TeamPredict paid launch. Every list punches the SIGNAL words
+  //    (headshot, skills, networking, profile, "Open to Work"), because those
+  //    are what tell a sound-off scroller what the product actually reads, and
+  //    the turn word that makes each clip funny.
+  "teampredict-v1-keep-scrolling": ["quitting", "scrolling", "headshot", "skills", "networking", "free"],
+  "teampredict-v2-two-weeks": ["weeks", "standing", "desk", "desks", "coming"],
+  "teampredict-v3-open-to-work": ["manager", "habitat", "herd", "open", "work", "recruiters", "cannot"],
+  "teampredict-v4-pizza-party": ["pizza", "valued", "anywhere", "accepted", "offer"],
+  "teampredict-v5-psychic": ["quit", "photo", "skills", "linkedin", "dollars", "person"],
+  "teampredict-v6-my-competitors": ["competitors", "polishing", "email", "call", "boss", "free"],
 };
 
 // Resolve an ad id from a file path, tolerating the -fixed / -trimmed / -1080p suffixes.
