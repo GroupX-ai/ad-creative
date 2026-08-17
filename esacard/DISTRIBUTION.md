@@ -218,6 +218,27 @@ through on the first try that way. Video covers are required on non-Spark video 
 Domains) has no API surface in the tools used; check it in the UI before activating. The 20
 banners are deliberately not uploaded yet: videos first, best banners after, per the plan.
 
+### TikTok organic (@esacard via Postiz, scheduled 2026-08-17 on Robby's ask)
+
+All ten clips scheduled as organic posts on the ESA Card TikTok account (Postiz integration
+`cmsxtwzga07nymt0y4bnw8g8g`, `tiktok-business`), two per day, 16:00 and 22:00 UTC (noon and
+6pm Eastern), direct-publish, public, comments on, labelled AI-generated per TikTok's
+synthetic-media rule, `brand_organic_toggle` on. Captions: the clip's opening line, the
+offer (wallet card with the pet's photo, certificate, $39 once, no renewal fees,
+esacard.com), three hashtags, acronym spelled out.
+
+| date (UTC) | 16:00 | 22:00 |
+| --- | --- | --- |
+| 2026-08-18 | d1-viewing | d5-hotel |
+| 2026-08-19 | e1-first-day | e2-keys |
+| 2026-08-20 | d2-lobby | e3-back-sunday |
+| 2026-08-21 | d4-section-four | e4-cottage |
+| 2026-08-22 | d3-bench | e5-haircut |
+
+Robby's two picks lead the run. Media rehosted via the fal URLs into Postiz uploads (TikTok
+pulls from the Postiz media domain). Postiz post ids `cmsxu2a5s01fgqi0yf6qp4oht` …
+`cmsxu2b2501fpqi0ym2e674kb`.
+
 ## Two API facts worth keeping
 
 - **Reddit ad `type` is `UNSPECIFIED`, not `PROMOTED_USER_POST`.** The value in
