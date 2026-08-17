@@ -55,13 +55,16 @@ const COMMUNITIES = [
   "consulting",
 ];
 
-// Pinned to the feature branch because these files are not on main yet (PR #28
-// and the batch-9 PR are open). Reddit fetches each URL once, at post-creation
-// time, and rehosts the media on its own CDN, so live ads are unaffected by what
-// happens to the branch afterwards. REPOINT THIS TO main ONCE THE PRs MERGE, or
-// a later re-run of this script will 404 against a deleted branch.
-const RAW =
-  "https://raw.githubusercontent.com/GroupX-ai/ad-creative/claude/teampredict-paid-ads-55oyeb";
+// Pinned to `main`, never to a feature branch. Reddit fetches each URL itself at
+// post-creation time, which can be days after the code is written, and a merged
+// branch gets deleted: a branch URL is a launch that breaks silently later.
+// Anything referenced here must be on main before the script is run.
+//
+// (The 2026-08-14 launch ran against the feature branch out of necessity, since
+// the assets were not merged yet. Those ads are unaffected either way: Reddit
+// rehosts the media on i.redd.it at post creation, so the source URL is only
+// ever read once.)
+const RAW = "https://raw.githubusercontent.com/GroupX-ai/ad-creative/main";
 const B8 = `${RAW}/teampredict/2026-08-13-paid-launch`;
 const V9 = `${RAW}/teampredict/2026-08-13-paid-launch-video`;
 
