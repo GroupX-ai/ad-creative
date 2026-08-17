@@ -1,0 +1,18 @@
+{
+  "ranAt": "2026-08-17T23:39:49.957Z",
+  "model": "bytedance/seedance-2.5/text-to-video",
+  "duration": "15",
+  "resolution": "720p",
+  "estimatedSpendUsd": 7.04,
+  "ok": [
+    {
+      "id": "u3-contributes-nothing",
+      "company": "esacard",
+      "seed": 1444478271,
+      "sourceUrl": "https://v3b.fal.media/files/b/0aa6c2ca/_CHvIUjXCTCKGj1IgPIbe_video.mp4",
+      "raw": "/home/user/ad-creative/esacard/2026-08-17-ugc-examples/u3-contributes-nothing-720p.mp4",
+      "upscaled": "/home/user/ad-creative/esacard/2026-08-17-ugc-examples/u3-contributes-nothing-1080p.mp4"
+    }
+  ],
+  "failed": []
+}

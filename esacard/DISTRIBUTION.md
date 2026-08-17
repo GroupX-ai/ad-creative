@@ -191,9 +191,15 @@ not an edit). The two earlier clicks-optimised ad groups are archived.
 
 ## TikTok
 
-**Built 2026-08-17, everything DISABLED at every level. Nothing can spend until Robby OKs a
-budget split** (the $1,000/month cap is fully allocated and TikTok's ad-group floor is
-$20/day, so activating it needs either a cap raise or cuts elsewhere).
+**ACTIVATED 2026-08-17 on Robby's decision: "$300/month for TikTok Ads."** TikTok's hard
+floor is $20/day per ad group, so $300/month runs as a **15-day burst**: schedule
+2026-08-18 00:00 → 2026-09-02 00:00 UTC at $20/day = $300, then it stops by itself and the
+next month's shape gets decided on the results. Campaign, ad group and all 10 ads flipped
+ENABLE 2026-08-17 (ads pass through TikTok review first). Ad group renamed
+`ESA | US | 25-55 | Broad | Purchase | $300 Aug burst`. Nothing else was cut, so total
+committed run rate while the burst runs is ~$1,300/month across the five platforms.
+
+*(Original build state below, kept for the record.)*
 
 | | value |
 | --- | --- |
