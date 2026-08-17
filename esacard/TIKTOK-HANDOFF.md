@@ -11,7 +11,7 @@ purchases, launch TikTok, and pitch new heart-tugging creative.
 ---
 
 You are picking up ESA Card paid acquisition. Four campaigns are already live (Google
-Search, Google Demand Gen, Meta, Reddit) and there are already purchases. Four jobs, in
+Search, Google Demand Gen, Meta, Reddit) and there are already purchases. Five jobs, in
 this order:
 
 1. **Full review of the live campaigns.**
@@ -21,6 +21,8 @@ this order:
 3. **Launch TikTok Ads.**
 4. **Pitch new creative** (banners and videos): "really creative heart tugging angles."
    Pitch first, render nothing without approval.
+5. **Build the self-report attribution question**, which Robby wants and which does not
+   exist on the site yet (verified 2026-08-14, details in job 5).
 
 **The product.** esacard.com sells one thing: a $39 one-time emotional support animal
 registration kit, two print-ready PDFs (a wallet ID card with the animal's photo, and a
@@ -51,17 +53,37 @@ environment.
 2. Per platform, report at absolute level: spend, impressions, clicks, checkouts started,
    purchases, cost per purchase against **$37.57**. One row per event type, never blended.
    Lead with the level, not a trend.
-3. Check delivery health: Meta ad review states, Reddit ad approval states, Google serving
+3. Attribute with Stripe metadata first: every purchase's PaymentIntent carries
+   first-touch click attribution written by `src/lib/attribution.ts` in `esacard.com`
+   (gclid/gbraid/wbraid, fbclid, ttclid, utm_*, referrer host). PaymentIntent metadata is
+   searchable. The SOURCE line in the Slack feeds is derived from exactly this data, so
+   Slack and Stripe should agree.
+4. Use Mixpanel for traffic and funnel conversion: project `4052772`. The funnel is
+   Registration Started → Registration Step Completed → Checkout Started → Payment
+   Succeeded → Kit Delivered, and the browser's distinct id is passed into checkout so the
+   webhook-fired money events join the visitor. Read step-to-step conversion and where
+   paid traffic drops. Reconcile Payment Succeeded to Stripe; when they disagree, Stripe
+   wins.
+5. Check delivery health: Meta ad review states, Reddit ad approval states, Google serving
    status and search terms (add negatives if junk queries are buying clicks), Demand Gen
    actually serving.
-4. Verdict per platform: scale, hold, fix, or kill. Blunt.
+6. Verdict per platform: scale, hold, fix, or kill. Blunt.
 
 ## Job 2: move optimisation to purchases
 
 Current state and what to do on each:
 
-- **Google Search + Demand Gen: already optimise for Purchase.** No change. Verify
-  conversions are recording against `AW-18387903752 / Y4F_CN7rlOEcEIjKhMBE`.
+- **Google Search + Demand Gen: already optimise for Purchase, but verify the
+  misconfiguration fix first.** The Search campaign sat `primary_status: MISCONFIGURED`
+  at launch ("missing a goal" in the UI): the PURCHASE goal existed at campaign and
+  account level with `biddable: false`, so Maximize Conversions had nothing to bid on,
+  which is consistent with the campaign spending $0. Fixed 2026-08-14: `biddable: true`
+  set on both campaigns' goals and the account default, confirmed by read-back. The
+  status is computed asynchronously, so your first Google action is to check
+  `campaign.primary_status` has left MISCONFIGURED; if it has not, read
+  `campaign.primary_status_reasons` and fix what it names before judging Google on
+  performance. Then verify conversions are recording against
+  `AW-18387903752 / Y4F_CN7rlOEcEIjKhMBE`.
 - **Meta: currently optimises for InitiateCheckout.** Update the ad set's promoted_object
   to `{"pixel_id":"4305407809789395","custom_event_type":"PURCHASE"}`. This resets the
   learning phase; that is accepted, Robby made the call.
@@ -140,6 +162,34 @@ Robby wants more banners and videos: "we just need really creative heart tugging
   speaker's-mouth finding, the ElevenLabs transcription gate (nothing ships unverified),
   caption tooling in `_scripts/` (the `esacard` brand kit is already in
   `seedance-emphasis.mjs`), banner QA including the luminance check.
+
+## Job 5: build the self-report attribution question
+
+Robby: "We also ask each user to self-report where they came from (beyond the pixel) - it
+shows up in Slack and I'm sure we save it somewhere."
+
+Checked against the code on 2026-08-14: **the site does not ask this today.** Nothing in
+the funnel, the success page or the kit email asks where the buyer came from; the kit
+email only asks "reply and tell us how it went". What shows up in Slack as SOURCE is the
+automatic click attribution (gclid/fbclid/utm/referrer host), which IS saved to Stripe
+metadata. The self-reported answer Robby wants is the missing piece, and it matters
+because click attribution goes dark exactly where iOS privacy bites hardest.
+
+Build it, small:
+
+- One tap-to-answer question on `/register/success`, after payment so it cannot cost a
+  sale: "Where did you find us?" with one-tap options (TikTok, Instagram or Facebook,
+  Google, Reddit, YouTube, a friend, somewhere else) and a free-text fallback.
+- Persist the answer onto the **PaymentIntent metadata** as its own key (for example
+  `self_reported_source`). Stripe merges metadata on update and the codebase already
+  updates PaymentIntent metadata in `recordRegistration` in `src/lib/registrations.ts`;
+  follow that pattern. There is no database; Stripe is the system of record, so if it is
+  not in Stripe metadata it does not exist.
+- Echo it into the Slack activity feed next to the derived SOURCE line, labelled as
+  self-reported so the two are never confused (`src/lib/slack.ts` builds those lines, and
+  it deliberately quotes any value a stranger can type; keep that).
+- Treat the answer as untrusted user input everywhere it renders.
+- Open a PR on `esacard.com` and show Robby; do not push to main.
 
 ---
 
