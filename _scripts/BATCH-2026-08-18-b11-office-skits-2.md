@@ -86,9 +86,19 @@ array in `reddit-launch-teampredict.mjs`). TikTok queued: Robby is creating the 
 and connecting it to Postiz; all six skits (w1-w6) post there once it appears in the
 integration list.
 
-IDs filled in after launch:
+Launched 2026-08-18 ~11:15-11:30 UTC, all four channels:
 
-- Meta: (pending)
-- YouTube: (pending)
-- Google Demand Gen: (pending)
-- Reddit: (pending)
+- **Meta** (HR & People 2.0 ad set 120251755786840233, all ACTIVE):
+  w4 ad 120251769201440233 · w5 ad 120251769212020233 · w6 ad 120251769225330233
+- **YouTube** (channel UCTgTZag9aozWRhh7sRreiBg, verified live via the channel's own
+  feed, not Postiz state): w4 `T7yl1fgcjCc` · w5 `u4ZvKnsaCg0` · w6 `w8dNV7bJfSY`
+- **Google Demand Gen** (campaign 24153452626, ad group 203200083750): 3 YOUTUBE_VIDEO
+  assets + 3 ads created, campaign now carries 12 video ads (6 batch-9, 3 batch-10,
+  3 batch-11)
+- **Reddit** (ad group 2568029876856713859, now 18 ads, all ACTIVE):
+  w4 post t3_1vrm8kg ad 2571268407613782155 · w5 post t3_1vrm8ly ad 2571268442143535760
+  · w6 post t3_1vrm8nw ad 2571268482628508457
+
+Manual follow-ups: the YouTube AI-content disclosure toggle needs a per-video switch in
+YouTube Studio (now 12 videos); TeamPredict TikTok still absent from Postiz (ESA Card,
+VoiceDrop and BitPredict have TikTok connections, TeamPredict does not yet).
