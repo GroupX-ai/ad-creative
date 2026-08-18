@@ -162,7 +162,7 @@ export const EMPHASIS = {
   "teampredict-w5-conspiracy-board": ["monday", "headline", "skills", "photo", "endorsed", "founder", "vision", "bigger", "steve"],
   "teampredict-w6-green-ring": ["sandra", "green", "ring", "dentist", "public", "everything", "point"],
 
-// ── batch 10, BitPredict "crazy, funny, parody, UGC". "crypto" is on every
+  // ── batch 10, BitPredict "crazy, funny, parody, UGC". "crypto" is on every
   //    list for this brand so it always lands green and oversized: it is what
   //    tells a sound-off scroller what the ad is even about. The rest are each
   //    ad's turn words, the beat where the joke actually lands.
@@ -174,6 +174,21 @@ export const EMPHASIS = {
   "bitpredict-c13-the-needle": ["crypto", "absolutely", "feeling", "receipts", "gambling", "skill"],
   "bitpredict-c14-prove-it": ["crypto", "prove", "alone", "receipt", "edits", "free"],
   "bitpredict-c15-evidence-wall": ["crypto", "look", "proof", "record"],
+
+  // ── batch 12, 1Lookup product-specific. Each list punches the PRODUCT words
+  //    (dead numbers, registry, skip trace, spam score, landlines, fraud score,
+  //    bounce, mobile number, domain age) so a sound-off scroller learns which
+  //    product the clip is about, plus each clip's turn word.
+  "1lookup-c8-dead-list": ["dead", "disconnected", "validated", "free"],
+  "1lookup-c9-first-call": ["call", "registry", "interested", "lawyer"],
+  "1lookup-c10-ghost-owner": ["owner", "mail", "skip", "trace", "name", "phone", "address", "free"],
+  "1lookup-c11-front-desk": ["calling", "gary", "roofing", "low", "risk", "gutters"],
+  "1lookup-c12-flagged": ["dials", "pickups", "flagged", "spam", "scores", "daily", "free"],
+  "1lookup-c13-landlines": ["texts", "boom", "landlines", "later"],
+  "1lookup-c14-best-month": ["signups", "record", "celebrate", "rick", "fraud", "score", "customer"],
+  "1lookup-c15-list-sommelier": ["online", "typos", "disposable", "domains", "bounce", "servable", "not"],
+  "1lookup-c16-magic-rolodex": ["boss", "everyone", "anyone", "profile", "mobile", "number", "tell"],
+  "1lookup-c17-established-1987": ["business", "domain", "registered", "tuesday", "change", "invoice", "friday"],
 };
 
 // Resolve an ad id from a file path, tolerating the -fixed / -trimmed / -1080p suffixes.
