@@ -128,6 +128,19 @@ export const EMPHASIS = {
   "teampredict-v4-pizza-party": ["pizza", "valued", "anywhere", "accepted", "offer"],
   "teampredict-v5-psychic": ["quit", "photo", "skills", "linkedin", "dollars", "person"],
   "teampredict-v6-my-competitors": ["competitors", "polishing", "email", "call", "boss", "free"],
+
+  // ── batch 10, BitPredict "crazy, funny, parody, UGC". "crypto" is on every
+  //    list for this brand so it always lands green and oversized: it is what
+  //    tells a sound-off scroller what the ad is even about. The rest are each
+  //    ad's turn words, the beat where the joke actually lands.
+  "bitpredict-c8-two-am-whisper": ["crypto", "right", "believes", "public", "timestamped", "locked", "free"],
+  "bitpredict-c9-there-is-a-link": ["crypto", "right", "link", "public", "timestamped", "prove", "free"],
+  "bitpredict-c10-pulled-over": ["crypto", "stake", "insane", "locked", "public", "free"],
+  "bitpredict-c11-receipt-roll": ["crypto", "prove", "receipt", "edits", "skill", "free"],
+  "bitpredict-c12-caster-waits": ["crypto", "locked", "edit", "receipt", "wrong"],
+  "bitpredict-c13-the-needle": ["crypto", "absolutely", "feeling", "receipts", "gambling", "skill"],
+  "bitpredict-c14-prove-it": ["crypto", "prove", "alone", "receipt", "edits", "free"],
+  "bitpredict-c15-evidence-wall": ["crypto", "look", "proof", "record"],
 };
 
 // Resolve an ad id from a file path, tolerating the -fixed / -trimmed / -1080p suffixes.

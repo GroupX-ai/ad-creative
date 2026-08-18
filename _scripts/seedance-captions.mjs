@@ -100,8 +100,13 @@ console.log(`${path.basename(video)}: ${words.length} words`);
 // so covering the wordmark defeats its only job.
 //
 // Pass --endcard <seconds> with the card's start time, or let it auto-detect the
-// cut. Auto-detection only looks at the last 5 seconds and only accepts a strong
-// scene change, so a hard cut mid-clip cannot trigger it.
+// cut. Auto-detection only looks at the last 5 seconds and only accepts a cut that
+// leaves a plausible card-length tail, so a hard cut mid-clip cannot trigger it.
+//
+// The scene threshold is deliberately low (0.22, not 0.4). A clip that ends on a dark
+// frame cuts to a near-black end card with only a small pixel delta: batch 10's caster
+// booth and courtroom both ended dark and both went undetected at 0.4. The tail-window
+// constraint, not the threshold, is what stops a false positive.
 const endcardFlag = process.argv.indexOf("--endcard");
 let cardStart = endcardFlag !== -1 ? Number(process.argv[endcardFlag + 1]) : null;
 const clipEnd = words.length ? words[words.length - 1].end : 0;
@@ -116,7 +121,7 @@ if (cardStart === null) {
       // showinfo writes to stderr and the command SUCCEEDS, so this cannot use the
       // catch-the-exception trick the plain `-i` probe above relies on.
       const scene = spawnSync(FF, ["-hide_banner", "-ss", String(from), "-i", video,
-        "-vf", "select='gt(scene,0.4)',showinfo", "-f", "null", "-"],
+        "-vf", "select='gt(scene,0.22)',showinfo", "-f", "null", "-"],
         { encoding: "utf8" });
       const sceneOut = (scene.stderr || "") + (scene.stdout || "");
       const hits = [...sceneOut.matchAll(/pts_time:([\d.]+)/g)].map((m) => from + Number(m[1]));

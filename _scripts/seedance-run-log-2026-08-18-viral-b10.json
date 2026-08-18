@@ -1,0 +1,18 @@
+{
+  "ranAt": "2026-08-18T10:27:36.951Z",
+  "model": "bytedance/seedance-2.5/text-to-video",
+  "duration": "20",
+  "resolution": "720p",
+  "estimatedSpendUsd": 9.39,
+  "ok": [
+    {
+      "id": "bitpredict-c12-caster-waits",
+      "company": "bitpredict",
+      "seed": 228843644,
+      "sourceUrl": "https://v3b.fal.media/files/b/0aa6d1dd/F70f9MnBwOcHwsl4xHzwu_video.mp4",
+      "raw": "/home/user/ad-creative/bitpredict/2026-08-18-viral-b10/bitpredict-c12-caster-waits-720p.mp4",
+      "upscaled": "/home/user/ad-creative/bitpredict/2026-08-18-viral-b10/bitpredict-c12-caster-waits-1080p.mp4"
+    }
+  ],
+  "failed": []
+}
