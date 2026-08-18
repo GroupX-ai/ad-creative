@@ -74,6 +74,17 @@ const BRAND_JOINS = [
   // separate transcription cross-check still has to be run on every clip.
   [["team", "protect"], "TeamPredict"],
 ];
+// SINGLE-WORD mishearings. BRAND_JOINS above only repairs a two-word split, so
+// a word scribe-v2 simply hears wrong used to burn in verbatim. Batch 12 shipped
+// "SPAMCH" over audio that says "spam", found by reading the pixels rather than
+// the transcript, which is the same class of miss as batch 9's "TEAM PROTECT".
+//
+// Only put a word here when the SPOKEN audio is correct and the transcriber is
+// wrong. If the actor genuinely said the wrong word, that is a trim, a mute or a
+// re-roll, not a caption patch: this map would then paper over a real defect.
+const WORD_FIXES = [
+  [["spamch", "spampch", "spamsh"], "spam"],
+];
 const bare = (s) => s.toLowerCase().replace(/[^a-z0-9]/g, "");
 const words = [];
 for (let i = 0; i < raw.length; i++) {
@@ -84,9 +95,17 @@ for (let i = 0; i < raw.length; i++) {
     words.push({ text: join[1], start: raw[i].start, end: raw[i + 1].end });
     console.log(`  joined brand name -> ${join[1]}`);
     i++;
-  } else {
-    words.push(raw[i]);
+    continue;
   }
+  const fix = WORD_FIXES.find(([variants]) => variants.includes(bare(raw[i].text)));
+  if (fix) {
+    // Keep any trailing punctuation the transcriber attached to the word.
+    const tail = raw[i].text.match(/[?!]+$/)?.[0] ?? "";
+    console.log(`  fixed misheard word ${raw[i].text} -> ${fix[1]}${tail}`);
+    words.push({ ...raw[i], text: fix[1] + tail });
+    continue;
+  }
+  words.push(raw[i]);
 }
 console.log(`${path.basename(video)}: ${words.length} words`);
 
