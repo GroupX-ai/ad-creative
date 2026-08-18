@@ -1,0 +1,35 @@
+{
+  "ranAt": "2026-08-18T11:03:14.102Z",
+  "model": "bytedance/seedance-2.5/text-to-video",
+  "duration": "30",
+  "resolution": "720p",
+  "estimatedSpendUsd": 70.45,
+  "ok": [
+    {
+      "id": "teampredict-w4-new-headshot",
+      "company": "teampredict",
+      "seed": 1514943505,
+      "sourceUrl": "https://v3b.fal.media/files/b/0aa6d2ac/pGaFhDW9H7EAJIoXlbjAL_video.mp4",
+      "raw": "/home/user/ad-creative/teampredict/2026-08-18-office-skits-2/teampredict-w4-new-headshot-720p.mp4",
+      "upscaled": "/home/user/ad-creative/teampredict/2026-08-18-office-skits-2/teampredict-w4-new-headshot-1080p.mp4",
+      "note": "recast re-roll 2026-08-18T10:58Z; first attempt rejected by fal output validation (potential copyright)"
+    },
+    {
+      "id": "teampredict-w5-conspiracy-board",
+      "company": "teampredict",
+      "seed": 1421666089,
+      "raw": "/home/user/ad-creative/teampredict/2026-08-18-office-skits-2/teampredict-w5-conspiracy-board-720p.mp4",
+      "upscaled": "/home/user/ad-creative/teampredict/2026-08-18-office-skits-2/teampredict-w5-conspiracy-board-1080p.mp4",
+      "note": "from the batch's first run 2026-08-18T10:46Z; this log file was overwritten by the later single-ad re-rolls, entry restored by hand"
+    },
+    {
+      "id": "teampredict-w6-green-ring",
+      "company": "teampredict",
+      "seed": 236972366,
+      "raw": "/home/user/ad-creative/teampredict/2026-08-18-office-skits-2/teampredict-w6-green-ring-720p.mp4",
+      "upscaled": "/home/user/ad-creative/teampredict/2026-08-18-office-skits-2/teampredict-w6-green-ring-1080p.mp4",
+      "note": "recast re-roll 2026-08-18T11:05Z; first render (seed 2142970936) was a real-actor likeness and was deleted"
+    }
+  ],
+  "failed": []
+}

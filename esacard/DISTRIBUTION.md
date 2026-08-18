@@ -34,6 +34,19 @@ All ten uploaded 2026-08-13, public, `selfDeclaredMadeForKids: no`. Uploaded as 
 | `e4-cottage` | Six hours in the car for this |
 | `e5-haircut` | His first ever haircut |
 
+Seven more queued 2026-08-19, the UGC talking-head batch (first publish attempt on
+2026-08-18 errored, see the batch section below):
+
+| clip | title |
+| --- | --- |
+| `u1-better-id` | My dog has better ID than I do |
+| `u2-wallet-ranked` | Everything in my wallet, ranked, worst to best |
+| `u4-roommate` | My roommate contributes nothing and screams at the mailman |
+| `u5-photoshoot` | Forty-seven takes for one card photo |
+| `u6-rabbit` | Registered my rabbit before my coffee went cold |
+| `u8-drama` | The most dramatic animal alive. One flawless take. |
+| `u9-supervisor` | She supervises everything I do |
+
 Every description carries the same three blocks: the clip's own opening line, the offer
 (certificate and ID card, verifiable registration number, $39 one time, no subscription), and
 the honesty block required by `docs/ads/policy.md` in the `esacard.com` repo. No description
@@ -55,12 +68,32 @@ is fal's storage API: `POST https://rest.alpha.fal.ai/storage/upload/initiate` w
 Four platforms live, **$32.88/day combined = $1,000/month**, which is the total Robby set
 across every ad account.
 
+**Superseded 2026-08-18.** The table below is the launch-day split, kept for history.
+Current state: Meta raised to $30.00/day on Robby's instruction, TikTok live at $20.00/day
+(August burst, approved separately), so the combined total is **$69.00/day (~$2,098/month)**
+across five platforms. Details in "Update 2026-08-18" below.
+
 | platform | campaign | daily | monthly | optimising for | creative |
 | --- | --- | --- | --- | --- | --- |
-| Meta | `ESA Card \| Meta \| US \| Cold \| Sales` | $13.88 | $422 | InitiateCheckout | 20 images + 10 videos |
+| Meta | `ESA Card \| Meta \| US \| Cold \| Sales` | $13.88 | $422 | **Purchase** (since 2026-08-17, see below) | 20 images + 10 videos |
 | Google Search | `ESA Card \| Search \| US \| Core` | $9.00 | $274 | Purchase (site tag) | 3 RSAs, ~70 keywords |
 | Google Demand Gen | `ESA Card \| Demand Gen \| US \| YouTube` | $5.00 | $152 | Purchase (site tag) | 2 ads × 5 YouTube clips |
-| Reddit | `ESA Card \| Reddit \| Pet + Housing \| Launch` | $5.00 | $152 | PageVisit | 20 images + 10 videos |
+| Reddit | `ESA Card \| Reddit \| Pet + Housing \| Launch` | $5.00 | $152 | **Purchase** (since 2026-08-17, see below) | 20 images + 10 videos |
+
+### Moved to Purchase optimisation, 2026-08-17 (Robby: "I think we can start optimizing around purchases - it's clearly converting")
+
+- **Meta:** conversion settings are immutable on a published ad set, so the switch is a new ad
+  set. New: `ESA | US | Broad | Purchase` `120247870160610605` (same targeting, same CBO
+  budget, promoted_object `PURCHASE`), all 30 ads recreated against the same creative ids and
+  ACTIVE (10 videos re-entered review, expected). Old:
+  `ESA | US | Broad | InitiateCheckout` `120247770766910605` PAUSED and renamed. Learning
+  phase reset accepted, Robby made the call.
+- **Reddit:** the goal is immutable after creation, so the switch is a new ad group. The gate
+  opened first: `GET /pixels/a2_ji9rrnreyf0d/last_fired_at` showed `purchase` fired
+  2026-08-17T15:29Z. New: `ESA | Pet + Housing | Purchase` `2570690648253263407`
+  (`optimization_goal: PURCHASE`, same 63-community targeting, $5/day), all 30 ads recreated
+  against the same post ids, ACTIVE/PROCESSING (Reddit review). Old PageVisit bootstrap group
+  `2567956092694490967` ARCHIVED.
 
 ### Why the split is shaped this way
 
@@ -92,10 +125,14 @@ $1,000 on Meta alone would come closer to a real read.
 Google defaults to PRESENCE now rather than the older "presence or interest", so no US-interested
 foreign traffic is bought. Both campaigns were explicitly set anyway.
 
-**Meta will not accept `location_types: ["home"]` alone at country level.** Writing it returns
-`success: true` and reads back as `["frequently_in", "home"]`, with Advantage+ Audience on or
-off. Both values mean physically in the United States, so there is no interest-based leakage;
-Meta simply does not expose a stricter country-level setting.
+**Meta location_types is dead. Never write it again.** (Updated 2026-08-18.) At launch,
+writing `location_types: ["home"]` read back as `["frequently_in", "home"]`. On 2026-08-17
+Meta removed those legacy options platform-wide, and any ad set still carrying them blocks
+on republish with error **#1870194** ("location targeting option that has been removed") -
+which is exactly what hit the paused InitiateCheckout ad set. The fix, applied to both ESA
+ad sets on 2026-08-18: send `geo_locations: {"countries": ["US"]}` with NO `location_types`
+key; Meta then stamps its new canonical default `["frequently_in", "home", "recent"]`. All
+of these mean physically in the United States; there is no stricter country-level setting.
 
 ### Why nothing optimises for Purchase except Google
 
@@ -135,12 +172,12 @@ not an edit). The two earlier clicks-optimised ad groups are archived.
 
 | | state |
 | --- | --- |
-| Meta pixel `4305407809789395` | live and firing, confirmed by `last_fired_time` |
-| Meta Conversions API | token set in Vercel, not fired yet (no purchase since) |
-| TikTok pixel `D9V1HSBC77UBUCS23800` | live, production only |
-| TikTok Events API | token set in Vercel, not fired yet |
-| Reddit pixel | only `page_visit` has ever fired |
-| Google conversion | `ESA Purchase (site tag)`, `AW-18387903752 / Y4F_CN7rlOEcEIjKhMBE`, primary |
+| Meta pixel `4305407809789395` | live and firing; `Purchase` seen on 2026-08-15 and 2026-08-17 (real sales, reconciled to Stripe) |
+| Meta Conversions API | token set in Vercel; browser+server dedup keyed on registration number |
+| TikTok pixel `D9V1HSBC77UBUCS23800` (id `7673594860187762706`) | ACTIVE, developer mode; `SHOPPING`, `INITIATE_ORDER`, `ON_WEB_DETAIL` configured in code; all four paid buyers to date carried the `_ttp` cookie in Stripe metadata, so the pixel demonstrably loads on real purchase paths |
+| TikTok Events API | token set in Vercel, production deployed |
+| Reddit pixel | `purchase` fired 2026-08-17T15:29Z, `add_to_cart` + `view_content` same day — the conversion gate that blocked launch is now open (and used: the Purchase ad group above) |
+| Google conversion | `ESA Purchase (site tag)`, `AW-18387903752 / Y4F_CN7rlOEcEIjKhMBE`, primary; first recorded conversion 2026-08-16 (Search) |
 
 ### Known gaps at launch
 
@@ -176,8 +213,111 @@ not an edit). The two earlier clicks-optimised ad groups are archived.
 
 ## TikTok
 
-Deferred by Robby to a separate conversation with the TikTok Ads connector. The self-contained
-prompt is in `esacard/TIKTOK-HANDOFF.md`.
+**ACTIVATED 2026-08-17 on Robby's decision: "$300/month for TikTok Ads."** TikTok's hard
+floor is $20/day per ad group, so $300/month runs as a **15-day burst**: schedule
+2026-08-18 00:00 → 2026-09-02 00:00 UTC at $20/day = $300, then it stops by itself and the
+next month's shape gets decided on the results. Campaign, ad group and all 10 ads flipped
+ENABLE 2026-08-17 (ads pass through TikTok review first). Ad group renamed
+`ESA | US | 25-55 | Broad | Purchase | $300 Aug burst`. Nothing else was cut, so total
+committed run rate while the burst runs is ~$1,300/month across the five platforms.
+
+*(Original build state below, kept for the record.)*
+
+| | value |
+| --- | --- |
+| Campaign | `ESA Card \| TikTok \| US \| Web Conversions` `1873787435137170`, WEB_CONVERSIONS, DISABLED |
+| Ad group | `ESA \| US \| 25-55 \| Broad \| Purchase` `1873787389986961`, CONVERT → `SHOPPING` (Complete Payment) on pixel `7673594860187762706`, $20/day (TikTok's minimum), US only, 25-54 age bands, broad, TikTok placement only, 7-day click / 1-day view, DISABLED |
+| Ads | 10 video ads, one per approved clip (d1-d5, e1-e5), all DISABLED. Identity: `ESA Card` (@esacard) via Business Center `7581306495212617745` (`BC_AUTH_TT`) — the account was created after TikTok's 2026-01-15 cutoff, so custom identities cannot run non-Spark ads on TikTok placement; the Business-Center-authorized identity is the working route |
+| Links | `utm_source=tiktok&utm_medium=paid_social&utm_campaign=esa-card-tiktok-us-web-conversions&utm_content=vid-<clip>` |
+| Ad text (all 10) | "A wallet card with your pet's photo and a certificate for the wall. $39 once, no renewal fees." |
+
+**Age note:** TikTok's bands are 25-34 / 35-44 / 45-54, so "25-55" is targeted as those three
+bands; 55 exactly is unreachable without adding the whole 55+ band.
+
+**Upload trap, hit and solved:** TikTok's `UPLOAD_BY_URL` refuses
+`raw.githubusercontent.com` (serves `application/octet-stream`; error 40914 "Failed to fetch
+url data"). Same class as the Postiz limitation above, same fix: rehost the file through
+fal's storage API (`content_type: video/mp4`) and upload from the fal URL. All 10 clips went
+through on the first try that way. Video covers are required on non-Spark video ads
+(`image_ids`); TikTok's own generated `video_cover_url` re-uploaded via
+`/file/image/ad/upload/` works.
+
+**Not verifiable by API:** domain verification for `esacard.com` (Business Center → Assets →
+Domains) has no API surface in the tools used; check it in the UI before activating. The 20
+banners are deliberately not uploaded yet: videos first, best banners after, per the plan.
+
+### TikTok organic (@esacard via Postiz, scheduled 2026-08-17 on Robby's ask)
+
+All ten clips scheduled as organic posts on the ESA Card TikTok account (Postiz integration
+`cmsxtwzga07nymt0y4bnw8g8g`, `tiktok-business`), two per day, 16:00 and 22:00 UTC (noon and
+6pm Eastern), direct-publish, public, comments on, labelled AI-generated per TikTok's
+synthetic-media rule, `brand_organic_toggle` on. Captions: the clip's opening line, the
+offer (wallet card with the pet's photo, certificate, $39 once, no renewal fees,
+esacard.com), three hashtags, acronym spelled out.
+
+| date (UTC) | 16:00 | 22:00 |
+| --- | --- | --- |
+| 2026-08-18 | d1-viewing | d5-hotel |
+| 2026-08-19 | e1-first-day | e2-keys |
+| 2026-08-20 | d2-lobby | e3-back-sunday |
+| 2026-08-21 | d4-section-four | e4-cottage |
+| 2026-08-22 | d3-bench | e5-haircut |
+
+Robby's two picks lead the run. Media rehosted via the fal URLs into Postiz uploads (TikTok
+pulls from the Postiz media domain). Postiz post ids `cmsxu2a5s01fgqi0yf6qp4oht` …
+`cmsxu2b2501fpqi0ym2e674kb`.
+
+## UGC talking-head batch, shipped 2026-08-18 (u-clips)
+
+Robby: "You can create 5-10 of these", "add 1-word subtitles to all of them and use
+font-size/color to emphasize words", "schedule all of these to be published in our TikTok
+account over the next few weeks", "These can also be added to YouTube ads and Meta Ads."
+
+- **9 scripted, 7 shipped.** `u3` and `u7` were killed after three rolls each: the spoken
+  phrase "emotional support animal card" garbled every take (confirmed by the two-engine
+  transcription gate, ElevenLabs scribe-v2 cross-checked with Whisper). The lesson, kept for
+  the next batch: possessive chains right before the phrase are the failure mode; reword the
+  line, don't re-roll the same text.
+- **Sharpness:** Seedance renders at 720p max. The earlier previews used the standard
+  upscale tier ($0.11/clip) and read soft; all seven finals were re-upscaled with the PRO
+  tier (`enhancement_tier: "pro"`, ~$1.08/clip, `_scripts/seedance-pro-upscale.mjs`) after
+  Robby flagged it. One-word captions burned in, three size/colour tiers (white, marigold
+  emphasis, brand largest).
+- Files: `esacard/2026-08-17-ugc-examples/<id>-1080p-captioned.mp4` for u1-better-id,
+  u2-wallet-ranked, u4-roommate, u5-photoshoot, u6-rabbit, u8-drama, u9-supervisor.
+
+Where all seven went:
+
+| channel | detail |
+| --- | --- |
+| TikTok Ads | 7 ads ENABLED in ad group `1873787389986961` (inside the $300 Aug burst, no budget change), in TikTok review. Ad ids `1873853579899330`, `1873853579907426`, `1873853579915586`, `1873853609550177`, `1873853609559361`, `1873853609567521`, `1873853609576769`. |
+| Meta | 7 video ads ACTIVE in the Purchase ad set `120247870160610605`. Ad ids `120247887769790605`, `120247887770690605`, `120247887771830605`, `120247887773130605`, `120247887774150605`, `120247887775530605`, `120247887777190605`. Creatives: GET_OFFER, AI-disclosure opt-in, `utm_content=UGC <id>`. |
+| TikTok organic | 7 posts, one every two days at 16:00 UTC, 2026-08-23 → 2026-09-04, picking up where the d/e run ends (2026-08-22). Same settings as that run: direct-post, public, comments on, AI-generated label, `brand_organic_toggle` on. Postiz ids `cmsyivxl002aoqi0y0r4vkbv1` … `cmsyivy8i02auqi0yb7ue9mir`. |
+| YouTube | **Not live yet.** All 7 publish attempts on 2026-08-18 (plus a lone retry) errored instantly in Postiz; TikTok on the same account worked, so it is YouTube-specific, most likely the shared YouTube API quota or an expired connection (unverified, Postiz hides the error payload). Rescheduled for 2026-08-19 07:30-08:30 UTC, ten minutes apart, right after YouTube's quota reset (Postiz ids `cmsyj4oeg0000p70yh6e0pezv` … `cmsyj4p0e0006p70ymngvoybk`). If they error again, the Postiz YouTube connection needs a manual reconnect. Demand Gen wiring follows once the videos are live. |
+
+Order of clips in the id lists above: u1, u2, u4, u5, u6, u8, u9.
+## Update 2026-08-18 (evening): Meta location fix, two-ad-set test, $30/day
+
+What changed after the sections above, all verified by API read-back:
+
+- **Meta broke, then got fixed.** The paused InitiateCheckout ad set blocked on Meta error
+  #1870194: Meta removed the legacy `location_types` values platform-wide (see the location
+  note in the US-targeting section). Fixed 2026-08-18: `location_types` stripped from both
+  ad sets and the InitiateCheckout ad set reactivated on Robby's instruction.
+- **Both ad sets now compete with the same 50 ads.** The 13 `o-c*` ads and the 7 UGC
+  `u*` ads (which had landed only in the Purchase ad set) were mirrored into the
+  InitiateCheckout ad set: InitiateCheckout (25-65) vs Purchase (18-65), same campaign,
+  identical creative. New mirrors re-enter Meta review, expected.
+- **Meta budget doubled to $30.00/day** on Robby's instruction, set at campaign level
+  (`120247770766350605`), so the two ad sets compete for one budget.
+- **Google's MISCONFIGURED / "missing a goal" state is cleared.** Cause was the PURCHASE
+  conversion goal sitting `biddable: false`; fixed 2026-08-14 via
+  `campaignConversionGoals:mutate` + `customerConversionGoals:mutate`. Read-back
+  2026-08-18: Search `primary_status: LIMITED` (`BIDDING_STRATEGY_LEARNING`), Demand Gen
+  `LEARNING`. Both normal for new Maximize Conversions campaigns.
+- **Current daily spend while the TikTok burst runs: Meta $30 + Google Search $9 +
+  Demand Gen $5 + Reddit $5 + TikTok $20 = $69.00/day (~$2,098/month).**
+
 
 ## Two API facts worth keeping
 
