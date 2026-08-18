@@ -34,6 +34,18 @@ All ten uploaded 2026-08-13, public, `selfDeclaredMadeForKids: no`. Uploaded as 
 | `e4-cottage` | Six hours in the car for this |
 | `e5-haircut` | His first ever haircut |
 
+Seven more added 2026-08-18, the UGC talking-head batch (see its section below):
+
+| clip | title |
+| --- | --- |
+| `u1-better-id` | My dog has better ID than I do |
+| `u2-wallet-ranked` | Everything in my wallet, ranked, worst to best |
+| `u4-roommate` | My roommate contributes nothing and screams at the mailman |
+| `u5-photoshoot` | Forty-seven takes for one card photo |
+| `u6-rabbit` | Registered my rabbit before my coffee went cold |
+| `u8-drama` | The most dramatic animal alive. One flawless take. |
+| `u9-supervisor` | She supervises everything I do |
+
 Every description carries the same three blocks: the clip's own opening line, the offer
 (certificate and ID card, verifiable registration number, $39 one time, no subscription), and
 the honesty block required by `docs/ads/policy.md` in the `esacard.com` repo. No description
@@ -244,6 +256,36 @@ esacard.com), three hashtags, acronym spelled out.
 Robby's two picks lead the run. Media rehosted via the fal URLs into Postiz uploads (TikTok
 pulls from the Postiz media domain). Postiz post ids `cmsxu2a5s01fgqi0yf6qp4oht` …
 `cmsxu2b2501fpqi0ym2e674kb`.
+
+## UGC talking-head batch, shipped 2026-08-18 (u-clips)
+
+Robby: "You can create 5-10 of these", "add 1-word subtitles to all of them and use
+font-size/color to emphasize words", "schedule all of these to be published in our TikTok
+account over the next few weeks", "These can also be added to YouTube ads and Meta Ads."
+
+- **9 scripted, 7 shipped.** `u3` and `u7` were killed after three rolls each: the spoken
+  phrase "emotional support animal card" garbled every take (confirmed by the two-engine
+  transcription gate, ElevenLabs scribe-v2 cross-checked with Whisper). The lesson, kept for
+  the next batch: possessive chains right before the phrase are the failure mode; reword the
+  line, don't re-roll the same text.
+- **Sharpness:** Seedance renders at 720p max. The earlier previews used the standard
+  upscale tier ($0.11/clip) and read soft; all seven finals were re-upscaled with the PRO
+  tier (`enhancement_tier: "pro"`, ~$1.08/clip, `_scripts/seedance-pro-upscale.mjs`) after
+  Robby flagged it. One-word captions burned in, three size/colour tiers (white, marigold
+  emphasis, brand largest).
+- Files: `esacard/2026-08-17-ugc-examples/<id>-1080p-captioned.mp4` for u1-better-id,
+  u2-wallet-ranked, u4-roommate, u5-photoshoot, u6-rabbit, u8-drama, u9-supervisor.
+
+Where all seven went:
+
+| channel | detail |
+| --- | --- |
+| TikTok Ads | 7 ads ENABLED in ad group `1873787389986961` (inside the $300 Aug burst, no budget change), in TikTok review. Ad ids `1873853579899330`, `1873853579907426`, `1873853579915586`, `1873853609550177`, `1873853609559361`, `1873853609567521`, `1873853609576769`. |
+| Meta | 7 video ads ACTIVE in the Purchase ad set `120247870160610605`. Ad ids `120247887769790605`, `120247887770690605`, `120247887771830605`, `120247887773130605`, `120247887774150605`, `120247887775530605`, `120247887777190605`. Creatives: GET_OFFER, AI-disclosure opt-in, `utm_content=UGC <id>`. |
+| TikTok organic | 7 posts, one every two days at 16:00 UTC, 2026-08-23 → 2026-09-04, picking up where the d/e run ends (2026-08-22). Same settings as that run: direct-post, public, comments on, AI-generated label, `brand_organic_toggle` on. Postiz ids `cmsyivxl002aoqi0y0r4vkbv1` … `cmsyivy8i02auqi0yb7ue9mir`. |
+| YouTube | 7 published 2026-08-18 as Shorts, hook-line titles, selling description (offer + esacard.com; the honesty block lives on the landing pages, where policy requires it), `selfDeclaredMadeForKids: no`. Postiz ids `cmsyiwfqb02awqi0yd6c8bq2n` … `cmsyiwgco02b2qi0y8d9774u6`. |
+
+Order of clips in the id lists above: u1, u2, u4, u5, u6, u8, u9.
 
 ## Two API facts worth keeping
 
