@@ -12,6 +12,18 @@ _qa/
 */2026-08-09-seedance-video-b2/*-1080p.mp4
 */2026-08-09-seedance-video-b2/*-1080p-fixed.mp4
 */2026-08-09-seedance-video-b2/*-1080p-trimmed.mp4
+
+# Batch 10 (2026-08-18) clean uncaptioned 1080p intermediates, same call as
+# batch 2 above: the *-captioned.mp4 files are the deliverable and ARE committed,
+# these are another 119 MB of intermediate. Re-derive from the committed 720p
+# master (~$0.14 each):
+#   node _scripts/seedance-generate.mjs --prompts seedance-prompts-b10-bitpredict.mjs \
+#     --batch 2026-08-18-viral-b10 --only <id>
+#   node _scripts/seedance-endcard.mjs bitpredict/2026-08-13-reddit-b2/_work/endcard.png <clip>
+# c8 and c15 additionally need their read-aloud stage direction muted before the
+# end card is appended; the windows are recorded in the batch doc.
+*/2026-08-18-viral-b10/*-1080p.mp4
+*/2026-08-18-viral-b10/*-1080p-fixed.mp4
 _review-*/
 
 # Banner batches: raw/ is the un-composited render straight off fal and is a
@@ -51,3 +63,8 @@ teampredict/2026-08-18-office-skits/teampredict-w3-gone-quiet-1080p.mp4
 # The *-captioned.mp4 files are the deliverable and ARE committed.
 esacard/2026-08-18-heart-tug/*-1080p.mp4
 esacard/2026-08-18-heart-tug/*.mp3
+# Batch 11 (2026-08-18) office skits round 2: same rule, uncaptioned 1080p
+# intermediates stay out; captioned deliverables and 720p masters are committed.
+teampredict/2026-08-18-office-skits-2/teampredict-w4-new-headshot-1080p.mp4
+teampredict/2026-08-18-office-skits-2/teampredict-w5-conspiracy-board-1080p.mp4
+teampredict/2026-08-18-office-skits-2/teampredict-w6-green-ring-1080p.mp4
