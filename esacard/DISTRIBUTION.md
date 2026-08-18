@@ -359,6 +359,45 @@ Demand Gen sizes.
    e1-first-day fatigues, not beside it", and `ESA VID e1-first-day` is live in the same Reddit
    ad group right now. Both daycare clips are running side by side.
 
+### Re-shot for the US market, 2026-08-18 (h-clips v2)
+
+Robby: *"Why do most ads have a British accent if we are literally targeting USA only?"* then
+*"You can reshoot them and we can test these out as-well."* Cause and the permanent fix are in
+`_scripts/seedance-locale.mjs` and the playbook; what changed here:
+
+- **All four clips re-rendered against American prompts.** `h1-old-bones` now opens on a US
+  suburban street with a pickup tailgate, a privacy fence and a sliding patio door, where v1
+  had British terraced houses. `h2` and `h5` were locale-neutral in both cuts.
+- **Two rolls needed a second pass on the brand phrase** (h1 "Emotionate support", h5
+  "emotional support aisle", both engines agreeing). h5's line still carried the possessive
+  chain "Here's his" that the ONSET rule exists to remove; rewording it fixed it. Same failure,
+  same fix, second batch running: the possessive chain is the failure mode, not the phrase.
+- **`h4-pick-up-day` killed a second time, for a different reason.** Its audio came back clean,
+  so the onset rule did rescue the clip that garbled twice before. But the setting rendered as
+  a British car park with a UK number plate in shot and the lead's jacket carried an invented
+  apparel logo, which the playbook bans outright.
+- Spend on the re-shoot: 7 rolls at $6.94, 5 pro upscales at $1.08, about $54.
+
+| channel | detail |
+| --- | --- |
+| Reddit | Straight swap, no extra dilution. Four US ads ACTIVE (`2571401156392734824` h1, `2571401212571559302` h2, `2571401263854445692` h3, `2571401315950134696` h5), posts `t3_1vrspao`, `t3_1vrspdx`, `t3_1vrspic`, `t3_1vrspli`. The four British ads are PAUSED, not deleted, and had no delivery data to lose. Ad names carry a ` US` suffix and `utm_content=<id>-us` so the two cuts never merge in a report. |
+| Meta | Four ads ACTIVE in the Purchase ad set `120247870160610605`: `120247896216090605`, `120247896216560605`, `120247896217120605`, `120247896217720605`. This is the batch's first appearance on Meta, chosen because it carries $30/day and the only booked sales. |
+| TikTok organic | Four posts, 2026-09-07 → 09-13, 16:00 UTC, interleaved with the v1 slots. Postiz ids `cmsyu502w00elp70yuprzywot` … `cmsyu50gz00eop70ybl3qggkp`. |
+| YouTube | Four scheduled 2026-08-21 07:30-08:30 UTC, the day after the v1 batch. Postiz ids `cmsyu5ydo00epp70y4653glch` … `cmsyu5yrk00esp70yjn59vatb`. |
+| Google Demand Gen | Still pending the YouTube uploads, same as v1. Wire with `--video <id>,...` once they are public. |
+| TikTok Ads | Deliberately skipped. The burst ad group already runs 17 ads on $20/day and ends 2026-09-02; adding four more buys no readable signal. |
+
+**Eight scheduled Postiz posts still carry the British cut and cannot be deleted through the
+API** (Postiz exposes no delete). They need deleting by hand in the Postiz app: YouTube
+`cmsyp2it30095p70yuoyyemft` … `cmsyp2j5w0098p70yuwm08k1g` (fire 2026-08-20) and TikTok
+`cmsyp22ni008wp70ymzebkw3e` … `cmsyp22z6008zp70y4ibx5qdq` (fire 2026-09-06 → 09-12).
+
+**One trap worth keeping: `raw.githubusercontent.com` served a stale cached copy of a file for
+several minutes after the merge.** A `curl` of the merged h1 returned the old British blob's
+byte count while `git cat-file` on `origin/main` returned the new one. Reddit and Meta both
+fetch the URL themselves, so a CDN cache would have silently re-shipped the version we just
+replaced. Both launches used fal-hosted URLs instead, which are content-addressed per upload.
+
 ### Three Reddit API facts this batch established
 
 - **The structured-post job status enum is `QUEUED | PROCESSING | SUCCESS | CLIENT_ERROR |
