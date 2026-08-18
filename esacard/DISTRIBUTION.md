@@ -57,10 +57,25 @@ across every ad account.
 
 | platform | campaign | daily | monthly | optimising for | creative |
 | --- | --- | --- | --- | --- | --- |
-| Meta | `ESA Card \| Meta \| US \| Cold \| Sales` | $13.88 | $422 | InitiateCheckout | 20 images + 10 videos |
+| Meta | `ESA Card \| Meta \| US \| Cold \| Sales` | $13.88 | $422 | **Purchase** (since 2026-08-17, see below) | 20 images + 10 videos |
 | Google Search | `ESA Card \| Search \| US \| Core` | $9.00 | $274 | Purchase (site tag) | 3 RSAs, ~70 keywords |
 | Google Demand Gen | `ESA Card \| Demand Gen \| US \| YouTube` | $5.00 | $152 | Purchase (site tag) | 2 ads × 5 YouTube clips |
-| Reddit | `ESA Card \| Reddit \| Pet + Housing \| Launch` | $5.00 | $152 | PageVisit | 20 images + 10 videos |
+| Reddit | `ESA Card \| Reddit \| Pet + Housing \| Launch` | $5.00 | $152 | **Purchase** (since 2026-08-17, see below) | 20 images + 10 videos |
+
+### Moved to Purchase optimisation, 2026-08-17 (Robby: "I think we can start optimizing around purchases - it's clearly converting")
+
+- **Meta:** conversion settings are immutable on a published ad set, so the switch is a new ad
+  set. New: `ESA | US | Broad | Purchase` `120247870160610605` (same targeting, same CBO
+  budget, promoted_object `PURCHASE`), all 30 ads recreated against the same creative ids and
+  ACTIVE (10 videos re-entered review, expected). Old:
+  `ESA | US | Broad | InitiateCheckout` `120247770766910605` PAUSED and renamed. Learning
+  phase reset accepted, Robby made the call.
+- **Reddit:** the goal is immutable after creation, so the switch is a new ad group. The gate
+  opened first: `GET /pixels/a2_ji9rrnreyf0d/last_fired_at` showed `purchase` fired
+  2026-08-17T15:29Z. New: `ESA | Pet + Housing | Purchase` `2570690648253263407`
+  (`optimization_goal: PURCHASE`, same 63-community targeting, $5/day), all 30 ads recreated
+  against the same post ids, ACTIVE/PROCESSING (Reddit review). Old PageVisit bootstrap group
+  `2567956092694490967` ARCHIVED.
 
 ### Why the split is shaped this way
 
@@ -135,12 +150,12 @@ not an edit). The two earlier clicks-optimised ad groups are archived.
 
 | | state |
 | --- | --- |
-| Meta pixel `4305407809789395` | live and firing, confirmed by `last_fired_time` |
-| Meta Conversions API | token set in Vercel, not fired yet (no purchase since) |
-| TikTok pixel `D9V1HSBC77UBUCS23800` | live, production only |
-| TikTok Events API | token set in Vercel, not fired yet |
-| Reddit pixel | only `page_visit` has ever fired |
-| Google conversion | `ESA Purchase (site tag)`, `AW-18387903752 / Y4F_CN7rlOEcEIjKhMBE`, primary |
+| Meta pixel `4305407809789395` | live and firing; `Purchase` seen on 2026-08-15 and 2026-08-17 (real sales, reconciled to Stripe) |
+| Meta Conversions API | token set in Vercel; browser+server dedup keyed on registration number |
+| TikTok pixel `D9V1HSBC77UBUCS23800` (id `7673594860187762706`) | ACTIVE, developer mode; `SHOPPING`, `INITIATE_ORDER`, `ON_WEB_DETAIL` configured in code; all four paid buyers to date carried the `_ttp` cookie in Stripe metadata, so the pixel demonstrably loads on real purchase paths |
+| TikTok Events API | token set in Vercel, production deployed |
+| Reddit pixel | `purchase` fired 2026-08-17T15:29Z, `add_to_cart` + `view_content` same day — the conversion gate that blocked launch is now open (and used: the Purchase ad group above) |
+| Google conversion | `ESA Purchase (site tag)`, `AW-18387903752 / Y4F_CN7rlOEcEIjKhMBE`, primary; first recorded conversion 2026-08-16 (Search) |
 
 ### Known gaps at launch
 
@@ -176,8 +191,59 @@ not an edit). The two earlier clicks-optimised ad groups are archived.
 
 ## TikTok
 
-Deferred by Robby to a separate conversation with the TikTok Ads connector. The self-contained
-prompt is in `esacard/TIKTOK-HANDOFF.md`.
+**ACTIVATED 2026-08-17 on Robby's decision: "$300/month for TikTok Ads."** TikTok's hard
+floor is $20/day per ad group, so $300/month runs as a **15-day burst**: schedule
+2026-08-18 00:00 → 2026-09-02 00:00 UTC at $20/day = $300, then it stops by itself and the
+next month's shape gets decided on the results. Campaign, ad group and all 10 ads flipped
+ENABLE 2026-08-17 (ads pass through TikTok review first). Ad group renamed
+`ESA | US | 25-55 | Broad | Purchase | $300 Aug burst`. Nothing else was cut, so total
+committed run rate while the burst runs is ~$1,300/month across the five platforms.
+
+*(Original build state below, kept for the record.)*
+
+| | value |
+| --- | --- |
+| Campaign | `ESA Card \| TikTok \| US \| Web Conversions` `1873787435137170`, WEB_CONVERSIONS, DISABLED |
+| Ad group | `ESA \| US \| 25-55 \| Broad \| Purchase` `1873787389986961`, CONVERT → `SHOPPING` (Complete Payment) on pixel `7673594860187762706`, $20/day (TikTok's minimum), US only, 25-54 age bands, broad, TikTok placement only, 7-day click / 1-day view, DISABLED |
+| Ads | 10 video ads, one per approved clip (d1-d5, e1-e5), all DISABLED. Identity: `ESA Card` (@esacard) via Business Center `7581306495212617745` (`BC_AUTH_TT`) — the account was created after TikTok's 2026-01-15 cutoff, so custom identities cannot run non-Spark ads on TikTok placement; the Business-Center-authorized identity is the working route |
+| Links | `utm_source=tiktok&utm_medium=paid_social&utm_campaign=esa-card-tiktok-us-web-conversions&utm_content=vid-<clip>` |
+| Ad text (all 10) | "A wallet card with your pet's photo and a certificate for the wall. $39 once, no renewal fees." |
+
+**Age note:** TikTok's bands are 25-34 / 35-44 / 45-54, so "25-55" is targeted as those three
+bands; 55 exactly is unreachable without adding the whole 55+ band.
+
+**Upload trap, hit and solved:** TikTok's `UPLOAD_BY_URL` refuses
+`raw.githubusercontent.com` (serves `application/octet-stream`; error 40914 "Failed to fetch
+url data"). Same class as the Postiz limitation above, same fix: rehost the file through
+fal's storage API (`content_type: video/mp4`) and upload from the fal URL. All 10 clips went
+through on the first try that way. Video covers are required on non-Spark video ads
+(`image_ids`); TikTok's own generated `video_cover_url` re-uploaded via
+`/file/image/ad/upload/` works.
+
+**Not verifiable by API:** domain verification for `esacard.com` (Business Center → Assets →
+Domains) has no API surface in the tools used; check it in the UI before activating. The 20
+banners are deliberately not uploaded yet: videos first, best banners after, per the plan.
+
+### TikTok organic (@esacard via Postiz, scheduled 2026-08-17 on Robby's ask)
+
+All ten clips scheduled as organic posts on the ESA Card TikTok account (Postiz integration
+`cmsxtwzga07nymt0y4bnw8g8g`, `tiktok-business`), two per day, 16:00 and 22:00 UTC (noon and
+6pm Eastern), direct-publish, public, comments on, labelled AI-generated per TikTok's
+synthetic-media rule, `brand_organic_toggle` on. Captions: the clip's opening line, the
+offer (wallet card with the pet's photo, certificate, $39 once, no renewal fees,
+esacard.com), three hashtags, acronym spelled out.
+
+| date (UTC) | 16:00 | 22:00 |
+| --- | --- | --- |
+| 2026-08-18 | d1-viewing | d5-hotel |
+| 2026-08-19 | e1-first-day | e2-keys |
+| 2026-08-20 | d2-lobby | e3-back-sunday |
+| 2026-08-21 | d4-section-four | e4-cottage |
+| 2026-08-22 | d3-bench | e5-haircut |
+
+Robby's two picks lead the run. Media rehosted via the fal URLs into Postiz uploads (TikTok
+pulls from the Postiz media domain). Postiz post ids `cmsxu2a5s01fgqi0yf6qp4oht` …
+`cmsxu2b2501fpqi0ym2e674kb`.
 
 ## Two API facts worth keeping
 

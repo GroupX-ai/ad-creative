@@ -1,0 +1,18 @@
+{
+  "ranAt": "2026-08-18T00:39:31.323Z",
+  "model": "bytedance/seedance-2.5/text-to-video",
+  "duration": "15",
+  "resolution": "720p",
+  "estimatedSpendUsd": 7.04,
+  "ok": [
+    {
+      "id": "u7-fourteen",
+      "company": "esacard",
+      "seed": 628074805,
+      "sourceUrl": "https://v3b.fal.media/files/b/0aa6c413/vRIAjifOzSjY_Q4l0srR2_video.mp4",
+      "raw": "/home/user/ad-creative/esacard/2026-08-17-ugc-examples/u7-fourteen-720p.mp4",
+      "upscaled": "/home/user/ad-creative/esacard/2026-08-17-ugc-examples/u7-fourteen-1080p.mp4"
+    }
+  ],
+  "failed": []
+}
