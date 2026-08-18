@@ -39,6 +39,15 @@ async function run(payload, label) {
 }
 
 const todo = VIDEOS.filter((v) => (!only.length || only.includes(v.id)) && !existsSync(OUT + v.id + "-720p.mp4"));
+
+// Same gate as the shared generator: no market named in the prompt, no render.
+const { scanPrompt } = await import("../../_scripts/seedance-locale.mjs");
+const bad = todo.filter((v) => { const r = scanPrompt(v.prompt); return !r.hasLocale || r.hard.length; });
+if (bad.length) {
+  console.error(`Refusing to spend: ${bad.map((v) => v.id).join(", ")} have no CAST AND LOCALE block or carry wrong-market vocabulary.`);
+  process.exit(1);
+}
+
 log(`${todo.length} clip(s) to render, ~$6.94 each`);
 
 await Promise.all(

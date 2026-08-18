@@ -9,6 +9,12 @@
 //     secondary speakers produced "rabbit card", "ham card", "elbow card")
 //   - one spoken exchange per transaction beat, because a crowded beat garbles
 
+// CAST AND LOCALE added 2026-08-18. These clips were rendered before it existed and came
+// back with British casts and British streets for a US-only campaign; the block rides on the
+// end of BAN so every prompt here picks it up if it is ever re-rendered. The beats above it
+// still carry some British vocabulary, which the linter flags as warnings.
+import { US_CAST } from "../_scripts/seedance-locale.mjs";
+
 const SPEECH =
   "SPEECH RULE: the only words spoken in the entire video are the lines written inside quotation marks in the beats " +
   "below, spoken by the character named for each line. Everything in the beats that is NOT inside quotation marks is " +
@@ -38,7 +44,8 @@ const BAN =
   "card, no product shot at the end, no slow motion, no drone or crane moves, no lens flares, no glowing particles, no " +
   "teal-and-orange grade, no stock-footage look, no medical imagery, no clinic, no pill bottles, no bus, no train, no " +
   "aeroplane, no airport, no public transport of any kind, no shop interior, no cafe interior, no restaurant, no " +
-  "service-dog vest, no labelled harness, no uniformed official.";
+  "service-dog vest, no labelled harness, no uniformed official. " +
+  US_CAST;
 
 const TONE =
   "TONE: wholesome, warm and completely ordinary. Everyone in shot is kind to everyone else. The animal is the visual " +

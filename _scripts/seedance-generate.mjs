@@ -92,6 +92,26 @@ async function download(url, dest) {
 const ads = ADS.filter((a) => !ONLY || a.id === ONLY);
 const secs = Number(DURATION);
 
+// Gate the spend on the locale check. Fourteen clips shipped with British casts for a US-only
+// campaign because no prompt named a market; a document nobody re-reads did not prevent it, so
+// the generator refuses instead. --force overrides, deliberately noisily.
+{
+  const { scanPrompt } = await import("./seedance-locale.mjs");
+  const bad = ads.filter((a) => {
+    const r = scanPrompt(a.prompt ?? "");
+    return !r.hasLocale || r.hard.length;
+  });
+  if (bad.length && !has("force")) {
+    console.error(
+      `\nRefusing to spend: ${bad.length} prompt(s) have no CAST AND LOCALE block or carry ` +
+      `wrong-market vocabulary:\n  ${bad.map((a) => a.id).join("\n  ")}\n` +
+      `Run: node _scripts/seedance-prompt-lint.mjs <prompts file>   (or pass --force)\n`,
+    );
+    process.exit(1);
+  }
+  if (bad.length) log(`--force: rendering ${bad.length} prompt(s) that failed the locale check`);
+}
+
 log(
   `${ads.length} ad(s) · ${DURATION}s · ${RESOLUTION} · est generate $${(
     cost(RESOLUTION, secs) * ads.length

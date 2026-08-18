@@ -47,6 +47,18 @@ this order:
 
 ---
 
+## Name the market in every prompt (blocking)
+
+Every video prompt carries a `CAST AND LOCALE` block from `_scripts/seedance-locale.mjs`, and
+the beats are written in that market's English. `_scripts/seedance-prompt-lint.mjs` enforces it
+and both generators call it before spending anything, so a prompt that has not said where it is
+set cannot reach fal.
+
+Added 2026-08-18, after fourteen ESA Card clips shipped with British casts and British streets
+for a US-only campaign: no prompt named a market, and the scripts said "flat", "car boot",
+"kerb" and "mum". The model fills in every attribute you leave blank, and it will not fill it
+in with your target market by accident.
+
 ## Repo context
 
 Setup, commands, and architecture for this repo live in [`README.md`](README.md).
