@@ -44,3 +44,10 @@ teampredict/2026-08-13-paid-launch-video/_work/status-page.html
 teampredict/2026-08-18-office-skits/teampredict-w1-farewell-party-1080p.mp4
 teampredict/2026-08-18-office-skits/teampredict-w2-exit-interview-1080p.mp4
 teampredict/2026-08-18-office-skits/teampredict-w3-gone-quiet-1080p.mp4
+
+# Heart-tug batch (2026-08-18): the uncaptioned pro-tier 1080p intermediates are
+# 64 MB and re-derivable from the committed 720p masters for ~$1.08 each:
+#   node _scripts/seedance-pro-upscale.mjs esacard/2026-08-18-heart-tug/<id>-720p.mp4
+# The *-captioned.mp4 files are the deliverable and ARE committed.
+esacard/2026-08-18-heart-tug/*-1080p.mp4
+esacard/2026-08-18-heart-tug/*.mp3
