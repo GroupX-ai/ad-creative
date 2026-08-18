@@ -71,12 +71,13 @@ ${GLANCE}
 ${SPEECH_RULE}
 
 BEATS.
-0-2s. GREG, leaning over Kevin's partition, delighted, mid-conversation already: "Kevin! The new headshot. I love it. Very, very professional."
-2-7s. KEVIN freezes with a pen in his hand. A long beat. Carefully, not turning round: "...Thanks."
+0-2s. GREG, leaning over Kevin's partition, delighted, mid-conversation already: "Kevin! The new headshot. On the profile."
+2-7s. GREG, warmer still: "I love it. Very, very professional." KEVIN freezes with a pen in his hand. A long beat. Carefully, not turning round: "...Thanks."
 7-13s. GREG, warming up, gesturing at the air: "And the suit. Kevin. When do you ever wear a suit?"
 13-18s. KEVIN, after a pause, very quietly: "Weddings." GREG, delighted: "Ha! Weddings."
-18-24s. GREG, patting the partition twice, walking off past DEV, expansive: "It's a great photo. Very forward-looking. Whatever it's for."
-24-30s. GREG, passing DEV, in a low proud aside: "Great kid. Going places." DEV, flat, without looking up: "He is, Greg." KEVIN turns a flat, held look into the lens.
+18-23s. GREG, patting the partition twice, starting down the aisle toward DEV, expansive: "It's a great photo. Very forward-looking. Whatever it's for."
+23-27s. GREG, reaching DEV, in a low proud aside: "Great kid. Going places." DEV, flat, without looking up: "He is, Greg." (This aside is trimmable garnish; the scene stands without it.)
+27-30s. The camera, planted in the aisle the whole time, whip-pans back to KEVIN at his desk. No more dialogue. KEVIN turns a flat, held look into the lens and holds it to the end of the clip.
 
 ${NO_SCREENS}
 
@@ -105,9 +106,9 @@ ${DOC_LOOK}
 
 ${FACES}
 
-PLACE. A small windowless meeting room. On the wall, a corkboard covered in COMPLETELY BLANK white index cards connected by red string, with one blank grey silhouette card at the centre. Every card is blank on both sides: no writing, no letters, no photographs of faces, nothing legible anywhere on the board or in the room. A laminate table, two chairs, a jug of water.
+PLACE. A small windowless meeting room. On the wall, a corkboard covered in COMPLETELY BLANK white index cards connected by red string, with one plain dark-grey card at the centre that is completely featureless: no silhouette of a person, no face, no facial features of any kind, drawn or photographed, and no app-style or profile-page framing. Every card is blank on both sides: no writing, no letters, no photographs of faces, nothing legible anywhere on the board or in the room. A laminate table, two chairs, a jug of water.
 
-PEOPLE. DIANE, the manager: late fifties, tall and angular, silver hair in a tight bun, reading glasses on a chain, a blazer with a brooch. She has the calm intensity of a detective in a prestige drama and no awareness that her evidence is public. TOM, seated: forties, a gentle heavy man with a beard and a plain crew-neck jumper, holding his coffee with both hands, the only adult in the room.
+PEOPLE. DIANE, the manager: late fifties, tall and angular, silver hair in a tight bun, reading glasses on a chain, a blazer with a brooch. She has the calm intensity of someone certain she has uncovered something, and no awareness that her evidence is public. TOM, seated: forties, a gentle heavy man with a beard and a plain crew-neck jumper, holding his coffee with both hands, the only adult in the room.
 
 ${HOOK}
 
@@ -119,11 +120,11 @@ ${SPEECH_RULE}
 
 BEATS.
 0-2s. DIANE, already at the board, tapping a blank card with one finger: "It started Monday. New headline."
-2-10s. She follows the red string card to card as she speaks, precise and quiet: "Wednesday, four new skills. Thursday, a professional photo. And on Friday he endorsed their founder. For 'vision'."
+2-10s. She follows the red string from blank card to blank card as she speaks; every card she touches is blank, precise and quiet: "Wednesday, four new skills. Thursday, a professional photo. And on Friday he endorsed their founder. For 'vision'."
 10-16s. TOM, gently, over his coffee: "Maybe just... ask Steve how he's doing?"
-16-23s. DIANE does not turn round. She stares at the centre card. Quietly: "It's bigger than that, Tom. It goes all the way up."
-23-27s. TOM, after a beat, flat: "It's really not."
-27-30s. Zoom punch-in on TOM as he turns a flat, held look into the lens. The string trembles slightly in the air-conditioning.
+16-23s. DIANE does not turn round. She stares at the blank centre card. Quietly: "It's bigger than that, Tom. It goes all the way up."
+23-26s. TOM, flat, without a pause: "It's really not."
+26-30s. No more dialogue. Zoom punch-in on TOM as he turns a flat, held look into the lens and holds it. The string trembles slightly in the air-conditioning.
 
 ${NO_SCREENS}
 
@@ -152,9 +153,9 @@ ${DOC_LOOK}
 
 ${FACES}
 
-PLACE. A corner of an ordinary open-plan office, mid-afternoon: low fabric partitions, desks with monitors all turned away from camera and one closed laptop, a wheeled office plant, a wall clock with plain hands. The camera stands in the aisle like a crew that has been there all week.
+PLACE. A corner of an ordinary open-plan office, mid-afternoon: low fabric partitions, desks with monitors all turned away from camera and one closed laptop, a wheeled office plant, a wall clock with plain hands. The camera stands in the aisle like a crew that has been there all week. No green ring, badge or circle graphic and no printed photograph, profile picture or image of any person appears anywhere in this video: the ring Sandra has put on her photo exists only in the dialogue and is never shown, drawn or suggested visually.
 
-PEOPLE. MARTIN, the manager: short and stocky, late fifties, bald on top with a neat monk's fringe of brown hair, a short-sleeved shirt with a lanyard and a completely blank white card. Wounded rather than angry, holding a mug he never drinks from. ROSA, at the nearest desk: mid-forties, hair in a loose ponytail, a denim shirt, annotating a paper form, does not stop working at any point. SAM, one desk over: thirties, a long narrow face, headphones around his neck, a flat unhurried voice.
+PEOPLE. MARTIN, the manager: short and stocky, late fifties, bald on top with a neat monk's fringe of brown hair, a short-sleeved shirt with a lanyard and a completely blank white card. Wounded rather than angry, holding a mug he never drinks from. ROSA, at the nearest desk: a broad, open, unremarkable face, mid-forties, hair in a loose ponytail, a denim shirt, annotating a paper form, does not stop working at any point. SAM, one desk over: thirties, a long narrow face, headphones around his neck, a flat unhurried voice.
 
 ${HOOK}
 
@@ -170,8 +171,9 @@ BEATS.
 6-9s. MARTIN, staring at her: "Monday? It's Thursday."
 9-15s. MARTIN, to the room, hurt gathering: "My dentist told me. My dentist, Rosa. This morning."
 15-20s. SAM, flat, like a weather report: "It's public, Martin. It has been public."
-20-25s. MARTIN, quieter, a genuine question, looking into the middle distance: "What else is public?"
-25-30s. SAM: "Everything, Martin. Everything. That's the point." ROSA turns a flat, held look into the lens without stopping her annotating.
+20-23s. MARTIN, quieter, a genuine question, looking into the middle distance: "What else is public?"
+23-26s. SAM: "Everything, Martin. Everything. That's the point."
+26-30s. A beat of silence. No more dialogue. ROSA turns a flat, held look into the lens without stopping her annotating, and holds it to the end of the clip.
 
 ${NO_SCREENS}
 
