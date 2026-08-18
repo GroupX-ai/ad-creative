@@ -5,6 +5,12 @@
 // says the full phrase, the card is featureless, no on-screen text, no claims about housing,
 // access or outcomes. These are EXAMPLES for Robby to judge; nothing ships anywhere.
 
+// CAST AND LOCALE added 2026-08-18. These clips were rendered before it existed and came
+// back with British casts and British streets for a US-only campaign; the block rides on the
+// end of BAN so every prompt here picks it up if it is ever re-rendered. The beats above it
+// still carry some British vocabulary, which the linter flags as warnings.
+import { US_CAST } from "../_scripts/seedance-locale.mjs";
+
 const SPEECH_UGC =
   "SPEECH RULE: the only words spoken in the entire video are the lines written inside quotation marks in the beats " +
   "below, and every line is spoken by the one person on camera, talking directly into the phone's front camera. " +
@@ -34,7 +40,8 @@ const BAN =
   "overlays, no end card, no product shot at the end, no slow motion, no drone or crane moves, no lens flares, no " +
   "glowing particles, no teal-and-orange grade, no stock-footage look, no medical imagery, no clinic, no pill bottles, " +
   "no therapy couch, no bus, no train, no aeroplane, no airport, no public transport of any kind, no service-dog vest, " +
-  "no labelled harness, no uniformed official.";
+  "no labelled harness, no uniformed official. " +
+  US_CAST;
 
 const UGC_TONE =
   "TONE: an ordinary, likeable, real-seeming person filming themselves on a phone, deadpan-playful, never salesy, " +

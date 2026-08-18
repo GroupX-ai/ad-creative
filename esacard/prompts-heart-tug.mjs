@@ -18,6 +18,13 @@
 // emotional-support product toward a healthcare read, which is the association `policy.md`
 // keeps us out of. Same story, generic shift-work fleece instead.
 
+// The four clips already shipped were rendered BEFORE this block existed, with British casts
+// and British streets for a US-only campaign (Robby, 2026-08-18: "Why do most ads have a
+// British accent if we are literally targeting USA only?"). The beats below are now written in
+// American English; re-rendering the clips against them is a separate call, and the generators
+// refuse to run any prompt that lacks this block.
+import { US_CAST } from "../_scripts/seedance-locale.mjs";
+
 const SPEECH =
   "SPEECH RULE: the only words spoken in the entire video are the lines written inside quotation marks in the beats " +
   "below, spoken by the character named for each line. Everything in the beats that is NOT inside quotation marks is " +
@@ -39,18 +46,19 @@ const SPEECH =
 
 const CARD_RULE =
   "CARD RULE: the ID card is a plain matte white credit-card-sized rectangle with a single small square photograph of " +
-  "the animal in its upper left corner and three short featureless grey lines beside that photograph. That is the " +
+  "the animal in its upper left corner and three short featureless gray lines beside that photograph. That is the " +
   "complete and exhaustive contents of the card. No logo, no seal, no crest, no badge, no barcode, no QR code, no flag, " +
   "no readable writing and no numbers anywhere on it. Any paperwork or screen otherwise visible is blank: forms are " +
-  "cream paper with short featureless grey lines and nothing else, and any phone or laptop screen is a plain solid " +
-  "pale grey rectangle with nothing on it at all.";
+  "cream paper with short featureless gray lines and nothing else, and any phone or laptop screen is a plain solid " +
+  "pale gray rectangle with nothing on it at all.";
 
 const BAN =
   "BAN LIST: no on-screen text of any kind, no captions, no subtitles, no lower thirds, no logos, no watermarks, no UI " +
   "overlays, no end card, no product shot at the end, no slow motion, no drone or crane moves, no lens flares, no " +
   "glowing particles, no teal-and-orange grade, no stock-footage look, no medical imagery, no clinic, no scrubs, no " +
-  "pill bottles, no therapy couch, no bus, no train, no aeroplane, no airport, no public transport of any kind, no " +
-  "service-dog vest, no labelled harness, no uniformed official, no signage, no readable paper anywhere.";
+  "pill bottles, no therapy couch, no bus, no train, no airplane, no airport, no public transport of any kind, no " +
+  "service-dog vest, no labeled harness, no uniformed official, no signage, no readable paper anywhere. " +
+  US_CAST;
 
 const WHOLESOME =
   "TONE: wholesome, warm and ordinary. Everyone in shot is kind to everyone else. The animal is the visual star of the " +
@@ -60,17 +68,17 @@ const WHOLESOME =
 export const VIDEOS = [
   { id: "h1-old-bones", title: "Old Bones",
     prompt:
-      "A fifteen-second vertical video about a woman moving her elderly dog into a garden flat. " +
-      "OPTICS: phone camera, handheld, bright natural daylight, warm natural colour, real lens softness. " +
-      "ANIMAL: a fourteen-year-old yellow labrador with a fully grey muzzle and grey eyebrows, soft dark eyes, stiff " +
+      "A fifteen-second vertical video about a woman moving her elderly dog into a ground-floor apartment with a yard. " +
+      "OPTICS: phone camera, handheld, bright natural daylight, warm natural color, real lens softness. " +
+      "ANIMAL: a fourteen-year-old yellow labrador with a fully gray muzzle and gray eyebrows, soft dark eyes, stiff " +
       "in the hips but endlessly happy, tail wagging in slow heavy sweeps. " +
-      "BEATS. 0.0-3.5s the open tail of a small moving van at the kerb, the old labrador standing on the pavement " +
-      "watching her, tail wagging. WOMAN: \"Fourteen years old. Stairs are done, so we found a garden flat.\" " +
-      "3.5-8.0s a friendly leasing agent waits at a garden gate and holds out a set of keys, which the woman takes " +
+      "BEATS. 0.0-3.5s the open tail of a small moving truck at the curb, the old labrador standing on the sidewalk " +
+      "watching her, tail wagging. WOMAN: \"Fourteen years old. Stairs are done, so we found a place on the ground floor.\" " +
+      "3.5-8.0s a friendly building manager waits at a yard gate and holds out a set of keys, which the woman takes " +
       "first. AGENT: \"You must be Murphy. We've been expecting you.\" The woman then holds out a plain matte white " +
       "card with a small photograph of the dog in its upper left corner. WOMAN: \"And this one is for your file. " +
       "Emotional support animal card.\" The agent tucks the card into a folder and crouches down to greet the dog. " +
-      "8.0-11.5s inside, the woman crosses an empty room to an open garden door and steps aside. WOMAN: \"Go see.\" " +
+      "8.0-11.5s inside, the woman crosses an empty room to an open patio door and steps aside. WOMAN: \"Go see.\" " +
       "11.5-15.0s NOBODY SPEAKS. The old labrador breaks into a short creaky trot out across the grass, the first run " +
       "in a long time, then stops, turns, and looks back at her in the doorway. She stays there watching him. " +
       WHOLESOME + " AUDIO: diegetic only, a van door, birds, the dog's collar tag, feet on grass. No music. " +
@@ -79,10 +87,10 @@ export const VIDEOS = [
   { id: "h2-visiting-nana", title: "Visiting Nana",
     prompt:
       "A fifteen-second vertical video about a woman taking her small dog to visit her grandmother. " +
-      "OPTICS: phone camera, handheld, soft indoor daylight, warm natural colour, real lens softness. " +
+      "OPTICS: phone camera, handheld, soft indoor daylight, warm natural color, real lens softness. " +
       "ANIMAL: a miniature dachshund in a small soft harness, glossy and comically low to the ground, enormous brown " +
       "eyes, ears flapping when he walks. " +
-      "BEATS. 0.0-3.5s at an open car boot she clips a lead onto the dachshund, who is already vibrating with " +
+      "BEATS. 0.0-3.5s at an open trunk she clips a leash onto the dachshund, who is already vibrating with " +
       "excitement. WOMAN: \"Sunday. You know where we're going.\" " +
       "3.5-8.0s a plain front desk in a quiet building. A warm receptionist in her fifties leans over to look at the " +
       "dog. DESK: \"Here for Mrs. Adler? And who's this?\" The woman holds out a plain matte white card with a small " +
@@ -92,14 +100,14 @@ export const VIDEOS = [
       "WOMAN: \"Go on then, find her.\" " +
       "11.5-15.0s NOBODY SPEAKS. The dog crosses a bright room to an older woman sitting in an armchair and rests his " +
       "chin on her knee. Her hand settles on his head and stays there. " +
-      WHOLESOME + " AUDIO: diegetic only, a car boot closing, quiet room tone, claws on floor, a lead clip. No music. " +
+      WHOLESOME + " AUDIO: diegetic only, a trunk closing, quiet room tone, claws on floor, a leash clip. No music. " +
       CARD_RULE + " " + SPEECH + " " + BAN },
 
   { id: "h3-night-shift", title: "Night Shift",
     prompt:
       "A fifteen-second vertical video about a woman leaving for a long work shift and coming home to her dog. " +
       "OPTICS: phone camera, handheld, cold blue dawn light at the start and warm golden evening light at the end, " +
-      "natural colour, real lens softness. " +
+      "natural color, real lens softness. " +
       "ANIMAL: a staffordshire bull terrier with a wide smiling mouth and a glossy brindle coat, leaning his whole " +
       "body weight against her leg, tail going constantly. " +
       "BEATS. 0.0-3.5s a front door in cold blue dawn light, the woman in a plain work fleece with a lanyard tucked " +
@@ -112,14 +120,14 @@ export const VIDEOS = [
       "away down the street. " +
       "11.5-15.0s NOBODY SPEAKS. The same front door opens in warm golden evening light, the woman still in the same " +
       "fleece. The dog does a full spin on the spot, and she drops to her knees into him and holds on. " +
-      WHOLESOME + " AUDIO: diegetic only, a quiet street at dawn, keys, claws on floorboards, an evening door. " +
+      WHOLESOME + " AUDIO: diegetic only, a quiet American street at dawn, keys, claws on hardwood, an evening door. " +
       "No music. " +
       CARD_RULE + " " + SPEECH + " " + BAN },
 
   { id: "h4-pick-up-day", title: "Pick-Up Day",
     prompt:
       "A fifteen-second vertical video about a woman collecting her dog after a week away. " +
-      "OPTICS: phone camera, handheld, bright natural daylight then soft interior light, warm natural colour. " +
+      "OPTICS: phone camera, handheld, bright natural daylight then soft interior light, warm natural color. " +
       "ANIMAL: an english springer spaniel with long freckled ears, a docked wiggling backside and a permanently " +
       "delighted face. " +
       "BEATS. 0.0-3.5s she walks fast across a car park toward a low building, phone held out in front of her. " +
@@ -139,16 +147,16 @@ export const VIDEOS = [
   { id: "h5-half-day", title: "Half Day",
     prompt:
       "A fifteen-second vertical video about a woman collecting her puppy early from daycare. " +
-      "OPTICS: phone camera, handheld, bright midday interior light, warm natural colour, real lens softness. " +
+      "OPTICS: phone camera, handheld, bright midday interior light, warm natural color, real lens softness. " +
       "ANIMAL: a small apricot cockapoo puppy, a mass of soft curls with a black button nose, bouncing rather than " +
       "walking. " +
       "BEATS. 0.0-3.5s she arrives at a plain front desk with her keys still in her hand, speaking quietly to the " +
       "phone. WOMAN: \"Half day today. Don't tell him.\" " +
       "3.5-8.0s a cheerful staff member looks up. STAFF: \"Early pickup. And you are?\" The woman holds out a plain " +
-      "matte white card with a small photograph of the puppy in its upper left corner. WOMAN: \"His mum. Here's his " +
+      "matte white card with a small photograph of the puppy in its upper left corner. WOMAN: \"His mom. Here's his " +
       "emotional support animal card.\" The staff member laughs. STAFF: \"Ah. The famous Biscuit, is it.\" " +
       "8.0-11.5s a door opens on a bright play room where the cockapoo is mid-game with one other dog. " +
-      "WOMAN: \"Biscuit. Come on, love. Home time.\" He ignores her completely and keeps playing. " +
+      "WOMAN: \"Biscuit. Come on, buddy. Time to go home.\" He ignores her completely and keeps playing. " +
       "11.5-15.0s NOBODY SPEAKS. The puppy does one last gleeful lap of the room, then gallops over and skids into " +
       "her legs. She laughs and scoops him up. " +
       WHOLESOME + " AUDIO: diegetic only, room tone, a door, claws on a smooth floor, two dogs playing. No music. " +
