@@ -104,6 +104,18 @@ export const EMPHASIS = {
   "e4-cottage": ["six", "hours", "emotional", "support", "animal", "card"],
   "e5-haircut": ["never", "haircut", "life", "emotional", "support", "animal", "card", "ridiculous"],
 
+  // ── ESA Card UGC talking-head batch (2026-08-17) ──
+  // The brand phrase is emphasised in every clip, same as the d/e slice-of-life
+  // set; the extra words are each clip's hook and punchline.
+  "u1-better-id": ["better", "id", "photo", "name", "emotional", "support", "animal", "card", "phone"],
+  "u2-wallet-ranked": ["ranked", "boring", "tragic", "emotional", "support", "animal", "card", "best"],
+  "u4-roommate": ["roommate", "nothing", "mailman", "emotional", "support", "animal", "card", "proud"],
+  "u5-photoshoot": ["photo", "photoshoot", "takes", "emotional", "support", "animal", "card", "obviously"],
+  "u6-rabbit": ["rabbit", "emotional", "support", "animal", "card", "coffee", "better", "id", "ears"],
+  "u7-fourteen": ["fourteen", "best", "decision", "emotional", "support", "animal", "card", "distinguished"],
+  "u8-drama": ["dramatic", "crisis", "emotional", "support", "animal", "card", "flawless", "take"],
+  "u9-supervisor": ["supervises", "judgement", "emotional", "support", "animal", "card", "personality"],
+
   // ── batch 6, BitPredict on Reddit ──
   // "crypto" is emphasised in every BitPredict ad: it is the one word that tells a
   // scroller with the sound off what this is even about, and Robby asked for it in
@@ -128,6 +140,18 @@ export const EMPHASIS = {
   "teampredict-v4-pizza-party": ["pizza", "valued", "anywhere", "accepted", "offer"],
   "teampredict-v5-psychic": ["quit", "photo", "skills", "linkedin", "dollars", "person"],
   "teampredict-v6-my-competitors": ["competitors", "polishing", "email", "call", "boss", "free"],
+
+  // ── batch 10, the mockumentary skits. Same logic as batch 9: punch the SIGNAL
+  //    words a sound-off scroller needs, plus the turn word of each joke.
+  "teampredict-w1-farewell-party": ["farewell", "party", "resigned", "headline", "skills", "headshot", "weeks", "cake", "marble"],
+  "teampredict-w2-exit-interview": ["exit", "interviews", "everything", "coffee", "march", "sure", "question"],
+  "teampredict-w3-gone-quiet": ["marcus", "memes", "thumbs", "quiet", "resign", "focused"],
+
+  // ── batch 11, on-the-nose round: the LinkedIn signals ARE the dialogue, so
+  //    the emphasised words are the signals themselves plus each turn word.
+  "teampredict-w4-new-headshot": ["kevin", "headshot", "professional", "suit", "weddings", "photo", "going", "places"],
+  "teampredict-w5-conspiracy-board": ["monday", "headline", "skills", "photo", "endorsed", "founder", "vision", "bigger", "steve"],
+  "teampredict-w6-green-ring": ["sandra", "green", "ring", "dentist", "public", "everything", "point"],
 };
 
 // Resolve an ad id from a file path, tolerating the -fixed / -trimmed / -1080p suffixes.
