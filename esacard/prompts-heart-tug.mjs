@@ -153,8 +153,7 @@ export const VIDEOS = [
       "BEATS. 0.0-3.5s she arrives at a plain front desk with her keys still in her hand, speaking quietly to the " +
       "phone. WOMAN: \"Half day today. Don't tell him.\" " +
       "3.5-8.0s a cheerful staff member looks up. STAFF: \"Early pickup. And you are?\" The woman holds out a plain " +
-      "matte white card with a small photograph of the puppy in its upper left corner. WOMAN: \"His mom. Here's his " +
-      "emotional support animal card.\" The staff member laughs. STAFF: \"Ah. The famous Biscuit, is it.\" " +
+      "matte white card with a small photograph of the puppy in its upper left corner. WOMAN: \"His mom. Emotional support animal card, right here.\" The staff member laughs. STAFF: \"Ah. The famous Biscuit, is it.\" " +
       "8.0-11.5s a door opens on a bright play room where the cockapoo is mid-game with one other dog. " +
       "WOMAN: \"Biscuit. Come on, buddy. Time to go home.\" He ignores her completely and keeps playing. " +
       "11.5-15.0s NOBODY SPEAKS. The puppy does one last gleeful lap of the room, then gallops over and skids into " +
