@@ -68,6 +68,11 @@ is fal's storage API: `POST https://rest.alpha.fal.ai/storage/upload/initiate` w
 Four platforms live, **$32.88/day combined = $1,000/month**, which is the total Robby set
 across every ad account.
 
+**Superseded 2026-08-18.** The table below is the launch-day split, kept for history.
+Current state: Meta raised to $30.00/day on Robby's instruction, TikTok live at $20.00/day
+(August burst, approved separately), so the combined total is **$69.00/day (~$2,098/month)**
+across five platforms. Details in "Update 2026-08-18" below.
+
 | platform | campaign | daily | monthly | optimising for | creative |
 | --- | --- | --- | --- | --- | --- |
 | Meta | `ESA Card \| Meta \| US \| Cold \| Sales` | $13.88 | $422 | **Purchase** (since 2026-08-17, see below) | 20 images + 10 videos |
@@ -120,10 +125,14 @@ $1,000 on Meta alone would come closer to a real read.
 Google defaults to PRESENCE now rather than the older "presence or interest", so no US-interested
 foreign traffic is bought. Both campaigns were explicitly set anyway.
 
-**Meta will not accept `location_types: ["home"]` alone at country level.** Writing it returns
-`success: true` and reads back as `["frequently_in", "home"]`, with Advantage+ Audience on or
-off. Both values mean physically in the United States, so there is no interest-based leakage;
-Meta simply does not expose a stricter country-level setting.
+**Meta location_types is dead. Never write it again.** (Updated 2026-08-18.) At launch,
+writing `location_types: ["home"]` read back as `["frequently_in", "home"]`. On 2026-08-17
+Meta removed those legacy options platform-wide, and any ad set still carrying them blocks
+on republish with error **#1870194** ("location targeting option that has been removed") -
+which is exactly what hit the paused InitiateCheckout ad set. The fix, applied to both ESA
+ad sets on 2026-08-18: send `geo_locations: {"countries": ["US"]}` with NO `location_types`
+key; Meta then stamps its new canonical default `["frequently_in", "home", "recent"]`. All
+of these mean physically in the United States; there is no stricter country-level setting.
 
 ### Why nothing optimises for Purchase except Google
 
@@ -287,6 +296,28 @@ Where all seven went:
 | YouTube | **Not live yet.** All 7 publish attempts on 2026-08-18 (plus a lone retry) errored instantly in Postiz; TikTok on the same account worked, so it is YouTube-specific, most likely the shared YouTube API quota or an expired connection (unverified, Postiz hides the error payload). Rescheduled for 2026-08-19 07:30-08:30 UTC, ten minutes apart, right after YouTube's quota reset (Postiz ids `cmsyj4oeg0000p70yh6e0pezv` … `cmsyj4p0e0006p70ymngvoybk`). If they error again, the Postiz YouTube connection needs a manual reconnect. Demand Gen wiring follows once the videos are live. |
 
 Order of clips in the id lists above: u1, u2, u4, u5, u6, u8, u9.
+## Update 2026-08-18 (evening): Meta location fix, two-ad-set test, $30/day
+
+What changed after the sections above, all verified by API read-back:
+
+- **Meta broke, then got fixed.** The paused InitiateCheckout ad set blocked on Meta error
+  #1870194: Meta removed the legacy `location_types` values platform-wide (see the location
+  note in the US-targeting section). Fixed 2026-08-18: `location_types` stripped from both
+  ad sets and the InitiateCheckout ad set reactivated on Robby's instruction.
+- **Both ad sets now compete with the same 50 ads.** The 13 `o-c*` ads and the 7 UGC
+  `u*` ads (which had landed only in the Purchase ad set) were mirrored into the
+  InitiateCheckout ad set: InitiateCheckout (25-65) vs Purchase (18-65), same campaign,
+  identical creative. New mirrors re-enter Meta review, expected.
+- **Meta budget doubled to $30.00/day** on Robby's instruction, set at campaign level
+  (`120247770766350605`), so the two ad sets compete for one budget.
+- **Google's MISCONFIGURED / "missing a goal" state is cleared.** Cause was the PURCHASE
+  conversion goal sitting `biddable: false`; fixed 2026-08-14 via
+  `campaignConversionGoals:mutate` + `customerConversionGoals:mutate`. Read-back
+  2026-08-18: Search `primary_status: LIMITED` (`BIDDING_STRATEGY_LEARNING`), Demand Gen
+  `LEARNING`. Both normal for new Maximize Conversions campaigns.
+- **Current daily spend while the TikTok burst runs: Meta $30 + Google Search $9 +
+  Demand Gen $5 + Reddit $5 + TikTok $20 = $69.00/day (~$2,098/month).**
+
 
 ## Two API facts worth keeping
 
