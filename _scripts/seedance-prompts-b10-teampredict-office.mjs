@@ -112,7 +112,7 @@ VISUAL STYLE. A single continuous seated interview shot, vertical 9:16, framed s
 
 PLACE. A beige office corner dressed as an interview spot: a plain wall, the edge of a filing cabinet, a shelf with three ring binders and a small trophy with no readable engraving, a pot plant. Nothing legible anywhere.
 
-PERSON. DOUG, an HR manager in his fifties, lanyard with a blank white card, short-sleeved shirt, a man deeply at peace with his own excellence. His confidence is total at the start and develops exactly one hairline crack, which he papers over and pretends never happened. ${DEADPAN}
+PERSON. DOUG, a heavy-set HR manager around sixty: a round face with a double chin, thinning silver hair combed flat, a neatly trimmed grey moustache, rimless rectangular glasses, a lanyard with a blank white card, a short-sleeved shirt straining slightly at the buttons. His face is entirely generic and unremarkable: he must not resemble any real actor, comedian, television presenter or public figure, living or dead. A man deeply at peace with his own excellence. His confidence is total at the start and develops exactly one hairline crack, which he papers over and pretends never happened. ${DEADPAN}
 
 ${HOOK}
 

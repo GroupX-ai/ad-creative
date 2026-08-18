@@ -34,3 +34,13 @@ teampredict/2026-08-13-paid-launch-video/*-1080p-trimmed.mp4
 # Generated status page: 372 KB of base64-inlined copies of thumbnails/ and the
 # brand fonts, all already present. Re-derive with _work/build-status-page.py.
 teampredict/2026-08-13-paid-launch-video/_work/status-page.html
+
+# Batch 10 (2026-08-18) office skits: the uncaptioned 1080p upscales, 82 MB of
+# intermediates. The *-captioned.mp4 files are the deliverable and ARE
+# committed, as are the 720p generation masters. Re-derive an intermediate by
+# re-running the upscale from the committed 720p master:
+#   node _scripts/seedance-generate.mjs --prompts seedance-prompts-b10-teampredict-office.mjs \
+#     --batch 2026-08-18-office-skits --duration 30 --resolution 720p --only <id>
+teampredict/2026-08-18-office-skits/teampredict-w1-farewell-party-1080p.mp4
+teampredict/2026-08-18-office-skits/teampredict-w2-exit-interview-1080p.mp4
+teampredict/2026-08-18-office-skits/teampredict-w3-gone-quiet-1080p.mp4
