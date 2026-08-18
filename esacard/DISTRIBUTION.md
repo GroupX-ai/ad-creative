@@ -422,3 +422,83 @@ From lifetime Meta insights, purchases are the only ranking that matters here:
 
 `p2-offer-square` and `p6-forever-square` are the two that have actually produced sales, and
 both lead with the offer rather than the story. They are the retargeting set.
+
+
+## Update 2026-08-18 (late): Nadav's tier-A country and US metro tests
+
+Nadav asked for two tests, both at a secondary budget below the US: tier-A countries for
+native English speakers, and an audience aimed at dense, affluent US metros. Live on Meta
+and Google. **TikTok versions are not built**: TikTok is reachable only through its
+connector, which was not attached to the session that did this work.
+
+### The country list changed before anything was spent
+
+Nadav named Germany, France, Netherlands and Canada. Google Keyword Planner, queried per
+country with English language targeting, says the demand sits elsewhere. Total monthly
+searches across all ESA-related keywords:
+
+| Country | Monthly English ESA searches | On Nadav's list |
+| --- | --- | --- |
+| United States | 2,033,020 | (the control) |
+| **United Kingdom** | **92,740** | no |
+| **Canada** | **56,140** | yes |
+| **Australia** | **33,650** | no |
+| Germany | 19,840 | yes |
+| Netherlands | 10,130 | yes |
+| France | 9,240 | yes |
+| Ireland | 9,020 | no |
+
+UK and Australia were not asked for and are the two largest English markets outside the US:
+the UK alone is nearly five times Germany and ten times France. All seven countries run in
+**one campaign per platform** rather than seven, so the budget flows to whatever converts
+instead of being pre-split by a guess. **Read the result by country, never in aggregate**,
+or the UK will hide whatever France did or did not do.
+
+Worth stating plainly: an emotional support animal has **no legal standing anywhere**, the
+US included, and the site says so. So this is not a test of whether the product travels
+legally. It is a test of whether the same $39 novelty kit sells to English speakers who are
+searching for it outside the US, and the search volumes above say those searches exist.
+
+### What is live
+
+| Platform | Campaign | Budget | Targeting |
+| --- | --- | --- | --- |
+| Meta | `ESA Card \| Meta \| Intl EN \| Cold \| Sales` (`120247894000470605`) | $12.00/day | GB, CA, AU, IE, DE, NL, FR · locale English (All) · 25-65 |
+| Meta | `ESA Card \| Meta \| US Metro \| Cold \| Sales` (`120247894001750605`) | $12.00/day | 9 metros at 25mi · top 25% of ZIP codes by household income · 25-65 |
+| Google | `ESA Card \| Search \| Intl EN \| Core` (`24155823820`) | $6.00/day | same 7 countries · English language · 20 phrase/exact keywords |
+
+Metros: Miami, New York, Los Angeles, Chicago, San Francisco, Boston, Seattle, Dallas,
+Atlanta. Income segments stacked as one OR group: top 5% (`6107813079183`), top 10%
+(`6107813551783`), top 10-25% (`6107813553183`).
+
+**No US metro campaign on Google Search.** A second US search campaign bidding the same
+keywords would only split data with the existing one, because Google lets a single account
+into any given auction once. Metro targeting is an audience idea, and it belongs where
+audiences are bought.
+
+### Creative: the same eight ads in both, on purpose
+
+Both Meta campaigns carry the identical eight ads, reusing the existing creative ids rather
+than new uploads, so the **only** variable between US broad, international and metro is the
+audience: `p2-offer-square`, `p6-forever-square`, `p1-carry-vertical`, `p2-offer-vertical`,
+`p6-forever-vertical`, `p5-three-minutes-vertical`, `o-c2-wallet-short`, `e4-cottage`. The
+first two are the only ads in the account that have produced a purchase.
+
+Google's international ad reuses headline and description copy **verbatim** from the three
+live US RSAs, so no claim ships that has not already run.
+
+### Spend after these tests
+
+Meta $74 (US $50, Intl $12, Metro $12) + Google $28 (US Search $9, Demand Gen $5, Display
+retargeting $8, Intl Search $6) + Reddit $5 + TikTok $20 = **$127.00/day (~$3,860/month)**,
+up from $97.
+
+### Two more API facts
+
+- **Meta targeting for household income is `flexible_spec[].income`**, and the segments are
+  ZIP-code percentiles, not stated salary: top 5%, top 10%, top 10-25%, top 25-50% of US ZIP
+  codes. US only.
+- **Any ad set touching an EU country requires `dsa_beneficiary` and `dsa_payor`.** Without
+  them the create fails outright. Both are set to "ESA Card".
+- **Google Ads display paths cap at 15 characters.** `path1: 'emotional-support'` is 17 and
+  fails with `TOO_LONG`.
