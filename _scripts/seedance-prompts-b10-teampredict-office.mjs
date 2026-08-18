@@ -19,7 +19,7 @@
 //
 // 30-SECOND RULES (playbook): 40-55 spoken words, hook fully spoken by second
 // 2, the turn in the middle rather than the tail, diegetic audio only, no
-// music score. Real counted dialogue: w1 = 41 words, w2 = 45, w3 = 41. The
+// music score. Real counted dialogue: w1 = 41 words, w2 = 42, w3 = 41. The
 // first draft of this header claimed 43-50 without counting, and the judge
 // panel caught it: count the quoted words, never assert them.
 //
@@ -38,7 +38,7 @@ const DOC_LOOK = `Shot by an unseen two-person documentary crew on a shoulder-mo
 
 const GLANCE = `THE LOOK. Exactly one deliberate look into the lens is allowed, where marked in the beats: the character turns their eyes to the camera and holds a completely flat, tired, knowing look for a full beat. No smile, no wink, no raised eyebrow, no head tilt, no performance of any kind. It is a private moment of communion with the documentary crew, and its entire power is that the face does not move.`;
 
-const DEADPAN = `COMEDY RULE. Every line is played completely straight. Nobody in the scene knows they are in something funny: no mugging, no smirking before a line, no comedy pauses held for effect, no laughing at their own words. The performances are naturalistic and slightly awkward, exactly as ordinary people are on an ordinary day at work being filmed for a documentary. Apart from the single permitted look described above, nobody acknowledges the camera as an audience.`;
+const DEADPAN = `COMEDY RULE. Every line is played completely straight. Nobody in the scene knows they are in something funny: no mugging, no smirking before a line, no comedy pauses held for effect, no laughing at their own words. The performances are naturalistic and slightly awkward, exactly as ordinary people are on an ordinary day at work being filmed for a documentary. Apart from the single permitted look described in THE LOOK block, nobody acknowledges the camera as an audience.`;
 
 const HOOK = `HOOK. The first line is fully spoken inside the first two seconds. No establishing shot, no slow push-in, no titles, no silence before the first word: the scene is already in motion when the clip begins, as though the viewer arrived a moment late.`;
 
@@ -81,7 +81,7 @@ ${SPEECH_RULE}
 BEATS.
 0-2s. GREG, mid-meeting, brisk and warm, hands flat on the table: "Steve's farewell party. I'm thinking Friday."
 2-7s. The camera whip-pans to JANET. A beat. Carefully: "Steve hasn't resigned."
-7-15s. Back to GREG, patient, counting on his fingers like a man presenting evidence: "New headline. Four new skills. A professional headshot. His profile changed twice this week. He's 'networking', Janet. We have weeks."
+7-15s. Back to GREG, patient, ticking items off with small hand gestures: "New headline. Four new skills. A professional headshot. His profile changed twice this week. He's 'networking', Janet. We have weeks."
 15-19s. JANET, after a pause, gently: "Shouldn't we just... talk to him?"
 19-24s. GREG goes still. A long beat. Quietly, with finality: "The cake is ordered." Another beat, softer: "It's marble."
 24-30s. Zoom punch-in on JANET as she turns a flat, held look into the lens. Nobody speaks. The room hums.
@@ -121,12 +121,14 @@ ${GLANCE}
 ${SPEECH_RULE}
 
 BEATS.
-0-2s. DOUG, settled, hands folded, quietly proud, the first line landing immediately: "I give the best exit interviews in this industry."
+0-2s. DOUG, settled, hands folded, quietly proud, the first line landing immediately: "I give the best exit interviews."
 2-6s. A small modest shrug: "People open up to me."
 6-15s. He leans in, warming to it, a small generous gesture: "When Dana left, I learned everything. The manager. The commute. The coffee. Everything. We were in there two hours."
-15-20s. A beat. The unheard interviewer has evidently asked something. DOUG's face flickers. "Would that have been useful back in March?"
+15-20s. A beat. The unheard interviewer has evidently asked something. DOUG's face flickers, and DOUG repeats the question back slowly, half to himself: "Would that have been useful back in March?"
 20-26s. A long pause. He looks off to the side, and the pride drains out by one degree. Quietly: "...Sure."
-26-30s. He looks back, recomposes completely, and turns the flat, held look into the lens: "Next question."
+26-30s. He looks back, recomposes completely, and says: "Next question." Then he turns the flat, held look into the lens and holds it in silence to the end of the clip.
+
+${NO_SCREENS}
 
 AUDIO. Real small-office room tone: the HVAC, a distant phone ringing twice, the chair's slow creak as he leans in, the tiny rustle of his shirt on the backrest. No music, no interviewer voice ever audible.
 
@@ -168,7 +170,7 @@ BEATS.
 7-14s. GREG, into his mug, wounded: "He used to send me forty memes a day. Today I got a thumbs up." A hurt beat. "Good memes, too."
 14-18s. Whip pan to DEV, who says it flat, like a weather report: "People go quiet before they resign, Greg."
 18-22s. GREG: "He's probably just focused." DEV: "Nobody is that focused."
-22-30s. In the far background, small and silent, MARCUS stands and unhurriedly puts on his jacket in the middle of the afternoon. The camera drifts one degree toward him and refocuses. PRIYA turns a flat, held look into the lens. Nobody speaks.
+22-30s. In the far background, small, silent and out of focus, MARCUS stands and unhurriedly puts on his jacket in the middle of the afternoon. The camera does not move and does not refocus: focus stays on PRIYA in the foreground as she turns a flat, held look into the lens and holds it. Nobody speaks.
 
 ${NO_SCREENS}
 
