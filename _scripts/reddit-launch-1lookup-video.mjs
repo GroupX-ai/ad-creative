@@ -76,7 +76,10 @@ const VIDEOS = [
   ["c11", "front-desk", "A number keeps calling and hanging up. Reverse lookup gives you caller identity and risk.",
     `${B12}/1lookup-c11-front-desk-1080p-captioned.mp4`,
     `${B12}/thumbnails/1lookup-c11-front-desk-thumb.jpg`],
-  ["c12", "flagged", "800 dials, four pickups. Your numbers are flagged as spam. Check their spam scores daily.",
+  // Headline re-worded because the original post/ad pair was superseded after a
+  // burned-in caption typo; Reddit has no DELETE, and posts are matched on
+  // headline, so a changed headline is what makes the re-run create a fresh one.
+  ["c12", "flagged-v2", "Eight hundred dials, four pickups. Your numbers are flagged as spam. Check their spam scores daily.",
     `${B12}/1lookup-c12-flagged-1080p-trimmed-captioned.mp4`,
     `${B12}/thumbnails/1lookup-c12-flagged-thumb.jpg`],
   ["c13", "landlines", "Ten thousand texts sent, half of them to landlines. Check line type before you send.",

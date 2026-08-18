@@ -109,7 +109,7 @@ Creative, prompts and QA: [`1lookup/2026-08-18-product-videos/README.md`](../1lo
 | c9 The First Call | Phone Scrub (DNC) | [`uJdQ5gMTT5I`](https://www.youtube.com/watch?v=uJdQ5gMTT5I) | 821304892222 | 52572524261521 | t3_1vrp9ye / 2571336604354781465 |
 | c10 The Ghost Owner | Skip Trace | [`5oQrRdGpSZ8`](https://www.youtube.com/watch?v=5oQrRdGpSZ8) | 821261737908 | 52572524270321 | t3_1vrpa0s / 2571336642353574545 |
 | c11 The Front Desk Knows | Reverse Phone Lookup | [`dvHEd7ZjtQQ`](https://www.youtube.com/watch?v=dvHEd7ZjtQQ) | 821261738070 | 52572524283521 | t3_1vrpa3c / 2571336681453126216 |
-| c12 Flagged | Phone Spam Check | [`_i_se9JvuI4`](https://www.youtube.com/watch?v=_i_se9JvuI4) | 821378144063 | 52572524301921 | t3_1vrpa5n / 2571336717430940166 |
+| c12 Flagged | Phone Spam Check | [`CuGaN7VfgmQ`](https://www.youtube.com/watch?v=CuGaN7VfgmQ) | 821264742465 | 52572528847921 | t3_1vrq1xv / 2571351730874432039 |
 | c13 Four Thousand Landlines | Carrier Lookup | [`l9UZZxCILl0`](https://www.youtube.com/watch?v=l9UZZxCILl0) | 821378180531 | 52572524305721 | t3_1vrpa7y / 2571336752099400371 |
 | c14 Best Month Ever | Fraud Detection | [`6xEH0dVAZLQ`](https://www.youtube.com/watch?v=6xEH0dVAZLQ) | 821262100248 | 52572524310721 | t3_1vrpaak / 2571336790943549620 |
 | c15 The List Sommelier | Email Validation | [`EfVO6U1W6cM`](https://www.youtube.com/watch?v=EfVO6U1W6cM) | 821304960442 | 52572524330321 | t3_1vrpacr / 2571336828087656781 |
@@ -137,6 +137,36 @@ Nothing from this run is spending. Three switches, each independent:
 3. **Reddit:** set the 15 `1lookup video ...` ads to ACTIVE. The ad group is already live at
    $25/day with 6 banner ads, so again this adds creative to existing spend, and the videos
    will take share from the banners.
+
+## c12 was rebuilt after publishing, for a burned-in caption typo
+
+The caption pass mis-heard "spam" and burned **SPAMCH** into three frames of c12. It was
+caught by reading the burned pixels off all ten finished files, which the transcript cannot
+do: the audio transcript for the same clip read "spam" correctly. `seedance-captions.mjs`
+now carries a `WORD_FIXES` map so a single misheard word can be corrected (it previously
+only repaired two-word brand splits), and the clip was re-captioned and re-carded.
+
+Everything downstream was rebuilt on the corrected file. The superseded entities are all
+parked, not serving:
+
+| Platform | Superseded | Replacement |
+|---|---|---|
+| YouTube | `_i_se9JvuI4` (still public) | `CuGaN7VfgmQ` |
+| Google | ad 821378144063, **REMOVED** | ad 821264742465, video asset 409550975532 |
+| Meta | ad 52572524301921, PAUSED + renamed `ZZ SUPERSEDED...` | ad 52572528847921 |
+| Reddit | ad 2571336717430940166, PAUSED + renamed `ZZ SUPERSEDED...` | post t3_1vrq1xv / ad 2571351730874432039 |
+| TikTok | post `cmsyp1f8w008tp70ygwtlvrm6`, still queued 08-26 | post `cmsyq78s2009tp70y46v0cwmv`, same slot |
+
+**Two of those need a human, because neither API can delete:** the old YouTube video
+`_i_se9JvuI4` has to be deleted in YouTube Studio, and the old TikTok post
+`cmsyp1f8w008tp70ygwtlvrm6` has to be deleted in Postiz, or 26 August publishes the flawed
+copy alongside the corrected one. Reddit's superseded post `t3_1vrpa5n` stays on the profile
+permanently (the API has no DELETE), but its ad is paused so it never delivers.
+
+**Rule this establishes:** read the burned-in captions off every finished file before
+publishing anywhere, not just off the clip that speaks the brand name. The batch-9 rule
+already said this; this run applied it to one clip and then published the other nine on the
+strength of a transcript.
 
 ## Two account problems found while doing this, neither fixed here
 
