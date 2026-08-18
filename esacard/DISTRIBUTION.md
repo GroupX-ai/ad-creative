@@ -502,3 +502,49 @@ up from $97.
   them the create fails outright. Both are set to "ESA Card".
 - **Google Ads display paths cap at 15 characters.** `path1: 'emotional-support'` is 17 and
   fails with `TOO_LONG`.
+
+
+## Update 2026-08-18 (late): Meta retargeting live, terms blocker cleared
+
+Robby accepted Meta's Custom Audience terms, which had been blocking **every** custom
+audience in the account. Worth recording how that failure presented, because it was
+misleading: with `subtype` still in the payload the call failed on `subtype`, and the
+engagement-audience calls failed with **"Invalid Event Name for Custom Audience"**. Both
+were the terms block wearing a different error. The moment the terms cleared, the exact same
+event names (`ig_business_profile_all`, `page_engaged`) succeeded unchanged. **Do not chase
+an event-name error on this endpoint before checking the terms.**
+
+### Six audiences
+
+| Audience | Rule | Window |
+| --- | --- | --- |
+| `ESA \| RTG \| Site visitors 30d` | pixel `PageView` | 30d |
+| `ESA \| RTG \| Viewed content 30d` | pixel `ViewContent` | 30d |
+| `ESA \| RTG \| Checkout started 30d` | pixel `InitiateCheckout` | 30d |
+| `ESA \| RTG \| Purchasers 180d` | pixel `Purchase` | 180d, **exclusion only** |
+| `ESA \| RTG \| IG engagers 365d` | `ig_business` / `ig_business_profile_all` | 365d |
+| `ESA \| RTG \| Page engagers 365d` | `page` / `page_engaged` | 365d |
+
+Website audiences were created with `prefill: true`, so they backfill from pixel history
+already collected rather than starting empty.
+
+### The campaign
+
+`ESA Card | Meta | US | Retargeting | Sales` (`120247894676000605`), **$10.00/day**, US,
+25-65, purchase-optimised. Ad set `ESA | US | Retargeting | Purchase` includes site
+visitors, content viewers and checkout starters, and **excludes purchasers**. Same eight
+winning ads as the other campaigns, reusing creative ids.
+
+**It will not spend $10/day for a while.** Both engagement audiences report "Audience is too
+small to be used in campaign creation" on creation, and the pixel has 765 PageViews in 30
+days against Meta's 1,000-person floor. They are left out of the ad set until they size up.
+The budget is a ceiling, not a forecast.
+
+Purchase optimisation was kept rather than dropping to landing page views, because Robby's
+2026-08-14 decision to optimise everything around purchases stands. A small warm pool
+spending slowly on the right event beats a bigger pool spending fast on the wrong one.
+
+### Spend now
+
+Meta $84 (US $50, Intl $12, Metro $12, Retargeting $10) + Google $28 + Reddit $5 +
+TikTok $20 = **$137.00/day (~$4,165/month)**.
