@@ -165,7 +165,7 @@ ${SKETCH_LOOK}
 
 PLACE. A cramped, ordinary sales floor mid-morning: two rows of desks with fabric partitions, monitors all turned away from the camera showing only their backs, a droopy pot plant, a bare cork noticeboard with nothing pinned to it, paper cups, a desk phone on each desk with its handset down.
 
-PEOPLE. KYLE, a man in his early twenties with short ginger hair, freckles and a too-big grey suit jacket over a polo shirt, wearing a wired headset around his neck, glowing with genuine first-day pride. MARGO, his manager, a woman in her late forties with a loose dark bun, half-moon reading glasses pushed up on her head and a mustard cardigan, seated at the next desk, marking a stack of blank-looking paper with a pen and radiating a deep, unhurried weariness. She does not once raise her voice.
+PEOPLE. KYLE, a man in his early twenties with short curly black hair, warm brown skin, round cheeks and rectangular black-framed glasses, in a too-big grey suit jacket over a polo shirt, wearing a wired headset around his neck, glowing with genuine first-day pride. MARGO, his manager, a woman in her late forties with a loose dark bun, half-moon reading glasses pushed up on her head and a mustard cardigan, seated at the next desk, marking a stack of blank-looking paper with a pen and radiating a deep, unhurried weariness. She does not once raise her voice.
 
 ${HOOK}
 
@@ -367,6 +367,7 @@ ${NO_REAL_PERSON}
 BEATS.
 0-3s. Dean, hands behind his head, announcing it to the room: "Ten thousand texts. Just sent. Boom."
 4-8s. Rosa turns one page of the printout, level and unhurried: "Almost half of these numbers are landlines."
+WORD PRONUNCIATION. The word "landlines" in Rosa's line is two ordinary English words said together as one: first "land", as in dry land, with the letter d sounded clearly, then "lines", as in telephone lines. She says it unhurriedly: "land-lines".
 9-12s. Dean's hands come down slowly. A genuine, hopeful pause: "So they'll get it later?"
 12-15s. Rosa says nothing at all. She looks at him over the glasses and holds it. From somewhere down the corridor, faintly, a fax machine screeches, and both of them turn their heads towards the door.
 
@@ -415,6 +416,7 @@ BEATS.
 5-9s. She stops, turns to the lens, hand on heart, completely sincere: "We don't ask questions here. We celebrate."
 10-15s. Cut to Oksana's seated confessional. Hands folded, perfectly flat: "It's all one man. Rick."
 16-23s. Oksana, same flatness, a small breath: "So now every signup gets a fraud score from 1Lookup. Zero to one hundred." A beat. "Rick scored ninety-eight."
+WORD PRONUNCIATION. The word "signup" in Oksana's line is two ordinary English words said together as one, unhurried: first "sign", as in to sign a form, then "up", as in up the stairs. She says it clearly: "sign-up".
 24-27s. Observational: June at her desk, serene, raising her mug slightly towards the camera: "Rick is our best customer."
 27-30s. The camera holds on June's contented face a moment too long. Somewhere off-screen a single party popper goes off, and nobody reacts.
 
@@ -496,7 +498,9 @@ ${BANS}`,
 
 ${UGC_LOOK}
 
-PLACE. A dim office at the end of the day: his desk lamp is the main light, warm and low, the overheads are off, monitors behind him turned away and dark, a jacket over his chair, a half-eaten sandwich in its wrapper beside the keyboard, the window behind showing early evening blue.
+PLACE. A dim office at the end of the day: his desk lamp is the main light, warm and low, the overheads are off, monitors behind him turned away and dark, a jacket over his chair, the window behind showing early evening blue. The desk surface is bare apart from a keyboard and a closed notebook: no food, no wrapper, no packaging and no takeaway container is anywhere in shot at any point.
+
+SINGLE SHOT. The entire clip is one unbroken take from the phone in his own hand, held at arm's length in front of his face. The camera never leaves his hand, never cuts to another angle, and never shows him from behind, from the side of the room, or from any position he could not be holding the phone in. There is no second camera, no cutaway, no reverse angle and no third-person shot at any moment.
 
 PERSON. ELI, a man in his late twenties with short tight dark curls, warm brown skin, a loosened knit tie over a pale shirt with the top button undone, leaning in towards the lens with the low conspiratorial energy of someone confessing something at the end of a good day. He checks over his shoulder once, theatrically unnecessary in an empty office, before the confession. He enjoys every second and never once plays it as a joke.
 

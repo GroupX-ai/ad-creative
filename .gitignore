@@ -50,3 +50,17 @@ teampredict/2026-08-18-office-skits/teampredict-w3-gone-quiet-1080p.mp4
 teampredict/2026-08-18-office-skits-2/teampredict-w4-new-headshot-1080p.mp4
 teampredict/2026-08-18-office-skits-2/teampredict-w5-conspiracy-board-1080p.mp4
 teampredict/2026-08-18-office-skits-2/teampredict-w6-green-ring-1080p.mp4
+
+# Batch 12 (2026-08-18) 1Lookup product videos. Same rule as batch 2: the
+# *-captioned.mp4 deliverables (captions burned in, branded end card appended)
+# ARE committed, along with the 720p Seedance masters they were built from.
+# The uncaptioned/trimmed/muted 1080p intermediates are ~203 MB and are
+# re-derivable by re-running the upscale and the trim/mute recorded in the
+# batch README:
+*/2026-08-18-product-videos/*-1080p.mp4
+*/2026-08-18-product-videos/*-1080p-trimmed.mp4
+*/2026-08-18-product-videos/*-1080p-fixed.mp4
+# Superseded takes: the 720p masters of rejected rolls are kept as the record
+# (they are what the README's re-roll comparison refers to); their 1080p
+# upscales are not, at ~87 MB for takes that will never ship.
+*/2026-08-18-product-videos/_rolls/*-1080p*.mp4

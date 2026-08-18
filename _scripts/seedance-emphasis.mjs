@@ -152,6 +152,21 @@ export const EMPHASIS = {
   "teampredict-w4-new-headshot": ["kevin", "headshot", "professional", "suit", "weddings", "photo", "going", "places"],
   "teampredict-w5-conspiracy-board": ["monday", "headline", "skills", "photo", "endorsed", "founder", "vision", "bigger", "steve"],
   "teampredict-w6-green-ring": ["sandra", "green", "ring", "dentist", "public", "everything", "point"],
+
+  // ── batch 12, 1Lookup product-specific. Each list punches the PRODUCT words
+  //    (dead numbers, registry, skip trace, spam score, landlines, fraud score,
+  //    bounce, mobile number, domain age) so a sound-off scroller learns which
+  //    product the clip is about, plus each clip's turn word.
+  "1lookup-c8-dead-list": ["dead", "disconnected", "validated", "free"],
+  "1lookup-c9-first-call": ["call", "registry", "interested", "lawyer"],
+  "1lookup-c10-ghost-owner": ["owner", "mail", "skip", "trace", "name", "phone", "address", "free"],
+  "1lookup-c11-front-desk": ["calling", "gary", "roofing", "low", "risk", "gutters"],
+  "1lookup-c12-flagged": ["dials", "pickups", "flagged", "spam", "scores", "daily", "free"],
+  "1lookup-c13-landlines": ["texts", "boom", "landlines", "later"],
+  "1lookup-c14-best-month": ["signups", "record", "celebrate", "rick", "fraud", "score", "customer"],
+  "1lookup-c15-list-sommelier": ["online", "typos", "disposable", "domains", "bounce", "servable", "not"],
+  "1lookup-c16-magic-rolodex": ["boss", "everyone", "anyone", "profile", "mobile", "number", "tell"],
+  "1lookup-c17-established-1987": ["business", "domain", "registered", "tuesday", "change", "invoice", "friday"],
 };
 
 // Resolve an ad id from a file path, tolerating the -fixed / -trimmed / -1080p suffixes.
