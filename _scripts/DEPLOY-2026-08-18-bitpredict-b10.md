@@ -44,7 +44,15 @@ Ad group `2569748569803060005` in campaign `2557856106149115257`, created by
 | BP C14 prove-it | `t3_1vrlnsd` | `2571253882664412213` |
 | BP C15 evidence-wall | `t3_1vrlnv2` | `2571253945407184860` |
 
-**They are paused on purpose.** The campaign is live and the ad group is ACTIVE, so
+**Activated 2026-08-18 ~11:50 UTC on Robby's approval ("you can launch the Reddit ads").**
+All eight were flipped ACTIVE and moved to `effective_status: PENDING_APPROVAL`, so the next
+gate is Reddit's review. Given the landing page's USDT prize copy took out 5 of the original
+12 at review, expect some of these eight to be rejected on the same grounds regardless of
+the creative.
+
+The paragraph below records why they were built paused in the first place.
+
+**They were paused on purpose.** The campaign is live and the ad group is ACTIVE, so
 activating these is a one-line change, but the numbers say it is Robby's call and not an
 automatic one. Verified against the Reddit reports API on 2026-08-18:
 
