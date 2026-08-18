@@ -71,9 +71,15 @@
 // Shared blocks (b9 lineage, 1Lookup-specific pronunciation)
 // ---------------------------------------------------------------------------
 
-const UGC_LOOK = `Shot on a modern phone's front camera, vertical, held at arm's length just below eye level, so the framing is slightly low and slightly off-centre the way real selfie video is. Constant handheld drift and two or three natural reframes. Available light only. Mild lens distortion up close, real skin texture, visible pores, no beauty smoothing, no colour grade. The face fills a good third of the frame, looking directly into the lens throughout.`;
+// 1Lookup's Meta, Google and Reddit campaigns all target the US only, so every
+// prompt names the market. Added after the repo-wide rule of 2026-08-18: the
+// model fills in every attribute you leave blank and will not pick your market
+// by accident. Enforced by _scripts/seedance-prompt-lint.mjs.
+import { US_CAST } from "./seedance-locale.mjs";
 
-const SKETCH_LOOK = `Shot on a phone held by an unseen third person standing a few feet away in the same room, vertical, at chest height. Constant small handheld drift, one natural reframe when someone speaks, imperfect focus that settles a beat late. Overhead office fluorescents and daylight from a window only. Real skin texture, no beauty smoothing, no colour grade, mild sensor noise in the shadows. It looks like a real moment someone filmed, not a scene that was lit.`;
+const UGC_LOOK = `Shot on a modern phone's front camera, vertical, held at arm's length just below eye level, so the framing is slightly low and slightly off-center the way real selfie video is. Constant handheld drift and two or three natural reframes. Available light only. Mild lens distortion up close, real skin texture, visible pores, no beauty smoothing, no color grade. The face fills a good third of the frame, looking directly into the lens throughout.`;
+
+const SKETCH_LOOK = `Shot on a phone held by an unseen third person standing a few feet away in the same room, vertical, at chest height. Constant small handheld drift, one natural reframe when someone speaks, imperfect focus that settles a beat late. Overhead office fluorescents and daylight from a window only. Real skin texture, no beauty smoothing, no color grade, mild sensor noise in the shadows. It looks like a real moment someone filmed, not a scene that was lit.`;
 
 const DEADPAN = `COMEDY RULE. Every line is played completely straight. Nobody in the scene knows they are in something funny: no mugging, no winking or glancing at the camera, no raised eyebrows to the lens, no smirking before a line, no comedy pause held for effect, no laughing at their own words. The performances are naturalistic and slightly awkward, exactly as ordinary people are on an ordinary bad day at work. The humour comes only from what is said and what happens, never from anyone performing that it is humour.`;
 
@@ -87,7 +93,7 @@ const SPEECH_RULE = `SPEECH RULE. Only the lines written in quotation marks belo
 // is sounded, per the batch-6 hardening. Positive only.
 const SAY_1LOOKUP = `BRAND PRONUNCIATION. The spoken brand name is three clear syllables delivered as one confident word, "one look up". The first syllable is "one", the ordinary English number one. The second is "look", exactly like the everyday English verb look, as in look at this. The third is "up", the ordinary English word up, as in up the stairs, and the final letter p is sounded crisply so the word ends closed. Together it is "1Lookup", said unhurriedly as three clear syllables with a small pause before it.`;
 
-const NO_SCREENS = `SCREEN RULE. No display surface of any kind appears anywhere in this video at any point. Every computer monitor in shot is turned away from the camera so that only its plain back panel, its stand and its side edge are visible. Every laptop is closed with its lid down. No phone screen, tablet, television, projector or smartwatch face is visible or lit at any moment, at any angle, in the foreground or the background; any phone in shot lies face down or is held to an ear with the screen against the head. There is no screen glow, no screen reflection in glass or spectacles, and no light spill from a screen onto anybody's face. Any paper, card, folder, binder, brochure, whiteboard or printout in shot carries no legible writing at any distance: pages read as plain blocks of grey texture, whiteboards are wiped to a smear.`;
+const NO_SCREENS = `SCREEN RULE. No display surface of any kind appears anywhere in this video at any point. Every computer monitor in shot is turned away from the camera so that only its plain back panel, its stand and its side edge are visible. Every laptop is closed with its lid down. No phone screen, tablet, television, projector or smartwatch face is visible or lit at any moment, at any angle, in the foreground or the background; any phone in shot lies face down or is held to an ear with the screen against the head. There is no screen glow, no screen reflection in glass or spectacles, and no light spill from a screen onto anybody's face. Any paper, card, folder, binder, brochure, whiteboard or printout in shot carries no legible writing at any distance: pages read as plain blocks of gray texture, whiteboards are wiped to a smear.`;
 
 const NO_REAL_PERSON = `CASTING RULE. Every person in this video is a fictional, deliberately generic-looking individual and resembles no real actor, celebrity, television character or public figure, even loosely. No face, hairstyle, wardrobe or mannerism evokes any recognisable person from any film or television programme.`;
 
@@ -115,7 +121,7 @@ export const ADS = [
 
 ${UGC_LOOK}
 
-PLACE. A small sales-floor corner desk in the early morning, before anyone else is in: flat grey daylight from a big window, empty desks with monitors turned away behind her, a wheeled whiteboard wiped to a smear, a cold takeaway coffee cup, a thick printout stack beside her keyboard with no legible writing on it.
+PLACE. A small sales-floor corner desk in the early morning, before anyone else is in: flat gray daylight from a big window, empty desks with monitors turned away behind her, a wheeled whiteboard wiped to a smear, a cold takeaway coffee cup, a thick printout stack beside her keyboard with no legible writing on it.
 
 PERSON. DANA, a woman in her late thirties with a round face, dark hair pulled into a short practical ponytail, a plain navy quarter-zip over a t-shirt, no makeup, tired but composed. She starts the video already annoyed in a calm, settled way, one forearm on the desk, and pats the printout stack once when she mentions the list. By the last line she is faintly, dryly pleased with herself. The changes are small and physical, never performed.
 
@@ -138,6 +144,8 @@ ${SAY_1LOOKUP}
 ${NO_SCREENS}
 
 AUDIO. Real empty-office morning sound: the air conditioning ticking on, a distant vacuum cleaner down the corridor, her sleeve on the desk, the paper stack shifting once under her hand. Her voice close and dry on the phone mic. No music.
+
+${US_CAST}
 
 ${BANS}`,
   },
@@ -165,7 +173,7 @@ ${SKETCH_LOOK}
 
 PLACE. A cramped, ordinary sales floor mid-morning: two rows of desks with fabric partitions, monitors all turned away from the camera showing only their backs, a droopy pot plant, a bare cork noticeboard with nothing pinned to it, paper cups, a desk phone on each desk with its handset down.
 
-PEOPLE. KYLE, a man in his early twenties with short curly black hair, warm brown skin, round cheeks and rectangular black-framed glasses, in a too-big grey suit jacket over a polo shirt, wearing a wired headset around his neck, glowing with genuine first-day pride. MARGO, his manager, a woman in her late forties with a loose dark bun, half-moon reading glasses pushed up on her head and a mustard cardigan, seated at the next desk, marking a stack of blank-looking paper with a pen and radiating a deep, unhurried weariness. She does not once raise her voice.
+PEOPLE. KYLE, a man in his early twenties with short curly black hair, warm brown skin, round cheeks and rectangular black-framed glasses, in a too-big gray suit jacket over a polo shirt, wearing a wired headset around his neck, glowing with genuine first-day pride. MARGO, his manager, a woman in her late forties with a loose dark bun, half-moon reading glasses pushed up on her head and a mustard cardigan, seated at the next desk, marking a stack of blank-looking paper with a pen and radiating a deep, unhurried weariness. She does not once raise her voice.
 
 ${HOOK}
 
@@ -185,6 +193,8 @@ BEATS.
 ${NO_SCREENS}
 
 AUDIO. Real small-office sound: a chair wheel squeaking on hard carpet, Margo's pen scratching, a desk phone ringing twice somewhere unanswered, the air-conditioning hum. Both voices dry and close. No music.
+
+${US_CAST}
 
 ${BANS}`,
   },
@@ -234,6 +244,8 @@ ${NO_SCREENS}
 
 AUDIO. Real parked-car sound: the seat creaking, his flannel sleeve on the wheel, a lawnmower far away, one car passing, the boxy close acoustic of a car interior. His voice low and close on the phone mic. No music.
 
+${US_CAST}
+
 ${BANS}`,
   },
 
@@ -279,6 +291,8 @@ BEATS.
 ${NO_SCREENS}
 
 AUDIO. Real lobby sound: the rubber stamp thumping in a steady rhythm, a phone ringing once far down the corridor, the fern brushing the desk fan, a door closing somewhere. Both voices close and dry. No music.
+
+${US_CAST}
 
 ${BANS}`,
   },
@@ -328,6 +342,8 @@ ${NO_SCREENS}
 
 AUDIO. Real stairwell sound: the hard concrete echo on her voice, the fire door clunking somewhere below, a muffled office beyond the door, her sleeve on the painted rail. No music.
 
+${US_CAST}
+
 ${BANS}`,
   },
 
@@ -352,7 +368,7 @@ ${BANS}`,
 
 ${SKETCH_LOOK}
 
-PLACE. A small, ordinary marketing office late in the afternoon: two desks pushed together, monitors turned away showing only their backs, a whiteboard wiped to a grey smear, a string of tiny plain paper pennants with nothing printed on them sagging over one desk left over from some forgotten celebration, mugs, a beaten swivel chair.
+PLACE. A small, ordinary marketing office late in the afternoon: two desks pushed together, monitors turned away showing only their backs, a whiteboard wiped to a gray smear, a string of tiny plain paper pennants with nothing printed on them sagging over one desk left over from some forgotten celebration, mugs, a beaten swivel chair.
 
 PEOPLE. DEAN, a man in his mid-twenties, tall and lanky with gelled-up dark hair and a slightly too tight completely plain polo shirt, leaning back in the swivel chair with his hands behind his head, luxuriating in triumph. ROSA, a woman in her mid-forties with straight black hair in a low ponytail, a denim shirt and reading glasses, standing beside his desk holding a thick printout with nothing legible on it, unhurried and entirely unimpressed.
 
@@ -374,6 +390,8 @@ WORD PRONUNCIATION. The word "landlines" in Rosa's line is two ordinary English 
 ${NO_SCREENS}
 
 AUDIO. Real office sound: the swivel chair creaking under Dean, the printout pages turning, the air-conditioning hum, and at the very end one distant muffled fax-machine screech from down the corridor. Both voices dry and close. No music.
+
+${US_CAST}
 
 ${BANS}`,
   },
@@ -397,11 +415,11 @@ ${BANS}`,
     duration: "30",
     prompt: `A vertical mockumentary-style video filmed in a small startup office by a two-person documentary crew, with handheld observational shots and one seated interview. This is not an advertisement and must not look like one.
 
-VISUAL STYLE. Handheld documentary camera, vertical. Observational shots drift and reframe with small punch-ins on reactions; the interview is a locked-off seated confessional against a plain wall with window light from one side. Natural light and office fluorescents only, real skin texture, no colour grade, no studio lighting, mild sensor noise.
+VISUAL STYLE. Handheld documentary camera, vertical. Observational shots drift and reframe with small punch-ins on reactions; the interview is a locked-off seated confessional against a plain wall with window light from one side. Natural light and office fluorescents only, real skin texture, no color grade, no studio lighting, mild sensor noise.
 
-PLACE. A small, bright, modern startup office: white walls, blond-wood desks, many healthy green plants, a yellow sofa in one corner, monitors all turned away showing only their backs, a glass jar of markers, a whiteboard wiped clean to a faint smear. Nothing beige, nothing grey, nothing dim. The confessional corner is a plain white wall beside a tall plant.
+PLACE. A small, bright, modern startup office: white walls, blond-wood desks, many healthy green plants, a yellow sofa in one corner, monitors all turned away showing only their backs, a glass jar of markers, a whiteboard wiped clean to a faint smear. Nothing beige, nothing gray, nothing dim. The confessional corner is a plain white wall beside a tall plant.
 
-PEOPLE. JUNE, the growth manager, a woman in her early thirties with box braids tied back, a mustard blazer over a white tee and small gold hoop earrings, glowing with sincere, unclouded pride. She addresses the unseen documentary crew directly and believes every word she says. OKSANA, an analyst, a woman in her late twenties with a blunt copper bob, a grey cardigan and no jewellery, who gives her interview seated, hands folded, with the calm of someone who has accepted the situation completely. Three background colleagues work silently at the turned-away desks.
+PEOPLE. JUNE, the growth manager, a woman in her early thirties with box braids tied back, a mustard blazer over a white tee and small gold hoop earrings, glowing with sincere, unclouded pride. She addresses the unseen documentary crew directly and believes every word she says. OKSANA, an analyst, a woman in her late twenties with a blunt copper bob, a gray cardigan and no jewellery, who gives her interview seated, hands folded, with the calm of someone who has accepted the situation completely. Three background colleagues work silently at the turned-away desks.
 
 ${HOOK}
 
@@ -426,6 +444,8 @@ ${NO_SCREENS}
 
 AUDIO. Real office room tone: keyboards, a printer, the mug set down on wood, the single party popper at the end, distant traffic through a window. Interview voice close and dry, observational lines a little roomier. No music.
 
+${US_CAST}
+
 ${BANS}`,
   },
 
@@ -448,9 +468,9 @@ ${BANS}`,
     duration: "15",
     prompt: `A vertical video of a private tasting in a wine cellar, filmed on a phone by someone seated at the table. This is not an advertisement and must not look like one.
 
-VISUAL STYLE. Handheld phone video, vertical, seated across the table so both people are in frame, small drift and one refocus. Lit by two candles on the table and one warm dim wall sconce, deep shadows, real grain, no colour grade, no studio lighting.
+VISUAL STYLE. Handheld phone video, vertical, seated across the table so both people are in frame, small drift and one refocus. Lit by two candles on the table and one warm dim wall sconce, deep shadows, real grain, no color grade, no studio lighting.
 
-PLACE. A small stone wine cellar got up for private tastings: a dark wooden table with a white runner, two candlesticks, an empty decanter, a spittoon, racked bottles along the walls with no legible labels anywhere. On a silver serving tray in the centre of the table lies a thick printed document, face up, its pages reading only as blocks of grey texture with nothing legible.
+PLACE. A small stone wine cellar got up for private tastings: a dark wooden table with a white runner, two candlesticks, an empty decanter, a spittoon, racked bottles along the walls with no legible labels anywhere. On a silver serving tray in the center of the table lies a thick printed document, face up, its pages reading only as blocks of gray texture with nothing legible.
 
 PEOPLE. THE SOMMELIER, a man in his late thirties with deep brown skin, a short black beard and a shaved head, wearing a maroon waistcoat over a crisp white shirt and a long dark sommelier's apron, who performs the full tasting ritual on the printed list with absolute unsmiling professional gravity. THE CLIENT, a man in his late thirties in a crumpled business shirt with his tie loosened, perched anxiously on the front edge of his chair, who has clearly paid for this and is afraid of the answer.
 
@@ -473,6 +493,8 @@ BEATS.
 ${NO_SCREENS}
 
 AUDIO. Real cellar sound: pages fanning once, the candle flames guttering, the list set down on the silver tray, the client's chair creaking, a deep stone-room silence under everything. Both voices low, close and dry. No music.
+
+${US_CAST}
 
 ${BANS}`,
   },
@@ -524,6 +546,8 @@ ${NO_SCREENS}
 
 AUDIO. Real end-of-day office sound: the desk lamp's faint buzz and final click, his chair creaking as he leans, the sandwich wrapper crinkling once, distant traffic through the window. His voice low and close on the phone mic. No music.
 
+${US_CAST}
+
 ${BANS}`,
   },
 
@@ -550,7 +574,7 @@ ${SKETCH_LOOK}
 
 PLACE. A small, ordinary procurement back office: one shared desk stacked with ring binders, a metal filing cabinet with a dying plant on top, monitors turned away showing only their backs, a wall year-planner with no legible writing, a window with vertical blinds half open.
 
-PEOPLE. CAROL, a woman in her mid-fifties with curly auburn hair, a bright patterned scarf over a cream blouse and reading glasses on a chain, holding a glossy tri-fold brochure with no legible printing on it, genuinely impressed by it. VICTOR, a man in his mid-thirties with a shaved head, wire-rimmed glasses and a plain dark jumper, seated at the desk with a stack of blank-looking printouts, calm to the point of stillness. He delivers facts the way other people deliver bad weather.
+PEOPLE. CAROL, a woman in her mid-fifties with curly auburn hair, a bright patterned scarf over a cream blouse and reading glasses on a chain, holding a glossy tri-fold brochure with no legible printing on it, genuinely impressed by it. VICTOR, a man in his mid-thirties with a shaved head, wire-rimmed glasses and a plain dark sweater, seated at the desk with a stack of blank-looking printouts, calm to the point of stillness. He delivers facts the way other people deliver bad weather.
 
 ${HOOK}
 
@@ -569,6 +593,8 @@ BEATS.
 ${NO_SCREENS}
 
 AUDIO. Real back-office sound: the brochure's glossy pages flexing, Victor's printouts shuffling, the filing cabinet ticking as it settles, the blinds clicking once in the draught, a phone ringing far away. Both voices dry and close. No music.
+
+${US_CAST}
 
 ${BANS}`,
   },
