@@ -40,6 +40,7 @@ const REF = refIdx === -1 ? "main" : argv[refIdx + 1];
 const RAW = `https://raw.githubusercontent.com/GroupX-ai/ad-creative/${REF}`;
 const B1 = `${RAW}/1lookup/2026-08-08-seedance-video`;
 const B2 = `${RAW}/1lookup/2026-08-09-seedance-video-b2`;
+const B12 = `${RAW}/1lookup/2026-08-18-product-videos`;
 
 // headline = what a redditor reads above the video. Never repeats the burned-in
 // captions; every product claim traces to the live site copy (re-verified
@@ -60,6 +61,39 @@ const VIDEOS = [
   ["c7", "one-key", "One API key, 41 data products: phone, email, domain, enrichment and more.",
     `${B2}/1lookup-c7-one-key-1080p-captioned.mp4`,
     `${B2}/thumbnails/1lookup-c7-one-key-thumb.png`],
+
+  // Batch 12, one named product per clip. Headlines lead with the complaint the
+  // target subreddit already has, not with the product name.
+  ["c8", "dead-numbers", "A third of our call list was disconnected. Validate the numbers before your reps dial them.",
+    `${B12}/1lookup-c8-dead-list-1080p-trimmed-captioned.mp4`,
+    `${B12}/thumbnails/1lookup-c8-dead-list-thumb.jpg`],
+  ["c9", "first-call", "His first cold call of the day was to a lawyer. Check the DNC list before you dial.",
+    `${B12}/1lookup-c9-first-call-1080p-captioned.mp4`,
+    `${B12}/thumbnails/1lookup-c9-first-call-thumb.jpg`],
+  ["c10", "ghost-owner", "Owner hasn't lived there since 2019, mail comes back. Skip trace: name in, phone and address out.",
+    `${B12}/1lookup-c10-ghost-owner-1080p-trimmed-captioned.mp4`,
+    `${B12}/thumbnails/1lookup-c10-ghost-owner-thumb.jpg`],
+  ["c11", "front-desk", "A number keeps calling and hanging up. Reverse lookup gives you caller identity and risk.",
+    `${B12}/1lookup-c11-front-desk-1080p-captioned.mp4`,
+    `${B12}/thumbnails/1lookup-c11-front-desk-thumb.jpg`],
+  ["c12", "flagged", "800 dials, four pickups. Your numbers are flagged as spam. Check their spam scores daily.",
+    `${B12}/1lookup-c12-flagged-1080p-trimmed-captioned.mp4`,
+    `${B12}/thumbnails/1lookup-c12-flagged-thumb.jpg`],
+  ["c13", "landlines", "Ten thousand texts sent, half of them to landlines. Check line type before you send.",
+    `${B12}/1lookup-c13-landlines-1080p-captioned.mp4`,
+    `${B12}/thumbnails/1lookup-c13-landlines-thumb.jpg`],
+  ["c14", "best-month", "500 signups in a record month, all of them one guy. A 0-100 fraud score on every signup.",
+    `${B12}/1lookup-c14-best-month-1080p-fixed-captioned.mp4`,
+    `${B12}/thumbnails/1lookup-c14-best-month-thumb.jpg`],
+  ["c15", "sommelier", "Bought online, recently. Typos and disposable domains. Validate the list before it bounces.",
+    `${B12}/1lookup-c15-list-sommelier-1080p-captioned.mp4`,
+    `${B12}/thumbnails/1lookup-c15-list-sommelier-thumb.jpg`],
+  ["c16", "rolodex", "My boss thinks I know everyone. Paste a profile link, get a direct mobile number.",
+    `${B12}/1lookup-c16-magic-rolodex-1080p-fixed-captioned.mp4`,
+    `${B12}/thumbnails/1lookup-c16-magic-rolodex-thumb.jpg`],
+  ["c17", "established-1987", "In business since 1987. Domain registered Tuesday. Verify a business before you pay it.",
+    `${B12}/1lookup-c17-established-1987-1080p-captioned.mp4`,
+    `${B12}/thumbnails/1lookup-c17-established-1987-thumb.jpg`],
 ];
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
