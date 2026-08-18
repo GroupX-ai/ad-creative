@@ -68,6 +68,7 @@ const RAW = "https://raw.githubusercontent.com/GroupX-ai/ad-creative/main";
 const B8 = `${RAW}/teampredict/2026-08-13-paid-launch`;
 const V9 = `${RAW}/teampredict/2026-08-13-paid-launch-video`;
 const V10 = `${RAW}/teampredict/2026-08-18-office-skits`;
+const V11 = `${RAW}/teampredict/2026-08-18-office-skits-2`;
 
 // ---------------------------------------------------------------------------
 // Reporting note, learned the expensive way on 2026-08-14.
@@ -182,6 +183,16 @@ const SKITS = [
    "Forty memes a day, then one thumbs up. People go quiet before they resign."],
 ];
 
+// Batch-11 skits, the on-the-nose round: the LinkedIn signals are the dialogue.
+const SKITS2 = [
+  ["w4", "new-headshot", "1080p-captioned",
+   "He got a professional headshot. For 'weddings.' The signals are always there."],
+  ["w5", "conspiracy-board", "1080p-captioned",
+   "New headline Monday. Four new skills Wednesday. You don't need the red string, it's all public."],
+  ["w6", "green-ring", "1080p-captioned",
+   "Her dentist knew before her manager. The 'Open to Work' ring is public."],
+];
+
 // Reddit gets the clean no-logo renders throughout. The post is already branded
 // with the author handle, and a pasted wordmark on top of that reads as an
 // advert twice over, which is the fastest way to lose the comment thread.
@@ -219,6 +230,11 @@ const ASSETS = [
     slug: `${v[0]}-${v[1]}`,
     name: `TP ${v[0].toUpperCase()} ${v[1]}`,
     creative: videoCreative(v, V10),
+  })),
+  ...SKITS2.map((v) => ({
+    slug: `${v[0]}-${v[1]}`,
+    name: `TP ${v[0].toUpperCase()} ${v[1]}`,
+    creative: videoCreative(v, V11),
   })),
 ];
 

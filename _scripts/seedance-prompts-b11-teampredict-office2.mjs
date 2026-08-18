@@ -58,9 +58,9 @@ ${DOC_LOOK}
 
 ${FACES}
 
-PLACE. A cubicle row in an ordinary open-plan office, mid-morning: low fabric partitions, a desk with a CLOSED laptop, stacked folders, a mug of pens, a small cactus. The camera stands in the aisle. Nothing legible on any surface.
+PLACE. A bright, slightly dated open-plan office with light-grey walls and pale-blue fabric partitions, mid-morning: a desk with a CLOSED laptop, stacked folders, a mug of pens, a small succulent, a water cooler at the end of the aisle. The camera stands in the aisle. Nothing legible on any surface.
 
-PEOPLE. GREG, the manager: wiry, mid-fifties, a long thin face, neatly side-parted grey hair, a tucked-in checked shirt, reading glasses pushed up on his head. Warm, loud, completely oblivious. KEVIN, at the desk: late twenties, a soft round face, short dark curly hair, a sweater vest over a shirt, a man who freezes when praised. DEV, one cubicle over: thirties, heavy dark-rimmed glasses, a cardigan, the office's designated truth-teller, never looks up from the closed folder he is annotating.
+PEOPLE. PAT, the manager: a stocky woman in her early sixties with a broad, friendly, unremarkable face, short permed grey hair, round glasses on a beaded chain, a floral blouse under an open cardigan. Warm, loud, completely oblivious. KEVIN, at the desk: late twenties, a soft round face, short dark curly hair, a plain navy zip-up over a t-shirt, a man who freezes when praised. LENA, one desk over: forties, a square, unremarkable face, box braids tied back, a mustard jumper, the office's designated truth-teller, never looks up from the closed folder she is annotating.
 
 ${HOOK}
 
@@ -71,12 +71,12 @@ ${GLANCE}
 ${SPEECH_RULE}
 
 BEATS.
-0-2s. GREG, leaning over Kevin's partition, delighted, mid-conversation already: "Kevin! The new headshot. On the profile."
-2-7s. GREG, warmer still: "I love it. Very, very professional." KEVIN freezes with a pen in his hand. A long beat. Carefully, not turning round: "...Thanks."
-7-13s. GREG, warming up, gesturing at the air: "And the suit. Kevin. When do you ever wear a suit?"
-13-18s. KEVIN, after a pause, very quietly: "Weddings." GREG, delighted: "Ha! Weddings."
-18-23s. GREG, patting the partition twice, starting down the aisle toward DEV, expansive: "It's a great photo. Very forward-looking. Whatever it's for."
-23-27s. GREG, reaching DEV, in a low proud aside: "Great kid. Going places." DEV, flat, without looking up: "He is, Greg." (This aside is trimmable garnish; the scene stands without it.)
+0-2s. PAT, leaning over Kevin's partition, delighted, mid-conversation already: "Kevin! The new headshot. On the profile."
+2-7s. PAT, warmer still: "I love it. Very, very professional." KEVIN freezes with a pen in his hand. A long beat. Carefully, not turning round: "...Thanks."
+7-13s. PAT, warming up, gesturing at the air: "And the suit. Kevin. When do you ever wear a suit?"
+13-18s. KEVIN, after a pause, very quietly: "Weddings." PAT, delighted: "Ha! Weddings."
+18-23s. PAT, patting the partition twice, starting down the aisle toward LENA, expansive: "It's a great photo. Very forward-looking. Whatever it's for."
+23-27s. PAT, reaching LENA, in a low proud aside: "Great kid. Going places." LENA, flat, without looking up: "He is, Pat." (This aside is trimmable garnish; the scene stands without it.)
 27-30s. The camera, planted in the aisle the whole time, whip-pans back to KEVIN at his desk. No more dialogue. KEVIN turns a flat, held look into the lens and holds it to the end of the clip.
 
 ${NO_SCREENS}
@@ -155,7 +155,7 @@ ${FACES}
 
 PLACE. A corner of an ordinary open-plan office, mid-afternoon: low fabric partitions, desks with monitors all turned away from camera and one closed laptop, a wheeled office plant, a wall clock with plain hands. The camera stands in the aisle like a crew that has been there all week. No green ring, badge or circle graphic and no printed photograph, profile picture or image of any person appears anywhere in this video: the ring Sandra has put on her photo exists only in the dialogue and is never shown, drawn or suggested visually.
 
-PEOPLE. MARTIN, the manager: short and stocky, late fifties, bald on top with a neat monk's fringe of brown hair, a short-sleeved shirt with a lanyard and a completely blank white card. Wounded rather than angry, holding a mug he never drinks from. ROSA, at the nearest desk: a broad, open, unremarkable face, mid-forties, hair in a loose ponytail, a denim shirt, annotating a paper form, does not stop working at any point. SAM, one desk over: thirties, a long narrow face, headphones around his neck, a flat unhurried voice.
+PEOPLE. MARTIN, the manager: tall and thin, early sixties, a full head of neatly combed silver hair, a long, lined, unremarkable face that resembles no actor, television character or real person, deep-set eyes behind gold wire-rimmed glasses, a mustard sweater-vest over a pale striped shirt, no lanyard. Wounded rather than angry, holding a mug he never drinks from. ROSA, at the nearest desk: a broad, open, unremarkable face, mid-forties, hair in a loose ponytail, a denim shirt, annotating a paper form, does not stop working at any point. SAM, one desk over: thirties, a long narrow face, headphones around his neck, a flat unhurried voice.
 
 ${HOOK}
 
