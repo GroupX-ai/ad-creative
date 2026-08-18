@@ -329,3 +329,96 @@ What changed after the sections above, all verified by API read-back:
 - **Google removed `VIDEO_ACTION` campaigns in API v25.** Video-for-conversions is now
   Demand Gen (`advertising_channel_type: DEMAND_GEN`), whose targeting lives on the ad group,
   not the campaign, and which requires `contains_eu_political_advertising`.
+
+
+## Update 2026-08-18 (late): retargeting built, Google now counts sales from Stripe
+
+### Google conversions come from Stripe now, not the browser
+
+The browser tag was the only thing telling Google Ads a click had turned into money, and it
+was losing them. Against $70.39 of Google spend, the tag had booked **one** purchase into
+"All conversions" and **zero** into the "Conversions" column, which is the one Smart Bidding
+actually optimises against. Both campaigns run Maximize Conversions, so they were bidding
+on a number that read zero.
+
+Stripe already had the answer: the checkout writes `gclid` (and `gbraid`/`wbraid`) into the
+charge metadata, so every paid registration can be matched back to the click that produced it.
+
+- New conversion action **"ESA Purchase (Stripe import)"** `7725254582`, type `UPLOAD_CLICKS`,
+  category `PURCHASE`, `MANY_PER_CLICK`, primary and counting into "Conversions". Its origin
+  reads back as `WEBSITE`, which matters: the campaigns' biddable goal is `PURCHASE/WEBSITE`,
+  so an action landing on any other origin would have been ignored by bidding.
+- Uploader lives in the vault repo: `scripts/esacard-google-offline-conversions.mjs`.
+  Dry run by default, `--live` to apply, matching `google-ads-manage.mjs`.
+- First live upload 2026-08-18: 2 conversions, $78, both real Stripe sales.
+
+### Three traps found doing it
+
+- **`ConversionUploadService.UploadClickConversions` is closed to new accounts.** It returns
+  `CUSTOMER_NOT_ALLOWLISTED_FOR_THIS_FEATURE` and points at the **Data Manager API**
+  (`datamanager.googleapis.com/v1/events:ingest`). Data Manager takes **no** `developer-token`
+  and **no** `login-customer-id`: headers on an ingest call are ignored outright, and the
+  account path goes in the `destinations[].operatingAccount` object instead. Its
+  `productDestinationId` is the conversion action id.
+- **`include_in_conversions_metric` is immutable on create.** It is derived from
+  `primary_for_goal`; sending it explicitly fails with `IMMUTABLE_FIELD`.
+- **Every v25 campaign create now requires `contains_eu_political_advertising`**, and
+  `start_date` is gone from the campaign create payload entirely.
+
+### The two "Google sales" were one person
+
+Worth recording, because the platform number and the Stripe number disagreed and the
+reconciliation changed the answer. Stripe showed two $39 charges attributed to Google. They
+carry the **same `gclid`, the same click timestamp, the same landing page**, and emails one
+character apart (`…@aol.com` and `…@aol.co`). That is one visitor, one click, who paid twice
+after mistyping their email. Google counting it once was correct behaviour, not a tracking
+gap. Any "cost per sale" for Google that treats those as two customers is wrong.
+
+### Google Display retargeting: live, dormant on purpose
+
+Campaign `24145157187`, **$8.00/day**, US only, Maximize Conversions, Display network only.
+Ad group `199028378869` targets the "All visitors (AdWords)" list and **excludes** "All
+Converters". One responsive display ad: the two 1200x628 ESA Card banners already in the
+account, the four best-performing squares from `2026-08-14-spelled-out/` uploaded as assets,
+the logo, and headline/description copy lifted verbatim from the live Search RSAs so no new
+claim ships.
+
+**It will not serve yet.** Google needs 100 people in a list before Display remarketing
+delivers; the list holds 32. Nothing to fix, it simply starts spending when the list fills.
+
+A responsive display ad **requires** a 1.91:1 landscape image. Our ESA creative is only
+square (1:1) and vertical (0.56:1), and all of it is text-heavy, so cropping would cut the
+headline. The two 1200x628 banners already in the Google account are what unblocked this.
+**If a future Display batch is wanted, it needs landscape masters made on purpose.**
+
+### Meta retargeting: blocked before it starts
+
+The ad account has **never accepted Meta's Custom Audience terms of service**, so
+`POST /act_3530109303824417/customaudiences` fails every time with
+`(#2663) Terms of service has not been accepted`. No custom audience of any kind can be
+created until someone with account access accepts at
+`facebook.com/customaudiences/app/tos/?act=3530109303824417`. This blocks retargeting
+entirely; it is not a code problem and no API call works around it.
+
+Two other things to know before that unblocks:
+
+- **`subtype` is no longer accepted on customaudiences in v25.** It errors with
+  "The parameter 'subtype' is not supported in the current API version"; the audience type is
+  inferred from the rule.
+- **Pixel volume is below Meta's floor.** 765 PageViews, 36 ViewContent, 24 InitiateCheckout
+  and 12 Purchase in the last 30 days, against a 1,000-person minimum for a website audience.
+  Website audiences do backfill from pixel history on creation, so accepting the terms today
+  still starts the clock sooner than waiting.
+
+### Creative to use when Meta retargeting unblocks
+
+From lifetime Meta insights, purchases are the only ranking that matters here:
+
+| Ad | Spend | Clicks | CTR | Checkouts | Purchases |
+| --- | --- | --- | --- | --- | --- |
+| IMG p2-offer-square | $29.53 | 59 | 5.99% | 8 | 3 |
+| IMG p6-forever-square | $6.78 | 23 | 12.23% | 2 | 2 |
+| IMG p1-carry-vertical | $40.17 | 105 | 7.30% | 6 | 0 |
+
+`p2-offer-square` and `p6-forever-square` are the two that have actually produced sales, and
+both lead with the offer rather than the story. They are the retargeting set.
