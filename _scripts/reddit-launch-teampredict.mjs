@@ -67,6 +67,7 @@ const COMMUNITIES = [
 const RAW = "https://raw.githubusercontent.com/GroupX-ai/ad-creative/main";
 const B8 = `${RAW}/teampredict/2026-08-13-paid-launch`;
 const V9 = `${RAW}/teampredict/2026-08-13-paid-launch-video`;
+const V10 = `${RAW}/teampredict/2026-08-18-office-skits`;
 
 // ---------------------------------------------------------------------------
 // Reporting note, learned the expensive way on 2026-08-14.
@@ -170,6 +171,17 @@ const VIDEOS = [
    "Everyone uses this on their own team. I use it on my competitors."],
 ];
 
+// Batch-10 mockumentary skits, added 2026-08-18 on Robby's "use all of these in
+// the paid ads". Same VIDEO creative shape, different source directory.
+const SKITS = [
+  ["w1", "farewell-party", "1080p-captioned",
+   "He planned the farewell party before the resignation. The signals were that obvious."],
+  ["w2", "exit-interview", "1080p-captioned",
+   "The exit interview is where you learn everything. Too late."],
+  ["w3", "gone-quiet", "1080p-captioned",
+   "Forty memes a day, then one thumbs up. People go quiet before they resign."],
+];
+
 // Reddit gets the clean no-logo renders throughout. The post is already branded
 // with the author handle, and a pasted wordmark on top of that reads as an
 // advert twice over, which is the fastest way to lose the comment thread.
@@ -182,12 +194,12 @@ function bannerCreative([id, slug, shape, headline]) {
   };
 }
 
-function videoCreative([id, slug, suffix, headline]) {
+function videoCreative([id, slug, suffix, headline], dir = V9) {
   return {
     type: "VIDEO",
     headline,
-    video: { media: { type: "URL", url: `${V9}/teampredict-${id}-${slug}-${suffix}.mp4` } },
-    thumbnail: { media: { type: "URL", url: `${V9}/thumbnails/teampredict-${id}-${slug}-thumb.png` } },
+    video: { media: { type: "URL", url: `${dir}/teampredict-${id}-${slug}-${suffix}.mp4` } },
+    thumbnail: { media: { type: "URL", url: `${dir}/thumbnails/teampredict-${id}-${slug}-thumb.png` } },
     destination: { type: "URL", url: utm(`${id}-${slug}`), call_to_action: "Sign Up" },
   };
 }
@@ -202,6 +214,11 @@ const ASSETS = [
     slug: `${v[0]}-${v[1]}`,
     name: `TP ${v[0].toUpperCase()} ${v[1]}`,
     creative: videoCreative(v),
+  })),
+  ...SKITS.map((v) => ({
+    slug: `${v[0]}-${v[1]}`,
+    name: `TP ${v[0].toUpperCase()} ${v[1]}`,
+    creative: videoCreative(v, V10),
   })),
 ];
 
