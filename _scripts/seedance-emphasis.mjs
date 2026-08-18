@@ -128,6 +128,12 @@ export const EMPHASIS = {
   "teampredict-v4-pizza-party": ["pizza", "valued", "anywhere", "accepted", "offer"],
   "teampredict-v5-psychic": ["quit", "photo", "skills", "linkedin", "dollars", "person"],
   "teampredict-v6-my-competitors": ["competitors", "polishing", "email", "call", "boss", "free"],
+
+  // ── batch 10, the mockumentary skits. Same logic as batch 9: punch the SIGNAL
+  //    words a sound-off scroller needs, plus the turn word of each joke.
+  "teampredict-w1-farewell-party": ["farewell", "party", "resigned", "headline", "skills", "headshot", "weeks", "cake", "marble"],
+  "teampredict-w2-exit-interview": ["exit", "interviews", "everything", "coffee", "march", "sure", "question"],
+  "teampredict-w3-gone-quiet": ["marcus", "memes", "thumbs", "quiet", "resign", "focused"],
 };
 
 // Resolve an ad id from a file path, tolerating the -fixed / -trimmed / -1080p suffixes.
