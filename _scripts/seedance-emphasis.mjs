@@ -116,6 +116,15 @@ export const EMPHASIS = {
   "u8-drama": ["dramatic", "crisis", "emotional", "support", "animal", "card", "flawless", "take"],
   "u9-supervisor": ["supervises", "judgement", "emotional", "support", "animal", "card", "personality"],
 
+  // ── ESA Card heart-tug batch (2026-08-18) ──
+  // Same treatment as the d/e slice-of-life set: the brand phrase is emphasised
+  // wherever it falls, plus each clip's emotional turn.
+  "h1-old-bones": ["fourteen", "stairs", "garden", "emotional", "support", "animal", "card", "go", "see"],
+  "h2-visiting-nana": ["sunday", "him", "emotional", "support", "animal", "card", "week", "find", "her"],
+  "h3-night-shift": ["twelve", "hours", "hates", "emotional", "support", "animal", "card", "naps", "fine"],
+  "h4-pick-up-day": ["seven", "days", "apart", "emotional", "support", "animal", "card", "never", "door"],
+  "h5-half-day": ["half", "day", "early", "mum", "emotional", "support", "animal", "card", "famous", "home"],
+
   // ── batch 6, BitPredict on Reddit ──
   // "crypto" is emphasised in every BitPredict ad: it is the one word that tells a
   // scroller with the sound off what this is even about, and Robby asked for it in
