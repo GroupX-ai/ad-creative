@@ -34,7 +34,8 @@ All ten uploaded 2026-08-13, public, `selfDeclaredMadeForKids: no`. Uploaded as 
 | `e4-cottage` | Six hours in the car for this |
 | `e5-haircut` | His first ever haircut |
 
-Seven more added 2026-08-18, the UGC talking-head batch (see its section below):
+Seven more queued 2026-08-19, the UGC talking-head batch (first publish attempt on
+2026-08-18 errored, see the batch section below):
 
 | clip | title |
 | --- | --- |
@@ -283,7 +284,7 @@ Where all seven went:
 | TikTok Ads | 7 ads ENABLED in ad group `1873787389986961` (inside the $300 Aug burst, no budget change), in TikTok review. Ad ids `1873853579899330`, `1873853579907426`, `1873853579915586`, `1873853609550177`, `1873853609559361`, `1873853609567521`, `1873853609576769`. |
 | Meta | 7 video ads ACTIVE in the Purchase ad set `120247870160610605`. Ad ids `120247887769790605`, `120247887770690605`, `120247887771830605`, `120247887773130605`, `120247887774150605`, `120247887775530605`, `120247887777190605`. Creatives: GET_OFFER, AI-disclosure opt-in, `utm_content=UGC <id>`. |
 | TikTok organic | 7 posts, one every two days at 16:00 UTC, 2026-08-23 → 2026-09-04, picking up where the d/e run ends (2026-08-22). Same settings as that run: direct-post, public, comments on, AI-generated label, `brand_organic_toggle` on. Postiz ids `cmsyivxl002aoqi0y0r4vkbv1` … `cmsyivy8i02auqi0yb7ue9mir`. |
-| YouTube | 7 published 2026-08-18 as Shorts, hook-line titles, selling description (offer + esacard.com; the honesty block lives on the landing pages, where policy requires it), `selfDeclaredMadeForKids: no`. Postiz ids `cmsyiwfqb02awqi0yd6c8bq2n` … `cmsyiwgco02b2qi0y8d9774u6`. |
+| YouTube | **Not live yet.** All 7 publish attempts on 2026-08-18 (plus a lone retry) errored instantly in Postiz; TikTok on the same account worked, so it is YouTube-specific, most likely the shared YouTube API quota or an expired connection (unverified, Postiz hides the error payload). Rescheduled for 2026-08-19 07:30-08:30 UTC, ten minutes apart, right after YouTube's quota reset (Postiz ids `cmsyj4oeg0000p70yh6e0pezv` … `cmsyj4p0e0006p70ymngvoybk`). If they error again, the Postiz YouTube connection needs a manual reconnect. Demand Gen wiring follows once the videos are live. |
 
 Order of clips in the id lists above: u1, u2, u4, u5, u6, u8, u9.
 
