@@ -1,0 +1,18 @@
+{
+  "ranAt": "2026-08-18T03:00:47.883Z",
+  "model": "bytedance/seedance-2.5/text-to-video",
+  "duration": "30",
+  "resolution": "720p",
+  "estimatedSpendUsd": 14.08,
+  "ok": [
+    {
+      "id": "teampredict-w2-exit-interview",
+      "company": "teampredict",
+      "seed": 1495117235,
+      "sourceUrl": "https://v3b.fal.media/files/b/0aa6c75e/NMo_9vjs2-CPUm_N-iWpb_video.mp4",
+      "raw": "/home/user/ad-creative/teampredict/2026-08-18-office-skits/teampredict-w2-exit-interview-720p.mp4",
+      "upscaled": "/home/user/ad-creative/teampredict/2026-08-18-office-skits/teampredict-w2-exit-interview-1080p.mp4"
+    }
+  ],
+  "failed": []
+}
