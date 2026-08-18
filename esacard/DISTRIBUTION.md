@@ -55,6 +55,11 @@ is fal's storage API: `POST https://rest.alpha.fal.ai/storage/upload/initiate` w
 Four platforms live, **$32.88/day combined = $1,000/month**, which is the total Robby set
 across every ad account.
 
+**Superseded 2026-08-18.** The table below is the launch-day split, kept for history.
+Current state: Meta raised to $30.00/day on Robby's instruction, TikTok live at $20.00/day
+(August burst, approved separately), so the combined total is **$69.00/day (~$2,098/month)**
+across five platforms. Details in "Update 2026-08-18" below.
+
 | platform | campaign | daily | monthly | optimising for | creative |
 | --- | --- | --- | --- | --- | --- |
 | Meta | `ESA Card \| Meta \| US \| Cold \| Sales` | $13.88 | $422 | InitiateCheckout | 20 images + 10 videos |
@@ -92,10 +97,14 @@ $1,000 on Meta alone would come closer to a real read.
 Google defaults to PRESENCE now rather than the older "presence or interest", so no US-interested
 foreign traffic is bought. Both campaigns were explicitly set anyway.
 
-**Meta will not accept `location_types: ["home"]` alone at country level.** Writing it returns
-`success: true` and reads back as `["frequently_in", "home"]`, with Advantage+ Audience on or
-off. Both values mean physically in the United States, so there is no interest-based leakage;
-Meta simply does not expose a stricter country-level setting.
+**Meta location_types is dead. Never write it again.** (Updated 2026-08-18.) At launch,
+writing `location_types: ["home"]` read back as `["frequently_in", "home"]`. On 2026-08-17
+Meta removed those legacy options platform-wide, and any ad set still carrying them blocks
+on republish with error **#1870194** ("location targeting option that has been removed") -
+which is exactly what hit the paused InitiateCheckout ad set. The fix, applied to both ESA
+ad sets on 2026-08-18: send `geo_locations: {"countries": ["US"]}` with NO `location_types`
+key; Meta then stamps its new canonical default `["frequently_in", "home", "recent"]`. All
+of these mean physically in the United States; there is no stricter country-level setting.
 
 ### Why nothing optimises for Purchase except Google
 
@@ -176,8 +185,37 @@ not an edit). The two earlier clicks-optimised ad groups are archived.
 
 ## TikTok
 
-Deferred by Robby to a separate conversation with the TikTok Ads connector. The self-contained
-prompt is in `esacard/TIKTOK-HANDOFF.md`.
+Live since 2026-08-17, launched by the handoff session from `esacard/TIKTOK-HANDOFF.md`.
+Campaign `1873787435137170` "ESA Card | TikTok | US | Web Conversions", ad group
+`1873787389986961` "ESA | US | 25-55 | Broad | Purchase | $300 Aug burst" at $20.00/day,
+US only, TikTok placement only, optimising for Complete Payment (`SHOPPING`) on pixel
+`7673594860187762706`. All 10 videos run as ads under the `@esacard` identity
+(`BC_AUTH_TT`; the account is too new for custom identities), CTA Shop now, landing page
+tagged `utm_source=tiktok`.
+
+## Update 2026-08-18: Meta location fix, two-ad-set test, $30/day
+
+What changed since launch, all verified by API read-back:
+
+- **Meta broke, then got fixed.** The 2026-08-17 handoff session paused the
+  InitiateCheckout ad set and created a Purchase ad set (`120247870160610605`) per Robby's
+  optimise-for-purchases decision. The paused ad set then blocked on Meta error #1870194
+  because Meta removed the legacy `location_types` values (see the location note above).
+  Fixed 2026-08-18: `location_types` stripped from both ad sets, the InitiateCheckout ad
+  set reactivated, and the 13 newer `o-c*` ads mirrored into it so **both ad sets run the
+  same 43 ads** and compete: InitiateCheckout (25-65) vs Purchase (18-65), same campaign.
+- **Meta budget doubled to $30.00/day** on Robby's instruction, set at campaign level
+  (`120247770766350605`), so the two ad sets compete for one budget.
+- **Google's MISCONFIGURED / "missing a goal" state is cleared.** Cause was the PURCHASE
+  conversion goal sitting `biddable: false`; fixed 2026-08-14 via
+  `campaignConversionGoals:mutate` + `customerConversionGoals:mutate`. Read-back
+  2026-08-18: Search `primary_status: LIMITED` (`BIDDING_STRATEGY_LEARNING`), Demand Gen
+  `LEARNING`. Both normal for new Maximize Conversions campaigns.
+- **Reddit now optimises for Purchase.** The 2026-08-17 session archived the PageVisit
+  bootstrap ad group and created `2570690648253263407` "ESA | Pet + Housing | Purchase",
+  ACTIVE at $5.00/day (the goal is immutable, so this was the planned rebuild).
+- **Current daily spend: Meta $30 + Google Search $9 + Demand Gen $5 + Reddit $5 +
+  TikTok $20 = $69.00/day.**
 
 ## Two API facts worth keeping
 
