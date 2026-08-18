@@ -123,7 +123,7 @@ export const EMPHASIS = {
   "h2-visiting-nana": ["sunday", "him", "emotional", "support", "animal", "card", "week", "find", "her"],
   "h3-night-shift": ["twelve", "hours", "hates", "emotional", "support", "animal", "card", "naps", "fine"],
   "h4-pick-up-day": ["seven", "days", "apart", "emotional", "support", "animal", "card", "never", "door"],
-  "h5-half-day": ["half", "day", "early", "mum", "emotional", "support", "animal", "card", "famous", "home"],
+  "h5-half-day": ["half", "day", "early", "mom", "emotional", "support", "animal", "card", "famous", "home"],
 
   // ── batch 6, BitPredict on Reddit ──
   // "crypto" is emphasised in every BitPredict ad: it is the one word that tells a
