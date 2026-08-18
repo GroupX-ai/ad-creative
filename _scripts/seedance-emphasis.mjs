@@ -146,6 +146,12 @@ export const EMPHASIS = {
   "teampredict-w1-farewell-party": ["farewell", "party", "resigned", "headline", "skills", "headshot", "weeks", "cake", "marble"],
   "teampredict-w2-exit-interview": ["exit", "interviews", "everything", "coffee", "march", "sure", "question"],
   "teampredict-w3-gone-quiet": ["marcus", "memes", "thumbs", "quiet", "resign", "focused"],
+
+  // ── batch 11, on-the-nose round: the LinkedIn signals ARE the dialogue, so
+  //    the emphasised words are the signals themselves plus each turn word.
+  "teampredict-w4-new-headshot": ["kevin", "headshot", "professional", "suit", "weddings", "photo", "going", "places"],
+  "teampredict-w5-conspiracy-board": ["monday", "headline", "skills", "photo", "endorsed", "founder", "vision", "bigger", "steve"],
+  "teampredict-w6-green-ring": ["sandra", "green", "ring", "dentist", "public", "everything", "point"],
 };
 
 // Resolve an ad id from a file path, tolerating the -fixed / -trimmed / -1080p suffixes.
