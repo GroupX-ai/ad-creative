@@ -822,20 +822,30 @@ so 23 views should have produced about 4; getting 0 is roughly a 0.8% chance by 
 what Feed serves, and the vertical cuts of these same two designs sold nothing, so no vertical
 cuts were made.
 
-### The seven video ads are NOT built, and cannot be through this connector
+### The seven video ads: blocked on one connector, shipped through another
 
 `ads_creative_upload_video` and `ads_creative_upload_image` both return **"This tool is new and
-is being gradually rolled out across ad accounts"** for `act_3530109303824417`. Images route
-around it: `ads_create_creative` takes a public `image_url` directly and needs no upload, which
-is how all 10 banners went in from raw GitHub links. **Video has no such route**, because a
-video creative requires a `video_id` that only exists after an upload into the account.
+is being gradually rolled out across ad accounts"** for `act_3530109303824417`, on every attempt.
+Images route around it, because `ads_create_creative` takes a public `image_url` and needs no
+upload; that is how all 10 banners went in from raw GitHub links. Video has no such field: a
+video creative requires a `video_id` that only an upload produces.
 
-So the seven clips are rendered, QA'd and committed, and need a human to attach them in Ads
-Manager (duplicate the ad set, swap the creative). Files:
-`2026-08-19-weird-animals/w*-1080p.mp4`. Copy to paste is the same UGC block the u-clips use:
-primary "A wallet card with your pet's photo, a certificate for the wall, and a registration
-number anyone can look up. / About three minutes from start to inbox. $39 once, no renewal
-fees.", headline "Registered in about three minutes", GET_OFFER.
+**The route that worked was a different connector entirely.** Porter Metrics carries
+`facebook_ads.video_upload`, which takes a public URL and returns a `video_id`, against the same
+ad account. Robby authorized Porter's Facebook connection on 2026-08-19 and all seven uploaded
+first try. The creatives were then built with the Meta connector as usual, so they carry the
+`@esa_card` Instagram identity, the AI-disclosure opt-in and the GET_OFFER button exactly like
+the banners; only the upload step went through Porter.
+
+| | |
+| --- | --- |
+| Video ads | 7, all PAUSED, in ad set `120247924771890605`: `120247925337160605` w1-turtle, `120247925337670605` w2-alligator, `120247925337880605` w3-hedgehog, `120247925338100605` w4-chicken, `120247925339020605` w5-raven, `120247925339360605` w6-snake, `120247925339650605` w7-dog-and-human |
+| Video ids | `1101739619464658`, `2116266675942666`, `1624194779225097`, `1599995124820806`, `2693003377836170`, `1094615333225879`, `1428542502557022` — all `video_status: ready` |
+| Assets | the `*-1080p-captioned.mp4` cuts, one-word captions burned in, marigold `#f2a93b` emphasis |
+| Copy (all 7) | the u-clip block verbatim: "A wallet card with your pet's photo..." / headline "Registered in about three minutes" / GET_OFFER |
+| Thumbnails | frame at 0.30s from each captioned clip, before the first caption word, committed as `*-thumb.jpg` |
+
+The ad set now holds **17 ads: 10 banners and 7 videos**, all PAUSED, campaign PAUSED.
 
 ### Two API facts worth keeping
 
