@@ -385,7 +385,7 @@ Robby: *"Why do most ads have a British accent if we are literally targeting USA
 | TikTok organic | Four posts, 2026-09-07 → 09-13, 16:00 UTC, interleaved with the v1 slots. Postiz ids `cmsyu502w00elp70yuprzywot` … `cmsyu50gz00eop70ybl3qggkp`. |
 | YouTube | Four scheduled 2026-08-21 07:30-08:30 UTC, the day after the v1 batch. Postiz ids `cmsyu5ydo00epp70y4653glch` … `cmsyu5yrk00esp70yjn59vatb`. |
 | Google Demand Gen | Still pending the YouTube uploads, same as v1. Wire with `--video <id>,...` once they are public. |
-| TikTok Ads | Deliberately skipped. The burst ad group already runs 17 ads on $20/day and ends 2026-09-02; adding four more buys no readable signal. |
+| TikTok Ads | **Added 2026-08-19** when Robby asked for all four ad accounts. Four ads ENABLED in ad group `1873787389986961`: `1873935414737185` (h1), `1873935414744257` (h2), `1873935415390369` (h3), `1873935415398657` (h5). `need_audit: false`, so they entered delivery immediately. Was skipped on 08-18 for budget dilution; that concern stands (21 ads now share $20/day) but Robby's instruction overrides it. |
 
 **Eight scheduled Postiz posts still carry the British cut and cannot be deleted through the
 API** (Postiz exposes no delete). They need deleting by hand in the Postiz app: YouTube
@@ -397,6 +397,36 @@ several minutes after the merge.** A `curl` of the merged h1 returned the old Br
 byte count while `git cat-file` on `origin/main` returned the new one. Reddit and Meta both
 fetch the URL themselves, so a CDN cache would have silently re-shipped the version we just
 replaced. Both launches used fal-hosted URLs instead, which are content-addressed per upload.
+
+### Google disapproved the WHOLE account, 2026-08-19: ENABLING_DISHONEST_BEHAVIOR
+
+Found while verifying the re-shoot. **All 10 ads across all 4 Google campaigns are DISAPPROVED**
+under `ENABLING_DISHONEST_BEHAVIOR`, type `PROHIBITED`, review status `REVIEWED`:
+
+| campaign | ads | state |
+| --- | --- | --- |
+| `24128254302` Search US Core | 3 RSAs | all DISAPPROVED, campaign `HAS_ADS_LIMITED_BY_POLICY` |
+| `24134740046` Demand Gen US YouTube | 5 (4 video + the new banner ad `821379915095`) | all DISAPPROVED |
+| `24145157187` Display US Retargeting | 1 | DISAPPROVED |
+| `24155823820` Search Intl EN Core | 1 | DISAPPROVED |
+
+The four video ads read APPROVED earlier the same day, so this was a sweep, not a creation-time
+rejection. Delivery stopped dead: $0.00 and zero impressions on 2026-08-19 against $12.78 the
+day before.
+
+**What it cost to learn:** $74.65 across 2026-08-13 to 08-18, 3,043 impressions, 37 clicks,
+**0 conversions**. Google has never produced a sale for this product.
+
+**Why this is not a copy problem.** `ENABLING_DISHONEST_BEHAVIOR` is Google's fake-documents and
+academic-cheating policy, not misrepresentation. It is a judgement about what the product IS, so
+no headline rewrite addresses it, and every ad in the account tripped the same topic at once
+including three Search RSAs whose copy carries the honesty headlines. The API returns
+`evidences: []`, so the specific triggering element (ad, landing page, or product category) is
+only visible in the Ads UI.
+
+**What NOT to do**, from `docs/ads/policy.md` section 8: do not resubmit or mass-appeal
+unchanged creative (repeated appeals on unchanged ads is itself what escalates to account
+review), and never open a second Google account.
 
 ### Three Reddit API facts this batch established
 
