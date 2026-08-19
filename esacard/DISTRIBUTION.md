@@ -671,3 +671,68 @@ spending slowly on the right event beats a bigger pool spending fast on the wron
 
 Meta $84 (US $50, Intl $12, Metro $12, Retargeting $10) + Google $28 + Reddit $5 +
 TikTok $20 = **$137.00/day (~$4,165/month)**.
+
+
+## Update 2026-08-19: TikTok tests built (paused), Facebook Page seeded
+
+### TikTok: both of Nadav's tests exist, both paused
+
+The TikTok connector became available, so the two tests are now built there as well, inside
+the existing campaign `1873787435137170`:
+
+| Ad group | id | Targeting |
+| --- | --- | --- |
+| `ESA \| Intl EN \| 25-55 \| Broad \| Purchase` | `1873936511498562` | GB, CA, AU, IE, DE, NL, FR |
+| `ESA \| US Metro \| 25-55 \| Broad \| Purchase` | `1873936560213265` | Miami, New York, Los Angeles, Chicago, San Francisco, Boston, Seattle, Dallas, Atlanta |
+
+Five shared video ads each (`h1-old-bones`, `h2-visiting-nana`, `h3-night-shift`,
+`h5-half-day`, `u9-supervisor`), reusing the existing `video_id`s and the BC identity, with
+`utm_campaign` set to `esa-card-tiktok-intl-en` and `esa-card-tiktok-us-metro` so the two
+read separately in Stripe.
+
+**Both are PAUSED and that is a decision, not an oversight.** TikTok's minimum ad group
+budget is **$20.00/day**, exactly what the US ad group runs. There is no way to run these
+"at a secondary budget below the US" the way Nadav asked, so switching both on adds $40/day
+and takes total spend from $137 to $177. That is Robby's call.
+
+One more asymmetry worth stating: **TikTok has no household-income targeting.** Meta's metro
+test narrows to the top 25% of ZIP codes by income; TikTok's can only target the cities. The
+two metro tests are therefore not the same test, and should not be compared to each other.
+
+**The British-cast accident is now an asset.** The fourteen heart-tug clips shipped with
+British casts and streets against a US-only campaign, which is what prompted the
+name-the-market lint rule. Those same clips are the right creative for the UK, the largest
+English market outside the US at 92,740 monthly searches.
+
+### TikTok API facts
+
+- **`identity_type: BC_AUTH_TT` requires `identity_authorized_bc_id`** on every creative.
+  Without it, `ad_create` fails with `"Identity_type" and "Identity_bc_ID" don't match.`
+- **`BID_TYPE_NO_BID` requires `pacing: PACING_MODE_SMOOTH`.** Omitting pacing fails with
+  "Accelerated delivery under No-Bid strategy is not supported for this objective."
+- **Location ids are GeoNames ids** and countries and US cities both work, confirmed by
+  read-back. US is `6252001`; UK `2635167`, Canada `6251999`, Australia `2077456`, Ireland
+  `2963597`, Germany `2921044`, Netherlands `2750405`, France `3017382`.
+- **`bc_asset_get` has no `DOMAIN` asset type**, so TikTok domain verification cannot be
+  checked through the API at all. Allowed values are ADVERTISER, CATALOG, LEAD,
+  MANAGED_BUSINESS_ACCOUNT, PIXEL, STOREFRONT, TIKTOK_SHOP, TT_ACCOUNT.
+
+### Facebook Page seeded
+
+The "0 fans and no content" note was **stale**: the Page already had its logo and cover, 5
+followers, an about line and the Animals & Pets category. What it lacked was posts, its only
+two being the profile and cover uploads from 2026-08-13.
+
+Four posts scheduled through Postiz (integration `cmsryk3c402k9ml0ymlzb9pjz`) at 15:00 UTC
+on 08-19, 08-21, 08-23 and 08-25, each pairing an approved square with copy taken only from
+the approved claims bank: `p5-three-minutes-square` (three minutes), `p2-offer-square` ($39
+once), `p9-verifiable-square` (the number anyone can check), `p6-forever-square` (no
+renewals). No new claim, no disclaimer, no acronym outside the domain.
+
+### One thing found and not acted on
+
+**Meta's pixel has Automatic Advanced Matching switched off** (`enable_automatic_matching:
+false` on pixel `4305407809789395`). Turning it on would raise Meta's match rate by letting
+the browser pixel hash form fields it already sees, which is directly relevant given how
+much of this week went into attribution. Left alone deliberately: it changes what customer
+data flows to Meta, and that is a call to make on purpose rather than in passing.
