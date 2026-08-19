@@ -736,3 +736,58 @@ false` on pixel `4305407809789395`). Turning it on would raise Meta's match rate
 the browser pixel hash form fields it already sees, which is directly relevant given how
 much of this week went into attribution. Left alone deliberately: it changes what customer
 data flows to Meta, and that is a call to make on purpose rather than in passing.
+
+
+## Update 2026-08-19: Reddit brought up to full creative parity
+
+Robby raised Reddit to **$15.00/day** and asked whether all the ads were there. They were not:
+the live Purchase ad group held **40 ads against Meta's 54 creatives**. Two whole batches had
+never been pushed to Reddit.
+
+**Added, 20 ads:**
+
+- **The 7 UGC clips** (`u1-better-id`, `u2-wallet-ranked`, `u4-roommate`, `u5-photoshoot`,
+  `u6-rabbit`, `u8-drama`, `u9-supervisor`)
+- **The 13 organic-cute clips** (`o-c1-reveal-long/short`, `o-c2-wallet-short`,
+  `o-c3-catpapers-short`, `o-c4-birthday-long/short`, `o-c5-photobattle-short`,
+  `o-c6-giftmom-long/short`, `o-c7-committee-short`, `o-c8-golden-short`, `o-c9-wall-short`,
+  `o-c10-3min-short`)
+
+Every headline is the clip's **approved Meta title, reused verbatim**, so no new claim shipped.
+
+**Live group now holds 60 ads:** 56 running (36 ACTIVE, 16 PROCESSING, 4 PENDING_APPROVAL)
+and 4 deliberately paused. A diff against Meta now comes back clean: Reddit carries
+everything Meta carries, plus `n1-grey-muzzle-square` and `n2-moving-box-square`, which are
+Reddit-only.
+
+The 4 paused ones are **not** a gap. They are the older `h1/h2/h3/h5` heart-tug ads,
+superseded by the `… US` re-cuts, already correctly paused by the earlier session.
+
+### How to add a Reddit ad when the source file is not in this repo
+
+The organic-cute clips exist nowhere in this repo, only as uploaded Meta videos, and the UGC
+clips have no thumbnails committed. Both were solved the same way, and it is the pattern to
+reuse:
+
+**Meta is a usable CDN for this.** `GET /act_<id>/advideos?fields=source,thumbnails{uri,is_preferred,width,height}`
+returns a publicly fetchable `source` URL for the video and a `thumbnails` list for the
+poster frame. Reddit's `structured_posts/jobs` takes both as `{"type":"URL","url":…}` and
+fetches them itself, so nothing has to be re-uploaded or re-encoded. Verified end to end on
+all 20.
+
+The name mapping is not obvious: an ad called `VID o-c2-wallet-short` on Meta is a video
+titled **`organic-esa-c2-wallet-short`**, and `UGC u1-better-id` is **`UGC u1-better-id captioned`**.
+
+**`thumbnail` is a required property on a Reddit VIDEO creative.** Omitting it fails with
+`'thumbnail' is a required property`, so a video with no poster frame cannot be posted at all.
+There is no ffmpeg in the agent environment, which is exactly why the Meta thumbnail route
+matters.
+
+### The real problem is now dilution, not coverage
+
+**56 running ads against $15.00/day is about $0.27 per ad per day.** The heart-tug section
+above already flagged this at 36 ads on $5/day; more creative has made it worse, not better.
+Reddit cannot produce a readable read on any single creative at this budget: the question
+"which ad works on Reddit" is unanswerable until either the budget rises a lot or the ad
+count is cut to the handful worth testing. Coverage is now complete, and that is a different
+thing from useful.
