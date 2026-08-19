@@ -112,6 +112,19 @@ export const EMPHASIS = {
   "u4-roommate": ["roommate", "nothing", "mailman", "emotional", "support", "animal", "card", "proud"],
   "u5-photoshoot": ["photo", "photoshoot", "takes", "emotional", "support", "animal", "card", "obviously"],
   "u6-rabbit": ["rabbit", "emotional", "support", "animal", "card", "coffee", "better", "id", "ears"],
+
+  // ── ESA Card weird-animals batch (2026-08-19) ──
+  // These are u6-rabbit's script with the animal swapped, so the emphasis list is
+  // u6-rabbit's with the animal noun and the closing tag word swapped to match.
+  // "three" and "half" punch automatically via NUMBER_WORDS, same as the rabbit.
+  "w1-turtle": ["turtle", "emotional", "support", "animal", "card", "coffee", "better", "id", "face"],
+  "w2-alligator": ["alligator", "emotional", "support", "animal", "card", "coffee", "better", "id", "smile"],
+  "w3-hedgehog": ["hedgehog", "emotional", "support", "animal", "card", "coffee", "better", "id", "nose"],
+  "w4-chicken": ["chicken", "emotional", "support", "animal", "card", "coffee", "better", "id", "face"],
+  "w5-raven": ["raven", "emotional", "support", "animal", "card", "coffee", "better", "id", "him"],
+  "w6-snake": ["snake", "emotional", "support", "animal", "card", "coffee", "better", "id", "face"],
+  // The corgi speaks, so the hook word is "myself" and the punchline is "including him".
+  "w7-dog-and-human": ["myself", "emotional", "support", "animal", "card", "human's", "coffee", "better", "id", "including", "him"],
   "u7-fourteen": ["fourteen", "best", "decision", "emotional", "support", "animal", "card", "distinguished"],
   "u8-drama": ["dramatic", "crisis", "emotional", "support", "animal", "card", "flawless", "take"],
   "u9-supervisor": ["supervises", "judgement", "emotional", "support", "animal", "card", "personality"],
