@@ -128,13 +128,39 @@ const analogFor = (slugs) => BANNERS.filter((b) => slugs.includes(b.product) && 
 const VALIDATE = ["phone-validation", "email-validation", "ip-lookup", "phone-scrub", "fraud-detection", "phone-spam-check"];
 const ENRICH = ["skip-trace", "b2b-contact-append", "prospect-search", "reverse-ip-append", "mobile-finder"];
 
+// Geo tiers, weighted off Stripe card country on every succeeded charge since 2024-01-01
+// (466 charges, $95,135 gross). Run `node _scripts/geo-vs-revenue.mjs` to re-derive.
+//
+//   T1  US                       57.5% of all revenue ever, 120 paying customers
+//   T2  CA GB AU IE NZ           12.2%, 41 customers, English, same creative, no rework
+//   T3  IL AE HK MX PL DE FR     22.5%, 53 customers, five languages, NOT built here
+//
+// One tier per campaign, never two tiers in one campaign. Campaign budget optimisation
+// buys the cheapest impression that fits, and a T2 CPM is a fraction of a US CPM, so a
+// mixed campaign spends nearly everything outside the US. That is the exact mechanism that
+// put 81% of this account's last-90-day impressions into the UAE.
+const GEO_TIERS = {
+  t1: ["US"],
+  t2: ["CA", "GB", "AU", "IE", "NZ"],
+};
+
 const CAMPAIGNS = [
   {
     key: "platform",
     name: "1L | META | COLD | Platform | Trials",
-    dailyBudget: 3000,
+    dailyBudget: 2000,
     adSets: [
       { name: "1L | platform | US Broad | Auto", targeting: "broad", ads: BANNERS.filter((b) => b.product === "platform") },
+    ],
+  },
+  {
+    // Carved out of the platform campaign, not added on top: Meta's share of the ramp stays
+    // $87/day. 11.5% of the Meta budget for 12.2% of the revenue, which is the whole point.
+    key: "tier2",
+    name: "1L | META | COLD | Platform T2 | Trials",
+    dailyBudget: 1000,
+    adSets: [
+      { name: "1L | platform | T2 English Broad | Auto", targeting: "broad-t2", ads: BANNERS.filter((b) => b.product === "platform") },
     ],
   },
   {
@@ -173,10 +199,10 @@ const PLACEMENTS = {
   device_platforms: JSON.stringify(["mobile", "desktop"]),
 };
 
-// US only. The old "Global" ad sets sent 74% of impressions to the UAE.
+// Geo comes off the tier table above, never a hand-typed country list here.
 function targetingSpec(kind) {
   const base = {
-    geo_locations: { countries: ["US"] },
+    geo_locations: { countries: kind.endsWith("-t2") ? GEO_TIERS.t2 : GEO_TIERS.t1 },
     age_min: 25,
     age_max: 60,
     ...JSON.parse(JSON.stringify({})),
