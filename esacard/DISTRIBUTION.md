@@ -791,3 +791,61 @@ Reddit cannot produce a readable read on any single creative at this budget: the
 "which ad works on Reddit" is unanswerable until either the budget rises a lot or the ad
 count is cut to the handful worth testing. Coverage is now complete, and that is a different
 thing from useful.
+
+## Update 2026-08-19: weird-animals duplicate campaign built (paused)
+
+Robby, after the three ads carrying the account's sales were identified:
+
+> Please create a duplicate our `ESA Card | Meta | US | Cold | Checkouts` campaign with
+> entirely new ads based on these best performing ones: IMG p2-offer-square, IMG
+> p6-forever-square, UGC u6-rabbit. Exact same video ad script and exact banner style and text
+> - but replace them with weird animals.
+
+Assets and prompts: `2026-08-19-weird-animals/`. This is a controlled test, not a new
+direction: layout, hexes, headline, subheadline, button label, corner wordmark, the three
+spoken lines, the kitchen table and the fifteen-second beat sheet are all held fixed. **The
+animal is the only variable.**
+
+| | |
+| --- | --- |
+| Campaign | `ESA Card \| Meta \| US \| Cold \| Weird Animals \| Checkouts` `120247924736580605`, OUTCOME_SALES, CBO $50.00/day, highest volume, **PAUSED** |
+| Ad set | `ESA \| US \| Weird Animals \| InitiateCheckout` `120247924771890605`, OFFSITE_CONVERSIONS → `INITIATED_CHECKOUT` on pixel `4305407809789395`, US, 25-65 as an Advantage+ suggestion, frequently_in + home, 7-day click / 1-day view, Advantage+ placements, **PAUSED** |
+| Ads | 10 image ads, all PAUSED: `120247924820550605` w1-turtle, `120247924821340605` w2-alligator, `120247924822210605` w3-raven, `120247924822640605` w4-snake, `120247924823100605` w5-pig, `120247924825740605` w6-egg, `120247924827120605` w7-hedgehog, `120247924828500605` w8-chicken, `120247924837160605` w9-axolotl, `120247924846540605` w10-cockatoo |
+| Copy (all 10) | Concept 5 verbatim: "$39 once. That is the whole price." / headline "$39 once. Never again." / description "No subscription, ever" / GET_OFFER / `@esa_card` IG identity / AI disclosure opt-in |
+| Links | `https://www.esacard.com/?utm_source=meta&utm_medium=paid_social&utm_campaign=ESA%20Card%20%7C%20Meta%20%7C%20US%20%7C%20Cold%20%7C%20Weird%20Animals%20%7C%20Checkouts&utm_content=IMG%20<id>` |
+
+**Square only, deliberately.** `p2-offer-square` and `p6-forever-square` carry 5 of the
+account's 6 sales. A `platform_position` breakdown of the source campaign puts Facebook Feed at
+4 of those 6 sales on $111.27, Facebook Reels at 1 on $44.35, and Instagram Reels at **0
+checkouts on 23 landing page views**. Feed converts landing page views to checkouts at 18.8%,
+so 23 views should have produced about 4; getting 0 is roughly a 0.8% chance by luck. Square is
+what Feed serves, and the vertical cuts of these same two designs sold nothing, so no vertical
+cuts were made.
+
+### The seven video ads are NOT built, and cannot be through this connector
+
+`ads_creative_upload_video` and `ads_creative_upload_image` both return **"This tool is new and
+is being gradually rolled out across ad accounts"** for `act_3530109303824417`. Images route
+around it: `ads_create_creative` takes a public `image_url` directly and needs no upload, which
+is how all 10 banners went in from raw GitHub links. **Video has no such route**, because a
+video creative requires a `video_id` that only exists after an upload into the account.
+
+So the seven clips are rendered, QA'd and committed, and need a human to attach them in Ads
+Manager (duplicate the ad set, swap the creative). Files:
+`2026-08-19-weird-animals/w*-1080p.mp4`. Copy to paste is the same UGC block the u-clips use:
+primary "A wallet card with your pet's photo, a certificate for the wall, and a registration
+number anyone can look up. / About three minutes from start to inbox. $39 once, no renewal
+fees.", headline "Registered in about three minutes", GET_OFFER.
+
+### Two API facts worth keeping
+
+**`custom_event_type` for InitiateCheckout is `INITIATED_CHECKOUT`, not `INITIATE_CHECKOUT`.**
+The pixel event is named `InitiateCheckout`, so the wrong enum is the natural guess. It does
+not fail as a validation error naming the field: it returns a generic
+`{"error_category":"INTERNAL","is_retryable":true}`, which reads like a transient Meta fault and
+invites blind retries. Four ad-set creates were burned before the enum was the suspect. **Treat
+a retryable INTERNAL on a create as a possible bad enum, not just bad luck.**
+
+**A gated MCP upload tool is not the same as a gated capability.** The image half of this build
+shipped anyway because `ads_create_creative` accepts `image_url`. Check for a field that takes
+the asset directly before reporting a platform as blocked.

@@ -79,3 +79,45 @@ and the certification page says "rabbits, birds, and other household animals are
 The copy across all 17 assets promises exactly: the card, the certificate, the photo on it,
 about three minutes, $39 once, and no renewal fees. Nothing about housing, landlords, access,
 travel, therapists, evaluations or legal standing appears in either direction.
+
+## QA, and what it caught
+
+Every clip was watched as a contact sheet and transcribed, and every suspect line was
+cross-checked on a second engine (ElevenLabs Scribe v2 and Whisper) before being called a
+defect. Four of the seven first takes had audio faults and **all four were confirmed by both
+engines**, so none was a transcription artifact.
+
+| clip | first-take fault | fix | cost |
+| --- | --- | --- | --- |
+| w1-turtle | opening verb was a non-word ("Repegged" / "Repeditated") | re-roll, take 2 | $6.93 |
+| w2-alligator | "emotional support **amble** card" | re-roll, take 2 | $6.93 |
+| w4-chicken | said the four-word phrase twice, then the script | **muted 3.30-5.15s** | **$0** |
+| w5-raven | "emotional **rescue** animal card" | re-rolls, take 3 | $13.86 |
+| w3, w6, w7 | none | shipped as rendered | $0 |
+
+Three things worth carrying forward.
+
+**The $0 mute repair works on an improvised repetition, not just a garbled tail.** The chicken
+said "emotional support animal card" a second time between beats 1 and 2. Both boundaries of
+the stray line sat inside existing silence gaps (3.13-3.49s and 4.95-5.38s), so muting
+3.30-5.15s removed it inaudibly. It re-transcribes clean on both the 720p and the 1080p, and
+saved a $6.93 re-roll that was not guaranteed to be better.
+
+**A re-roll is still a coin flip, and this batch called it.** The raven's take 2 fixed the
+banned "rescue" substitution and then broke the opening verb instead ("Reten tried" / "Rattan
+tried", two engines agreeing). Fixing one named failure at a time is what let the second one
+through; take 3 named **both** words in one correction block and came back exact on both
+engines. Take 2 was discarded. Every superseded take is in `_takes/take1/` (gitignored).
+
+**Take 1 was the better picture twice, and lost anyway.** The turtle's first take had a warmer
+payoff and the alligator's first take had a much stronger composition, with the animal's head
+right beside the speaker's face. Both were discarded, because a garbled product name in the
+hook is not a thing taste can outvote.
+
+No clip contains on-screen text, a recognisable real person, a readable card, or a spoken claim
+outside the bank. All seven are 15.07s, 720x1280, 24fps, with audio.
+
+## Cost
+
+$79.44 of fal spend: $2.00 for ten banners, $48.51 for seven 15s clips at 720p, $27.72 for four
+re-rolls, $1.19 for eleven 1080p upscales, about $0.02 of transcription.

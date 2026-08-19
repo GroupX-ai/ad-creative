@@ -1,0 +1,63 @@
+{
+  "model": "bytedance/seedance-2.5/text-to-video",
+  "resolution": "720p",
+  "duration": 15,
+  "results": [
+    {
+      "ok": true,
+      "value": {
+        "id": "w1-turtle",
+        "seed": 538185851,
+        "sourceUrl": "https://v3b.fal.media/files/b/0aa7041c/aNg6LpzwpiNlNSVdFQuJi_video.mp4"
+      }
+    },
+    {
+      "ok": true,
+      "value": {
+        "id": "w2-alligator",
+        "seed": 1608069248,
+        "sourceUrl": "https://v3b.fal.media/files/b/0aa70408/aS-4yvolqhHLDUHB21j_8_video.mp4"
+      }
+    },
+    {
+      "ok": true,
+      "value": {
+        "id": "w3-hedgehog",
+        "seed": 947502282,
+        "sourceUrl": "https://v3b.fal.media/files/b/0aa7041f/z5M2Ib34DKxsO-OnQxbLB_video.mp4"
+      }
+    },
+    {
+      "ok": true,
+      "value": {
+        "id": "w4-chicken",
+        "seed": 1808630576,
+        "sourceUrl": "https://v3b.fal.media/files/b/0aa7041b/i-zN5FBScbhYps0W3TQ0C_video.mp4"
+      }
+    },
+    {
+      "ok": true,
+      "value": {
+        "id": "w5-raven",
+        "seed": 1498844293,
+        "sourceUrl": "https://v3b.fal.media/files/b/0aa7044d/nagtZVClWpwz_JDpFZx0l_video.mp4"
+      }
+    },
+    {
+      "ok": true,
+      "value": {
+        "id": "w6-snake",
+        "seed": 346614193,
+        "sourceUrl": "https://v3b.fal.media/files/b/0aa70432/ACecWJFNWQS1jEQQ0wPk__video.mp4"
+      }
+    },
+    {
+      "ok": true,
+      "value": {
+        "id": "w7-dog-and-human",
+        "seed": 401598770,
+        "sourceUrl": "https://v3b.fal.media/files/b/0aa7043c/nkXUbh68uAYhhnq1gL_kL_video.mp4"
+      }
+    }
+  ]
+}
