@@ -1,0 +1,109 @@
+{
+  "ranAt": "2026-08-19T23:51:33.333Z",
+  "account": "act_2333276243857483",
+  "campaigns": [
+    {
+      "id": "52572891623921",
+      "name": "1L | META | COLD | Platform | Trials"
+    }
+  ],
+  "adSets": [
+    {
+      "id": "52572891863121",
+      "name": "1L | platform | US Broad | Auto",
+      "campaign": "1L | META | COLD | Platform | Trials"
+    }
+  ],
+  "ads": [
+    {
+      "id": "52572891954921",
+      "name": "1L | platform | b13c01 forty-one-keys | square",
+      "file": "1lookup/2026-08-19-b13-product-banners/1lookup-platform-b13c01-square.png",
+      "link": "https://www.1lookup.io/?utm_source=facebook&utm_medium=cpc&utm_campaign=1l-meta-cold-platform-trials&utm_content=b13c01-square&utm_term=platform"
+    },
+    {
+      "id": "52572891959721",
+      "name": "1L | platform | b13c01 forty-one-keys | landscape",
+      "file": "1lookup/2026-08-19-b13-product-banners/1lookup-platform-b13c01-landscape.png",
+      "link": "https://www.1lookup.io/?utm_source=facebook&utm_medium=cpc&utm_campaign=1l-meta-cold-platform-trials&utm_content=b13c01-landscape&utm_term=platform"
+    },
+    {
+      "id": "52572891961121",
+      "name": "1L | platform | b13c01 forty-one-keys | vertical",
+      "file": "1lookup/2026-08-19-b13-product-banners/1lookup-platform-b13c01-vertical.png",
+      "link": "https://www.1lookup.io/?utm_source=facebook&utm_medium=cpc&utm_campaign=1l-meta-cold-platform-trials&utm_content=b13c01-vertical&utm_term=platform"
+    },
+    {
+      "id": "52572891964721",
+      "name": "1L | platform | b13c02 vendor-graveyard | square",
+      "file": "1lookup/2026-08-19-b13-product-banners/1lookup-platform-b13c02-square.png",
+      "link": "https://www.1lookup.io/?utm_source=facebook&utm_medium=cpc&utm_campaign=1l-meta-cold-platform-trials&utm_content=b13c02-square&utm_term=platform"
+    },
+    {
+      "id": "52572891967721",
+      "name": "1L | platform | b13c02 vendor-graveyard | landscape",
+      "file": "1lookup/2026-08-19-b13-product-banners/1lookup-platform-b13c02-landscape.png",
+      "link": "https://www.1lookup.io/?utm_source=facebook&utm_medium=cpc&utm_campaign=1l-meta-cold-platform-trials&utm_content=b13c02-landscape&utm_term=platform"
+    },
+    {
+      "id": "52572891977521",
+      "name": "1L | platform | b13c02 vendor-graveyard | vertical",
+      "file": "1lookup/2026-08-19-b13-product-banners/1lookup-platform-b13c02-vertical.png",
+      "link": "https://www.1lookup.io/?utm_source=facebook&utm_medium=cpc&utm_campaign=1l-meta-cold-platform-trials&utm_content=b13c02-vertical&utm_term=platform"
+    },
+    {
+      "id": "52572891984321",
+      "name": "1L | platform | b13c03 hazard | square",
+      "file": "1lookup/2026-08-19-b13-product-banners/1lookup-platform-b13c03-square.png",
+      "link": "https://www.1lookup.io/?utm_source=facebook&utm_medium=cpc&utm_campaign=1l-meta-cold-platform-trials&utm_content=b13c03-square&utm_term=platform"
+    },
+    {
+      "id": "52572891992321",
+      "name": "1L | platform | b13c03 hazard | landscape",
+      "file": "1lookup/2026-08-19-b13-product-banners/1lookup-platform-b13c03-landscape.png",
+      "link": "https://www.1lookup.io/?utm_source=facebook&utm_medium=cpc&utm_campaign=1l-meta-cold-platform-trials&utm_content=b13c03-landscape&utm_term=platform"
+    },
+    {
+      "id": "52572892006721",
+      "name": "1L | platform | b13c03 hazard | vertical",
+      "file": "1lookup/2026-08-19-b13-product-banners/1lookup-platform-b13c03-vertical.png",
+      "link": "https://www.1lookup.io/?utm_source=facebook&utm_medium=cpc&utm_campaign=1l-meta-cold-platform-trials&utm_content=b13c03-vertical&utm_term=platform"
+    },
+    {
+      "id": "52572892022521",
+      "name": "1L | platform | b13c04 one-balance | square",
+      "file": "1lookup/2026-08-19-b13-product-banners/1lookup-platform-b13c04-square.png",
+      "link": "https://www.1lookup.io/?utm_source=facebook&utm_medium=cpc&utm_campaign=1l-meta-cold-platform-trials&utm_content=b13c04-square&utm_term=platform"
+    },
+    {
+      "id": "52572892024521",
+      "name": "1L | platform | b13c04 one-balance | landscape",
+      "file": "1lookup/2026-08-19-b13-product-banners/1lookup-platform-b13c04-landscape.png",
+      "link": "https://www.1lookup.io/?utm_source=facebook&utm_medium=cpc&utm_campaign=1l-meta-cold-platform-trials&utm_content=b13c04-landscape&utm_term=platform"
+    },
+    {
+      "id": "52572892029121",
+      "name": "1L | platform | b13c04 one-balance | vertical",
+      "file": "1lookup/2026-08-19-b13-product-banners/1lookup-platform-b13c04-vertical.png",
+      "link": "https://www.1lookup.io/?utm_source=facebook&utm_medium=cpc&utm_campaign=1l-meta-cold-platform-trials&utm_content=b13c04-vertical&utm_term=platform"
+    },
+    {
+      "id": "52572892038321",
+      "name": "1L | platform | b13c05 stop-paying | square",
+      "file": "1lookup/2026-08-19-b13-product-banners/1lookup-platform-b13c05-square.png",
+      "link": "https://www.1lookup.io/?utm_source=facebook&utm_medium=cpc&utm_campaign=1l-meta-cold-platform-trials&utm_content=b13c05-square&utm_term=platform"
+    },
+    {
+      "id": "52572892049121",
+      "name": "1L | platform | b13c05 stop-paying | landscape",
+      "file": "1lookup/2026-08-19-b13-product-banners/1lookup-platform-b13c05-landscape.png",
+      "link": "https://www.1lookup.io/?utm_source=facebook&utm_medium=cpc&utm_campaign=1l-meta-cold-platform-trials&utm_content=b13c05-landscape&utm_term=platform"
+    },
+    {
+      "id": "52572892059921",
+      "name": "1L | platform | b13c05 stop-paying | vertical",
+      "file": "1lookup/2026-08-19-b13-product-banners/1lookup-platform-b13c05-vertical.png",
+      "link": "https://www.1lookup.io/?utm_source=facebook&utm_medium=cpc&utm_campaign=1l-meta-cold-platform-trials&utm_content=b13c05-vertical&utm_term=platform"
+    }
+  ]
+}

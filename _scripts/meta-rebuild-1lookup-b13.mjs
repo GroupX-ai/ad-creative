@@ -103,7 +103,12 @@ function api(method, edge, body) {
   const raw = execFileSync("curl", args, { encoding: "utf8", maxBuffer: 1 << 26 });
   let j;
   try { j = JSON.parse(raw); } catch { throw new Error(`non-JSON from ${edge}: ${raw.slice(0, 300)}`); }
-  if (j.error) throw new Error(`${edge}: ${j.error.message} (code ${j.error.code})`);
+  if (j.error) {
+    const e = j.error;
+    throw new Error(`${edge}: ${e.message} (code ${e.code}${e.error_subcode ? "/" + e.error_subcode : ""})` +
+      `${e.error_user_title ? " | " + e.error_user_title : ""}${e.error_user_msg ? " | " + e.error_user_msg : ""}` +
+      `${e.error_data ? " | " + JSON.stringify(e.error_data) : ""}`);
+  }
   return j;
 }
 
@@ -194,7 +199,9 @@ const CAMPAIGNS = [
 // two that produced 70.7% of the account's clicks and zero trials.
 const PLACEMENTS = {
   publisher_platforms: JSON.stringify(["facebook", "instagram"]),
-  facebook_positions: JSON.stringify(["feed", "video_feeds", "story", "instream_video", "facebook_reels"]),
+  // "video_feeds" was removed here on 2026-08-19: Graph v25.0 rejects the whole ad set with
+  // "Facebook video feeds placement is deprecated for this API version".
+  facebook_positions: JSON.stringify(["feed", "story", "instream_video", "facebook_reels"]),
   instagram_positions: JSON.stringify(["stream", "story", "reels", "explore"]),
   device_platforms: JSON.stringify(["mobile", "desktop"]),
 };
@@ -220,9 +227,43 @@ function targetingSpec(kind) {
     delete base.age_min;
     delete base.age_max;
   }
+  // Graph v25.0 refuses an ad set that does not state this either way ("Advantage Audience
+  // Flag Required"). On a broad ad set the whole point is to let Meta find the buyer, so it
+  // is on; on the interest and retargeting ad sets it is off, because there the named
+  // audience IS the test and an expansion would quietly erase it.
+  base.targeting_automation = { advantage_audience: kind.startsWith("broad") ? 1 : 0 };
+  // Advantage+ audience refuses any maximum age under 65, so the broad ad sets carry a
+  // 25-65 band and the interest ad sets keep the tighter 25-60 working-age band.
+  if (base.targeting_automation.advantage_audience === 1 && base.age_max) base.age_max = 65;
   const spec = { ...base, ...Object.fromEntries(Object.entries(PLACEMENTS).map(([k, v]) => [k, JSON.parse(v)])) };
   return JSON.stringify(spec);
 }
+
+// Meta deprecated the single `standard_enhancements` opt-out in v25.0 ("Including standard
+// enhancements field in creative has been deprecated"), so every feature is now named one by
+// one. This matters more here than convenience: 1Lookup's own guardrail bans invented numbers
+// and third-party marks, and the text features rewrite the headline and the body copy while
+// the image features restyle a rendered banner. An ad that ships an auto-written claim is a
+// claim violation whoever typed it.
+// Graph v25.0 accepts exactly seven keys here and rejects the whole creative on any other,
+// naming the allowed set in the error: IG_VIDEO_NATIVE_SUBTITLE, IMAGE_ANIMATION,
+// PRODUCT_BROWSING, PRODUCT_METADATA_AUTOMATION, PROFILE_CARD,
+// STANDARD_ENHANCEMENTS_CATALOG, TEXT_OVERLAY_TRANSLATION. The four that can touch this
+// account's creative are opted out below.
+//
+// WHAT THIS NO LONGER BUYS US, and somebody has to know it: the old blanket
+// `standard_enhancements: OPT_OUT` also covered Meta's headline and body-copy rewriting, and
+// v25.0 exposes no key for that here. 1Lookup's guardrail bans invented numbers and accuracy
+// claims, and an auto-written headline is a claim violation whoever typed it. So the copy
+// setting has to be checked in Ads Manager under the ad's "Advantage+ creative" toggles after
+// a build, and that check is not something this script can do for you.
+const OPT_OUT_FEATURES = [
+  "IMAGE_ANIMATION",          // do not animate a rendered banner
+  "IG_VIDEO_NATIVE_SUBTITLE", // every video ships burned one-word captions already
+  "TEXT_OVERLAY_TRANSLATION", // do not translate burned-in English text
+  "PROFILE_CARD",
+];
+const OPT_OUTS = Object.fromEntries(OPT_OUT_FEATURES.map((f) => [f, { enroll_status: "OPT_OUT" }]));
 
 // ---------------------------------------------------------------- image upload
 const uploaded = new Map();
@@ -245,6 +286,36 @@ function uploadImage(file) {
   return h;
 }
 
+// ---------------------------------------------------------------- idempotency
+// A half-finished run used to leave orphan campaigns behind and a re-run created a second
+// copy of everything, which is how an ad account ends up with 200 ads nobody can read. Every
+// object is now looked up by its exact name first, so re-running after a failure resumes
+// instead of duplicating.
+const nameCache = new Map();
+function existing(edge, key) {
+  if (!nameCache.has(key)) {
+    const rows = [];
+    let after = null;
+    do {
+      // api() appends its own query string, so the fields go in the body, never in the edge:
+      // an edge that already carries a "?" produces a second one and Graph answers
+      // "(#200) Provide valid app ID" because it never parses the token.
+      const page = api("GET", edge, { fields: "id,name", limit: 200, ...(after ? { after } : {}) });
+      rows.push(...(page.data ?? []));
+      after = page.paging?.cursors?.after && page.data?.length ? page.paging.cursors.after : null;
+    } while (after);
+    nameCache.set(key, rows);
+  }
+  return nameCache.get(key);
+}
+function findOrCreate(edge, cacheKey, name, body, label) {
+  const hit = existing(edge, cacheKey).find((r) => r.name === name);
+  if (hit) { log(`  reuse ${label} ${hit.id}  ${name}`); return { id: hit.id, reused: true }; }
+  const made = api("POST", edge, body);
+  if (LIVE) existing(edge, cacheKey).push({ id: made.id, name });
+  return made;
+}
+
 // ---------------------------------------------------------------- build
 const created = { campaigns: [], adSets: [], ads: [] };
 
@@ -252,7 +323,7 @@ for (const c of CAMPAIGNS) {
   if (ONLY && c.key !== ONLY) continue;
   log(`\n=== ${c.name}  $${(c.dailyBudget / 100).toFixed(2)}/day  PAUSED`);
 
-  const campaign = api("POST", `${ACCOUNT}/campaigns`, {
+  const campaign = findOrCreate(`${ACCOUNT}/campaigns`, "campaigns", c.name, {
     name: c.name,
     objective: "OUTCOME_SALES",
     status: "PAUSED",
@@ -261,13 +332,13 @@ for (const c of CAMPAIGNS) {
     // splitting it evenly across creative nobody has read yet.
     daily_budget: String(c.dailyBudget),
     bid_strategy: "LOWEST_COST_WITHOUT_CAP",
-  });
+  }, "campaign");
   created.campaigns.push({ id: campaign.id, name: c.name });
   log(`  campaign ${campaign.id}`);
 
   for (const s of c.adSets) {
     if (!s.ads.length) { log(`  (skip ${s.name}: no creative)`); continue; }
-    const adSet = api("POST", `${ACCOUNT}/adsets`, {
+    const adSet = findOrCreate(`${ACCOUNT}/adsets`, "adsets", s.name, {
       name: s.name,
       campaign_id: campaign.id,
       status: "PAUSED",
@@ -278,7 +349,7 @@ for (const c of CAMPAIGNS) {
       // Weekends are 29% of the days and 16% of the trials (Stripe, 365 days). Meta only
       // honours a schedule on a lifetime budget, so this is left for the operator rather
       // than half-applied here; the finding is recorded in the batch README.
-    });
+    }, "ad set");
     created.adSets.push({ id: adSet.id, name: s.name, campaign: c.name });
     log(`  ad set ${adSet.id}  ${s.name}  (${s.ads.length} concepts)`);
 
@@ -290,6 +361,10 @@ for (const c of CAMPAIGNS) {
         const assetId = b.id.match(/b\d+c\d{2}/)[0];
         const name = adName(b.product, assetId, b.concept, shape);
         const link = `${b.destination}?${utms(c.name, assetId, shape, b.product)}`;
+        // Check the ad before uploading the image: an existing ad means the upload, the
+        // creative and the ad were all already paid for on an earlier run.
+        const already = existing(`${ACCOUNT}/ads`, "ads").find((r) => r.name === name);
+        if (already) { log(`    reuse ad ${already.id}  ${name}`); created.ads.push({ id: already.id, name, file, link, reused: true }); continue; }
         const hashV = uploadImage(file);
 
         const creative = api("POST", `${ACCOUNT}/adcreatives`, {
@@ -308,11 +383,7 @@ for (const c of CAMPAIGNS) {
           }),
           // Belt and braces: url_tags survive even if the link ever gets rewritten.
           url_tags: utms(c.name, assetId, shape, b.product),
-          degrees_of_freedom_spec: JSON.stringify({
-            creative_features_spec: {
-              standard_enhancements: { enroll_status: "OPT_OUT" },
-            },
-          }),
+          degrees_of_freedom_spec: JSON.stringify({ creative_features_spec: OPT_OUTS }),
         });
 
         const ad = api("POST", `${ACCOUNT}/ads`, {
