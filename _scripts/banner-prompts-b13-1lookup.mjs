@@ -242,7 +242,12 @@ const PRODUCTS = [
     oneLiner: "ad library API covering four major ad platforms",
     headline: "See Every Ad They Are Running",
     sub: "Four ad libraries, one call, nothing found costs nothing.",
-    visual: "a dark API response card in monospace listing the fields running_ads, ad_count, platform, status and started." },
+    // Wave 1 rendered the real Meta, TikTok, Google and Microsoft marks in the four corners.
+    // The prompt already said "no company logos of any kind" and the model added them anyway,
+    // because a subheadline naming four ad platforms invites them. The playbook's own rule
+    // applies: prevent a prop with an exhaustive POSITIVE spec, never with a prohibition. So
+    // the four slots are now assigned something concrete and unbranded.
+    visual: "a dark API response card in monospace listing the fields running_ads, ad_count, platform, status and started, with four small plain dark rounded squares arranged around it, connected to the card by thin glowing cyan lines. Each of those four squares is completely empty: a plain dark rounded tile with a soft cyan edge glow and absolutely nothing inside it, no icon, no glyph, no letter, no symbol, no mark and no picture of any kind." },
   { slug: "tiktok-audience-demographics", family: "Social",
     oneLiner: "audience demographics API returning a creator's country split",
     headline: "Where Does Their Audience Actually Live?",

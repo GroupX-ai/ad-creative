@@ -67,6 +67,19 @@ inside the prompts module, one line per product.
   proved the model writes plausible-but-wrong values into any field it is allowed to fill, and
   a wrong product mechanic is worse than an empty one.
 
+### One wave-1 defect, and the rule it re-proved
+
+**`b13c32` ad-library-lookup rendered the real Meta, TikTok, Google and Microsoft marks** in
+four corner tiles. The prompt already ended with "no company logos of any kind" and the model
+added them anyway, because a subheadline naming four ad platforms invites them.
+
+The fix is the playbook's own rule, which this batch had applied everywhere except here:
+**prevent a prop with an exhaustive positive spec, never with a prohibition.** The four slots
+are now assigned something concrete ("a plain dark rounded tile with a soft cyan edge glow and
+absolutely nothing inside it, no icon, no glyph, no letter, no symbol, no mark") and the re-roll
+came back with four empty tiles. $0.40. Every other file in the batch was checked for the same
+failure and none has it.
+
 `banner-prompt-lint.mjs` enforces all of the above and runs **inside** the generator, so a
 prompt that would fabricate a feature chip, open on a disclaimer, quote an accuracy percentage
 or name a competitor cannot spend money. It returned 0 errors and 1 warning on this batch. The
