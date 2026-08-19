@@ -108,14 +108,64 @@ concrete generic physiognomy, then read it back and ask which real person it des
 | 12 clips, 15s, native 720p | $83.16 |
 | 3 re-rolls (2 fal rejections + 1 invented dialogue) | $20.79 |
 | 2 rejected outputs, money kept by fal | (included above) |
-| 12 upscales to 1080p | $1.30 |
-| Transcription, 15 clips | ~$0.05 |
-| **Total** | **~$105** |
+| 2 re-rolls found by the caption pass (rotation, inverted joke) | $13.86 |
+| 14 upscales to 1080p | $1.52 |
+| Transcription: QA, captions, and 3 passes to settle b13v03 | ~$0.13 |
+| **Total** | **~$120** |
+
+## Captions and end card, applied 2026-08-19 evening
+
+Robby asked whether the one-word subtitles had been added. They had not: the section below
+used to say "not yet applied" and that was the whole of it. Now every clip ships as
+`<name>-1080p-endcard-captioned.mp4`:
+
+- **A 2.2s branded end card**, appended first. This batch needs it more than any other,
+  because no clip speaks the brand name, so the card is the only place "1lookup" appears.
+- **One-word-at-a-time captions**, burned to pixels with libass off scribe-v2 word timings.
+  Three tiers, per `_scripts/seedance-emphasis.mjs`: plain white at base size, **brand cyan
+  one third larger** for numbers and this ad's punchline words, largest for the brand name
+  (which never fires in this batch, by design).
+- Captions are clamped to the end-card cut on all twelve, so nothing covers the wordmark.
+
+Emphasis lists were written per clip and kept to 3 to 6 words. Emphasise everything and
+nothing is emphasised.
+
+## Two defects the caption pass surfaced, both re-rolled
+
+Neither was found by the original QA. Both were found only because captioning forced a
+second, closer look at the finished pixels.
+
+| Clip | Defect | Fix |
+|---|---|---|
+| b13v12 platform | **The entire scene rendered landscape and rotated 90 degrees into the 1080x1920 frame.** Both actors lying on their side, ceiling on the right. The prompt said "vertical" three times and it was not enough: the *blocking* was horizontal (a man at a desk, a woman standing beside it), and the model composes what it reads, then turns the canvas to fit. | Re-blocked so the two stack top and bottom of the tall frame, plus an explicit FRAMING block. **Re-rolled clean**, $6.93. Roll 1 parked in `_rolls/` as `-ROTATED`. |
+| b13v03 prospect search | Script said "Four of them searched **it** once". The render says "searched **at** once", which inverts the joke: the premise is five bought seats sitting idle, and "at once" says they are all in use. Four independent scribe-v2 passes agree, so the model said it. | The line is now "Four of them used it one time", which cannot collapse into another phrase. **Re-rolled**, $6.93. Roll 1 parked in `_rolls/` as `-AT-ONCE`. |
+
+Re-roll seeds, since the run log for them does not survive (see below): b13v12 `699405333`,
+b13v03 `1463887598`.
+
+**The rule both of these re-prove, for the third time in this batch: a finding on one script
+is a finding on all twelve.** The render judge caught the rotation risk on b13v10 before
+rendering, and the fix was applied only to b13v10. The fal face rejections were the same
+shape. So the rotation check is now in the tooling rather than in this document:
+`seedance-prompt-lint.mjs` warns when a prompt has two or more people on camera and nothing
+says how they sit in the tall frame. It flags b13v05 and b13v06 today, both of which happened
+to render upright.
+
+Two tooling faults came out of doing this, both of the same shape: something that failed
+quietly instead of loudly.
+
+`seedance-generate.mjs` defaulted `--batch` to `2026-08-08-seedance-video`, so both re-rolls
+wrote their clips into the *first* batch's folder and **overwrote that batch's run log**,
+destroying the seeds and fal source URLs of the three clips in it. Restored from git.
+`--batch` is now required and the generator refuses to spend without it.
+
+`adIdFromPath()` also had to learn the `-endcard` and `720p` suffixes. It silently returned
+`...-1080p-endcard` for a captioned file, which missed the emphasis list and would have
+shipped every punchline word in plain white instead of failing loudly. All 114 existing
+emphasis keys still resolve.
 
 ## Not done here
 
 - **Nothing is live.** Standing rule: build paused, Robby flips.
-- Captions and the branded end card are a post step, not yet applied. Both are required before
-  these run anywhere, because no clip speaks the brand.
-- Burned-in captions must be read off the finished file, not off the transcript. Batch 12 burned
-  "SPAMCH" into three frames of a clip whose audio transcript read "spam" correctly.
+- b13v12's re-roll gave the adding machine a small lit digit display, which the prompt asked
+  not to have. Diegetic, in-scene, no claim attached, so it was not worth a third roll.

@@ -30,7 +30,18 @@ const has = (n) => argv.includes(`--${n}`);
 const DURATION = flag("duration", "30");
 const RESOLUTION = flag("resolution", "480p");
 const ONLY = flag("only", null);
-const BATCH = flag("batch", "2026-08-08-seedance-video");
+// No default batch. It used to default to "2026-08-08-seedance-video", which meant a
+// re-roll run without --batch wrote its clip into the FIRST batch's folder and overwrote
+// that batch's run log, destroying the seeds and fal source URLs of the three clips in it.
+// That happened on 2026-08-19 and had to be restored from git. A required flag cannot do
+// that; a default that silently points at somebody else's batch can.
+const BATCH = flag("batch", null);
+if (!BATCH) {
+  throw new Error(
+    "--batch is required, e.g. --batch 2026-08-19-b13-product-videos. Without it a run " +
+    "writes into another batch's folder and overwrites its run log.",
+  );
+}
 const CONCURRENCY = Number(flag("concurrency", "5"));
 const { ADS } = await import(`./${flag("prompts", "seedance-prompts.mjs")}`);
 

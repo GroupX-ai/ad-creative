@@ -182,7 +182,7 @@ export const ADS = [
       `CHARACTER. Mid-thirties, straight black hair to the shoulder, wide round face, heavy eyebrows, no makeup, a plain navy blazer over a t-shirt. She is at a desk on a sales floor with a low gray partition behind her and a floor-standing fan turning somewhere off to one side.`,
       `BEATS.`,
       `0-3s: Straight into the lens, flat and faintly disbelieving: "We bought five seats. For one list."`,
-      `3-6s: She holds up one hand and drops it again. "Four of them searched it once."`,
+      `3-6s: She holds up one hand and drops it again. "Four of them used it one time."`,
       `6-10s: "We are renting chairs. Nobody is sitting in them."`,
       `10-13s: More matter of fact, working it out for the viewer: "Or we pay two credits when we actually search."`,
       `13-15s: She raises her eyebrows once at the lens and reaches forward as if to stop the recording. The clip ends on the movement.`,
@@ -419,13 +419,15 @@ export const ADS = [
     prompt: [
       `A vertical phone video of a real budget conversation in a small company's finance corner. This is not an advertisement and must not look like one.`,
       `SETTING. A corner desk with a wire tray of paper, an old mechanical adding machine with a plain metal body and no display, a stapler, a mug with no printing on it, and a metal filing cabinet whose drawer label holders are empty, with a plant on top of it that has gone brown at the tips. A closed laptop. Beige wall, one window with the blind at half mast. Overhead fluorescents.`,
-      `CHARACTERS. A man in his fifties, reading glasses low on his nose, short-sleeved shirt, holding a sheet of paper that carries no legible writing. A woman in her early thirties, plain rust-colored sweater, standing beside the desk with her arms crossed loosely.`,
+      `CHARACTERS. A man in his fifties, reading glasses low on his nose, short-sleeved shirt, holding a sheet of paper that carries no legible writing. He is seated at the desk in the lower part of the frame, three-quarters turned away from the camera. A woman in her early thirties, plain rust-colored sweater, arms crossed loosely, standing further back in the room behind and above him so that her head sits in the upper third, so the two of them stack top and bottom of the tall frame rather than side by side.`,
       `BEATS.`,
       `0-3s: He is already reading down the page, flat and unhurried: "Eleven renewals. All of them data."`,
       `3-6s: She answers without defending it: "They are all different vendors, with their own logins and their own bills."`,
       `6-10s: He takes the glasses off. "Eleven balances. Every one runs out on a different Tuesday."`,
       `10-13s: She uncrosses her arms. "One key. One balance. Forty-one of these products."`,
-      `13-15s: He puts the paper down on the desk and leaves his hand flat on top of it. Hold.`,
+      `13-15s: He puts the paper down on the desk and leaves his hand flat on top of it. Hold.
+
+FRAMING. The frame is portrait, taller than it is wide, at every single moment. The camera is held upright in portrait orientation for the entire clip and is never turned on its side, never tilted to landscape, and never rotated at any point. The scene is composed for a tall narrow frame from the start: the two people are arranged one above the other in depth, never left and right across a wide frame. Heads point to the top of the frame and the floor is at the bottom throughout.`,
       `AUDIO. Diegetic only: paper being set down on a desk, the adding machine's keys under an idle finger, a filing cabinet somewhere, room tone. No music.`,
       ...common(SKETCH_LOOK),
     ].join("\n\n"),

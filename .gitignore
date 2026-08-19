@@ -82,3 +82,18 @@ teampredict/2026-08-18-office-skits-2/teampredict-w6-green-ring-1080p.mp4
 # (they are what the README's re-roll comparison refers to); their 1080p
 # upscales are not, at ~87 MB for takes that will never ship.
 */2026-08-18-product-videos/_rolls/*-1080p*.mp4
+
+# Batch 13 (2026-08-19) end-card intermediates. Same call as batches 2 and 10
+# above: the *-endcard-captioned.mp4 files are the deliverable and ARE committed;
+# these are the same clip with only the card appended and no captions, another
+# 119 MB of pure intermediate. Re-derive in seconds, no fal spend, with:
+#   cp <clip>-1080p.mp4 <clip>-1080p-endcard.mp4
+#   node _scripts/seedance-endcard.mjs \
+#     1lookup/2026-08-13-youtube-google-ads/_work/endcard.png <clip>-1080p-endcard.mp4
+*/2026-08-19-b13-product-videos/*-1080p-endcard.mp4
+
+# Batch 13 rejected rolls: the 720p takes ARE committed, because they are the
+# evidence for the README's two defect rows (a rotated frame and an inverted
+# joke) and someone will want to see them. Their 1080p upscales are not, at
+# ~30 MB for takes that will never ship.
+*/2026-08-19-b13-product-videos/_rolls/*-1080p*.mp4
