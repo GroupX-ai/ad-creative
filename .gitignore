@@ -82,3 +82,10 @@ teampredict/2026-08-18-office-skits-2/teampredict-w6-green-ring-1080p.mp4
 # (they are what the README's re-roll comparison refers to); their 1080p
 # upscales are not, at ~87 MB for takes that will never ship.
 */2026-08-18-product-videos/_rolls/*-1080p*.mp4
+
+# ESA Card weird-animals batch (2026-08-19). The *-1080p.mp4 files are the deliverable
+# and ARE committed; these are the intermediates and the discarded/backup takes:
+#   _takes/take1/ holds the pre-re-roll masters of w1, w2, w4 and w5, kept only so a
+#   worse second take can be discarded (batch 12: two of four re-rolls came back worse).
+esacard/2026-08-19-weird-animals/_takes/
+esacard/2026-08-19-weird-animals/*-take2-720p.mp4
