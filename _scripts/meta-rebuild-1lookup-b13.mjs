@@ -29,10 +29,14 @@
  * WHAT IT BUILDS. Four campaigns, each PAUSED, each with a small number of ad sets carrying a
  * budget big enough to read:
  *
- *   1L | META | COLD | Platform | Trials       $60/day  the 41-products platform pitch
- *   1L | META | COLD | Validate | Trials       $60/day  phone, email, IP, DNC, fraud
- *   1L | META | COLD | Enrich | Trials         $40/day  skip trace, append, prospecting
- *   1L | META | RETARGET | Platform | Trials   $20/day  site visitors, 90 days
+ *   1L | META | COLD | Platform | Trials       $30/day  the 41-products platform pitch
+ *   1L | META | COLD | Validate | Trials       $30/day  phone, email, IP, DNC, fraud
+ *   1L | META | COLD | Enrich | Trials         $17/day  skip trace, append, prospecting
+ *   1L | META | RETARGET | Platform | Trials   $10/day  site visitors, 90 days
+ *
+ * $87/day total, which is the week-4 steady-state Meta share of the $10K/month plan. Week 1
+ * is $25/day on the Platform campaign alone; the other three stay paused until the ramp gate
+ * clears. Do not flip all four on day one.
  *
  * OPTIMISATION EVENT, and this is the part that matters most. Stripe records about 0.6
  * card-saved trials a day across ALL sources. Meta needs roughly 50 conversions per ad set per
@@ -128,7 +132,7 @@ const CAMPAIGNS = [
   {
     key: "platform",
     name: "1L | META | COLD | Platform | Trials",
-    dailyBudget: 6000,
+    dailyBudget: 3000,
     adSets: [
       { name: "1L | platform | US Broad | Auto", targeting: "broad", ads: BANNERS.filter((b) => b.product === "platform") },
     ],
@@ -136,7 +140,7 @@ const CAMPAIGNS = [
   {
     key: "validate",
     name: "1L | META | COLD | Validate | Trials",
-    dailyBudget: 6000,
+    dailyBudget: 3000,
     adSets: [
       { name: "1L | validate | US Sales 25-54 | Auto", targeting: "sales", ads: byProduct(VALIDATE) },
       { name: "1L | analog | US Broad | Auto", targeting: "broad", ads: analogFor([...VALIDATE, ...ENRICH]) },
@@ -145,7 +149,7 @@ const CAMPAIGNS = [
   {
     key: "enrich",
     name: "1L | META | COLD | Enrich | Trials",
-    dailyBudget: 4000,
+    dailyBudget: 1700,
     adSets: [
       { name: "1L | enrich | US Sales 25-54 | Auto", targeting: "sales", ads: byProduct(ENRICH) },
     ],
@@ -153,7 +157,7 @@ const CAMPAIGNS = [
   {
     key: "retarget",
     name: "1L | META | RETARGET | Platform | Trials",
-    dailyBudget: 2000,
+    dailyBudget: 1000,
     adSets: [
       { name: "1L | platform | Retarget 90d | Auto", targeting: "retarget", ads: BANNERS.filter((b) => b.product === "platform") },
     ],
