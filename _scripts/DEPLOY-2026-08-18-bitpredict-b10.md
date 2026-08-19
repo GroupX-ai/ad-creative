@@ -52,6 +52,61 @@ the creative.
 
 The paragraph below records why they were built paused in the first place.
 
+### Review outcome: 6 of 8 cleared, 2 rejected (verified 2026-08-19 06:41 UTC)
+
+| | |
+|---|---|
+| ACTIVE | `c8` two-am-whisper, `c10` pulled-over, `c11` receipt-roll, `c12` caster-waits, `c13` the-needle, `c15` evidence-wall |
+| REJECTED, `GAMBLING` | `c9` there-is-a-link, `c14` prove-it |
+
+75% cleared, against 58% on the original twelve (7 of 12). All six approved ads are
+delivering; per-ad reporting shows each picking up 48-67 impressions in its first hours.
+
+**The two rejections confirm the landing-page diagnosis rather than a creative problem.**
+Neither carries money, prize or stake language, and `c14` is the exact proposition of banner
+**B1 "You say you called it. Prove it"**, which is ACTIVE and remains the account's best
+performer. **The same claim passed as a banner and failed as a video**, from the same ad
+group, pointing at the same URL. Review of one page is inconsistent between ads, which is
+the same conclusion the original twelve produced. Nothing in the ad copy can be rewritten to
+fix this; the prize promise on bitpredict.io is the variable.
+
+### Correction: there was no delivery collapse
+
+The activation note above, and what was reported to Robby on 2026-08-18, said delivery had
+fallen from ~1,000 impressions a day to **17 on 08-17**, and offered creative fatigue as the
+likely cause. **That was wrong, and it was wrong because the number was read from a
+partial day.** The report was pulled at 00:46 UTC on 08-18, which is 20:46 the previous
+evening in the account's own America/New_York timezone, and the day was still filling in.
+08-17 finished at **1,021 impressions and $9.34**, in line with every other day.
+
+This is the reporting rule in `CLAUDE.md` failing in a new way: the source was the system of
+record, but the *window* was partial and nothing in the response said so. **A same-day figure
+from this endpoint is not final. Only read a date once its timezone day has closed**, and
+prefer `metrics_updated_at` over the wall clock when deciding whether it has.
+
+The practical consequence is that the case for adding eight fresh creatives was weaker than
+stated: there was no fatigue signal to fix. The ads are worth running on their own merits
+(more creative, more auction options, no extra budget) but that specific argument should not
+have been made.
+
+### Delivery since launch (verified 2026-08-19 06:41 UTC)
+
+| Date | Spend | Impressions | Clicks | Signups |
+|---|---|---|---|---|
+| 08-15 | $9.94 | 928 | 3 | 0 |
+| 08-16 | $10.39 | 1,051 | 0 | 0 |
+| 08-17 | $9.34 | 1,021 | 2 | 0 |
+| 08-18 | $2.67 | 342 | 1 | 0 |
+| **Total** | **$32.34** | **3,342** | **6** | **0** |
+
+CTR 0.180%, cost per click $5.39, and **still zero signups on $32.34**. 08-18 is a genuinely
+light day, which is expected: the eight new ads sat in review for part of it.
+
+Six clicks is far too few to judge creative on. The standing rule is ~5,000 impressions per
+ad before reading anything, and the newest six are under 70 impressions each. The number that
+matters is not CTR, it is that four days of spend have produced no signups at all.
+
+
 **They were paused on purpose.** The campaign is live and the ad group is ACTIVE, so
 activating these is a one-line change, but the numbers say it is Robby's call and not an
 automatic one. Verified against the Reddit reports API on 2026-08-18:
