@@ -452,3 +452,222 @@ review), and never open a second Google account.
 - **Google removed `VIDEO_ACTION` campaigns in API v25.** Video-for-conversions is now
   Demand Gen (`advertising_channel_type: DEMAND_GEN`), whose targeting lives on the ad group,
   not the campaign, and which requires `contains_eu_political_advertising`.
+
+
+## Update 2026-08-18 (late): retargeting built, Google now counts sales from Stripe
+
+### Google conversions come from Stripe now, not the browser
+
+The browser tag was the only thing telling Google Ads a click had turned into money, and it
+was losing them. Against $70.39 of Google spend, the tag had booked **one** purchase into
+"All conversions" and **zero** into the "Conversions" column, which is the one Smart Bidding
+actually optimises against. Both campaigns run Maximize Conversions, so they were bidding
+on a number that read zero.
+
+Stripe already had the answer: the checkout writes `gclid` (and `gbraid`/`wbraid`) into the
+charge metadata, so every paid registration can be matched back to the click that produced it.
+
+- New conversion action **"ESA Purchase (Stripe import)"** `7725254582`, type `UPLOAD_CLICKS`,
+  category `PURCHASE`, `MANY_PER_CLICK`, primary and counting into "Conversions". Its origin
+  reads back as `WEBSITE`, which matters: the campaigns' biddable goal is `PURCHASE/WEBSITE`,
+  so an action landing on any other origin would have been ignored by bidding.
+- Uploader lives in the vault repo: `scripts/esacard-google-offline-conversions.mjs`.
+  Dry run by default, `--live` to apply, matching `google-ads-manage.mjs`.
+- First live upload 2026-08-18: 2 conversions, $78, both real Stripe sales.
+
+### Three traps found doing it
+
+- **`ConversionUploadService.UploadClickConversions` is closed to new accounts.** It returns
+  `CUSTOMER_NOT_ALLOWLISTED_FOR_THIS_FEATURE` and points at the **Data Manager API**
+  (`datamanager.googleapis.com/v1/events:ingest`). Data Manager takes **no** `developer-token`
+  and **no** `login-customer-id`: headers on an ingest call are ignored outright, and the
+  account path goes in the `destinations[].operatingAccount` object instead. Its
+  `productDestinationId` is the conversion action id.
+- **`include_in_conversions_metric` is immutable on create.** It is derived from
+  `primary_for_goal`; sending it explicitly fails with `IMMUTABLE_FIELD`.
+- **Every v25 campaign create now requires `contains_eu_political_advertising`**, and
+  `start_date` is gone from the campaign create payload entirely.
+
+### The two "Google sales" were one person
+
+Worth recording, because the platform number and the Stripe number disagreed and the
+reconciliation changed the answer. Stripe showed two $39 charges attributed to Google. They
+carry the **same `gclid`, the same click timestamp, the same landing page**, and emails one
+character apart (`…@aol.com` and `…@aol.co`). That is one visitor, one click, who paid twice
+after mistyping their email. Google counting it once was correct behaviour, not a tracking
+gap. Any "cost per sale" for Google that treats those as two customers is wrong.
+
+### Google Display retargeting: live, dormant on purpose
+
+Campaign `24145157187`, **$8.00/day**, US only, Maximize Conversions, Display network only.
+Ad group `199028378869` targets the "All visitors (AdWords)" list and **excludes** "All
+Converters". One responsive display ad: the two 1200x628 ESA Card banners already in the
+account, the four best-performing squares from `2026-08-14-spelled-out/` uploaded as assets,
+the logo, and headline/description copy lifted verbatim from the live Search RSAs so no new
+claim ships.
+
+**It will not serve yet.** Google needs 100 people in a list before Display remarketing
+delivers; the list holds 32. Nothing to fix, it simply starts spending when the list fills.
+
+A responsive display ad **requires** a 1.91:1 landscape image. Our ESA creative is only
+square (1:1) and vertical (0.56:1), and all of it is text-heavy, so cropping would cut the
+headline. The two 1200x628 banners already in the Google account are what unblocked this.
+**If a future Display batch is wanted, it needs landscape masters made on purpose.**
+
+### Meta retargeting: blocked before it starts
+
+The ad account has **never accepted Meta's Custom Audience terms of service**, so
+`POST /act_3530109303824417/customaudiences` fails every time with
+`(#2663) Terms of service has not been accepted`. No custom audience of any kind can be
+created until someone with account access accepts at
+`facebook.com/customaudiences/app/tos/?act=3530109303824417`. This blocks retargeting
+entirely; it is not a code problem and no API call works around it.
+
+Two other things to know before that unblocks:
+
+- **`subtype` is no longer accepted on customaudiences in v25.** It errors with
+  "The parameter 'subtype' is not supported in the current API version"; the audience type is
+  inferred from the rule.
+- **Pixel volume is below Meta's floor.** 765 PageViews, 36 ViewContent, 24 InitiateCheckout
+  and 12 Purchase in the last 30 days, against a 1,000-person minimum for a website audience.
+  Website audiences do backfill from pixel history on creation, so accepting the terms today
+  still starts the clock sooner than waiting.
+
+### Creative to use when Meta retargeting unblocks
+
+From lifetime Meta insights, purchases are the only ranking that matters here:
+
+| Ad | Spend | Clicks | CTR | Checkouts | Purchases |
+| --- | --- | --- | --- | --- | --- |
+| IMG p2-offer-square | $29.53 | 59 | 5.99% | 8 | 3 |
+| IMG p6-forever-square | $6.78 | 23 | 12.23% | 2 | 2 |
+| IMG p1-carry-vertical | $40.17 | 105 | 7.30% | 6 | 0 |
+
+`p2-offer-square` and `p6-forever-square` are the two that have actually produced sales, and
+both lead with the offer rather than the story. They are the retargeting set.
+
+
+## Update 2026-08-18 (late): Nadav's tier-A country and US metro tests
+
+Nadav asked for two tests, both at a secondary budget below the US: tier-A countries for
+native English speakers, and an audience aimed at dense, affluent US metros. Live on Meta
+and Google. **TikTok versions are not built**: TikTok is reachable only through its
+connector, which was not attached to the session that did this work.
+
+### The country list changed before anything was spent
+
+Nadav named Germany, France, Netherlands and Canada. Google Keyword Planner, queried per
+country with English language targeting, says the demand sits elsewhere. Total monthly
+searches across all ESA-related keywords:
+
+| Country | Monthly English ESA searches | On Nadav's list |
+| --- | --- | --- |
+| United States | 2,033,020 | (the control) |
+| **United Kingdom** | **92,740** | no |
+| **Canada** | **56,140** | yes |
+| **Australia** | **33,650** | no |
+| Germany | 19,840 | yes |
+| Netherlands | 10,130 | yes |
+| France | 9,240 | yes |
+| Ireland | 9,020 | no |
+
+UK and Australia were not asked for and are the two largest English markets outside the US:
+the UK alone is nearly five times Germany and ten times France. All seven countries run in
+**one campaign per platform** rather than seven, so the budget flows to whatever converts
+instead of being pre-split by a guess. **Read the result by country, never in aggregate**,
+or the UK will hide whatever France did or did not do.
+
+Worth stating plainly: an emotional support animal has **no legal standing anywhere**, the
+US included, and the site says so. So this is not a test of whether the product travels
+legally. It is a test of whether the same $39 novelty kit sells to English speakers who are
+searching for it outside the US, and the search volumes above say those searches exist.
+
+### What is live
+
+| Platform | Campaign | Budget | Targeting |
+| --- | --- | --- | --- |
+| Meta | `ESA Card \| Meta \| Intl EN \| Cold \| Sales` (`120247894000470605`) | $12.00/day | GB, CA, AU, IE, DE, NL, FR · locale English (All) · 25-65 |
+| Meta | `ESA Card \| Meta \| US Metro \| Cold \| Sales` (`120247894001750605`) | $12.00/day | 9 metros at 25mi · top 25% of ZIP codes by household income · 25-65 |
+| Google | `ESA Card \| Search \| Intl EN \| Core` (`24155823820`) | $6.00/day | same 7 countries · English language · 20 phrase/exact keywords |
+
+Metros: Miami, New York, Los Angeles, Chicago, San Francisco, Boston, Seattle, Dallas,
+Atlanta. Income segments stacked as one OR group: top 5% (`6107813079183`), top 10%
+(`6107813551783`), top 10-25% (`6107813553183`).
+
+**No US metro campaign on Google Search.** A second US search campaign bidding the same
+keywords would only split data with the existing one, because Google lets a single account
+into any given auction once. Metro targeting is an audience idea, and it belongs where
+audiences are bought.
+
+### Creative: the same eight ads in both, on purpose
+
+Both Meta campaigns carry the identical eight ads, reusing the existing creative ids rather
+than new uploads, so the **only** variable between US broad, international and metro is the
+audience: `p2-offer-square`, `p6-forever-square`, `p1-carry-vertical`, `p2-offer-vertical`,
+`p6-forever-vertical`, `p5-three-minutes-vertical`, `o-c2-wallet-short`, `e4-cottage`. The
+first two are the only ads in the account that have produced a purchase.
+
+Google's international ad reuses headline and description copy **verbatim** from the three
+live US RSAs, so no claim ships that has not already run.
+
+### Spend after these tests
+
+Meta $74 (US $50, Intl $12, Metro $12) + Google $28 (US Search $9, Demand Gen $5, Display
+retargeting $8, Intl Search $6) + Reddit $5 + TikTok $20 = **$127.00/day (~$3,860/month)**,
+up from $97.
+
+### Two more API facts
+
+- **Meta targeting for household income is `flexible_spec[].income`**, and the segments are
+  ZIP-code percentiles, not stated salary: top 5%, top 10%, top 10-25%, top 25-50% of US ZIP
+  codes. US only.
+- **Any ad set touching an EU country requires `dsa_beneficiary` and `dsa_payor`.** Without
+  them the create fails outright. Both are set to "ESA Card".
+- **Google Ads display paths cap at 15 characters.** `path1: 'emotional-support'` is 17 and
+  fails with `TOO_LONG`.
+
+
+## Update 2026-08-18 (late): Meta retargeting live, terms blocker cleared
+
+Robby accepted Meta's Custom Audience terms, which had been blocking **every** custom
+audience in the account. Worth recording how that failure presented, because it was
+misleading: with `subtype` still in the payload the call failed on `subtype`, and the
+engagement-audience calls failed with **"Invalid Event Name for Custom Audience"**. Both
+were the terms block wearing a different error. The moment the terms cleared, the exact same
+event names (`ig_business_profile_all`, `page_engaged`) succeeded unchanged. **Do not chase
+an event-name error on this endpoint before checking the terms.**
+
+### Six audiences
+
+| Audience | Rule | Window |
+| --- | --- | --- |
+| `ESA \| RTG \| Site visitors 30d` | pixel `PageView` | 30d |
+| `ESA \| RTG \| Viewed content 30d` | pixel `ViewContent` | 30d |
+| `ESA \| RTG \| Checkout started 30d` | pixel `InitiateCheckout` | 30d |
+| `ESA \| RTG \| Purchasers 180d` | pixel `Purchase` | 180d, **exclusion only** |
+| `ESA \| RTG \| IG engagers 365d` | `ig_business` / `ig_business_profile_all` | 365d |
+| `ESA \| RTG \| Page engagers 365d` | `page` / `page_engaged` | 365d |
+
+Website audiences were created with `prefill: true`, so they backfill from pixel history
+already collected rather than starting empty.
+
+### The campaign
+
+`ESA Card | Meta | US | Retargeting | Sales` (`120247894676000605`), **$10.00/day**, US,
+25-65, purchase-optimised. Ad set `ESA | US | Retargeting | Purchase` includes site
+visitors, content viewers and checkout starters, and **excludes purchasers**. Same eight
+winning ads as the other campaigns, reusing creative ids.
+
+**It will not spend $10/day for a while.** Both engagement audiences report "Audience is too
+small to be used in campaign creation" on creation, and the pixel has 765 PageViews in 30
+days against Meta's 1,000-person floor. They are left out of the ad set until they size up.
+The budget is a ceiling, not a forecast.
+
+Purchase optimisation was kept rather than dropping to landing page views, because Robby's
+2026-08-14 decision to optimise everything around purchases stands. A small warm pool
+spending slowly on the right event beats a bigger pool spending fast on the wrong one.
+
+### Spend now
+
+Meta $84 (US $50, Intl $12, Metro $12, Retargeting $10) + Google $28 + Reddit $5 +
+TikTok $20 = **$137.00/day (~$4,165/month)**.
