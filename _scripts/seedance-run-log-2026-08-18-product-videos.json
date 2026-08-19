@@ -1,0 +1,23 @@
+{
+  "note": "Consolidated by hand. seedance-generate.mjs overwrites this file per invocation, and this batch took four invocations (one main run plus three re-roll runs), so the script's own log only ever held the last one. Every seed below was read from the run output. estimatedSpendUsd in the script's log is also wrong for this batch: it multiplies by the --duration flag (30) rather than each ad's own duration field (15), so it over-counts the 15-second clips.",
+  "ranAt": "2026-08-18T12:11:00Z",
+  "model": "bytedance/seedance-2.5/text-to-video",
+  "resolution": "720p",
+  "upscaler": "fal-ai/bytedance-upscaler/upscale/video (standard, 1080p)",
+  "prompts": "_scripts/seedance-prompts-b12-1lookup-products.mjs",
+  "batch": "2026-08-18-product-videos",
+  "computedSpendUsd": 112.9,
+  "spendBasis": "tokens = w*h*duration*24/1024 at $0.0214/1000, upscale $0.0072/s. 9x15s + 1x30s main run = $76.27 + $1.19 upscales; 4 re-rolls (c9, c13, c16 @15s, c14 @30s) = $35.20; transcription ~$0.20.",
+  "clips": [
+    { "id": "1lookup-c8-dead-list", "product": "Phone Validation", "duration": 15, "seed": 1201694538, "roll": 1, "ships": true, "repair": "trimmed at 11.5s, brand spoken as 'One Lookout'" },
+    { "id": "1lookup-c9-first-call", "product": "Phone Scrub (DNC)", "duration": 15, "seed": 1745832385, "roll": 2, "ships": true, "repair": "re-rolled: roll 1 (seed 744580372) rendered a real-actor likeness", "supersededSeeds": [744580372] },
+    { "id": "1lookup-c10-ghost-owner", "product": "Skip Trace", "duration": 15, "seed": 2135045365, "roll": 1, "ships": true, "repair": "trimmed at 12.1s, brand spoken as '1Lookit'" },
+    { "id": "1lookup-c11-front-desk", "product": "Reverse Phone Lookup", "duration": 15, "seed": 961716749, "roll": 1, "ships": true, "repair": null },
+    { "id": "1lookup-c12-flagged", "product": "Phone Spam Check", "duration": 15, "seed": 983564569, "roll": 1, "ships": true, "repair": "trimmed at 12.6s, brand spoken as 'One look'" },
+    { "id": "1lookup-c13-landlines", "product": "Carrier Lookup / line type", "duration": 15, "seed": 1559425094, "roll": 2, "ships": true, "repair": "re-rolled with a per-syllable anchor on 'landlines': roll 1 (seed 799333409) said 'line lines'", "supersededSeeds": [799333409] },
+    { "id": "1lookup-c14-best-month", "product": "Fraud Detection", "duration": 30, "seed": 1483262191, "roll": 1, "ships": true, "repair": "muted 15.63-16.09s ('signup' garbled). Roll 2 (seed 1699210205) was WORSE: it garbled the brand name too, so roll 1 was restored.", "supersededSeeds": [1699210205] },
+    { "id": "1lookup-c15-list-sommelier", "product": "Email Validation", "duration": 15, "seed": 721278466, "roll": 1, "ships": true, "repair": null },
+    { "id": "1lookup-c16-magic-rolodex", "product": "Mobile Finder", "duration": 15, "seed": 505659186, "roll": 1, "ships": true, "repair": "muted 11.3-13.1s (brand spoken as 'One leads'). Roll 2 (seed 1597570331) fixed nothing and degraded the framing, so roll 1 was restored. NOTE: roll 1's 720p master was overwritten by the re-roll before it was backed up; re-render from seed 505659186 if it is needed.", "supersededSeeds": [1597570331], "masterLost": "720p" },
+    { "id": "1lookup-c17-established-1987", "product": "Business Verify", "duration": 15, "seed": 1622946927, "roll": 1, "ships": true, "repair": null }
+  ]
+}

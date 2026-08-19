@@ -116,6 +116,15 @@ export const EMPHASIS = {
   "u8-drama": ["dramatic", "crisis", "emotional", "support", "animal", "card", "flawless", "take"],
   "u9-supervisor": ["supervises", "judgement", "emotional", "support", "animal", "card", "personality"],
 
+  // ── ESA Card heart-tug batch (2026-08-18) ──
+  // Same treatment as the d/e slice-of-life set: the brand phrase is emphasised
+  // wherever it falls, plus each clip's emotional turn.
+  "h1-old-bones": ["fourteen", "stairs", "garden", "emotional", "support", "animal", "card", "go", "see"],
+  "h2-visiting-nana": ["sunday", "him", "emotional", "support", "animal", "card", "week", "find", "her"],
+  "h3-night-shift": ["twelve", "hours", "hates", "emotional", "support", "animal", "card", "naps", "fine"],
+  "h4-pick-up-day": ["seven", "days", "apart", "emotional", "support", "animal", "card", "never", "door"],
+  "h5-half-day": ["half", "day", "early", "mom", "emotional", "support", "animal", "card", "famous", "home"],
+
   // ── batch 6, BitPredict on Reddit ──
   // "crypto" is emphasised in every BitPredict ad: it is the one word that tells a
   // scroller with the sound off what this is even about, and Robby asked for it in
@@ -152,6 +161,34 @@ export const EMPHASIS = {
   "teampredict-w4-new-headshot": ["kevin", "headshot", "professional", "suit", "weddings", "photo", "going", "places"],
   "teampredict-w5-conspiracy-board": ["monday", "headline", "skills", "photo", "endorsed", "founder", "vision", "bigger", "steve"],
   "teampredict-w6-green-ring": ["sandra", "green", "ring", "dentist", "public", "everything", "point"],
+
+  // ── batch 10, BitPredict "crazy, funny, parody, UGC". "crypto" is on every
+  //    list for this brand so it always lands green and oversized: it is what
+  //    tells a sound-off scroller what the ad is even about. The rest are each
+  //    ad's turn words, the beat where the joke actually lands.
+  "bitpredict-c8-two-am-whisper": ["crypto", "right", "believes", "public", "timestamped", "locked", "free"],
+  "bitpredict-c9-there-is-a-link": ["crypto", "right", "link", "public", "timestamped", "prove", "free"],
+  "bitpredict-c10-pulled-over": ["crypto", "stake", "insane", "locked", "public", "free"],
+  "bitpredict-c11-receipt-roll": ["crypto", "prove", "receipt", "edits", "skill", "free"],
+  "bitpredict-c12-caster-waits": ["crypto", "locked", "edit", "receipt", "wrong"],
+  "bitpredict-c13-the-needle": ["crypto", "absolutely", "feeling", "receipts", "gambling", "skill"],
+  "bitpredict-c14-prove-it": ["crypto", "prove", "alone", "receipt", "edits", "free"],
+  "bitpredict-c15-evidence-wall": ["crypto", "look", "proof", "record"],
+
+  // ── batch 12, 1Lookup product-specific. Each list punches the PRODUCT words
+  //    (dead numbers, registry, skip trace, spam score, landlines, fraud score,
+  //    bounce, mobile number, domain age) so a sound-off scroller learns which
+  //    product the clip is about, plus each clip's turn word.
+  "1lookup-c8-dead-list": ["dead", "disconnected", "validated", "free"],
+  "1lookup-c9-first-call": ["call", "registry", "interested", "lawyer"],
+  "1lookup-c10-ghost-owner": ["owner", "mail", "skip", "trace", "name", "phone", "address", "free"],
+  "1lookup-c11-front-desk": ["calling", "gary", "roofing", "low", "risk", "gutters"],
+  "1lookup-c12-flagged": ["dials", "pickups", "flagged", "spam", "scores", "daily", "free"],
+  "1lookup-c13-landlines": ["texts", "boom", "landlines", "later"],
+  "1lookup-c14-best-month": ["signups", "record", "celebrate", "rick", "fraud", "score", "customer"],
+  "1lookup-c15-list-sommelier": ["online", "typos", "disposable", "domains", "bounce", "servable", "not"],
+  "1lookup-c16-magic-rolodex": ["boss", "everyone", "anyone", "profile", "mobile", "number", "tell"],
+  "1lookup-c17-established-1987": ["business", "domain", "registered", "tuesday", "change", "invoice", "friday"],
 };
 
 // Resolve an ad id from a file path, tolerating the -fixed / -trimmed / -1080p suffixes.

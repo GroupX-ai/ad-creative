@@ -8,7 +8,7 @@
 // audio minute), which returns per-word start/end. Rendered with libass, so the
 // captions are real subtitles burned to pixels, not model-generated text.
 
-import { execFileSync } from "node:child_process";
+import { execFileSync, spawnSync } from "node:child_process";
 import { BRAND, EMPHASIS, NUMBER_WORDS, adIdFromPath, companyFromPath } from "./seedance-emphasis.mjs";
 import { readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
@@ -74,6 +74,17 @@ const BRAND_JOINS = [
   // separate transcription cross-check still has to be run on every clip.
   [["team", "protect"], "TeamPredict"],
 ];
+// SINGLE-WORD mishearings. BRAND_JOINS above only repairs a two-word split, so
+// a word scribe-v2 simply hears wrong used to burn in verbatim. Batch 12 shipped
+// "SPAMCH" over audio that says "spam", found by reading the pixels rather than
+// the transcript, which is the same class of miss as batch 9's "TEAM PROTECT".
+//
+// Only put a word here when the SPOKEN audio is correct and the transcriber is
+// wrong. If the actor genuinely said the wrong word, that is a trim, a mute or a
+// re-roll, not a caption patch: this map would then paper over a real defect.
+const WORD_FIXES = [
+  [["spamch", "spampch", "spamsh"], "spam"],
+];
 const bare = (s) => s.toLowerCase().replace(/[^a-z0-9]/g, "");
 const words = [];
 for (let i = 0; i < raw.length; i++) {
@@ -84,11 +95,76 @@ for (let i = 0; i < raw.length; i++) {
     words.push({ text: join[1], start: raw[i].start, end: raw[i + 1].end });
     console.log(`  joined brand name -> ${join[1]}`);
     i++;
-  } else {
-    words.push(raw[i]);
+    continue;
   }
+  const fix = WORD_FIXES.find(([variants]) => variants.includes(bare(raw[i].text)));
+  if (fix) {
+    // Keep any trailing punctuation the transcriber attached to the word.
+    const tail = raw[i].text.match(/[?!]+$/)?.[0] ?? "";
+    console.log(`  fixed misheard word ${raw[i].text} -> ${fix[1]}${tail}`);
+    words.push({ ...raw[i], text: fix[1] + tail });
+    continue;
+  }
+  words.push(raw[i]);
 }
 console.log(`${path.basename(video)}: ${words.length} words`);
+
+// ---- 1b. keep captions off the end card ------------------------------------
+// Every clip gets a 2.2s branded end card appended before captioning. A word is
+// held until the next one starts (capped at end + 0.6s), and the transcript has
+// no idea the end card exists, so the last spoken word bleeds over the wordmark.
+// That shipped on all four batch-7 BitPredict clips: "FREE", "ONE" and "STAKE"
+// were burned across the BitPredict logo for the first half-second of the card.
+// The end card exists precisely because the model mispronounces the brand name,
+// so covering the wordmark defeats its only job.
+//
+// Pass --endcard <seconds> with the card's start time, or let it auto-detect the
+// cut. Auto-detection only looks at the last 5 seconds and only accepts a cut that
+// leaves a plausible card-length tail, so a hard cut mid-clip cannot trigger it.
+//
+// The scene threshold is deliberately low (0.22, not 0.4). A clip that ends on a dark
+// frame cuts to a near-black end card with only a small pixel delta: batch 10's caster
+// booth and courtroom both ended dark and both went undetected at 0.4. The tail-window
+// constraint, not the threshold, is what stops a false positive.
+const endcardFlag = process.argv.indexOf("--endcard");
+let cardStart = endcardFlag !== -1 ? Number(process.argv[endcardFlag + 1]) : null;
+const clipEnd = words.length ? words[words.length - 1].end : 0;
+if (cardStart === null) {
+  try {
+    execFileSync(FF, ["-hide_banner", "-i", video], { stdio: ["ignore", "pipe", "pipe"] });
+  } catch (e) {
+    const d = (e.stderr || "").toString().match(/Duration: (\d+):(\d+):([\d.]+)/);
+    if (d) {
+      const dur = Number(d[1]) * 3600 + Number(d[2]) * 60 + Number(d[3]);
+      const from = Math.max(0, dur - 5);
+      // showinfo writes to stderr and the command SUCCEEDS, so this cannot use the
+      // catch-the-exception trick the plain `-i` probe above relies on.
+      const scene = spawnSync(FF, ["-hide_banner", "-ss", String(from), "-i", video,
+        "-vf", "select='gt(scene,0.22)',showinfo", "-f", "null", "-"],
+        { encoding: "utf8" });
+      const sceneOut = (scene.stderr || "") + (scene.stdout || "");
+      const hits = [...sceneOut.matchAll(/pts_time:([\d.]+)/g)].map((m) => from + Number(m[1]));
+      // Take the last cut that leaves a plausible end card (0.5s to 4s of tail).
+      const cand = hits.filter((t) => dur - t > 0.5 && dur - t < 4).pop();
+      if (cand !== undefined) {
+        cardStart = cand;
+        console.log(`  end card auto-detected at ${cardStart.toFixed(2)}s (clip ${dur.toFixed(2)}s)`);
+      }
+    }
+  }
+}
+if (cardStart !== null && Number.isFinite(cardStart)) {
+  const before = words.length;
+  for (let i = words.length - 1; i >= 0; i--) {
+    if (words[i].start >= cardStart - 0.05) words.splice(i, 1);
+    else if (words[i].end > cardStart) words[i].end = cardStart;
+  }
+  const dropped = before - words.length;
+  if (dropped) console.log(`  dropped ${dropped} word(s) that fell on the end card`);
+  console.log(`  captions clamped to ${cardStart.toFixed(2)}s so nothing covers the wordmark`);
+} else if (clipEnd) {
+  console.log(`  no end card detected, captions run to ${clipEnd.toFixed(2)}s`);
+}
 
 // ---- 2. ASS subtitle file --------------------------------------------------
 // Probe the real frame size so PlayRes matches and the font scales correctly.
@@ -165,7 +241,8 @@ const lines = words.map((w, i) => {
   const next = words[i + 1];
   // Hold the word until the next one starts, but never longer than 0.6s past
   // its own end, so a pause does not leave a word stranded on screen.
-  const end = Math.min(next ? next.start : w.end + 0.4, w.end + 0.6);
+  let end = Math.min(next ? next.start : w.end + 0.4, w.end + 0.6);
+  if (cardStart !== null && Number.isFinite(cardStart)) end = Math.min(end, cardStart);
   const tier = tierOf(w.text);
   counts[tier]++;
   const text = esc(w.text);

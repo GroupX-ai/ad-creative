@@ -319,13 +319,106 @@ What changed after the sections above, all verified by API read-back:
   Demand Gen $5 + Reddit $5 + TikTok $20 = $69.00/day (~$2,098/month).**
 
 
+## Heart-tug batch, shipped 2026-08-18 (h-clips and banners N1/N2)
+
+Robby approved scripts 11-15 and both banner concepts off
+`_scripts-for-approval-2026-08-17-heart-tug.md`: "All of these are great, you can create with
+Seedance 2.5 and publish to YouTube / TikTok + add to the ads in Google, YouTube, and Reddit."
+
+**Four of five clips shipped.** `h4-pick-up-day` was killed after garbling the brand phrase on
+two rolls ("emotional service bird", "a lomenonial support Vamigal card", both engines
+agreeing). It was written as the alternate to `h3-night-shift`, which came back clean, so
+nothing was lost by dropping it rather than paying for a third roll.
+
+**The prompt rule that fixed the batch, worth carrying forward.** Four of the first five rolls
+garbled the four brand words. Re-rolling the same text is not the fix; the fix is the ONSET
+rule now in `prompts-heart-tug.mjs`: the phrase begins its own sentence, the speaker pauses and
+starts EMOTIONAL cleanly from silence rather than running "here's his" into it. Three of the
+four came back clean on the next roll with that plus a reworded line.
+
+Assets: `esacard/2026-08-18-heart-tug/`. Clips are 720p masters, pro-tier 1080p upscales, and
+`-1080p-captioned.mp4` deliverables. Banners in square, landscape and portrait, plus the exact
+Demand Gen sizes.
+
+| channel | detail |
+| --- | --- |
+| Reddit | 4 video + 2 image ads ACTIVE in the live Purchase ad group `2570690648253263407`, in Reddit review. Ad ids `2571341033016883369` (h1), `2571341086910863434` (h2), `2571341140584553476` (h3), `2571341193466165454` (h5), `2571341247352569182` (n1), `2571341299998206939` (n2). Posts `t3_1vrpi0r`, `t3_1vrpi4i`, `t3_1vrpi84`, `t3_1vrpibh`, `t3_1vrpifn`, `t3_1vrpijs`. |
+| Google Demand Gen | Banners live as a **second ad type**: `DEMAND_GEN_MULTI_ASSET_AD` `821379915095`, ENABLED, in review, in ad group `197002640617`. Six image assets uploaded (`409546803732`, `409369701677`, `409369719545`, `409546761474`, `409546798242`, `409546782066`). Same five headlines and three descriptions as the four live video ads. |
+| Google Demand Gen (video) | **Pending.** Demand Gen takes video only as a `YOUTUBE_VIDEO` asset, so the four clips must be public on the channel first. Wire with `node _scripts/google-demandgen-esacard-heart-tug.mjs --video <id>,<id>,<id>,<id> --live` once the 2026-08-20 uploads land. |
+| TikTok organic | 4 posts scheduled every two days at 16:00 UTC, 2026-09-06 → 2026-09-12, picking up where the u-batch run ends. Postiz ids `cmsyp22ni008wp70ymzebkw3e` … `cmsyp22z6008zp70y4ibx5qdq`. |
+| YouTube | 4 scheduled 2026-08-20 07:30-08:30 UTC, twenty minutes apart, deliberately on the day AFTER the seven u-clip retries so one day's uploads stay inside YouTube's quota. Postiz ids `cmsyp2it30095p70yuoyyemft` … `cmsyp2j5w0098p70yuwm08k1g`. |
+
+**Two things that need a decision, not assumptions:**
+
+1. **Budget dilution is now real on both new channels.** Reddit is 36 ads on the $5.00/day
+   platform floor, about $0.14/ad/day. Demand Gen is 5 ads on $5.00/day, and the two ads added
+   on 2026-08-17 have taken 7 and 8 impressions in five days against 2,579 for the two
+   originals. Neither channel can produce a readable read on the new creative at these
+   budgets; the choice is to raise the budget or pause weak incumbents.
+2. **`h5-half-day` breaks its own hold.** The approval doc marked script 15 "runs when
+   e1-first-day fatigues, not beside it", and `ESA VID e1-first-day` is live in the same Reddit
+   ad group right now. Both daycare clips are running side by side.
+
+### Re-shot for the US market, 2026-08-18 (h-clips v2)
+
+Robby: *"Why do most ads have a British accent if we are literally targeting USA only?"* then
+*"You can reshoot them and we can test these out as-well."* Cause and the permanent fix are in
+`_scripts/seedance-locale.mjs` and the playbook; what changed here:
+
+- **All four clips re-rendered against American prompts.** `h1-old-bones` now opens on a US
+  suburban street with a pickup tailgate, a privacy fence and a sliding patio door, where v1
+  had British terraced houses. `h2` and `h5` were locale-neutral in both cuts.
+- **Two rolls needed a second pass on the brand phrase** (h1 "Emotionate support", h5
+  "emotional support aisle", both engines agreeing). h5's line still carried the possessive
+  chain "Here's his" that the ONSET rule exists to remove; rewording it fixed it. Same failure,
+  same fix, second batch running: the possessive chain is the failure mode, not the phrase.
+- **`h4-pick-up-day` killed a second time, for a different reason.** Its audio came back clean,
+  so the onset rule did rescue the clip that garbled twice before. But the setting rendered as
+  a British car park with a UK number plate in shot and the lead's jacket carried an invented
+  apparel logo, which the playbook bans outright.
+- Spend on the re-shoot: 7 rolls at $6.94, 5 pro upscales at $1.08, about $54.
+
+| channel | detail |
+| --- | --- |
+| Reddit | Straight swap, no extra dilution. Four US ads ACTIVE (`2571401156392734824` h1, `2571401212571559302` h2, `2571401263854445692` h3, `2571401315950134696` h5), posts `t3_1vrspao`, `t3_1vrspdx`, `t3_1vrspic`, `t3_1vrspli`. The four British ads are PAUSED, not deleted, and had no delivery data to lose. Ad names carry a ` US` suffix and `utm_content=<id>-us` so the two cuts never merge in a report. |
+| Meta | Four ads ACTIVE in the Purchase ad set `120247870160610605`: `120247896216090605`, `120247896216560605`, `120247896217120605`, `120247896217720605`. This is the batch's first appearance on Meta, chosen because it carries $30/day and the only booked sales. |
+| TikTok organic | Four posts, 2026-09-07 → 09-13, 16:00 UTC, interleaved with the v1 slots. Postiz ids `cmsyu502w00elp70yuprzywot` … `cmsyu50gz00eop70ybl3qggkp`. |
+| YouTube | Four scheduled 2026-08-21 07:30-08:30 UTC, the day after the v1 batch. Postiz ids `cmsyu5ydo00epp70y4653glch` … `cmsyu5yrk00esp70yjn59vatb`. |
+| Google Demand Gen | Still pending the YouTube uploads, same as v1. Wire with `--video <id>,...` once they are public. |
+| TikTok Ads | Deliberately skipped. The burst ad group already runs 17 ads on $20/day and ends 2026-09-02; adding four more buys no readable signal. |
+
+**Eight scheduled Postiz posts still carry the British cut and cannot be deleted through the
+API** (Postiz exposes no delete). They need deleting by hand in the Postiz app: YouTube
+`cmsyp2it30095p70yuoyyemft` … `cmsyp2j5w0098p70yuwm08k1g` (fire 2026-08-20) and TikTok
+`cmsyp22ni008wp70ymzebkw3e` … `cmsyp22z6008zp70y4ibx5qdq` (fire 2026-09-06 → 09-12).
+
+**One trap worth keeping: `raw.githubusercontent.com` served a stale cached copy of a file for
+several minutes after the merge.** A `curl` of the merged h1 returned the old British blob's
+byte count while `git cat-file` on `origin/main` returned the new one. Reddit and Meta both
+fetch the URL themselves, so a CDN cache would have silently re-shipped the version we just
+replaced. Both launches used fal-hosted URLs instead, which are content-addressed per upload.
+
+### Three Reddit API facts this batch established
+
+- **The structured-post job status enum is `QUEUED | PROCESSING | SUCCESS | CLIENT_ERROR |
+  SERVER_ERROR`.** `FAILED`, `ERROR` and `COMPLETED` do not exist, so both older launch
+  scripts spin their whole poll window on a genuine failure and report a timeout instead of
+  the reason, which sits in `error_message`.
+- **List endpoints cap at 50 and return `pagination.next_url`.** The account holds 71 ads, so
+  a page-1-only idempotency check would not find an existing ad and would create a duplicate.
+  Nothing on Reddit can be deleted.
+- **`raw.githubusercontent.com` works for Reddit** (it downloads and rehosts on `i.redd.it`),
+  unlike TikTok, which rejects it for serving `application/octet-stream`.
+
 ## Two API facts worth keeping
 
-- **Reddit ad `type` is `UNSPECIFIED`, not `PROMOTED_USER_POST`.** The value in
-  `_scripts/reddit-launch-bitpredict.mjs` is wrong; that script never reached its own
-  activation step, so it was never caught. All 30 posts were created before the ads failed.
+- **Reddit ad `type` is `UNSPECIFIED`, not `PROMOTED_USER_POST`.** The value was wrong in
+  `_scripts/reddit-launch-bitpredict.mjs`; that script never reached its own activation step,
+  so it was never caught. All 30 posts were created before the ads failed. **Fixed in
+  `c64ed7c` (2026-08-16), so this note's "that script is still wrong" claim is stale as of
+  2026-08-18; the rule itself stands.**
 - **Reddit updates are `PATCH /ad_groups/{id}`**, with no `/ad_accounts/{id}` prefix. The
-  prefixed path 404s. Same script, same latent bug.
+  prefixed path 404s. Same script, same fix in `c64ed7c`.
 - **Google removed `VIDEO_ACTION` campaigns in API v25.** Video-for-conversions is now
   Demand Gen (`advertising_channel_type: DEMAND_GEN`), whose targeting lives on the ad group,
   not the campaign, and which requires `contains_eu_political_advertising`.
