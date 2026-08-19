@@ -121,3 +121,32 @@ outside the bank. All seven are 15.07s, 720x1280, 24fps, with audio.
 
 $79.44 of fal spend: $2.00 for ten banners, $48.51 for seven 15s clips at 720p, $27.72 for four
 re-rolls, $1.19 for eleven 1080p upscales, about $0.02 of transcription.
+
+## One-word captions
+
+All seven ship as `*-1080p-captioned.mp4`, burned with `_scripts/seedance-captions.mjs`: one
+word at a time, centred, held until the next word starts, in three tiers.
+
+| tier | look | what gets it |
+| --- | --- | --- |
+| plain | white, base size | everything else |
+| emphasis | marigold `#f2a93b`, larger | numbers, plus the per-clip list in `seedance-emphasis.mjs` |
+| brand | marigold, largest | the company name (unused here, no clip speaks it) |
+
+The emphasis lists are `u6-rabbit`'s with the animal noun and the closing tag word swapped, so
+the same words punch in the same places: the animal, all four words of "emotional support animal
+card", `coffee`, `better`, `id`, and the payoff word. `three` and `half` punch automatically
+through `NUMBER_WORDS`.
+
+**Verified off the pixels, not off a transcript.** Batch 9 shipped a clip captioned "TEAM
+PROTECT" over audio that four separate passes read correctly, because `seedance-captions.mjs`
+runs its own transcription and can mishear independently of the QA pass. So the burned `.ass`
+text was dumped for all seven and read word for word, and two clips were checked frame by frame
+at 0.28s intervals to confirm the subtitles actually rendered and sit legibly over the footage.
+All seven carry "EMOTIONAL SUPPORT ANIMAL CARD" spelled correctly and emphasised. Nothing needed
+a `BRAND_JOINS` or `WORD_FIXES` patch.
+
+**One blemish, left alone.** `w1-turtle` says "for **her** ... now **he** has": the take-2 audio
+drifted on the possessive, and the caption honestly reproduces what is said. Patching the caption
+to "his" would make the words on screen disagree with the words in the ear, which is worse than a
+one-word gender slip in a fifteen-second clip.
