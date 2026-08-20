@@ -978,3 +978,83 @@ the budget buys presence, not a readable test.
 2026-09-13 with the u-clip and h-clip runs, so weird animals would start around 2026-09-27 at the
 established every-two-days cadence, which is too late to inform anything. Postiz also exposes no
 delete, so a scheduled post cannot be pulled back through the API. Say the word and it goes in.
+
+## Update 2026-08-20 (later): weird animals is live on Reddit and TikTok, and round 2 is rendered
+
+Both blockers from the section above cleared in the same session. Robby attached the TikTok Ads
+connector, and the Reddit write went through on a retry.
+
+### Reddit: 17 ads ACTIVE
+
+`node _scripts/reddit-launch-esacard-weird-animals.mjs --live` then `--activate`. Created 17
+posts and 17 ads in the live Purchase ad group `2570690648253263407`, then flipped all 17 ACTIVE.
+The account went from 95 ads to 112.
+
+| ad | ad id | post |
+| --- | --- | --- |
+| `ESA IMG w1-turtle-square` … `w10-cockatoo-square` | `2572715…` series | `t3_1vtgh…` series |
+| `ESA VID w1-turtle` | `2572715643634170062` | `t3_1vtghns` |
+| `ESA VID w2-alligator` | `2572715693736661816` | `t3_1vtghpv` |
+| `ESA VID w3-hedgehog` | `2572715743464846890` | `t3_1vtghs9` |
+| `ESA VID w4-chicken` | `2572715794587340849` | `t3_1vtghuq` |
+| `ESA VID w5-raven` | `2572715846355352829` | `t3_1vtghxq` |
+| `ESA VID w6-snake` | `2572715895529291397` | `t3_1vtgi03` |
+| `ESA VID w7-dog-and-human` | `2572715946665181570` | `t3_1vtgi2a` |
+
+Own `utm_campaign=esa-card-reddit-weird-animals`, so Stripe resolves these separately from the
+60 incumbent ads. **The dilution caveat stands unchanged: 77 ads on $30.00/day is about $0.39
+per ad per day against a $37.57 break-even, and Reddit is $65.94 spent with zero purchases to
+date.** The creative is now the best in the account; the budget question is still open.
+
+### TikTok: 7 video ads ENABLED
+
+Advertiser `7673589031742701586`, ad group `ESA | US | 25-55 | Broad | Purchase | $300 Aug burst`
+`1873787389986961`, $20.00/day, TikTok placement only, burst ends 2026-09-02.
+
+| ad | ad id | video id |
+| --- | --- | --- |
+| `ESA VID w1-turtle` | `1874040296957425` | `v10033g50000da3dsrvog65rc2gsq7g0` |
+| `ESA VID w2-alligator` | `1874040267409409` | `v10033g50000da3dstnog65jhoijshog` |
+| `ESA VID w3-hedgehog` | `1874040267416657` | `v10033g50000da3dsvnog65k79vul0og` |
+| `ESA VID w4-chicken` | `1874040267425025` | `v10033g50000da3dt1vog65qvobhjqc0` |
+| `ESA VID w5-raven` | `1874040267433185` | `v10033g50000da3dt5vog65hkv1km2o0` |
+| `ESA VID w6-snake` | `1874040381037954` | `v10033g50000da3dt7vog65l5evljg20` |
+| `ESA VID w7-dog-and-human` | `1874040381045922` | `v10033g50000da3dtfnog65nf12dpml0` |
+
+Identity `ESA Card` (@esacard), `f7eb3fbd-64ab-54f6-8134-a588dfa7e147`, `BC_AUTH_TT` on Business
+Center `7581306495212617745`. Covers are the committed `w*-thumb.jpg` frames, rehosted through
+fal and uploaded via `/file/image/ad/upload/`. `need_audit: false` on all seven, so they entered
+delivery immediately rather than sitting in review. Links carry
+`utm_campaign=esa-card-tiktok-weird-animals`.
+
+**The 10 banners were deliberately not uploaded to TikTok.** The ad group is
+`placements: ["PLACEMENT_TIKTOK"]` only, and TikTok placement does not serve single-image ads, so
+they would have been built to never deliver. This matters because the banners are the half of the
+batch that is actually selling on Meta: **TikTok is getting the half of this batch that has not
+yet proven anything.** If weird animals is to be tested on TikTok as a static-image idea, that
+needs Pangle or Global App Bundle placement, which is a different ad group and a different
+decision.
+
+**Dilution, same warning as 2026-08-19:** the burst ad group now carries 28 ads on $20.00/day,
+about $0.71 per ad per day.
+
+### Round 2: 16 more banners rendered, not live anywhere
+
+`esacard/2026-08-20-weird-animals-2/`. Robby: *"I'm fully up for all these animal ideas, please
+generate all the banners"*, then, on seeing them: *"Banners look fantastic."* Approval of the
+render, not yet an instruction to launch.
+
+Ten Layout A: bearded dragon, ferret, leopard gecko, fancy rat, sulcata tortoise, pygmy goat,
+miniature donkey, Indian runner duck, capybara, opossum. Six Layout B: corn snake, sphynx cat,
+sugar glider, Highland cow calf, alpaca, tarantula. `prompts.mjs` imports `offer` and `forever`
+from the round-1 batch rather than copying them, so the two posters cannot drift. Full QA, the
+layout-split reasoning and the hypothesis being tested are in that folder's `README.md`.
+
+**One generator bug found and fixed, and it cost money.** The blank-frame check shells out to
+Pillow, Pillow was not installed, and the check sat inside the paid retry loop, so
+`ModuleNotFoundError` was caught by the same handler as a bad render and all 16 banners were
+re-submitted. The run was killed during the second pass: roughly 16 to 32 renders were paid for
+instead of 16, about $3 to $6 rather than $3.20, and the exact count is not recoverable from the
+log. `spread()` now returns `null` when the checker itself cannot run and only fails on a real
+low-spread result. **A broken verifier must never be indistinguishable from a broken image when
+the retry costs money.**
