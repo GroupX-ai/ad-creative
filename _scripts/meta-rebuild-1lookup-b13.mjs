@@ -363,7 +363,13 @@ for (const c of CAMPAIGNS) {
         const link = `${b.destination}?${utms(c.name, assetId, shape, b.product)}`;
         // Check the ad before uploading the image: an existing ad means the upload, the
         // creative and the ad were all already paid for on an earlier run.
-        const already = existing(`${ACCOUNT}/ads`, "ads").find((r) => r.name === name);
+        //
+        // Scoped to THIS ad set, not the account. The platform banners appear in three
+        // campaigns (US, T2 and retargeting) and adName() gives them the same name in all
+        // three, so an account-wide check silently declared them already built and left the
+        // T2 and retargeting ad sets holding zero ads on a live budget. Meta allows
+        // duplicate ad names across ad sets; the ad set is the real uniqueness scope.
+        const already = existing(`${adSet.id}/ads`, `ads:${adSet.id}`).find((r) => r.name === name);
         if (already) { log(`    reuse ad ${already.id}  ${name}`); created.ads.push({ id: already.id, name, file, link, reused: true }); continue; }
         const hashV = uploadImage(file);
 
