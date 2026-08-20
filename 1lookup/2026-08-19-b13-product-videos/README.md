@@ -185,6 +185,9 @@ budget. Five campaigns, nine ad sets, 93 ads, **$87/day**:
 | COLD Enrich | 17 | US Sales interests, US Broad Video | 10 + 4 |
 | RETARGET Platform | 10 | 90-day site visitors | 15 |
 
+All five switched on at 00:47 UTC on 2026-08-20 and read back ACTIVE: 92 of the 93 ads
+ACTIVE, one still in review, zero disapprovals.
+
 Every ad set is `facebook` + `instagram` only, one geo tier per campaign, `SIGN_UP` on every
 call to action, `LANDING_PAGE_VIEWS` as the optimisation goal, and a UTM on every link whose
 `utm_content` is the asset id, so a Stripe subscription traces back to one file in this repo.
