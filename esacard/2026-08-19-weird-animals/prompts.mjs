@@ -33,7 +33,7 @@ const mark = (colour) =>
   `A small ${colour} lowercase wordmark reading exactly "esacard.com" sits in the top corner. `;
 
 // ── Layout A: the p2-offer poster, verbatim. Only `subject` changes. ──
-const offer = (subject) =>
+export const offer = (subject) =>
   "A bold editorial poster. Cream hex #faf7f1 background with enormous dark indigo hex #2b2a5c serif type " +
   "reading \"$39. One time.\" across the upper half. " +
   "Beneath it, marigold-yellow hex #f2a93b type reads \"Emotional support animal certificate and ID card.\" " +
@@ -43,7 +43,7 @@ const offer = (subject) =>
   "Flat, typographic, high contrast. " + RULES;
 
 // ── Layout B: the p6-forever poster, verbatim. Only `subject` changes. ──
-const forever = (subject) =>
+export const forever = (subject) =>
   "A bold editorial poster. Cream hex #faf7f1 background. Enormous dark indigo hex #2b2a5c serif type reads " +
   "\"$39. Once. Forever.\" on three tight lines in the upper two thirds. " +
   "Beneath it, marigold-yellow hex #f2a93b type reads \"Emotional support animal registration. No renewal fees.\" " +
