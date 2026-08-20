@@ -103,6 +103,16 @@ for (const name of TARGETS) {
       blocked++;
       continue;
     }
+    // An ad set with no ads still holds its share of a campaign budget. This exact case
+    // happened on 2026-08-20: a by-name idempotency check matched the platform banners in a
+    // different campaign, so the T2 and retargeting ad sets came out empty and $20/day was
+    // one command away from being switched on with nothing to serve.
+    if (activeAds === 0) {
+      log(`  BLOCKED ${s.name}: zero active ads, would hold budget and serve nothing`);
+      campaignSafe = false;
+      blocked++;
+      continue;
+    }
     log(`  ${s.effective_status.padEnd(10)} ${s.name}`);
     log(`      geo ${JSON.stringify(countries)}  placements ${JSON.stringify(platforms)}  goal ${s.optimization_goal}  ads ${activeAds}/${ads.length} active`);
 

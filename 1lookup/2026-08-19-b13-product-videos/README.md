@@ -164,8 +164,56 @@ destroying the seeds and fal source URLs of the three clips in it. Restored from
 shipped every punchline word in plain white instead of failing loudly. All 114 existing
 emphasis keys still resolve.
 
+
+## Published and live, 2026-08-20
+
+Robby: *"You can publish them and set them to live."* The standing "build paused, Robby flips"
+rule was lifted for this batch by that sentence, so the twelve clips are now running as paid
+creative and queued as organic posts. What went where:
+
+### Meta, `act_2333276243857483`
+
+The account was rebuilt around this batch rather than having the videos bolted onto the old
+structure, because the audit on 2026-08-19 found the old structure could not convert at any
+budget. Five campaigns, nine ad sets, 93 ads, **$87/day**:
+
+| Campaign | $/day | Ad sets | Ads |
+|---|---:|---|---:|
+| COLD Platform | 20 | US Broad banners, US Broad Video | 15 + 6 |
+| COLD Platform T2 | 10 | CA GB AU IE NZ banners | 15 |
+| COLD Validate | 30 | US Sales interests, US Broad analog, US Broad Video | 12 + 14 + 2 |
+| COLD Enrich | 17 | US Sales interests, US Broad Video | 10 + 4 |
+| RETARGET Platform | 10 | 90-day site visitors | 15 |
+
+Every ad set is `facebook` + `instagram` only, one geo tier per campaign, `SIGN_UP` on every
+call to action, `LANDING_PAGE_VIEWS` as the optimisation goal, and a UTM on every link whose
+`utm_content` is the asset id, so a Stripe subscription traces back to one file in this repo.
+
+The twelve videos sit in three dedicated video ad sets inside the existing campaigns, so the
+budgets did not move: this added creative, not money. Campaign budget optimisation now decides
+between the banner ad set and the video ad set, which is the first honest banner-versus-video
+read this account has ever had.
+
+### Reddit
+
+All 27 1Lookup video ads, the twelve from this batch included, are ACTIVE in the live
+conversion campaign (`2557856098062241615`, ad group "US Broad - SignUp", $25/day, SIGN_UP).
+Each b13 ad lands on **its own product page** rather than the shared homepage.
+
+### Organic
+
+Twenty-four posts queued through Postiz on the 1Lookup channels:
+
+- **YouTube**, public, four a day at 14:00, 16:00, 18:00 and 20:00 UTC on 20, 21 and 22 August.
+- **TikTok**, `DIRECT_POST`, `video_made_with_ai: true`, one a day at 17:00 UTC from 24 August
+  to 4 September, which starts after the batch-12 queue ends on 23 August.
+
+### Not done
+
+- **Google Ads.** Demand Gen video ads take a YouTube video id, and these clips do not have
+  one until the YouTube posts publish. Do this after 22 August against the real ids.
+
 ## Not done here
 
-- **Nothing is live.** Standing rule: build paused, Robby flips.
 - b13v12's re-roll gave the adding machine a small lit digit display, which the prompt asked
   not to have. Diegetic, in-scene, no claim attached, so it was not worth a third roll.
