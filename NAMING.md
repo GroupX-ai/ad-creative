@@ -63,7 +63,7 @@ Ad         <CO> | <PRODUCT> | <ASSET ID> <CONCEPT> | <SHAPE>
 
 | Field | Values |
 |---|---|
-| `<CO>` | `1L`, `VD`, `EC`, `TP`, `BP`, `ESA` |
+| `<CO>` | `1L`, `1C`, `VD`, `EC`, `TP`, `BP`, `ESA` |
 | `<PLATFORM>` | `META`, `GOOG`, `REDDIT`, `TIKTOK` |
 | `<STAGE>` | `COLD`, `RETARGET`, `BRAND`, `COMP` (competitor conquest) |
 | `<THEME>` | the product family or test name: `Validate`, `Enrich`, `Social`, `Intelligence`, `Platform`, `CreativeTest` |
