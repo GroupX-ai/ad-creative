@@ -1,0 +1,18 @@
+{
+  "ranAt": "2026-08-19T17:39:52.824Z",
+  "model": "bytedance/seedance-2.5/text-to-video",
+  "duration": "15",
+  "resolution": "720p",
+  "estimatedSpendUsd": 7.04,
+  "ok": [
+    {
+      "id": "1lookup-job-change-monitoring-b13v05-left-in-march",
+      "company": "1lookup",
+      "seed": 443171104,
+      "sourceUrl": "https://v3b.fal.media/files/b/0aa6fdc7/l0ntoNacmR94fJ3aC-YxV_video.mp4",
+      "raw": "/home/user/ad-creative/1lookup/2026-08-19-b13-product-videos/1lookup-job-change-monitoring-b13v05-left-in-march-720p.mp4",
+      "upscaled": "/home/user/ad-creative/1lookup/2026-08-19-b13-product-videos/1lookup-job-change-monitoring-b13v05-left-in-march-1080p.mp4"
+    }
+  ],
+  "failed": []
+}

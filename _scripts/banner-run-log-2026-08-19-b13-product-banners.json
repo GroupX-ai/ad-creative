@@ -1,0 +1,31 @@
+{
+  "ranAt": "2026-08-19T17:50:54.579Z",
+  "model": "openai/gpt-image-2",
+  "batch": "2026-08-19-b13-product-banners",
+  "estimatedSpendUsd": 0.4,
+  "ok": [
+    {
+      "id": "1lookup-ad-library-lookup-b13c32",
+      "shape": "square",
+      "product": "ad-library-lookup",
+      "concept": "ad-library-lookup",
+      "file": "1lookup/2026-08-19-b13-product-banners/1lookup-ad-library-lookup-b13c32-square.png",
+      "generated": "1024x1024",
+      "delivered": "1024x1024",
+      "sha256": "58c479904234",
+      "prompt": "Professional square display ad banner for 1Lookup, a ad library API covering four major ad platforms. Background: deep blue-black #05060F, dark developer terminal aesthetic with a soft #22D3EE glow and thin glowing cyan signal lines. Bold geometric technical sans-serif headline text in white: \"See Every Ad They Are Running\". Smaller light gray subheadline text: \"Four ad libraries, one call, nothing found costs nothing.\". A bright blue #3B82F6 rounded call-to-action button with white text: \"Start For Free\". The brand name \"1lookup\" in small white geometric technical sans-serif type in one corner, the \"1\" in blue #3B82F6. Visual element: a dark API response card in monospace listing the fields running_ads, ad_count, platform, status and started, with four small plain dark rounded squares arranged around it, connected to the card by thin glowing cyan lines. Each of those four squares is completely empty: a plain dark rounded tile with a soft cyan edge glow and absolutely nothing inside it, no icon, no glyph, no letter, no symbol, no mark and no picture of any kind. Each row shows only its field name in monospace type and a blank rounded pill where the value would be, with a small #10B981 check mark beside it. The pills are empty: no values, no numbers, no words inside them. Balanced centered square composition. Clean modern SaaS advertising design, crisp legible typography, exact spelling, generous margins, high detail. The ONLY text in the image is the brand name \"1lookup\", the headline, the subheadline and the button label, plus the monospace field names listed above. No feature chips, no badges with captions, no statistics, no percentages, no company logos of any kind, no other words anywhere."
+    },
+    {
+      "id": "1lookup-ad-library-lookup-b13c32",
+      "shape": "landscape",
+      "product": "ad-library-lookup",
+      "concept": "ad-library-lookup",
+      "file": "1lookup/2026-08-19-b13-product-banners/1lookup-ad-library-lookup-b13c32-landscape.png",
+      "generated": "1200x624",
+      "delivered": "1200x628",
+      "sha256": "39a390c4fbd2",
+      "prompt": "Professional wide landscape display ad banner for 1Lookup, a ad library API covering four major ad platforms. Background: deep blue-black #05060F, dark developer terminal aesthetic with a soft #22D3EE glow and thin glowing cyan signal lines. Bold geometric technical sans-serif headline text in white: \"See Every Ad They Are Running\". Smaller light gray subheadline text: \"Four ad libraries, one call, nothing found costs nothing.\". A bright blue #3B82F6 rounded call-to-action button with white text: \"Start For Free\". The brand name \"1lookup\" in small white geometric technical sans-serif type in one corner, the \"1\" in blue #3B82F6. Visual element: a dark API response card in monospace listing the fields running_ads, ad_count, platform, status and started, with four small plain dark rounded squares arranged around it, connected to the card by thin glowing cyan lines. Each of those four squares is completely empty: a plain dark rounded tile with a soft cyan edge glow and absolutely nothing inside it, no icon, no glyph, no letter, no symbol, no mark and no picture of any kind. Each row shows only its field name in monospace type and a blank rounded pill where the value would be, with a small #10B981 check mark beside it. The pills are empty: no values, no numbers, no words inside them. Wide landscape composition with the text on the left and the visual element on the right. Clean modern SaaS advertising design, crisp legible typography, exact spelling, generous margins, high detail. The ONLY text in the image is the brand name \"1lookup\", the headline, the subheadline and the button label, plus the monospace field names listed above. No feature chips, no badges with captions, no statistics, no percentages, no company logos of any kind, no other words anywhere."
+    }
+  ],
+  "failed": []
+}

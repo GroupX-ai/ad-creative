@@ -202,14 +202,37 @@ export const EMPHASIS = {
   "1lookup-c15-list-sommelier": ["online", "typos", "disposable", "domains", "bounce", "servable", "not"],
   "1lookup-c16-magic-rolodex": ["boss", "everyone", "anyone", "profile", "mobile", "number", "tell"],
   "1lookup-c17-established-1987": ["business", "domain", "registered", "tuesday", "change", "invoice", "friday"],
+
+  // ── batch 13, 1Lookup, twelve products that had never had a video.
+  //    No clip in this batch speaks the brand name (deliberate: the brand sat
+  //    inside each clip's only mechanic sentence, so a garble could not be
+  //    trimmed without deleting the pitch with it). That makes the end card the
+  //    only place the brand appears, and it makes these lists the only thing
+  //    telling a sound-off scroller which product the clip is about.
+  //    Kept to 3-6 words each: emphasise everything and nothing is emphasised.
+  "1lookup-search-intent-lookup-b13v01-read-google": ["free", "subscription", "credit"],
+  "1lookup-reverse-ip-append-b13v02-ninety-seven-ghosts": ["which", "ones", "number", "visitors"],
+  "1lookup-prospect-search-b13v03-per-seat": ["seats", "used", "renting", "chairs", "nobody", "credits"],
+  "1lookup-b2b-contact-append-b13v04-four-guesses": ["bounced", "combination", "real", "back"],
+  "1lookup-job-change-monitoring-b13v05-left-in-march": ["left", "march", "month"],
+  "1lookup-ip-lookup-b13v06-shipped-to-a-basement": ["chargebacks", "different", "building", "connection"],
+  "1lookup-hlr-lookup-b13v07-code-went-nowhere": ["never", "beautiful", "stopped", "alive", "tidy"],
+  "1lookup-property-lookup-b13v08-drive-by": ["drove", "bedrooms", "whole", "morning", "record"],
+  "1lookup-bulk-audio-transcription-b13v09-nine-hours": ["useful", "home", "still", "transcribe"],
+  "1lookup-ad-library-lookup-b13v10-what-are-they-running": ["competitors", "running", "thursday", "libraries", "look"],
+  "1lookup-mcp-b13v11-ask-the-agent": ["key", "paste", "url", "agent", "hand", "itself"],
+  "1lookup-platform-b13v12-renewal-wall": ["renewals", "vendors", "logins", "bills", "balances", "tuesday", "key", "balance", "products"],
 };
 
-// Resolve an ad id from a file path, tolerating the -fixed / -trimmed / -1080p suffixes.
+// Resolve an ad id from a file path, tolerating every pipeline suffix in any
+// order. Strips a trailing RUN of known tokens rather than one fixed sequence:
+// the pipeline has since grown -endcard and 720p, and the old fixed pattern
+// returned "...-1080p-endcard" for those, which silently fell through to
+// "no emphasis list" and shipped captions with the punchline words unemphasised
+// instead of failing loudly. No real ad id ends in one of these tokens.
 export function adIdFromPath(p) {
   const base = p.split("/").pop().replace(/\.mp4$/, "");
-  return base
-    .replace(/-(480p|1080p)(-fixed|-trimmed)*(-captioned)?$/, "")
-    .replace(/-(fixed|trimmed|captioned)$/, "");
+  return base.replace(/(-(480p|720p|1080p|fixed|trimmed|captioned|endcard))+$/, "");
 }
 
 export function companyFromPath(p) {

@@ -41,6 +41,7 @@ const RAW = `https://raw.githubusercontent.com/GroupX-ai/ad-creative/${REF}`;
 const B1 = `${RAW}/1lookup/2026-08-08-seedance-video`;
 const B2 = `${RAW}/1lookup/2026-08-09-seedance-video-b2`;
 const B12 = `${RAW}/1lookup/2026-08-18-product-videos`;
+const B13 = `${RAW}/1lookup/2026-08-19-b13-product-videos`;
 
 // headline = what a redditor reads above the video. Never repeats the burned-in
 // captions; every product claim traces to the live site copy (re-verified
@@ -97,6 +98,60 @@ const VIDEOS = [
   ["c17", "established-1987", "In business since 1987. Domain registered Tuesday. Verify a business before you pay it.",
     `${B12}/1lookup-c17-established-1987-1080p-captioned.mp4`,
     `${B12}/thumbnails/1lookup-c17-established-1987-thumb.jpg`],
+
+  // Batch 13, the twelve products that had never had a video. These carry a sixth
+  // element, the landing page, because every one of them sells a named product and
+  // dropping a skip-trace ad on a generic homepage is the single most-repeated
+  // mistake in this account's history. The seventh element is the batch date, which
+  // is what keeps the ad name unique and therefore idempotent.
+  ["b13v01", "serp-read-google", "We pay five hundred a month to read search results. One credit a search elsewhere.",
+    `${B13}/1lookup-search-intent-lookup-b13v01-read-google-1080p-endcard-captioned.mp4`,
+    `${B13}/thumbnails/1lookup-search-intent-lookup-b13v01-read-google-thumb.jpg`,
+    "https://www.1lookup.io/products/search-intent-lookup", "2026-08-19"],
+  ["b13v02", "reverse-ip-ghosts", "Ninety-seven visitors yesterday and not one name. Turn the IP into a contact.",
+    `${B13}/1lookup-reverse-ip-append-b13v02-ninety-seven-ghosts-1080p-endcard-captioned.mp4`,
+    `${B13}/thumbnails/1lookup-reverse-ip-append-b13v02-ninety-seven-ghosts-thumb.jpg`,
+    "https://www.1lookup.io/products/reverse-ip-append", "2026-08-19"],
+  ["b13v03", "prospect-per-seat", "Five seats so five people can take turns searching one list. Two credits a search instead.",
+    `${B13}/1lookup-prospect-search-b13v03-per-seat-1080p-endcard-captioned.mp4`,
+    `${B13}/thumbnails/1lookup-prospect-search-b13v03-per-seat-thumb.jpg`,
+    "https://www.1lookup.io/products/prospect-search", "2026-08-19"],
+  ["b13v04", "append-four-guesses", "Four guesses at a work email, four bounces. Verified email, title and seniority, charged only on a match.",
+    `${B13}/1lookup-b2b-contact-append-b13v04-four-guesses-1080p-endcard-captioned.mp4`,
+    `${B13}/thumbnails/1lookup-b2b-contact-append-b13v04-four-guesses-thumb.jpg`,
+    "https://www.1lookup.io/products/b2b-contact-append", "2026-08-19"],
+  ["b13v05", "job-change-march", "Spent a quarter pitching a champion who left in March. Get an event when someone changes company or title.",
+    `${B13}/1lookup-job-change-monitoring-b13v05-left-in-march-1080p-endcard-captioned.mp4`,
+    `${B13}/thumbnails/1lookup-job-change-monitoring-b13v05-left-in-march-thumb.jpg`,
+    "https://www.1lookup.io/products/job-change-monitoring", "2026-08-19"],
+  ["b13v06", "ip-basement", "Nine chargebacks, nine names, one building. Proxy and VPN detection on any IP.",
+    `${B13}/1lookup-ip-lookup-b13v06-shipped-to-a-basement-1080p-endcard-captioned.mp4`,
+    `${B13}/thumbnails/1lookup-ip-lookup-b13v06-shipped-to-a-basement-thumb.jpg`,
+    "https://www.1lookup.io/products/ip-lookup", "2026-08-19"],
+  ["b13v07", "hlr-code-nowhere", "The number formats perfectly and the code went nowhere. Check live subscriber status first.",
+    `${B13}/1lookup-hlr-lookup-b13v07-code-went-nowhere-1080p-endcard-captioned.mp4`,
+    `${B13}/thumbnails/1lookup-hlr-lookup-b13v07-code-went-nowhere-thumb.jpg`,
+    "https://www.1lookup.io/products/hlr-lookup", "2026-08-19"],
+  ["b13v08", "property-drive-by", "Forty minutes across town to count bedrooms. Beds, baths, square footage and last sale from an address.",
+    `${B13}/1lookup-property-lookup-b13v08-drive-by-1080p-endcard-captioned.mp4`,
+    `${B13}/thumbnails/1lookup-property-lookup-b13v08-drive-by-thumb.jpg`,
+    "https://www.1lookup.io/products/property-lookup", "2026-08-19"],
+  ["b13v09", "audio-nine-hours", "Nine hours of our own calls to find one useful minute. Speaker labels and word-level timestamps.",
+    `${B13}/1lookup-bulk-audio-transcription-b13v09-nine-hours-1080p-endcard-captioned.mp4`,
+    `${B13}/thumbnails/1lookup-bulk-audio-transcription-b13v09-nine-hours-thumb.jpg`,
+    "https://www.1lookup.io/products/bulk-audio-transcription", "2026-08-19"],
+  ["b13v10", "ad-library-running", "The client asks what the competition is running and we go look. Meta, TikTok, LinkedIn and Google in one call.",
+    `${B13}/1lookup-ad-library-lookup-b13v10-what-are-they-running-1080p-endcard-captioned.mp4`,
+    `${B13}/thumbnails/1lookup-ad-library-lookup-b13v10-what-are-they-running-thumb.jpg`,
+    "https://www.1lookup.io/products/ad-library-lookup", "2026-08-19"],
+  ["b13v11", "mcp-ask-the-agent", "Where does the API key go in the agent? There isn't one. Add one URL to Claude or Cursor.",
+    `${B13}/1lookup-mcp-b13v11-ask-the-agent-1080p-endcard-captioned.mp4`,
+    `${B13}/thumbnails/1lookup-mcp-b13v11-ask-the-agent-thumb.jpg`,
+    "https://www.1lookup.io/products/mcp", "2026-08-19"],
+  ["b13v12", "platform-renewal-wall", "Eleven data vendors, eleven logins, eleven renewal dates. 41 data products on one API key and one balance.",
+    `${B13}/1lookup-platform-b13v12-renewal-wall-1080p-endcard-captioned.mp4`,
+    `${B13}/thumbnails/1lookup-platform-b13v12-renewal-wall-thumb.jpg`,
+    "https://www.1lookup.io/", "2026-08-19"],
 ];
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
@@ -136,7 +191,7 @@ function api(method, path, body) {
   return parsed.data;
 }
 
-function creativeFor([id, slug, headline, video, thumb]) {
+function creativeFor([id, slug, headline, video, thumb, dest, _date]) {
   return {
     type: "VIDEO",
     headline,
@@ -144,13 +199,13 @@ function creativeFor([id, slug, headline, video, thumb]) {
     thumbnail: { media: { type: "URL", url: thumb } },
     destination: {
       type: "URL",
-      url: `${LANDING}?utm_source=reddit&utm_medium=paid&utm_campaign=video-seedance-2026-08&utm_content=${slug}`,
+      url: `${dest ?? LANDING}?utm_source=reddit&utm_medium=paid&utm_campaign=video-seedance-2026-08&utm_content=${slug}`,
       call_to_action: "Sign Up",
     },
   };
 }
 
-const ASSETS = VIDEOS.map((v) => ({ key: v[0], name: `1lookup video ${v[0]} ${v[1]} 2026-08-18`, creative: creativeFor(v) }));
+const ASSETS = VIDEOS.map((v) => ({ key: v[0], name: `1lookup video ${v[0]} ${v[1]} ${v[6] ?? "2026-08-18"}`, creative: creativeFor(v) }));
 
 mintToken();
 console.log(`${LIVE ? "LIVE" : "DRY RUN"} · ${ASSETS.length} video ads · media ref ${REF}\n`);
