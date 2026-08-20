@@ -859,3 +859,122 @@ a retryable INTERNAL on a create as a possible bad enum, not just bad luck.**
 **A gated MCP upload tool is not the same as a gated capability.** The image half of this build
 shipped anyway because `ads_create_creative` accepts `image_url`. Check for a field that takes
 the asset directly before reporting a platform as blocked.
+
+## Update 2026-08-20: weird animals is live on Meta and selling; Reddit built, TikTok blocked
+
+Robby: *"Can you make sure we also run the weird animals campaign in Reddit and TikTok? It seems
+to be working very well."*
+
+**It is working, and this is the verified version of that claim.** The campaign was PAUSED in the
+section above; it is now ACTIVE at $100.00/day CBO and it is the best cost per purchase in the
+account.
+
+| campaign | spend | impressions | clicks | purchases | cost per purchase |
+| --- | --- | --- | --- | --- | --- |
+| `Weird Animals \| Checkouts` | $16.33 | 904 | 42 | **3** | **$5.44** |
+| `US \| Cold \| Checkouts` (the source) | $237.87 | 8,765 | 598 | 8 | $29.73 |
+| `US \| Cold \| Sales` | $34.50 | 796 | 43 | 2 | $17.25 |
+| `US \| Retargeting \| Sales` | $26.02 | 449 | 30 | 0 | n/a |
+| `US Metro \| Cold \| Sales` | $28.79 | 584 | 47 | 0 | n/a |
+| `Intl EN \| Cold \| Sales` | $25.75 | 993 | 80 | 0 | n/a |
+
+Break-even is $37.57, so $5.44 is 6.9x better than break-even. **Reconciled to Stripe, not read
+off Meta**: three $39 PaymentIntents on 2026-08-20 carry
+`utm_campaign=ESA Card | Meta | US | Cold | Weird Animals | Checkouts`, at 01:38, 01:45 and 03:01
+UTC, with `utm_content` of `IMG w5-pig-square`, `IMG w2-alligator-square` and
+`IMG w4-snake-square`. Meta's 3 and Stripe's 3 are the same three sales.
+
+**Sample size is the honest caveat.** Three purchases on $16.33 is a real money event, not a
+platform-reported proxy, but it is three. The 95% interval on a 3-sale count is roughly 0.6 to 8.8
+sales, so the true cost per purchase could be anywhere from about $2 to $27. It beats the source
+campaign on every plausible reading of that interval; it is not yet a measured 6.9x.
+
+### All three sales are banners, and all three are the same layout
+
+| ad | spend | impr | clicks | LPV | checkouts | purchases |
+| --- | --- | --- | --- | --- | --- | --- |
+| `IMG w4-snake-square` | $1.26 | 67 | 10 | 8 | 1 | **1** |
+| `IMG w2-alligator-square` | $4.26 | 235 | 11 | 9 | 3 | **1** |
+| `IMG w5-pig-square` | $0.72 | 36 | 3 | 2 | 1 | **1** |
+| `IMG w3-raven-square` | $7.63 | 455 | 15 | 9 | 1 | 0 |
+| `IMG w1-turtle-square` | $0.66 | 25 | 1 | 0 | 0 | 0 |
+| `IMG w10-cockatoo-square` | $0.45 | 30 | 1 | 0 | 0 | 0 |
+| `IMG w8-chicken-square` | $0.20 | 20 | 0 | 0 | 0 | 0 |
+| `IMG w6-egg-square` | $1.05 | 28 | 1 | 0 | 0 | 0 |
+| `IMG w7-hedgehog-square` | $0.00 | 2 | 0 | 0 | 0 | 0 |
+| `IMG w9-axolotl-square` | $0.01 | 1 | 0 | 0 | 0 | 0 |
+| 7 × `UGC w*` video | $0.09 | 5 | 0 | 0 | 0 | 0 |
+
+Two facts worth carrying into the next batch, and one non-fact.
+
+**Fact: the banners are carrying this, the videos are not in it yet.** The seven video ads have
+taken 5 impressions and $0.09 between them. They have not lost; they have not run.
+
+**Fact: snake, alligator and pig are all Layout A (`p2-offer`, "$39. One time.").** Layout A took
+$14.53 of the $16.24 banner spend and produced all three sales.
+
+**Non-fact: Layout B did not lose.** The five `p6-forever` banners have $1.71 of spend and 81
+impressions between them. That is not a fair test of a layout, it is a delivery difference. Do not
+retire Layout B on this evidence, and do not report it as a layout win for A.
+
+### Reddit: 17 ads built, launch pending one permission
+
+`_scripts/reddit-launch-esacard-weird-animals.mjs`. Dry run passes against the live account; the
+`--live` pass is not run yet because the session's permission classifier blocked the write. One
+command each way:
+
+```
+node _scripts/reddit-launch-esacard-weird-animals.mjs --live      # 17 posts + 17 ads, PAUSED
+node _scripts/reddit-launch-esacard-weird-animals.mjs --activate  # flip them ACTIVE
+```
+
+| | |
+| --- | --- |
+| Target | the live ad group `ESA \| Pet + Housing \| Purchase` `2570690648253263407`, PURCHASE goal, **$30.00/day** (raised from the $5.00 floor recorded above), 63 communities, US only |
+| Ads | 10 banners + 7 videos, mirroring the Meta names exactly (`ESA IMG w1-turtle-square` … `ESA VID w7-dog-and-human`) |
+| Media | fal URLs, not `raw.githubusercontent.com`. Reddit fetches the URL itself and GitHub's CDN served a stale blob for minutes after a merge on 2026-08-18 |
+| Links | `utm_source=reddit&utm_medium=paid_social&utm_campaign=esa-card-reddit-weird-animals&utm_content=<id>` |
+| ids | prefixed `img-`/`vid-`, because `w3` is the raven as a banner and the hedgehog as a video. Bare w-numbers would merge two animals into one report row |
+| Titles | videos use the clip's own opening line verbatim, the pattern the live d/e/h ads use. Banners get one line each, all inside the approved bank: the card, the photo on it, three minutes, $39 once, no subscription. No disclaimer anywhere (`docs/ads/policy.md` §0) |
+
+**Reddit's record before this batch, which is the reason to read it carefully:**
+
+| ad group | spend | impressions | clicks | purchases |
+| --- | --- | --- | --- | --- |
+| `Purchase` `2570690648253263407` (live, 60 ads) | $49.01 | 3,483 | 29 | **0** |
+| `PageVisit` `2567956092694490967` (archived, 35 ads) | $16.93 | 1,632 | 45 | **0** |
+
+**$65.94 spent on Reddit to date and zero purchases.** "Working very well" is a Meta fact and not
+yet a Reddit fact. Adding 17 ads takes the live group to 77 ads on $30.00/day, about $0.39 per ad
+per day, against a $37.57 break-even: an individual ad would need roughly three months of that
+share to fund one sale. The batch goes in anyway because it is the best creative in the account
+and Reddit's problem is not creative allocation, but the read will not be clean until either the
+budget rises or the weakest incumbents are paused. That is a decision for Robby, not an assumption.
+
+### TikTok: blocked, needs the connector
+
+The TikTok Ads connector is **not attached to this session** and there are no TikTok credentials in
+the environment (`REDDIT_ADS_*`, `META_*`, `GOOGLE_ADS_*` and `FAL_KEY` are all present; nothing
+TikTok). Every prior TikTok build in this ledger went through the MCP connector, so there is no
+script to fall back on and none was invented.
+
+What a session with the connector attached needs to do, so nothing is re-derived:
+
+| | |
+| --- | --- |
+| Campaign | `ESA Card \| TikTok \| US \| Web Conversions` `1873787435137170` |
+| Ad group | `ESA \| US \| 25-55 \| Broad \| Purchase \| $300 Aug burst` `1873787389986961`, $20/day, burst ends 2026-09-02 00:00 UTC |
+| Add | the 7 `UGC w*` clips as video ads, plus the 10 banners if image ads are wanted (the 20 originals were deliberately never uploaded: videos first, best banners after) |
+| Media | use the fal URLs in `_scripts/reddit-launch-esacard-weird-animals.mjs`. TikTok's `UPLOAD_BY_URL` refuses `raw.githubusercontent.com` with error 40914 |
+| Covers | required on non-Spark video ads; TikTok's own `video_cover_url` re-uploaded via `/file/image/ad/upload/` works |
+| Identity | `ESA Card` (@esacard) via Business Center `7581306495212617745` |
+| Links | `utm_source=tiktok&utm_medium=paid_social&utm_campaign=esa-card-tiktok-weird-animals&utm_content=<id>` |
+
+**Budget warning, unchanged from 2026-08-19:** the burst ad group already carries 21 ads on
+$20.00/day. Seventeen more makes 38 ads, about $0.53 per ad per day. Adding them without raising
+the budget buys presence, not a readable test.
+
+**TikTok organic was deliberately not scheduled.** The @esacard queue is already booked to
+2026-09-13 with the u-clip and h-clip runs, so weird animals would start around 2026-09-27 at the
+established every-two-days cadence, which is too late to inform anything. Postiz also exposes no
+delete, so a scheduled post cannot be pulled back through the API. Say the word and it goes in.
