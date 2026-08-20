@@ -1058,3 +1058,70 @@ instead of 16, about $3 to $6 rather than $3.20, and the exact count is not reco
 log. `spread()` now returns `null` when the checker itself cannot run and only fails on a real
 low-spread result. **A broken verifier must never be indistinguishable from a broken image when
 the retry costs money.**
+
+### Meta: round 2 added to the weird animals ad set, 2026-08-20
+
+Robby: *"You're adding these to the Meta Ads campaign also, right?"* Yes. All 16 round-2 banners
+went into the same ad set as round 1, `ESA | US | Weird Animals | InitiateCheckout`
+`120247924771890605`, campaign `120247924736580605`, $100.00/day CBO. **The ad set now holds 33
+ads: 26 banners and 7 videos.**
+
+The spec was read off the live `w4-snake-square` and `w5-pig-square` creatives and matched field
+for field rather than rebuilt from the ledger, so nothing drifted:
+
+| | |
+| --- | --- |
+| Primary text | "$39 once. That is the whole price. / The registration never expires and the verification listing stays live for good. / A wallet card with your animal's photo and a certificate for the wall, both print-ready, both in your inbox in about three minutes." |
+| Headline | "$39 once. Never again." |
+| Description | "No subscription, ever" |
+| CTA | `GET_OFFER` |
+| Page | `1238464462686774`, IG identity `17841438094553997` (@esa_card) |
+| AI disclosure | `self_ai_disclosure: OPT_IN`, same as round 1 |
+| Links | `utm_content=IMG x<n>-<animal>-square`, same campaign UTM as round 1 |
+
+| ad | ad id | creative id |
+| --- | --- | --- |
+| `IMG x1-bearded-dragon-square` | `120247935759040605` | `2584962691967756` |
+| `IMG x2-ferret-square` | `120247935774720605` | `2171246593440920` |
+| `IMG x3-leopard-gecko-square` | `120247935764800605` | `2331265381001854` |
+| `IMG x4-rat-square` | `120247935767250605` | `1228712576068316` |
+| `IMG x5-tortoise-square` | `120247935771440605` | `2168029740812749` |
+| `IMG x6-pygmy-goat-square` | `120247935772550605` | `1056331680335733` |
+| `IMG x7-donkey-square` | `120247935799190605` | `2007279056458024` |
+| `IMG x8-runner-duck-square` | `120247935814480605` | `1323771079558615` |
+| `IMG x9-capybara-square` | `120247935816500605` | `1587235812791152` |
+| `IMG x10-opossum-square` | `120247935820760605` | `1064514549847747` |
+| `IMG x11-corn-snake-square` | `120247935888740605` | `1651863549888007` |
+| `IMG x12-sphynx-cat-square` | `120247935895740605` | `1273940651420451` |
+| `IMG x13-sugar-glider-square` | `120247935915520605` | `899085282895554` |
+| `IMG x14-highland-cow-square` | `120247935934530605` | `1077481174963303` |
+| `IMG x15-alpaca-square` | `120247935937370605` | `1002338309478499` |
+| `IMG x16-tarantula-square` | `120247935940650605` | `1392084972854728` |
+
+**All 16 were activated, but "activated" is not "delivering."** Read-back immediately after:
+5 ACTIVE (x1, x2, x5, x6, x9), 9 PENDING_REVIEW, 2 IN_PROCESS. New creatives enter Meta review,
+which is expected and normally clears within hours. The 17 round-1 ads are all ACTIVE and
+unaffected.
+
+**Media served from fal, not raw GitHub.** `ads_creative_upload_image` is still gated on this ad
+account (see the round-1 section), but `ads_create_creative` takes a public `image_url`, so all
+16 went in without an upload. fal URLs are content-addressed per upload, which avoids the stale
+CDN blob that bit the 2026-08-18 launch.
+
+**What this does to the read, stated rather than glossed.** The ad set went from 17 ads to 33 on
+the same $100.00/day. The three ads carrying every sale so far (`w4-snake`, `w2-alligator`,
+`w5-pig`) now compete with 16 new ones, so their share of delivery drops and cost per purchase
+for the campaign as a whole will move before it settles. That is the intended cost of testing 16
+animals at once; it is not a signal about round 2 either way for the first few days.
+
+### Where weird animals now runs
+
+| platform | what is live | budget | note |
+| --- | --- | --- | --- |
+| Meta | 26 banners + 7 videos, 33 ads | $100.00/day | round 2 in review, round 1 delivering |
+| Reddit | 10 banners + 7 videos, 17 ads | shares $30.00/day with 60 incumbents | round 1 only |
+| TikTok | 7 videos | shares $20.00/day with 21 incumbents | round 1 only, no banners (TikTok placement does not serve single-image ads) |
+
+**Round 2 is Meta-only for now.** It was not added to Reddit or TikTok: Reddit is already 77 ads
+on $30.00/day with zero purchases to date, and TikTok cannot serve banners on its current
+placement at all. Adding 16 more to either would buy presence, not a read.
