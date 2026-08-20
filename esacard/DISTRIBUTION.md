@@ -1125,3 +1125,41 @@ animals at once; it is not a signal about round 2 either way for the first few d
 **Round 2 is Meta-only for now.** It was not added to Reddit or TikTok: Reddit is already 77 ads
 on $30.00/day with zero purchases to date, and TikTok cannot serve banners on its current
 placement at all. Adding 16 more to either would buy presence, not a read.
+
+### Reddit: all budget moved onto weird animals, 2026-08-20
+
+Robby: *"Reddit - put all the budget on the weird animals campaign, turn off anything else."*
+
+`_scripts/reddit-esacard-weird-animals-only.mjs --live`. **Budget on Reddit lives on the ad
+group, and all 77 ads sit in one group, so this was not a budget edit at all**: it is pausing the
+other ads inside `ESA | Pet + Housing | Purchase`, after which the whole $30.00/day is contested
+only by weird animals. No budget field was touched.
+
+- 77 ads in the group: **17 weird-animal ads left ACTIVE, 56 paused** (4 were already off).
+- Paused, never archived, so any of the 56 comes back in one call.
+- The keep-list is the 17 exact ad names, not a `w` prefix match, and the script refuses to pause
+  anything if it does not find exactly 17. A prefix match is one careless rename away from
+  pausing a winner, and nothing on Reddit can be deleted.
+
+**And it put Reddit dark, which the read-back caught.** Immediately after the sweep the campaign
+and ad group both flipped to `effective_status: PAUSED` while still `configured_status: ACTIVE`,
+with `modified_at` equal to the second the last pause landed. Cause, confirmed not guessed: all
+17 weird-animal ads are `effective_status: PENDING_APPROVAL`, still in Reddit review. The 56 ads
+that were carrying delivery are now off, so the group has **no deliverable ad at all** and Reddit
+rolls a parent up to PAUSED when nothing under it can serve.
+
+So Reddit spends **$0.00/day until Reddit approves the new ads**, and stays dark if they are
+rejected. This is the instruction working as asked, not a fault, but it is a real gap and it is
+recorded rather than reported as "live":
+
+- **Expected:** review has cleared on every prior ESA batch on this account, usually within hours.
+- **The bridge, if wanted:** re-activate a handful of the 56 (the `d`/`e` clips carried the most
+  delivery) until the weird animals clear, then pause them again. Not done, because it directly
+  contradicts "turn off anything else"; it is Robby's call.
+- **Check:** re-read `effective_status` on the 17 before claiming Reddit is delivering again.
+
+**The general lesson, worth carrying:** `configured_status` is what you set, `effective_status`
+is what is happening. Swapping an entire ad group's creative in one pass takes the account dark
+for the length of the review queue, because the replacements are always in review at the exact
+moment the incumbents go off. Check the replacements are approved *before* pausing the
+incumbents, or accept a gap deliberately.
