@@ -1163,3 +1163,30 @@ is what is happening. Swapping an entire ad group's creative in one pass takes t
 for the length of the review queue, because the replacements are always in review at the exact
 moment the incumbents go off. Check the replacements are approved *before* pausing the
 incumbents, or accept a gap deliberately.
+
+---
+
+## Banner motion for TikTok (2026-08-21) — built, NOT published
+
+Six animated versions of the two best-selling Meta banners, from Robby's idea on 2026-08-21:
+take the banners that are actually producing sales and animate the animal only, then run them
+as TikTok ads. Full batch notes and the model findings: `2026-08-21-banner-motion/README.md`.
+
+**Nothing here is live anywhere.** Sent to Robby in chat 2026-08-21 for a pick. Do not upload
+until he chooses, and update this table when anything ships.
+
+| asset | source banner | model / method | duration | published |
+| --- | --- | --- | --- | --- |
+| `upload/cat-kling.mp4` | `p2-offer-vertical` | Kling 2.5 Turbo Pro | 5s | — |
+| `upload/dog-kling.mp4` | `p1-carry-vertical` | Kling 2.5 Turbo Pro | 5s | — |
+| `upload/cat-locked-text.mp4` | `p2-offer-vertical` | Kling + text regions composited back | 5s | — |
+| `upload/dog-locked-text.mp4` | `p1-carry-vertical` | Kling + text regions composited back | 5s | — |
+| `upload/cat-veo.mp4` | `p2-offer-vertical` | Veo 3.1 | 6s | — |
+| `upload/dog-veo.mp4` | `p1-carry-vertical` | Veo 3.1 | 6s | — |
+
+All six are 1080x1920 and **silent**; add a track before spending on TikTok.
+
+Two models were tested and rejected, recorded so nobody spends on them again: **Seedance v1
+Pro** rewrote the dog banner's subheadline and button into gibberish, and **Hailuo 02** zoomed
+the cat banner far enough to crop the headline. **Seedance 2.5 refuses both banners outright**
+on a likeness filter. Use Kling 2.5 for this job.

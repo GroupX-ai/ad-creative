@@ -105,3 +105,10 @@ teampredict/2026-08-18-office-skits-2/teampredict-w6-green-ring-1080p.mp4
 esacard/2026-08-19-weird-animals/_takes/
 esacard/2026-08-19-weird-animals/*-take2-720p.mp4
 esacard/2026-08-19-weird-animals/*.log
+
+# Batch 2026-08-21 (ESA Card banner motion) per-model masters. The upload/ clips are the
+# deliverable and ARE committed; these ten are 48 MB of raw model output and are re-derivable
+# for ~$4 by re-running the generator:
+#   node esacard/2026-08-21-banner-motion/generate.mjs
+esacard/2026-08-21-banner-motion/*.mp4
+!esacard/2026-08-21-banner-motion/upload/*.mp4
