@@ -1,0 +1,8 @@
+p2-offer-vertical
+w10-cockatoo-square
+w2-alligator-square
+w7-hedgehog-square
+x11-corn-snake-square
+x16-tarantula-square
+x2-ferret-square
+x4-rat-square

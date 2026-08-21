@@ -1215,3 +1215,53 @@ confidently. All four are documented in the watcher's header.
 **And the account reports in `America/Los_Angeles`.** A UTC "today" and the dashboard's "Today"
 can differ by seven hours, which is enough to make a healthy campaign read as $0.00 just after LA
 midnight. Every window in the watcher is explicit UTC for that reason.
+
+---
+
+## Banner motion for TikTok (2026-08-21) — built, NOT published
+
+Six animated versions of the two best-selling Meta banners, from Robby's idea on 2026-08-21:
+take the banners that are actually producing sales and animate the animal only, then run them
+as TikTok ads. Full batch notes and the model findings: `2026-08-21-banner-motion/README.md`.
+
+**Nothing here is live anywhere.** Sent to Robby in chat 2026-08-21 for a pick. Do not upload
+until he chooses, and update this table when anything ships.
+
+| asset | source banner | model / method | duration | published |
+| --- | --- | --- | --- | --- |
+| `upload/cat-kling.mp4` | `p2-offer-vertical` | Kling 2.5 Turbo Pro | 5s | — |
+| `upload/dog-kling.mp4` | `p1-carry-vertical` | Kling 2.5 Turbo Pro | 5s | — |
+| `upload/cat-locked-text.mp4` | `p2-offer-vertical` | Kling + text regions composited back | 5s | — |
+| `upload/dog-locked-text.mp4` | `p1-carry-vertical` | Kling + text regions composited back | 5s | — |
+| `upload/cat-veo.mp4` | `p2-offer-vertical` | Veo 3.1 | 6s | — |
+| `upload/dog-veo.mp4` | `p1-carry-vertical` | Veo 3.1 | 6s | — |
+
+All six are 1080x1920 and **silent**; add a track before spending on TikTok.
+
+Two models were tested and rejected, recorded so nobody spends on them again: **Seedance v1
+Pro** rewrote the dog banner's subheadline and button into gibberish, and **Hailuo 02** zoomed
+the cat banner far enough to crop the headline. **Seedance 2.5 refuses both banners outright**
+on a likeness filter. Use Kling 2.5 for this job.
+
+
+---
+
+## Animated banners: LIVE on TikTok and Meta (2026-08-22)
+
+The 32 clips in `2026-08-22-banner-motion-sound/all/upload/` are **published on both platforms**,
+$100/day each. Full detail: `2026-08-22-banner-motion-sound/DEPLOYED.md`.
+
+| platform | campaign | id | budget | ads |
+| --- | --- | --- | --- | --- |
+| TikTok | `ESA Card \| TikTok \| US \| Animated Banners \| Purchase` | `1874171439614978` | $100/day | 32 |
+| Meta | `ESA Card \| Meta \| US \| Weird Animals \| ANIMATED VIDEO` | `120247971648290605` | $100/day | 32 |
+
+The Meta campaign exists to test these against the Weird Animals banners, so its audience is
+copied field for field off ad set `120247924771890605` and its copy, headline, CTA and landing
+page are that campaign's. Creative is the only variable.
+
+The previous TikTok campaign `1873787435137170` stays **paused** (spent $134.35, zero sales).
+
+Three banners are still NOT animated and so not in either campaign: `p5-three-minutes-square`,
+`p5-three-minutes-vertical`, `p11-his-photo-square`. Their type sits on top of the subject and no
+mask protects the words without freezing part of the animal.
