@@ -1190,3 +1190,26 @@ Two models were tested and rejected, recorded so nobody spends on them again: **
 Pro** rewrote the dog banner's subheadline and button into gibberish, and **Hailuo 02** zoomed
 the cat banner far enough to crop the headline. **Seedance 2.5 refuses both banners outright**
 on a likeness filter. Use Kling 2.5 for this job.
+
+
+---
+
+## Animated banners: LIVE on TikTok and Meta (2026-08-22)
+
+The 32 clips in `2026-08-22-banner-motion-sound/all/upload/` are **published on both platforms**,
+$100/day each. Full detail: `2026-08-22-banner-motion-sound/DEPLOYED.md`.
+
+| platform | campaign | id | budget | ads |
+| --- | --- | --- | --- | --- |
+| TikTok | `ESA Card \| TikTok \| US \| Animated Banners \| Purchase` | `1874171439614978` | $100/day | 32 |
+| Meta | `ESA Card \| Meta \| US \| Weird Animals \| ANIMATED VIDEO` | `120247971648290605` | $100/day | 32 |
+
+The Meta campaign exists to test these against the Weird Animals banners, so its audience is
+copied field for field off ad set `120247924771890605` and its copy, headline, CTA and landing
+page are that campaign's. Creative is the only variable.
+
+The previous TikTok campaign `1873787435137170` stays **paused** (spent $134.35, zero sales).
+
+Three banners are still NOT animated and so not in either campaign: `p5-three-minutes-square`,
+`p5-three-minutes-vertical`, `p11-his-photo-square`. Their type sits on top of the subject and no
+mask protects the words without freezing part of the animal.
