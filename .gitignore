@@ -114,3 +114,7 @@ esacard/2026-08-21-banner-motion/*.mp4
 !esacard/2026-08-21-banner-motion/upload/*.mp4
 esacard/2026-08-22-banner-motion-sound/raw-*.mp4
 esacard/2026-08-22-banner-motion-sound/_qa/
+esacard/2026-08-22-banner-motion-sound/all/raw/
+esacard/2026-08-22-banner-motion-sound/all/silent/
+esacard/2026-08-22-banner-motion-sound/all/sfx/
+esacard/2026-08-22-banner-motion-sound/all/_chk/

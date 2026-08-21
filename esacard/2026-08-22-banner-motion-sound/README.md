@@ -75,3 +75,63 @@ python3 esacard/2026-08-22-banner-motion-sound/assemble.py         # composite +
 ```
 
 The 10s masters (`raw-*.mp4`) are gitignored; `upload/` is the deliverable.
+
+---
+
+# The full batch (32 clips), 2026-08-22
+
+Robby: *"You can generate all of them and send me here"*, scoped to *"the weird animal banners +
+any banner that converted anything"*. That resolves to 35 banners: all 26 weird animals, plus 9
+more that produced a checkout or a purchase on Meta. **32 shipped, 3 held.**
+
+Everything is in `all/upload/`, 1080x1920, 15.00s, AAC. 30 carry the animal's own sound; the
+cartoon egg and the tarantula are silent animals and ship music-only rather than with an
+invented noise.
+
+## Held back, and why
+
+`p5-three-minutes-square`, `p5-three-minutes-vertical`, `p11-his-photo-square`. On these the type
+sits directly ON the subject: both p5 banners run the headline across a man's head and a kitchen,
+and p11 runs "An emotional support animal ID card, $39 one time." across the labrador's forehead.
+Glyph detection needs a flat background they do not have, and no horizontal band separates the
+words from the animal, so every mask that protects the copy also freezes part of the subject.
+They need a different technique, not a wider rectangle.
+
+## The pipeline
+
+`prep.py` -> `render-all.mjs` -> `assemble-all.py` -> `audio-all.mjs` -> `mix-all.py`, with
+`score.py` as the gate. `prep.py` and `score.py` cost nothing, so both run before and after the
+paid steps.
+
+## What this batch cost in rework, so the next one does not repeat it
+
+- **Derive the mask, do not draw it.** 30 of the 35 banners are one cut-out animal on flat cream,
+  so the freeze mask is computed: find every non-background pixel, group into blobs, call the
+  largest non-navy blob the animal, freeze all the other ink. The navy test is what separates the
+  button from the animal, and it holds even for a black raven and a dark alligator, which both sit
+  near B-R = 0 while the button sits at +61. Hand-drawn rectangles were wrong on all five banners
+  they were used for, because they were written in the original banner's coordinates and applied
+  to the padded 1080x1920 frame.
+- **A glyph-shaped mask cannot survive a moving frame.** It is thin, so when the video's own copy
+  of the headline shifts even slightly it shows through the gaps between the frozen letters and
+  you get two overlapping headlines. `p2-offer-vertical` and `w8-chicken-square` did this through
+  three separate re-renders (10s, 10s with a containment clause, 5s). The fix was not a fourth
+  render: on both, the animal sits well below all the type, so the type is frozen as one solid
+  band that hides whatever the video does up there. **If a clip ghosts twice, stop re-rolling and
+  change the mask.**
+- **"Impossible to miss" is read as "come closer".** The first pass told the model the hero action
+  must be impossible to miss, and eight clips dramatised it by walking the animal at the lens
+  until it crowded the headline. The containment clause in `render-all.mjs` fixes the animal's
+  footprint and distance and confines the motion to the head.
+- **Measure the strip ABOVE the animal, nothing else.** The first version of `score.py` measured
+  every row carrying type, which on these banners is most of the upper two thirds and includes
+  rows the animal legitimately occupies. It scored normal breathing as a fault and flagged 30 of
+  32. Scoped to the strip above the animal's head it flagged 8, which matched the eye.
+- **The metric is a filter, not a verdict.** Even scoped, it kept flagging w3-raven, w2-alligator
+  and x16-tarantula after they were visibly fine, and it scores 0.00 on the two photographic
+  banners because the ink test is meaningless there. Every shipped clip was confirmed by looking
+  at a contact sheet at mid-action (`all/ALL-32.png`). Trust the sheet over the number.
+- **Stream frames, never write them.** 32 clips x 240 frames as PNGs is about 15 GB against a much
+  smaller disk allowance. `assemble-all.py` pipes raw RGB from ffmpeg into numpy and back.
+- **Still nobody here can hear the audio.** Sync is structural, because MMAudio generates from the
+  finished video, but tone is unverified. A human listen before spend is still required.
