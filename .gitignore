@@ -112,3 +112,5 @@ esacard/2026-08-19-weird-animals/*.log
 #   node esacard/2026-08-21-banner-motion/generate.mjs
 esacard/2026-08-21-banner-motion/*.mp4
 !esacard/2026-08-21-banner-motion/upload/*.mp4
+esacard/2026-08-22-banner-motion-sound/raw-*.mp4
+esacard/2026-08-22-banner-motion-sound/_qa/
