@@ -23,6 +23,32 @@ All 1080x1920, exactly 15.00s, 24fps, AAC stereo. Picked because all three conve
    window rather than guessed.
 6. **Mix**: music bed at 0.13 gain under the animal sound at full.
 
+## Two things Robby rejected on the first pass, and the fixes
+
+**"Videos look super weird with the animals coming out of their frame."** The mask was
+backwards. Video played inside a rectangle drawn round the animal and everything outside was
+frozen, so when the alligator opened its jaws past the right edge of its box the frame sliced
+the jaw off in a hard vertical line, with a ghost of the closed mouth showing through from the
+banner behind. Now video plays EVERYWHERE and only the glyphs and the button are frozen,
+detected as "not the flat cream background" inside zones known to hold type, then thickened.
+The animal can move anywhere, including into the empty cream between lines, and nothing can cut
+it. If it reaches a letter the letter paints over it, so it passes behind the type.
+
+**"The sounds they make are horrible and not synced with the visuals."** Both true. The sounds
+came from `cassetteai/sound-effects-generator` as standalone clips and were then dropped onto
+timestamps picked from motion peaks, which is guesswork. Replaced with `fal-ai/mmaudio-v2`,
+which takes the finished video and generates audio for it, so it tracks the mouth by
+construction. A highpass and a gate strip its noise floor, which is the usual reason this model
+reads as hiss. Peak alignment measured after the change: the duck's four loudest audio moments
+land within 0.4s of its four biggest movements.
+
+**A limit worth writing down: the agent cannot hear.** Sync can be verified numerically by
+correlating the audio envelope against per-frame motion, and that was done. Whether the result
+actually sounds good is not checkable here, which is exactly how the first batch shipped
+"horrible" audio with a clean QA report. Every batch with sound needs a human listen before it
+goes near a campaign, and a music-only cut should ship alongside so there is a fallback that
+cannot sound wrong.
+
 ## What was learned
 
 - **"Hold still" and "make its sound" fight each other.** The first pass reused the silent
