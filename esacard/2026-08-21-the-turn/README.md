@@ -92,7 +92,7 @@ cross-checked on a second engine (ElevenLabs Scribe v2 and Whisper) before being
 | clip | take 1 | verdict |
 | --- | --- | --- |
 | `t1-whole-saturday` | every line verbatim, brand phrase clean, payoff rendered exactly as written | shipped as rendered |
-| `t2-the-wall` | said **"Emotional support Weeder Red, less thing for the wall"** | re-rolled as `t2-the-wall-v2` |
+| `t2-the-wall` | said **"Emotional support Weeder Red, less thing for the wall"**, and the certificate drew an ornamental border, a garbled title, body text and two signature lines | re-rolled as `t2-the-wall-v2`, both fixed |
 
 **The cause of the t2 garble is a word collision, not bad luck.** The scripted line was
 "Emotional support animal card. Certificate for the wall." Two hard-C words met across the
@@ -120,6 +120,17 @@ No seal, crest, eagle, shield or flag appeared on either take, which is the §1.
 matters most. No clip contains a recognisable real person, on-screen text, a readable card, or a
 spoken claim outside the bank.
 
+**Take 2 came back clean on both counts.** The brand phrase transcribes verbatim
+("Emotional support animal card"), and the certificate rendered exactly as specified: cream
+paper, one small photograph of the cat, four featureless gray bars, no border, no title, no
+signature line, nothing else. Both fixes were in one correction block and both held, which is
+the batch-13 rule paying out rather than the coin flip landing well.
+
+The face was checked at full size on three frames, per the batch-10 rule that a transcript
+cannot catch a likeness. Take 2's man reads as more "cast" than take 1's in a small contact-sheet
+thumbnail, but at full resolution he is an ordinary middle-aged face and not a recognisable
+person. No re-roll needed.
+
 **Superseded takes are in `_takes/take1/` (gitignored), not deleted.** A re-roll is a coin flip
 and this account has twice adopted a worse second take; the originals stay on disk so the two can
 be compared.
@@ -134,5 +145,5 @@ serves, while Instagram Reels has produced 0 checkouts on 23 landing page views.
 
 ## Cost
 
-2 clips at 15s / 720p: `720*1280*15*24/1024 = 324,000` tokens at $0.0214/1000 = **$6.93 each**,
-$13.86 total, plus about $0.22 of upscaling.
+Three renders at 15s / 720p (two clips plus one re-roll): `720*1280*15*24/1024 = 324,000`
+tokens at $0.0214/1000 = **$6.93 each**, $20.79 total, plus about $0.33 of upscaling.
