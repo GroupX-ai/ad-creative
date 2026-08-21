@@ -1,0 +1,23 @@
+{
+  "model": "bytedance/seedance-2.5/text-to-video",
+  "resolution": "720p",
+  "duration": 15,
+  "results": [
+    {
+      "ok": true,
+      "value": {
+        "id": "t1-whole-saturday",
+        "seed": 1307402743,
+        "sourceUrl": "https://v3b.fal.media/files/b/0aa74635/M1hyTKPF8u9oY8yq7Aete_video.mp4"
+      }
+    },
+    {
+      "ok": true,
+      "value": {
+        "id": "t2-the-wall",
+        "seed": 602542177,
+        "sourceUrl": "https://v3b.fal.media/files/b/0aa74615/2Cv3RiXp3STo67NmGbghC_video.mp4"
+      }
+    }
+  ]
+}

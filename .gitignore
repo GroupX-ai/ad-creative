@@ -103,5 +103,11 @@ teampredict/2026-08-18-office-skits-2/teampredict-w6-green-ring-1080p.mp4
 #   _takes/take1/ holds the pre-re-roll masters of w1, w2, w4 and w5, kept only so a
 #   worse second take can be discarded (batch 12: two of four re-rolls came back worse).
 esacard/2026-08-19-weird-animals/_takes/
+
+# Batch 2026-08-21 ("the turn"): _takes/take1/ holds t2's superseded take, whose
+# audio garbled the brand phrase into "emotional support Weeder Red" on two
+# independent transcription engines. Kept off the repo but on disk so the two
+# takes can be compared, per the batch-12 rule that a re-roll is a coin flip.
+esacard/2026-08-21-the-turn/_takes/
 esacard/2026-08-19-weird-animals/*-take2-720p.mp4
 esacard/2026-08-19-weird-animals/*.log
