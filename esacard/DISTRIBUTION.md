@@ -1163,3 +1163,55 @@ is what is happening. Swapping an entire ad group's creative in one pass takes t
 for the length of the review queue, because the replacements are always in review at the exact
 moment the incumbents go off. Check the replacements are approved *before* pausing the
 incumbents, or accept a gap deliberately.
+
+## Update 2026-08-21: Reddit review cleared, weird animals running solo to a $100 gate
+
+Robby: *"As long as we're only spending on the weird animals ads in Reddit - let's let it spend up
+to $100 on these, then make a decision."*
+
+**The gap the section above flagged has closed.** All 17 weird-animal ads read
+`effective_status: ACTIVE`, the ad group and campaign are ACTIVE, and delivery has been continuous
+since 2026-08-20T12:00Z. Reddit approved them; the account is not dark.
+
+State as of 2026-08-21T18:33Z, read from the Reddit reporting API and cross-checked two ways:
+
+| | |
+| --- | --- |
+| Weird-animal spend since the sweep | **$41.48 of the $100 gate** |
+| Everything else | **$0.00.** Robby's condition holds: no other ad in the account has spent a cent since 2026-08-20T12:00Z |
+| Impressions / clicks | 2,687 / 46, CTR 1.71% |
+| Purchases | **0**, and that is not a reporting gap: Stripe shows **zero** payments carrying `utm_source=reddit` since 2026-08-19, against 30 succeeded payments in the same window that are almost all `meta` |
+| Observed rate | ~$32.50/day, so $100 lands around 2026-08-23 |
+
+Watcher: `_scripts/reddit-esacard-weird-animals-watch.mjs`. Read-only by default, prints spend
+against the gate, and **exits non-zero if anything that is not a weird animal spends**, because
+Robby's instruction was conditional and a stray unpaused ad invalidates the test rather than just
+nudging the number. `--pause-at-cap` pauses the 17 at $100; it is off by default so the default
+cannot stop money.
+
+### The decision this is walking toward
+
+Reddit has now taken **$41.48 with nothing to show**, on top of the $65.94 the ledger already
+recorded, and the same seventeen creatives are the best cost per purchase in the account on Meta
+(three sales at $5.44 each in round 1, and Stripe shows w6-snake, w4-snake, w2-alligator,
+w5-pig, x6-pygmy-goat and x8-runner-duck all selling on Meta since). **The creative is not the
+variable that is failing here, the channel is.** That is the read to bring to the $100 mark.
+
+### Four Reddit reporting-API traps, all paid for on 2026-08-21
+
+Any future script that reports a Reddit number must handle these or it will report a wrong one
+confidently. All four are documented in the watcher's header.
+
+1. **The AD_ID breakdown caps at 50 rows** and returns `pagination.next_url`. A page-1 read of a
+   20-day window returned `$23.86` for this account with exactly 50 ads listed. A silent
+   truncation looks exactly like a real total.
+2. **That `next_url` 404s on GET**, so the pagination cannot be followed. The fix is not to need
+   it: `AD_GROUP_ID` returns one row per group and never truncates.
+3. **`starts_at` / `ends_at` must be hour-aligned** or the API returns 400.
+4. **`ends_at` is ignored.** Every report runs `starts_at` to now. Windows ending 00:00, 06:00,
+   12:00 and 19:00 returned the identical 31 rows ending at the current hour. A report cannot be
+   pinned to a past window, so an "as of" label has to come from the row timestamps.
+
+**And the account reports in `America/Los_Angeles`.** A UTC "today" and the dashboard's "Today"
+can differ by seven hours, which is enough to make a healthy campaign read as $0.00 just after LA
+midnight. Every window in the watcher is explicit UTC for that reason.
