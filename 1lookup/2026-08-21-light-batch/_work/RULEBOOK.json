@@ -1,0 +1,487 @@
+{
+ "rulebook": {
+  "verdict": "A 1Lookup banner should look like something a real person made or a real screen actually showed, photographed or set in daylight, on a bright ground, with the single biggest thing in the frame being something the buyer gets: the number 41, a green valid state, a free trial. One claim, one focal element, one light source, one shadow direction. The rejected batch was not fourteen concepts, it was one concept rendered fourteen times (12 of 14 on #05060F, measured median square luminance 56.7, 8 of 14 under 60, 14 of 14 negatively framed, 6 of them the rim-light-fog-reflective-floor AI preset), and I confirmed that by opening the files: the gumball frame is grey capsules in a glass globe under blue rim light on a wet black floor, which reads as a pharmaceutical ad, and \"disgusting\" is a fair word for it. The correction is not \"the same fourteen on white.\" The evidence points four ways at once and they compound: light or saturated ground instead of near-black (every renderable competitor is light, and the one 177-day survivor in the category, Melissa, is a light corporate system), the after-state instead of the before-state (System1: 6x brand lift, 20% more recall; the account's own standing rule says never open on what is wrong), a real surface or a real screen instead of an object in a void (Reddit's ~150k-ad study: empty backgrounds are the worst-converting image type), and five or six visually unrelated systems instead of fourteen renders of one (Motion, 550k ads: only 5-8% of creatives ever win, so fourteen variants of one idea is one bet, not fourteen). Two things override the published advice. First, the funnel: the 2026-08-20 audit found 90% of paid visitors never reach the signup page and 96% of Meta visitors view exactly one page, so the creative's job is qualification, not click volume, and a concept that filters for a sales-ops lead or a developer beats a concept that maximises taps. Second, the only creative this account has ever praised is a bright, hand-lettered whiteboard photographed edge to edge in window light with a hand-drawn gold button and the brand written on the surface itself, measured over 200/255 luminance. That is the shape of the answer: bright, made-by-a-human, positive, one idea, brand inside the scene, and nothing about it looks like a banner.",
+  "what_the_evidence_says": [
+   {
+    "claim": "The rejected batch is one concept rendered fourteen times, and I measured it: 12 of 14 squares on the same near-black field, median mean-luminance 56.7/255, 8 of 14 under 60, and 14 of 14 headlines phrased as a loss.",
+    "strength": "verified",
+    "sources": "Direct Pillow measurement of /home/user/ad-creative/1lookup/2026-08-20-crazy-banners/*-square.png on 2026-08-21; headline table in that folder's README.md; Motion Creative Benchmarks 2026 (550,000+ ads, $1.3B spend) on the 5-8% winner rate.",
+    "so_what": "At a 5-8% winner rate, fourteen near-identical creatives has an expected winner count near zero. The next batch must vary the concept axis (ground, layout, light source, register), not the object in the middle of the same rectangle."
+   },
+   {
+    "claim": "Objects on solid or empty backgrounds are the worst-converting image type; images carrying a visible logo converted 108% better; plain descriptive text overlaid on an image cut conversion ~13%.",
+    "strength": "verified",
+    "sources": "Reddit Creative Best Practices 2026, ~150,000 unique in-feed ads across ~7,000 advertisers, via ppc.land.",
+    "so_what": "This is the largest measured sample in the whole set and it condemns three specific things the batch did at once. Every subject sits on a real surface, every frame carries the wordmark, and on-image text becomes an offer or a number rather than a description."
+   },
+   {
+    "claim": "Melissa, the closest structural competitor that exists (multi-product US data-verification API sold to B2B ops), has run the same creative for ~177 days and 9 of its 10 live headlines are short positive imperatives: 'Trust Starts Here', 'Confirm Every Customer', 'Fix Bad Addresses Fast'.",
+    "strength": "verified",
+    "sources": "Meta Ads Library API, page_id 110126150973, pulled 2026-08-21: 47 active US ads, oldest created 2026-02-25 and still delivering.",
+    "so_what": "A 177-day survivor in our exact category, country and buyer is the strongest directly-observed signal available. Copy the register wholesale: 3-to-6-word positive imperative, one verified result shown as UI, light ground. Note the caveat: the API returns copy and dates, not images, so the visual read is inferred from Melissa's live site."
+   },
+   {
+    "claim": "Nobody is advertising phone validation on Meta at all. The search 'phone number validation API' returns zero active US ads, and ZeroBounce, NeverBounce, Bouncer, Emailable, Kickbox, Clearout, Twilio, Telnyx, ZoomInfo, Lusha and Cognism all return zero.",
+    "strength": "verified",
+    "sources": "Meta Ads Library API sweep, US, ACTIVE, 2026-08-21.",
+    "so_what": "This reframes the brief. 'Crazy banners, disruptive stuff' was written as if there were a crowded dark-tech category to break through. There is no category on Meta to disrupt. The job is to be the clearest and most trustworthy-looking thing in an empty auction, not the weirdest."
+   },
+   {
+    "claim": "Prospeo went from 185 active ads to zero inside nine days, running the plain static-guarantee-headline format.",
+    "strength": "verified",
+    "sources": "Meta Ads Library API 2026-08-21 (0 results) compared against /home/user/ad-creative/_scripts/RESEARCH-2026-08-12-b2b-scripts-synthesis.md recording 185 ads on 2026-08-12.",
+    "so_what": "A banner whose whole content is a headline plus a CTA button on a plain field is the format a direct competitor just switched off at scale. Every concept needs a second layer beyond the headline: a result row, a countable number, a real surface, or a face."
+   },
+   {
+    "claim": "The account's only praised creative is a bright hand-lettered whiteboard photographed edge to edge in window light, measured over 200/255 luminance, with the brand written on the surface and a hand-drawn gold button. Polished-corporate has never once been picked.",
+    "strength": "verified",
+    "sources": "/home/user/ad-creative/voicedrop/2026-08-03-disruptive-batch/README.md lines 11, 22, 284 ('the best by far'); image opened and inspected at voicedrop-c21-square.png.",
+    "so_what": "The native/analog family is right and was executed wrong. Every native frame in the rejected batch was underlit and every native message was a complaint. Relight them and flip the copy and three concepts survive without new ideas."
+   },
+   {
+    "claim": "Product-imagery banners lost to typographic billboards on real spend in this portfolio: the Banner Test was killed with every ad under 2% CTR on $160.67, while Billboard Ads runs 3.9-4.0% CTR at $0.93-1.05 CPC over 90 days.",
+    "strength": "verified",
+    "sources": "/home/user/ad-creative/voicedrop/2026-08-03-billboard-batch/README.md and 2026-08-08-sms-competitive/README.md, both quoting the same campaign data.",
+    "so_what": "The only first-party CTR comparison this portfolio owns says typography beats product shots roughly 2x. It is VoiceDrop, a different buyer, so it caps rather than kills the product-UI territory: 3 concepts, not half the batch."
+   },
+   {
+    "claim": "Every dark 1Lookup banner that has ever run produced zero attributed paid subscriptions, at $236 per trial start on $4,011 of spend, and the whole display program was paused with 0 trials on $573.",
+    "strength": "verified",
+    "sources": "/home/user/ad-creative/1lookup/2026-08-03-disruptive/README.md deployment log; /home/user/second-brain/projects/2026-08-20-1lookup-acquisition-audit.md.",
+    "so_what": "'It is on-brand' is not a defence for another dark batch. About 34 of the account's ~46 non-analog banner files measure under luminance 60 and none has produced an attributable trial."
+   },
+   {
+    "claim": "90% of paid visitors leave without ever seeing the signup page (Google 88%, Meta 95%), 96% of Meta visitors view exactly one page, and clicks do arrive: 3,209 platform clicks against 3,267 paid site visitors, with pages loading under 2.7s and zero console errors.",
+    "strength": "verified",
+    "sources": "/home/user/second-brain/projects/2026-08-20-1lookup-acquisition-audit.md section 4 item 7.",
+    "so_what": "The biggest thing every sweep under-weighted. The traffic is the wrong people, not a broken pipe, so the creative's job is to qualify, not to maximise taps. A concept that a sales-ops lead or a developer recognises as written for them beats a concept that gets more clicks from everyone."
+   },
+   {
+    "claim": "The 5/day target is not reachable with this funnel; the audit's realistic number is 1.5 to 2/day by end of September at about $3,500/month. Today is 0.57/day card-saved, with 15 of the last 30 days at zero.",
+    "strength": "verified",
+    "sources": "Same audit, sections 1 and 65 (Stripe, card-saved trials, last 7 full days).",
+    "so_what": "State the real bar when the batch ships. Creative cannot close a 9x gap alone, and promising it sets the batch up to be judged as a failure at 2/day, which would actually be a 3.5x improvement."
+   },
+   {
+    "claim": "Only four things reliably break banner blindness in eye-tracking: plain text, faces, body parts, and creative that looks native to surrounding content. The rejected batch used none of them, and 1Lookup has zero faces across 60+ banner files.",
+    "strength": "verified",
+    "sources": "Nielsen Norman Group, 10-year eye-tracking overview; directory inspection of all five 1Lookup banner batches.",
+    "so_what": "Faces are the cheapest structural fix available and the single most different thing this account could put in a feed. At least three frames get a US office worker at a real desk with gaze on the screen."
+   },
+   {
+    "claim": "Six of the fourteen rejected frames are the exact parodied AI preset: teal-blue grading, rim light from behind, volumetric fog, mirror-reflective floor, floating particles. Consumers in 2026 read that combination as low effort, and disclosure does not rescue it.",
+    "strength": "verified",
+    "sources": "AI-slop coverage (McGraw Hill 2026, Creative Bloq); direct inspection of 1lookup-gumball-square.png and 1lookup-expired-stamp-square.png; Valentino and McDonald's campaign pulls.",
+    "so_what": "Prompts must forbid all five ingredients by name, individually, or the image model reverts to the preset. This is the specific mechanism behind the word 'disgusting'."
+   },
+   {
+    "claim": "Positive-emotion campaigns get 6x more brand lift and 20% more ad recall, and stripping the edge out to play safe removes the positive without removing the negative, leaving an expensive neutral.",
+    "strength": "verified",
+    "sources": "System1 Star Rating database (150,000+ ads); corroborated by a framing study at 72% choice under positive framing vs 22% under negative.",
+    "so_what": "Rewrite every line to the after-state. Not 'stop paying for disconnected numbers' but 'every number on this list connects'. Same claim, opposite frame, and it is free."
+   },
+   {
+    "claim": "Every negative line that actually survives in this niche flips a category myth, names a competitor, or points at money on the table. Not one live competitor ad tells the reader they are doing something stupid.",
+    "strength": "verified",
+    "sources": "Meta Ads Library API 2026-08-21: ScaledMail 'Cold email isn't dead. You're just doing it wrong.' (~16 days, re-cut), LeadMagic 'You're Leaving Enrichments on the Table' (~75 days), Onfire AI, Sent.dm.",
+    "so_what": "Five of the fourteen rejected concepts were sarcasm aimed at the buyer's competence ('IGNORE THIS IF YOUR CRM IS SPOTLESS'). The fix is not to drop negativity, it is to redirect the target at the category or the old method."
+   },
+   {
+    "claim": "Google's responsive display guidance forbids overlaid text, overlaid logos, drawn CTA buttons, digital composite backgrounds, and blank space over 80% of the image, and asks for photographs with physical settings and organic shadows.",
+    "strength": "verified",
+    "sources": "support.google.com/google-ads/answer/9823397.",
+    "so_what": "'Object floating in a dark studio with rim lighting plus a drawn blue button' is three separate policy violations, not just a taste problem. Google Display image assets get a clean-photo variant with nothing painted on them."
+   },
+   {
+    "claim": "The count 41 is live, moves, and is the one headline no competitor in the sweep can copy. DATA_PRODUCT_COUNT = 41 today, verified; it was 34 fifteen days earlier and five live Google video ads still say 34.",
+    "strength": "verified",
+    "sources": "/home/user/1Lookup-Marketing/src/lib/products.ts:138, read 2026-08-21; AD-CREATIVE-PLAYBOOK.md approved copy bank.",
+    "so_what": "It appeared in five rejected concepts and was never larger than about 4% of canvas height. Make it the hero at billboard scale on a bright ground, and re-read the constant the day the copy is written."
+   },
+   {
+    "claim": "Our own ad playbook hardcodes the rejected look: 'Background: dark blue-black #05060F', 'Tone: dark developer terminal aesthetic, live-signal motion, blue/cyan glow', and the prompt template names #05060F and a blue CTA button.",
+    "strength": "verified",
+    "sources": "/home/user/1Lookup-Marketing/AD-CREATIVE-PLAYBOOK.md, 'Brand kit for ads' and 'Generation recipe', read 2026-08-21.",
+    "so_what": "This is the root cause and it is a documentation edit, not a rebrand. Fix the playbook before writing any new prompts, or the next batch drifts dark again. The site's own globals.css already ships a full light ramp, so light is on-brand today."
+   },
+   {
+    "claim": "A validation product owns a legitimate three-colour system (valid green, risky amber, invalid red) that competitors use as their hero graphic, and it makes zero factual claims.",
+    "strength": "verified",
+    "sources": "Live-site renders of zerobounce.net and emailable.com, 2026-08-21; 1Lookup tokens verify green #10B981, warning #F59E0B, error #EF4444 in tailwind.config.ts.",
+    "so_what": "This is the honest answer to 'no colour beyond one blue button'. Colour comes from the data, not from decoration, and it is claim-free because a status chip asserts nothing."
+   },
+   {
+    "claim": "Faces raise gaze duration by roughly 37% and a model whose gaze points at the product pulls attention to the product.",
+    "strength": "likely",
+    "sources": "Peer-reviewed gaze-cuing work (PMC5454066) is solid on the direction; the 37% figure is second-hand from eye-tracking summaries and the primary was not opened.",
+    "so_what": "Use averted gaze pointed at the screen, not direct-to-camera. Treat the direction as reliable and the magnitude as unverified."
+   },
+   {
+    "claim": "Native, in-feed-looking creative gets roughly 3x the CTR of banner-shaped creative in B2B/SaaS (0.82% vs 0.28%).",
+    "strength": "likely",
+    "sources": "digitalapplied.com Display Advertising Benchmarks 2026, an aggregator with no published methodology.",
+    "so_what": "Treat the ratio as directional and the absolutes as unusable. It supports designing away from the ad skeleton, but do not quote the numbers to the client."
+   },
+   {
+    "claim": "Reddit as a channel has produced nothing: $282 lifetime spend, 0 signups and 0 trials by Reddit's own reporting, and 0 of 72 Stripe subscriptions in 90 days carry any reddit tag.",
+    "strength": "verified",
+    "sources": "/home/user/second-brain/projects/2026-08-20-1lookup-acquisition-audit.md section 4 item 1.",
+    "so_what": "Three sweeps recommend building a separate Reddit-native asset set. Do not spend batch slots on it. First-party data beats published channel advice."
+   },
+   {
+    "claim": "'Dark backgrounds win in feed' (+40% engagement, +20-30% CTR), 'ugly ads win', and 'high contrast lifts CTR 32%' are all folklore with no controlled study behind them.",
+    "strength": "contested",
+    "sources": "almostzero.io fetched and audited: no study, no company, no sample size, no methodology. Search Engine Land's ugly-ads piece contains zero performance figures. The 32% figure appears only on uncited marketing blogs.",
+    "so_what": "Do not build the batch on any of them, in either direction. The case against near-black here is first-party (34 dark files, zero attributed trials, a client rejection), not a published test, and it should be stated that way."
+   }
+  ],
+  "contradictions": [
+   "PRODUCT UI AS HERO: principles, b2b-saas and antipatterns all want three or more concepts built on a real API response or dashboard. our-history says product-shot banners lost on real spend (Banner Test killed, every ad under 2% CTR on $160.67, against Billboard Ads at 3.9-4.0%) and that 1Lookup's own two dark API-card banners produced zero attributed trials. I side with our-history on the cap and with the others on keeping the territory: 3 of 18 concepts maximum, and only in the light documentation register (black on white, docs-looking), never the dark terminal card that already failed. Reason: the VoiceDrop loss was a phone mockup for a ringless-voicemail buyer, not a JSON response for a developer, so it caps rather than kills. And the funnel audit says the real problem is unqualified traffic, which a code artefact fixes better than anything else in the set.",
+   "DARK BACKGROUNDS: disruptive and competitors-live say ban near-black outright. principles says there is no controlled dark-vs-light test and warns explicitly against overcorrecting. b2b-saas and our-history say keep one or two as a control. I side with the cap, not the ban: 2 of 18, and dark means the deep-navy register (~#1E3A5F, the Vonage 73-day survivor) with a warm secondary accent, never #05060F. Reason: principles is right that 'dark loses' is unproven, but we do not need a published test when we have 34 of our own dark files and zero attributed trials. Cap on first-party evidence, do not ban on folklore.",
+   "TEXT ON THE IMAGE: Reddit's own 2026 study says image text overlays cut conversion 13%, while Reddit separately publishes that text overlay drives 32% higher CTR. Both cannot be the operating rule. I believe the conversion number, because our money event is a card-saved trial, not a click, and the audit already proves this account buys clicks that never reach the signup page. Practical resolution: on-image text is an offer, a number or a name; descriptions move to the copy field.",
+   "THE PAINTED CTA BUTTON: antipatterns wants it banned (it duplicates the platform's own button and is an ad tell). competitors-live says every long-running ad in the sweep closes on a filled offer pill. principles cites Google policy forbidding drawn buttons on responsive display image assets. All three are right about different surfaces. Resolution: on Google Display image assets, no drawn button, no overlaid text, no overlaid logo, full stop, it is policy. On Meta, a CTA may exist only when rendered in the scene's own material (hand-drawn on the whiteboard, printed on the flyer), which is exactly what the 'best by far' winner did. A generic rounded pill in platform blue floating over the artwork is banned everywhere.",
+   "THE CORNER WORDMARK: principles cites the strongest single measured effect in the entire research set (logo-bearing images convert 108% better, top-left or lower-right). antipatterns says a corner-pasted logo is the most recognisable banner tell there is. Both survive if you separate presence from placement: the 108% finding is about the mark existing, the blindness finding is about the whole headline-subhead-button-corner-logo skeleton. Resolution: the mark always appears exactly once; it goes inside the scene where the surface allows (written on the whiteboard, printed on the paper, on the screen) and corner-pasted otherwise, never top-centre.",
+   "BATCH SHAPE: principles says 6-8 concepts x 2. competitors-live says 3-4 concepts x 3+ variants, because Apollo shipped five variants of one line inside an hour and LeadMagic re-cut two headlines four times in nineteen days. our-history says 18-24 because renders cost $0.20. antipatterns says 5 systems x 3 messages. These are answering two different questions. Resolution: this batch is discovery, because at 0.57 trials/day the account has no signal to optimise against, so ship 5-6 visually unrelated systems x 3 messages = 15-18. Only once a system shows a real click-to-signup-page signal do you re-cut that one system 3-5 ways, which is the competitors-live pattern.",
+   "REDDIT ASSETS: b2b-saas and principles both want a separate unpolished Reddit-native asset set built to the opposite spec. First-party data kills it: $282 lifetime Reddit spend, 0 signups, 0 trials, 0 of 72 Stripe subscriptions carrying a reddit tag. I side with the data. Build no Reddit-specific assets this batch. The native/lo-fi register still earns two slots because it works on Meta, not because Reddit needs feeding.",
+   "THE PREMISE OF 'DISRUPTIVE': competitors-live says the Meta auction for this category is literally empty (zero ads for 'phone number validation API'), so there is no wall of sameness to break and the correct move is maximum clarity. disruptive says borrow the visual grammar of non-ad artefacts to defeat banner blindness. These read as opposites and are not: competitors-live is right about the message (be the clearest, most trustworthy thing in an unclaimed auction, not the weirdest), disruptive is right about the form (do not wear the banner skeleton). 'Crazy' got translated into 'dark and mean', which is neither clear nor disruptive.",
+   "WHAT ACTUALLY FAILED: our-history and competitors-live both note the rejected batch was 7 native / 7 loud, and native is the family Robby previously called 'best by far'. So the family was not the failure. The two variables that changed between the win and the rejection are darkness and negative framing. That is an inference, not a tested conclusion, and the discriminating test is cheap: re-render the whiteboard and cardboard-sign concepts unchanged except daylight ground and a positive headline, and see if they survive. Run that test as part of wave 1."
+  ],
+  "rulebook": [
+   {
+    "rule": "Ground luminance: at least 12 of every 18 delivered files must measure above 120/255 mean luminance. At most 2 may be dark, and 'dark' means deep navy around #1E3A5F, never #05060F or anything under 8% lightness.",
+    "why": "Twelve of fourteen rejected frames sat on #05060F with a measured median of 56.7/255. About 34 of the account's ~46 non-analog banner files are under 60 and none has produced an attributable trial. Every renderable competitor is light, and the only 177-day survivor in the category is a light corporate system.",
+    "checkable": "Downsample each PNG to 64x64 greyscale and take the mean. Count files under 120. More than 6 of 18, rule broken. Any file whose dominant field samples darker than #1E3A5F, rule broken."
+   },
+   {
+    "rule": "The largest, highest-contrast element in every frame must be something the buyer gets. Never a loss word.",
+    "why": "Fourteen of fourteen rejected headlines named a problem. In detour-ahead the biggest, most saturated object on the canvas literally says BAD DATA, so the phrase the scroller memorises next to our logo is 'bad data'. System1 measures 6x brand lift and 20% more recall for positive-emotion creative.",
+    "checkable": "Name the single biggest text or object in the frame. If it is BAD DATA, EXPIRED, MISSING, DISCONNECTED, STOP, NOT, or any other loss word, rule broken."
+   },
+   {
+    "rule": "Headline register: a positive imperative or a plain benefit noun phrase, 3 to 7 words, ending in a full stop. At most 2 of 18 may be problem-framed, and a problem frame must point at the category, the old method, or money on the table, never at the reader's competence.",
+    "why": "Melissa's 177-day survivors are 9 of 10 positive imperatives. Every negative line that survives in this niche flips a myth or names a competitor; not one live competitor ad insults the buyer. Five rejected concepts were sarcasm aimed at the reader ('IGNORE THIS IF YOUR CRM IS SPOTLESS').",
+    "checkable": "Read the headline aloud. If it contains 'you' or 'your' attached to a fault, or instructs the reader to ignore, discard, or keep doing the wrong thing, rule broken. Count problem-framed headlines across the batch; more than 2, rule broken."
+   },
+   {
+    "rule": "No object floating in a void, on any ground colour. Every subject sits on a real surface, lit by one source, casting one shadow in one direction, with a visible contact shadow.",
+    "why": "Reddit's ~150,000-ad study found objects on solid or empty backgrounds are the worst-converting image type, and Google's display guidance names digital composite backgrounds as a thing to avoid in favour of photographs with physical settings and organic shadows.",
+    "checkable": "Trace every shadow in the frame. More than one direction, or a subject with no contact shadow touching a surface, rule broken."
+   },
+   {
+    "rule": "Ban all five AI-slop ingredients, individually and together: rim or back lighting, volumetric fog or haze or god rays, wet or mirror-reflective floors, floating dust or ember particles, and teal-orange or teal-blue cinematic grading.",
+    "why": "Six rejected frames carry four or five of these at once. This exact combination is the most-parodied AI render in circulation and 2026 coverage documents it reading as low effort even when the brand discloses human involvement. It is the specific mechanism behind the word 'disgusting'.",
+    "checkable": "Look for each of the five by name. Any one present, rule broken. The gumball and expired-stamp frames are the reference failures."
+   },
+   {
+    "rule": "Ship 5 or 6 visually unrelated systems with 3 messages each (15-18 concepts). No two systems may share a background family, a layout skeleton, or a light source.",
+    "why": "Motion's 550,000-ad dataset puts the winner rate at 5-8%, so fourteen renders of one idea is one bet with an expected winner count near zero. Building it as unrelated systems also means a single taste objection costs 20% of the batch instead of 100%.",
+    "checkable": "Lay every square out as 150px thumbnails. If any two thumbnails from different systems could be mistaken for each other, rule broken. If more than 3 of 18 share a background family, rule broken."
+   },
+   {
+    "rule": "Type minimums: headline cap-height at least 8% of frame height, body at least 3.5%, and nothing carrying a claim under 3%. Every file must be readable exported to 400px wide.",
+    "why": "receipt sets eight lines of body copy at ~18px on a 1024 canvas, which lands at 7-9px in a real mobile feed; notebook-todo, eyechart and imessage fail the same way. The two brightest frames in the rejected batch did not rescue it because they were bright and illegible, so the batch read as uniformly dark AND unreadable.",
+    "checkable": "Export to 400px wide and read at arm's length. Any word carrying a claim that cannot be read, rule broken. Measure headline cap-height against frame height; under 8%, rule broken."
+   },
+   {
+    "rule": "Text baked into the image is an offer, a number, or a name. Never a descriptive sentence about a problem. Explanations go in the ad copy field.",
+    "why": "Reddit measured a ~13% conversion penalty for plain descriptive image text, recovered only by urgency or offer language. Our money event is a card-saved trial, so believe the conversion number over Reddit's separately published +32% CTR claim.",
+    "checkable": "Read every string on the image. If any of them is a descriptive sentence rather than an offer ('7 DAYS FREE'), a number ('41'), or a name, rule broken."
+   },
+   {
+    "rule": "One claim per frame. Never two claims on one canvas.",
+    "why": "Only 9% of display ads are viewed longer than a second. 41 data products, daily FCC updates, sub-second responses, 7-day trial and 5-minute setup are five ideas and each gets its own banner.",
+    "checkable": "Count distinct claims from the approved bank visible in the frame. More than one, rule broken."
+   },
+   {
+    "rule": "The 1lookup wordmark appears exactly once per frame, lowercase, numeral 1 in #3B82F6 and 'lookup' in #F8FAFC on dark or near-black ink on light. It goes inside the scene where the surface allows, corner-pasted otherwise, never top-centre, never larger than 26% of frame width.",
+    "why": "Reddit's study puts logo-bearing images at 108% higher conversion, the largest measured effect in the whole research set. But a corner-pasted mark on top of a headline-subhead-button stack is the archetypal ad skeleton, and the account has already paused three live ads for model-drawn brand marks and shipped 18 of 19 files with a wrong capital L.",
+    "checkable": "Count brand marks: zero or two, rule broken. Capital-L '1Lookup', rule broken. Mark centred at top, rule broken. Mark on a frame whose surface already spells the name, rule broken."
+   },
+   {
+    "rule": "No CTA pill painted into the artwork in platform blue. A CTA may appear only when rendered in the scene's own material (hand-drawn on a whiteboard, printed on a flyer). Google Display image assets carry no drawn button, no overlaid text and no overlaid logo at all.",
+    "why": "Eight rejected frames carry a blue rounded pill very close to Meta's own #1877F2, so the scroller sees two buttons for one action and one of them is fake. Google's responsive display policy forbids drawn buttons outright. The 'best by far' whiteboard did have a button, hand-drawn in marker as part of the scene.",
+    "checkable": "Is there a rounded rectangle in #3B82F6 or #1877F2 floating over the image with no material relationship to the scene? Rule broken. On any file tagged for Google Display: any drawn button, any overlaid text, any pasted logo, rule broken."
+   },
+   {
+    "rule": "Every photographic frame carries visible imperfection: film grain, a slight focus miss, a crease, a smudge, a coffee ring, uneven handwriting pressure, or slightly off-axis framing.",
+    "why": "The 2026 AI tell is no longer bad hands, it is the absence of imperfection. The rejected receipt has no paper fibre, the notebook page has no pen indentation, the chalk is evenly spaced with no smudge, the windshield glass has no dirt. The whiteboard that won has visible marker ghosting and a glare band.",
+    "checkable": "Zoom to 100%. If every surface is spotless, evenly lit and perfectly aligned, rule broken."
+   },
+   {
+    "rule": "At least 3 of 18 frames contain a human face: US, 28-45, at a real desk in window daylight, mid-action, gaze directed down at the screen rather than at the camera.",
+    "why": "Faces are one of only four things eye-tracking shows reliably break banner blindness, gaze-cuing work shows averted gaze toward the product pulls attention to the product, and 1Lookup has zero faces across 60+ banner files. In a category where competitors show only UI and type, a face is the most differentiated thing available.",
+    "checkable": "Count faces across the batch. Under 3, rule broken. Any direct-to-camera stock grin, arms crossed, headset smile, handshake or pointing-at-a-monitor pose, rule broken."
+   },
+   {
+    "rule": "The subject must resolve in under half a second with no analogy to decode.",
+    "why": "Median feed fixation is about 1.7 seconds and the first half-second decides the scroll-stop. Gumball, velvet rope, shot clock and eye chart all require decoding an analogy before any product meaning arrives, and gumball does not decode at all: it reads as a pharmaceutical ad.",
+    "checkable": "Show the frame to someone for one second. If they cannot name what category the product is in, rule broken."
+   },
+   {
+    "rule": "Give each system its own ground colour so the set is distinguishable at 150px, and never let a single blue button be the only colour event in the frame. Where the concept allows, colour comes from the product's own three states: valid green #10B981, risky amber #F59E0B, invalid red #EF4444.",
+    "why": "Near-black plus one blue button means the only hue in the frame is the same hue as Meta's chrome and Google's link colour. A validation product owns a legitimate three-colour system that competitors use as their hero graphic and that asserts no facts, which is the honest fix for 'no colour beyond one blue button'.",
+    "checkable": "Desaturate the image. If the only thing that loses colour is one button, rule broken. Line up all 18 squares at 150px; if you cannot tell the systems apart by colour, rule broken."
+   },
+   {
+    "rule": "Break the ad skeleton: no headline over subhead over centred button. On landscape, the subject occupies one 40% side and the type the other 60%.",
+    "why": "Eleven of the fourteen rejected frames are the exact rectangle-headline-subline-coloured-button-corner-logo template that eye-tracking shows people have learned to filter before content ever competes for attention.",
+    "checkable": "Draw a vertical line down the centre. If headline, subhead and button are all centred on it, rule broken."
+   },
+   {
+    "rule": "Claim safety, absolute: no accuracy percentage, no percent sign in any performance context, no invented statistic, customer count, testimonial, award or star rating, and no third-party brand name or logo including carrier names inside mock API responses (use 'Mobile Carrier').",
+    "why": "Client hard rule, rejected on sight, and the market leaders keep accuracy percentages off their own ads anyway. The homepage's integration logos do not travel to advertising, where the same marks read as endorsement claims.",
+    "checkable": "Read every glyph in the frame. Any %, any named company other than 1lookup, any number not traceable to the approved bank, rule broken."
+   },
+   {
+    "rule": "Physics and function: nothing stamps, pours or strikes a surface it is not touching; every object performs the job its shape implies; no red spray or spatter on a white surface.",
+    "why": "expired-stamp has a stamp hovering two inches above paper that already carries its impression, with red ink radiating spherically like embers, which reads as blood spatter. missing-flyer has blank tear-off tabs, which is an object that cannot do the only thing tabs exist to do.",
+    "checkable": "For each object, ask what its shape promises and whether the render delivers it. Floating stamp, blank tabs, chute to nowhere, impossible ink direction, red spray on white: rule broken."
+   },
+   {
+    "rule": "Square and landscape cuts of one concept must agree: same copy, same layout logic, same direction of every directional element. Every critical element sits inside the centre 80%.",
+    "why": "detour-ahead shipped with the arrow pointing right in the square and left in the landscape, in the same delivery. Keeping the focal subject in the centre 80% also lets one layout survive a 1:1, a 1.91:1 and a 9:16 crop.",
+    "checkable": "Put the two cuts side by side. Any arrow, gaze, copy or layout contradiction, rule broken. Overlay a centre-80% box; anything critical outside it, rule broken."
+   },
+   {
+    "rule": "Every prompt names the United States explicitly: cast, wardrobe, street furniture and vocabulary. Every string is written in escaped quotes exactly as it must render, and every prompt ends with the no-extra-text constraint.",
+    "why": "Fourteen ESA Card clips shipped with British casts and streets for a US-only campaign because no prompt named a market. The image model also fills any unassigned layout slot by inventing feature chips or duplicating the CTA, which is exactly how error-dialog rendered two identical Start For Free buttons.",
+    "checkable": "Search the prompt for 'United States'; absent, rule broken. In the render, any British spelling, kerb, or non-US street furniture, rule broken. Any word on the image that is not the wordmark, headline, subheadline or button label, rule broken."
+   }
+  ],
+  "banned": [
+   "Any accuracy percentage, hit rate, match rate, 'high accuracy' badge, or any percent sign in a performance context. Rejected on sight, and the only approved accuracy-adjacent line is 'A 7-day free trial to test accuracy'.",
+   "Any third-party brand name, logo, product mark, app icon, or recognisable UI chrome other than 1lookup's own, including real carrier names inside mock API responses.",
+   "#05060F or any ground under 8% lightness as the batch default. Cap of 2 of 18, and dark means deep navy around #1E3A5F, never the near-black field.",
+   "A physical object floating in a dark studio with rim lighting on a reflective floor. This exact composition is what produced the client's verdict and it appears in gumball, expired-stamp, shotclock and velvet-rope.",
+   "Rim or back lighting, volumetric fog, haze, god rays, lens flare, floating dust or ember particles, glass-morphism panels, neon-glow edges, circuit boards, node graphs, glowing globes, binary rain, or any abstract 'data' imagery.",
+   "Teal-orange or teal-blue cinematic colour grading.",
+   "A batch where every headline is a negative, and any copy that insults, excludes or instructs the reader: no 'IGNORE THIS IF...', no 'Please keep calling disconnected numbers', no 'THROW THIS FLYER AWAY', no 'Not for people who like...', no eye-chart implying they cannot see, no velvet rope implying they are not on the list.",
+   "A blue rounded CTA pill painted into the artwork. It duplicates the platform's own button and matches Meta's chrome colour. On Google Display image assets: no drawn button, no overlaid text, no pasted logo at all.",
+   "Monochrome plus a single blue button as the only colour event in the frame.",
+   "A frame whose entire content is a headline plus a CTA button on a plain field, with no product, no number, no surface and no face. That is the format Prospeo just switched off after 185 variants.",
+   "Polished-corporate: stock SaaS gradient, gradient mesh, floating laptop or phone mockup, glowing UI panel, feature-chip row, icon trio with green check badges, dark API response card. That family has never once been picked here and its measured CTR in this portfolio was under 2%.",
+   "Model-invented anything: feature chips, badges, captions, timestamps, status text, taglines, statistics, or a duplicated CTA in an unassigned layout slot.",
+   "A model-drawn 1Lookup logo, and the capital-L '1Lookup' wordmark. The site lockup is lowercase.",
+   "Any claim outside the approved bank, including '100 free lookups', '99%', 'guaranteed', 'always', or upgrading the sub-0.3-second figure from an average to a promise. Any stale count: '34 data products' is now wrong.",
+   "A currency symbol anywhere near the numeral 41. At thumbnail size it reads as a price and the cheapest real plan is $99/month.",
+   "Text under 30px at upload size, and any device that makes the payoff the smallest type in the frame: eye charts, receipt fine print, ballpoint handwriting, eight-line body copy.",
+   "Physics violations and non-functional objects: floating stamps, blank tear-off tabs, chutes to nowhere, ink radiating in impossible directions. Red spray or spatter on a white surface, which reads as blood.",
+   "Stock-photo poses: handshakes, arms crossed, headset call-centre smiles, pointing at a monitor, boardroom applause, hooded fraud figures, glowing brains.",
+   "Collages, multi-panel grids, device mockup stacks, outer borders, vignettes, heavy filters, colour-inverted or blurred imagery.",
+   "'Book a Demo' or 'Talk to Sales' as the CTA on cold traffic, and bare CTA verbs with no offer attached.",
+   "Fourteen-plus one-off concepts with a single render each, or near-identical variants where the render changes and the concept does not.",
+   "Reddit-specific asset sets this batch. $282 lifetime spend, 0 trials, 0 of 72 Stripe subscriptions tagged reddit.",
+   "British or unspecified cast, wardrobe, street furniture or vocabulary. Every prompt names the United States.",
+   "Rebuilding the same fourteen concepts on a light background and calling it a new batch."
+  ],
+  "scoring_rubric": [
+   {
+    "dimension": "Thumbnail survival",
+    "weight": 0.2,
+    "description": "Export to 150px wide and to 400px wide. 10 = the focal subject is identifiable and the headline readable at 150px, and every claim-carrying word is readable at 400px. 5 = the subject reads at 150px but the payoff line needs 400px. 0 = the concept depends on small type by design (eye chart, receipt fine print, ballpoint handwriting). This is weighted highest because it is the only dimension that is purely objective and it eliminated four of the fourteen rejected concepts on its own."
+   },
+   {
+    "dimension": "Buyer self-selection",
+    "weight": 0.2,
+    "description": "Does the frame tell a US sales-ops lead, growth marketer or developer that it was written for them? 10 = a specific, insider, checkable detail only that buyer recognises (a real curl call, a carrier and line-type field, a list of 41 product names, a real CRM row). 5 = generic B2B language that any software buyer would read. 0 = decoration with no buyer signal. Weighted equal-highest because the audit found 90% of paid visitors never reach the signup page and 96% of Meta visitors view exactly one page: the traffic is the wrong people, so qualification beats click volume."
+   },
+   {
+    "dimension": "Claim safety",
+    "weight": 0.15,
+    "description": "A gate scored 10 or 0, never in between. 10 = every glyph traces to the approved bank, no percent sign, no third-party name or mark, no invented number, count re-read from DATA_PRODUCT_COUNT the day the copy was written. 0 = any violation, and the concept is dead regardless of every other score."
+   },
+   {
+    "dimension": "Distinctness",
+    "weight": 0.15,
+    "description": "Distinct from the rejected batch and from every other concept in this batch. 10 = shares no ground family, layout skeleton or light source with any other frame, and would not be mistaken for anything in the five prior 1Lookup batches. 5 = a new subject inside a familiar layout. 0 = a render variant of another concept, or a relight of the rejected look. Check by laying all thumbnails out at 150px."
+   },
+   {
+    "dimension": "Positive register",
+    "weight": 0.1,
+    "description": "10 = the biggest element in the frame is something the buyer gets and the headline is a positive imperative or benefit noun. 5 = neutral or a myth-flip aimed at the category, resolved inside the frame. 0 = a loss word is the biggest element, or the copy points at the reader's competence. System1 measures 6x brand lift for positive-emotion creative, and no live competitor ad in the sweep insults the buyer."
+   },
+   {
+    "dimension": "Escapes the ad skeleton",
+    "weight": 0.1,
+    "description": "10 = borrows the grammar of a non-ad artefact or a real screen, brand mark inside the scene, no centred headline-subhead-button stack, no painted platform-blue pill. 5 = a designed layout that at least breaks symmetry. 0 = the archetypal banner template, which eleven of fourteen rejected frames were."
+   },
+   {
+    "dimension": "Render reliability",
+    "weight": 0.1,
+    "description": "Can the image model actually produce this without slop or a defect? 10 = a plain scene, one light source, few strings, nothing requiring correct hands, small type, functional mechanisms, or a pixel-accurate third-party UI. 5 = needs one careful re-roll. 0 = requires a convincing fake iOS or a mechanism with moving parts, which is how imessage-clean-list and missing-flyer failed. Score before spending, not after."
+   }
+  ],
+  "concept_territories": [
+   {
+    "territory": "Daylight whiteboard and hand-made surfaces, relit and flipped positive",
+    "rationale": "The only creative family this account has ever praised ('the best by far') and the only one with a first-party win behind it. It was tried in this batch and failed, and the two variables that changed between the win and the rejection are darkness and negative framing, which makes this a controlled correction rather than a new gamble. Also the discriminating test for the whole 'what actually failed' question: re-render the whiteboard and cardboard-sign concepts unchanged except for daylight and a positive line, and see if they survive.",
+    "visual_signature": "A white dry-erase board or a sheet of kraft card filling 100% of the frame, no wall, no room. Shot slightly off-axis on a phone in window light with one soft glare band across a corner and visible old marker ghosting. 'Validate Every Contact.' hand-lettered in thick black marker at roughly one-eighth of frame height, the payoff half underlined twice in #3B82F6. A rough hand-drawn arrow down to a hand-drawn rounded rectangle filled in marker with 'Start For Free' hand-lettered inside. 'ilookup' hand-written small at the top in blue, so the brand is part of the surface and nothing gets pasted. One real marker in the tray. Measured luminance target above 190/255.",
+    "risk": "It is the account's signature move now and repetition is a real cost: the whiteboard was praised once, in another company's batch, and nobody has tested whether a second one still lands. Also the easiest frame in the set to make look like a template rather than a photograph."
+   },
+   {
+    "territory": "Flat saturated colour field, typography only, no image at all",
+    "rationale": "NEVER TRIED here, and the only case in the whole research set with proven display-banner economics behind it: The Economist's programmatic display campaign, no photography, flat vermilion field and one sentence, delivered 64,000 paid subscriptions and \u00a351.7m at over 25:1 ROMI. Spotify Wrapped's OOH runs the same construction on an oddly specific number. Costs nothing to generate, every variant is a real test, and it is the format that best exploits an empty auction because it is maximally legible rather than maximally weird.",
+    "visual_signature": "Full-bleed flat colour, no gradient, no shadow, no vignette, one per execution across a set the eye can tell apart at 150px: marigold #F5A524, signal orange #FF6B35, deep teal #0F766E, verify green #10B981. One sentence in heavy Space Grotesk, near-black on the warm grounds and white on teal and green, left-aligned, ragged right, ranged over three or four lines and occupying 55-65% of frame height. Optical margin of one cap-height on all sides. Wordmark bottom-left at 4% of frame height. Nothing else exists in the frame.",
+    "risk": "Prospeo's 185-ad library of plain typographic guarantee headlines went dark inside nine days, which is the closest thing to a live counter-example. The difference is that Prospeo's line was a guarantee claim and this is a specific number or an offer, but that distinction is my read, not a tested one. Keep it to 3 of 18 until one shows signal."
+   },
+   {
+    "territory": "41 as a billboard numeral on paper white",
+    "rationale": "The one headline no competitor in the sweep can copy, and the countable-number format is exactly what the category's leaders use as hero proof (ZeroBounce 60B+, Apollo 4M+ teams, Emailable 300,000+) while keeping quality percentages off their ads, which is the constraint we are under anyway. The number appeared in five rejected concepts and was never larger than 4% of canvas height while BAD DATA got 20%. It has never once been the whole banner.",
+    "visual_signature": "Off-white paper ground #FAF7F2. The numeral 41 in the heaviest Space Grotesk weight, near-black #111827, occupying 55-65% of frame height, baseline-aligned left, no digit touching or cropped by any edge. Directly beneath at one-eighth the numeral size: 'data products. One API key.' To the right, optionally, a tight stacked list of six real product names at 1/20 height. Wordmark bottom-left. No photograph, no button, no currency symbol anywhere near the numeral.",
+    "risk": "The count moves (34 to 41 in fifteen days, and five live Google video ads still say 34), so it has to be re-read from src/lib/products.ts the day the copy is written. A naked 41 next to a free CTA can also read as a price at thumbnail size when the cheapest plan is $99/month."
+   },
+   {
+    "territory": "The validation traffic light: green, amber and red status rows on white",
+    "rationale": "NEVER TRIED, and it is the honest answer to the client's exact complaint about 'no colour beyond one blue button'. A validation product owns a real three-state colour system, so the colour comes from the data rather than from decoration, and a status chip asserts nothing, which makes it the safest possible frame under the no-percentages rule. ZeroBounce and Emailable both build their whole visual identity on it, which proves this buyer's eye is already trained to read it.",
+    "visual_signature": "Pure white ground. A single light-mode result card, 1px #E5E7EB hairline border, 16px radius, one soft drop shadow, sitting flat with no perspective and cropped so it bleeds off one edge. Inside: a column of about eight US phone numbers in JetBrains Mono at legible size, each with a status pill to its right, six green #10B981 'Valid', one amber #F59E0B 'Risky', one red #EF4444 'Disconnected'. Carrier field reads 'Mobile Carrier', never a real name. Headline left-aligned above in near-black, five words. No numbers, no percentages, no counts anywhere on the card.",
+    "risk": "It edges toward the product-UI family that lost on real spend in this portfolio (Banner Test killed under 2% CTR against billboards at 3.9-4.0%), and it can slide into the generic light-purple dashboard look that every email-hygiene competitor already runs. Cap at 3 of 18 and keep the card cropped and oversized rather than centred and small."
+   },
+   {
+    "territory": "One person, one desk, one screen",
+    "rationale": "NEVER TRIED: zero faces across 60+ 1Lookup banner files. Faces are one of only four things eye-tracking shows reliably break banner blindness, gaze-cuing work shows a model looking at the product pulls attention to the product, and only one competitor in the entire sweep (Clay) uses faces at all, so it is genuinely differentiated in an auction where everyone else shows UI and type. A person holding a phone also asserts nothing, which makes it claim-safe by construction.",
+    "visual_signature": "One US office worker, 28-45, waist-up, at a real desk with real window daylight from camera left, mid-action rather than posed, three-quarter profile with gaze directed down-left at a laptop where the validation result is the brightest object in the frame. Shot around f/2.8 so the room falls away. Visible desk clutter: a mug, a cable, an unstyled wall. Film grain, slightly off-horizon framing. Face at 25-30% of canvas, screen at 35%. Headline in a flat colour band beside them, never overlapping the face. No stock grin, no arms crossed, no pointing.",
+    "risk": "The hardest render in the set to get right, and stock-photo drift is one bad prompt away. It also cannot imply an attributed testimonial, because we have no named customer we can back, so it must read as generic-desk illustration. Budget re-rolls."
+   },
+   {
+    "territory": "The banner that is visibly too wordy to be a banner",
+    "rationale": "NEVER TRIED, and it attacks the account's actual bottleneck rather than its click rate. Oatly launched a market on a 523-to-634-word billboard, and a wall of small readable copy in a feed of five-word headlines self-selects exactly the reader who will finish a signup: an ops lead or a developer who reads docs. The audit says 96% of Meta visitors view exactly one page, so a format that filters at the impression is worth more here than one that maximises taps.",
+    "visual_signature": "Off-white or pale oat-cream field #F4EFE4, filled 80% with a wall of small black justified body copy in a plain grotesque, at a size that is legible at 1024 but clearly too much for an ad. One handwritten-marker headline across the top. One deliberately crude line drawing in a corner, amateur on purpose. Ends on 'ilookup.io. 7-day free trial. Cancel anytime.' No photography, no button, no gradient.",
+    "risk": "It breaks our own type-minimum rule by design, which is the point but also means it fails the 400px legibility gate and must be exempted explicitly, once, in writing. If it fails, it fails invisibly rather than loudly, so it needs its own read of the landing-page-view rate rather than CTR."
+   },
+   {
+    "territory": "Two columns, generic left side",
+    "rationale": "A proven live form in this exact niche right now (Onfire AI's 'ZoomInfo sees titles. Onfire sees buyers.' and Sent.dm's 'Move Beyond Twilio' are both delivering and both cleared Meta review), stripped of the part we cannot use. Replacing the named competitor with a generic method keeps the working structure, drops the brand name, and lands directly on the 'Daily FCC and carrier data updates' claim, which is the one claim in the bank that has never carried a concept.",
+    "visual_signature": "Pale grey #F3F4F6 field split by a single #3B82F6 hairline at 40/60. Left column narrower, desaturated, set in a lighter weight: 'Your list says valid.' Right column wider, full colour, heavier weight, near-black on white: 'The carrier says disconnected.' Beneath the right column only, one line: 'Checked against FCC and carrier data every day.' No object, no photograph, no button. The right side always wins on area, saturation and type size.",
+    "risk": "It is a problem frame, so it burns one of only two negative slots in the batch, and the left column has to name a method rather than a person or it becomes the sarcasm that got the last batch killed. Read every version aloud with 'ilookup' appended before it ships."
+   },
+   {
+    "territory": "Documentation white: real code on paper, not a dark terminal",
+    "rationale": "The one instinct the rejected batch had right, moved out of the register that failed. The dark API-response card has run twice here and produced zero attributed trials, but a curl call and a JSON response set as black-on-white documentation is a different object: it is the strongest possible qualification filter (a developer clicks it, everyone else scrolls) and it is the only genuinely uncopyable proof an API has. Stripe's '7 lines of code' is the long-running anchor for the whole format.",
+    "visual_signature": "White page ground. Top 60%: a three-line curl to a real 1Lookup endpoint on the left and the JSON response on the right, JetBrains Mono at 30px+, in light-mode code chrome with a #F3F4F6 gutter. Keys in near-black, values syntax-coloured, one #10B981 green highlight on the field that matters, carrier reading 'Mobile Carrier'. A small '0.2s' badge in the corner. Bottom 40%: flat #3B82F6 carrying one line of headline type under 20 words. Wordmark top-left. Every endpoint verified against the repo before render.",
+    "risk": "Product-imagery banners lost on real spend in this portfolio, and this is the closest territory to that loss. The defence is that it is a code artefact rather than a product mockup, and that it filters rather than persuades, but that is a reasoned bet and not a measured one. Two concepts, not more, and judge it on landing-page-view rate rather than CTR."
+   },
+   {
+    "territory": "Borrowed poster grammar: a printed object photographed flat in daylight",
+    "rationale": "The one high-variance slot, and it is where the 'crazy, disruptive' brief actually belongs. Liquid Death's whole mechanism is wearing another category's costume, and KFC's FCK ran in two newspapers and recovered a crashed brand-impression score in four weeks on one object with three letters on it. A fight card reading PHONE vs FAKE NUMBER, EMAIL vs BOUNCE, DOMAIN vs SPAM TRAP, MAIN EVENT: 41 DATA PRODUCTS ON ONE API KEY is instantly readable, positively framed as spectacle, contains only backable claims, and looks like nothing else in a B2B feed.",
+    "visual_signature": "A real printed poster photographed flat-on lying on a plain wooden or laminate surface in overcast daylight, with visible paper texture, one soft fold crease and a slightly off-square camera angle. Condensed gothic type, two colours only, aged paper stock. The poster is an object in a photograph, never a full-bleed digital layout. The brand is printed on the poster itself at the bottom, so nothing is pasted over the image.",
+    "risk": "Highest variance in the batch and the easiest to render badly: the whole mechanism depends on the fake being executed with total straight-faced conviction, and a half-committed version looks like a joke nobody got. It also risks reading as loud-for-loud's-sake, which is the same failure mode that produced 'crazy' meaning 'dark and mean'. One slot, and kill it fast if wave 1 comes back soft."
+   }
+  ]
+ },
+ "critique": {
+  "root_causes": [
+   "The playbook hardcoded the failure before anyone had an idea. /home/user/1Lookup-Marketing/AD-CREATIVE-PLAYBOOK.md specifies ground '#05060F', 'dark developer terminal aesthetic, blue/cyan glow', and a blue CTA pill inside the prompt template itself. Measured result: 12 of 14 squares under 60/255 mean luminance, median 56.7, and 8 frames carrying a #3B82F6 pill. This is not a taste failure, it is a config file, and no amount of new concepting fixes it until that file is edited.",
+   "'Crazy' was translated into 'mean' by the panel structure. The six-lens panel shipped a 'negging' lens, a 'loudwarn' lens and an 'object' lens, and no lens was assigned the after-state. Outcome: 14 of 14 headlines name a loss, and 5 of 14 aim the loss at the reader's competence ('IGNORE THIS IF YOUR CRM IS SPOTLESS', 'Not for people who like bounced emails', 'THROW THIS FLYER AWAY'). The client's word 'weird' is the darkness; 'nothing click-worthy' is that there is nothing in any frame the buyer gets.",
+   "The concept axis never varied, only the object did. All 14 are the same rectangle: same near-black ground, same single light source, same headline-subhead-blue-pill stack, same corner wordmark, with a different prop swapped into the middle. At Motion's 5-8% winner rate that is one bet rendered fourteen times, not fourteen bets, and it is also why a single taste objection killed 100% of the batch instead of 20%.",
+   "Nobody ever looked at these at delivery size. The three brightest, most human frames (notebook-todo at 169.5, missing-flyer at 143.5, windshield-flyer at 129.3) each set the payoff line at roughly 2-4% of frame height, so they are bright AND illegible. That is why brightness did not rescue the set: at feed scale the batch reads as uniformly dark and uniformly unreadable. A single 400px export would have caught receipt, notebook-todo, eyechart, windshield-flyer and missing-flyer.",
+   "The subject is decoration, not the product, so the frames carry no buyer signal. In 11 of 14 the hero object is an analogy the viewer has to decode (gumball, velvet rope, eye chart, shot clock, detour sign, expired stamp) and none of them says phone, email, domain, API or ops. Zero frames show a validated result, zero show real product output, zero show a person. Against a funnel where 90% of paid visitors never reach signup, the batch optimised for a scroll-stop it did not get and skipped qualification entirely.",
+   "The audit that ran was the wrong audit. An adversarial claim-safety and duplication pass cut 14 of 28 concepts and did its job well: no percentages, no third-party names, count re-read from products.ts. It had no ground-luminance check, no headline-polarity check, no thumbnail check and no slop-ingredient check, so 12 near-black frames, 14 negative headlines and 4 rim-light-fog-reflective-floor renders passed clean. Everything on the checklist was verified, and everything that killed the batch was off it."
+  ],
+  "per_concept": [
+   {
+    "id": "receipt",
+    "score": 7.5,
+    "verdict": "rescue",
+    "whats_wrong": "Best idea in the batch, destroyed by scale. It is the only frame where every single word is something the buyer gets (six real product names, TOTAL: 41 data products on one API key, 7-day free trial, Cancel anytime, Try For Free) and the biggest line is the offer, not a loss word. It is also the strongest qualification filter in the set: 'DNC scrub', 'reverse lookup', 'IP intelligence' are insider words a sales-ops lead recognises and a tourist does not. Then it is shot as a small slip of paper occupying ~35% of a 1024 canvas on a dark walnut desk, mono type at roughly 18px, which is 7-9px in a real feed. Scored against the rubric it takes a 1 on thumbnail survival, the highest-weighted and only objective dimension, and that alone eliminates it. Secondary: the ground is a dark desk, so the 115.9 measured luminance is paper, not field.",
+    "rescue_path": "Reshoot as the paper filling the frame edge to edge, no desk, no mug, no keyboard: an overhead phone shot of an itemised slip cropped so the top and bottom bleed off canvas, on a pale surface in window light. Type goes up 3-4x so the TOTAL line clears 8% cap height and every product name clears 3.5%. Keep the receipt-as-invoice-of-what-you-get device, keep the printed 1lookup at the top so nothing is pasted, keep the paper curl and print banding as the imperfection. Delete 'phone validation / email validation' generic lines and use six of the more specific product names so the qualification signal gets stronger, not weaker. No currency symbol anywhere near the 41."
+   },
+   {
+    "id": "sidewalk-chalkboard",
+    "score": 7,
+    "verdict": "rescue",
+    "whats_wrong": "Right family, right craft, one banned sentence. Real US sidewalk, real overcast daylight, one light source, real contact shadow, hand-lettered chalk with genuine unevenness and board ghosting, brand written on the surface so nothing is pasted, 108 luminance. It is the closest thing in the batch to the whiteboard the account called 'best by far'. Then the copy is 'IGNORE THIS IF YOUR CRM IS SPOTLESS', which is the exact sarcasm-at-the-reader pattern the rulebook bans by name, and it is the biggest element in the frame, so the phrase memorised next to the wordmark is an instruction to ignore us. Composition also wastes ~45% of the canvas on sidewalk and shopfront glass, and the payoff '7-day free trial' is set at half the headline size.",
+    "rescue_path": "Change two variables and nothing else, which also runs the discriminating test on the whole 'what actually failed' question. One: crop so the chalkboard fills 90%+ of the frame, shot slightly off-axis, no street context. Two: flip the line to a positive imperative of 3-6 words in the Melissa register, hand-lettered at 10%+ cap height, with the payoff half underlined in blue chalk and 'Start free' hand-drawn in a chalk box as the in-scene CTA. Keep the chalk dust, the smudges and the uneven letter pressure. If a relit, positive chalkboard still gets rejected, the problem was never darkness and we learn that for about $0.40."
+   },
+   {
+    "id": "notebook-todo",
+    "score": 7,
+    "verdict": "rescue",
+    "whats_wrong": "Brightest frame in the batch at 169.5, the most positive concept after receipt, and near-unreadable. The device is genuinely good: three crossed-off manual tasks resolving into a circled 1lookup is an after-state, not a complaint, and it is the only frame in the set where the brand is the resolution of the story rather than the accuser. 'check every domain by hand' and 'guess who is on the DNC list' are real ops-work language, so it qualifies. Handwriting came back clean on the first roll, which is the hard part. But the writing sits at roughly 2.5% cap height, the payoff 'Start free in 5 minutes.' is the smallest type in the frame, and more than half the canvas is empty ruled paper plus wood grain. At 150px it is a photo of a notebook with nothing on it.",
+    "rescue_path": "Crop to the page: spiral binding at the left edge, page bleeding off the top and right, no keyboard, no coffee cup, no desk. Handwriting scales to 3x so the circled 1lookup and 'Start free in 5 minutes.' both clear 8% cap height and become the two biggest things in the frame. Cut from three struck-through lines to two so the resolution line dominates. Keep the pen indentation, the ink pooling and the slightly off-square camera angle. Blue ballpoint on white paper in window light is already the right palette, so nothing else changes."
+   },
+   {
+    "id": "courtesy-notice",
+    "score": 6,
+    "verdict": "rescue",
+    "whats_wrong": "Correct format, wrong ground, wrong polarity, and currently an exact match for the format a competitor just switched off. Typography-only, left-aligned, headline at roughly 11% cap height, readable at 150px, trivially reliable to render: on the mechanical dimensions it is the best frame in the batch. Everything else is wrong. Ground is #05060F at 46.3 luminance. The line 'Please keep calling disconnected numbers.' is sarcasm aimed at the reader and the largest element on the canvas is a loss. And as delivered it is a headline plus a subhead plus a blue pill on a plain field with no product, no number, no surface and no face, which is the Prospeo construction that went from 185 active ads to zero in nine days.",
+    "rescue_path": "Keep the layout skeleton exactly as it is and change three things: ground goes to a flat saturated field (marigold #F5A524 or deep teal #0F766E, no gradient, no vignette), the line becomes a positive imperative or a countable number instead of a complaint, and the painted blue pill is deleted so the platform's own button is the only button. That converts it into the flat-colour-field territory with proven display economics behind it, at zero render cost. Do not ship it as a headline-only frame: give it a number or an offer so it is not the Prospeo format on a brighter background."
+   },
+   {
+    "id": "missing-flyer",
+    "score": 6,
+    "verdict": "rescue",
+    "whats_wrong": "The photograph is reusable, the idea is not. Craft is real: a paper poster nailed to a US utility pole, overcast daylight, a real suburban street, torn corners, rusted nails, hand-lettering with genuine wobble, brand printed on the surface, 143.5 luminance. Two things kill it. The biggest word on the canvas is MISSING, a loss word, and the message tells the reader their emails are lost, which is an accusation about their operation next to our logo. And the tear-off tabs are blank, so the one object in the frame whose whole purpose is to be torn off cannot be torn off, which is exactly the non-functional-object failure the rulebook names. Poster occupies only ~60% of the frame and everything below the headline is under 3% height.",
+    "rescue_path": "Keep the surface, throw away the concept. Same pole, same overcast daylight, same nails and paper texture, but the poster is a straight printed announcement rather than a lost-pet parody: one positive line at 10%+ cap height, the offer beneath it, 1lookup.io printed at the bottom. If tabs appear at all they carry '1lookup.io' repeated so the object performs its function. Crop so the poster fills 85% of the frame. What survives here is the photographic recipe, not the analogy, so do not carry the headline forward in any form."
+   },
+   {
+    "id": "shotclock",
+    "score": 6,
+    "verdict": "rescue",
+    "whats_wrong": "The only frame where the biggest element is a benefit, wrapped in the exact render preset that got the batch called disgusting. '0.3' in cyan LED at roughly 25% of frame height reads instantly at 150px and speed is a real developer signal, so the instinct (make the number the hero) is the right one. But the vessel is a shot clock floating in a dark void at 27.6 luminance with a red glow bar, volumetric haze and floating particles, which is four of the five banned slop ingredients at once, and it shares that exact composition with gumball, expired-stamp and velvet-rope. It also needs the viewer to decode a basketball analogy before any product meaning arrives, and it closes on a painted blue pill.",
+    "rescue_path": "Keep the principle, discard the object entirely. The number becomes the whole banner set in heavy type on a paper-white or flat-colour ground, no LED, no clock, no fog, no particles, no pill, at 55-65% of frame height with the claim beneath it at one-eighth the size. Note the number to lead with is 41, not 0.3: 41 is the claim no competitor in the sweep can copy and 0.3 is a latency figure that must not be upgraded from an average to a promise. Run 0.3 only as a second execution inside the same numeral system, and re-read DATA_PRODUCT_COUNT from src/lib/products.ts the day the copy is written."
+   },
+   {
+    "id": "detour-ahead",
+    "score": 4.5,
+    "verdict": "rescue",
+    "whats_wrong": "Wins the thumbnail test outright and loses everything else. The orange diamond is the highest-contrast object in the entire batch and it resolves in well under half a second at 150px, which nothing else here does. It is also the frame that most literally breaks the rulebook: the biggest, most saturated element on the canvas says BAD DATA, so the phrase the scroller carries away next to our wordmark is 'bad data'. It sits on #05060F at 26.6 luminance despite being an outdoor object, the sign has no environment and no contact shadow, and the square and landscape cuts shipped in the same delivery with the detour arrow pointing in opposite directions, which is a QA failure independent of the concept.",
+    "rescue_path": "Only survives as borrowed public signage shot straight and positive: a real highway gantry or roadside board photographed in daylight against sky, carrying '41 DATA PRODUCTS. ONE API KEY.' in standard highway type, with the sign as an object in a real photograph rather than an icon on a black field. A warning sign cannot be made positive, so the diamond and the word AHEAD both go. If that reads as strained, kill it and bank the only real lesson: one giant saturated high-contrast object beats every dark composition in the batch at thumbnail size."
+   },
+   {
+    "id": "windshield-flyer",
+    "score": 4,
+    "verdict": "kill",
+    "whats_wrong": "Clean render, bad object, insulting copy, invisible payoff. Genuinely well made: real US parking lot, hard daylight, one shadow direction, correct wiper physics, no slop, 129.3 luminance. But the flyer occupies roughly 11% of the frame and every word on it is unreadable at 400px, let alone 150px, so as an ad it is a photo of a grey car. The copy is a double insult ('THROW THIS FLYER AWAY. KEEP PAYING FOR BAD DATA.'), which is the banned instruct-the-reader-to-discard pattern. And the borrowed artefact itself is a windshield flyer, an object people universally resent finding, so the association it buys is junk mail under your wiper. missing-flyer already covers the printed-object-in-daylight recipe better.",
+    "rescue_path": "kill"
+   },
+   {
+    "id": "eyechart",
+    "score": 3.5,
+    "verdict": "kill",
+    "whats_wrong": "Structurally disqualified: the payoff has to be the smallest type in the frame or it stops being an eye chart. 'STOP' reads at 150px and everything from line two down, including 41 DATA PRODUCTS and START FOR FREE, is illegible by construction, which the rubric scores 0 on the highest-weighted dimension. The analogy also insults the reader twice over, implying they cannot see what is wrong with their data, and it opens on STOP PAYING FOR BAD DATA so the largest word is a loss. Craft is decent (real framed print, real room, 102 luminance) but it is a picture of a poster on a dark navy wall with the poster at ~40% of frame, and the framed-print-on-wall device is closer to office decor than to anything a buyer gets.",
+    "rescue_path": "kill"
+   },
+   {
+    "id": "imessage-clean-list",
+    "score": 3,
+    "verdict": "rescue",
+    "whats_wrong": "One line of copy worth keeping, inside a frame that violates three hard rules. 'how is your lead list suddenly this clean?' is the single best line in the batch: it is the after-state, it comes from a third party so it reads as social proof, and it makes no factual claim. Everything around it fails. The frame reproduces recognisable third-party UI chrome (iOS Messages bubbles, back chevron, typing indicator, input pill), which is a claim-safety gate failure, not a taste note. It is the darkest file in the set at 18.9 luminance. It is a flat digital composite with no surface, no light source and no shadow. It carries two claims on one canvas. Roughly 45% of the frame is empty. And convincing fake OS UI is the render risk the rulebook names as an automatic 0.",
+    "rescue_path": "Salvage the twelve words, bin the vessel. The line moves onto a legitimate surface: hand-lettered on a whiteboard, printed on paper, or set as flat type on a saturated colour field, with the reply carrying exactly one claim, not two. No fake Messages, no fake iOS, no blue-and-grey bubble grammar, no borrowed OS chrome of any kind. The concept as rendered is dead; the copy is a keeper."
+   },
+   {
+    "id": "error-dialog",
+    "score": 3,
+    "verdict": "kill",
+    "whats_wrong": "The archetypal banner skeleton with a loss statement as the headline. Biggest text on the canvas is 'This number does not exist.', a pure negative, next to a red X. It is a digital composite on a #05060F field at 25.1 luminance with a blue radial glow standing in for a light source, no surface, no contact shadow. The CTA is a painted pill in a blue effectively indistinguishable from Meta's own chrome, with the wordmark corner-pasted above it: headline, button, corner logo, exactly the template eye-tracking says people filter before content competes. It also needed a re-roll after the model duplicated the CTA into an unassigned slot, and the contact sheet still carries the two-button take. Nothing in the frame says who this is for.",
+    "rescue_path": "kill"
+   },
+   {
+    "id": "velvet-rope",
+    "score": 3,
+    "verdict": "kill",
+    "whats_wrong": "Explicitly banned copy on top of the batch's default composition. 'Not for people who like bounced emails.' is exclusion aimed at the reader, which the rulebook names by name. The visual is two gold stanchions and a red rope floating in a black void at 32.3 luminance with no floor, no room and no contact shadow, closed by a painted blue pill: object-in-a-void plus platform-blue button plus corner wordmark, all three at once. The nightclub-rope analogy also has to be decoded before any product meaning arrives, and when it decodes it says the reader is not on the list. Type is large and legible, which is the only thing it has.",
+    "rescue_path": "kill"
+   },
+   {
+    "id": "expired-stamp",
+    "score": 2,
+    "verdict": "kill",
+    "whats_wrong": "One of the two reference slop failures, and a physics violation on top. A brass stamp hovers two inches above paper that already carries its impression, with red ink radiating spherically like embers, which on white paper reads as blood spatter. Rim light from behind, haze, teal-blue grading, floating particles: four of the five banned ingredients in one frame. Ground is 56.7 luminance, exactly the batch median. The biggest object-word is EXPIRED. The one thing worth keeping is the claim underneath it, 'Daily FCC and carrier data updates', which is the only line in the approved bank that has never carried a concept of its own and deserves a proper frame built around the after-state instead of the decay.",
+    "rescue_path": "kill"
+   },
+   {
+    "id": "gumball",
+    "score": 1,
+    "verdict": "kill",
+    "whats_wrong": "The worst frame in the batch and the direct cause of the word 'disgusting'. Opened at full size it is grey capsules in a glass globe under blue rim light on a wet mirror-reflective floor with volumetric fog and green under-glow: it reads as a pharmaceutical ad, not a data product. All five banned slop ingredients are present simultaneously. Ground measures 36.5 luminance. Headline is 'Stop Paying for Bad Data', a loss, closed with a painted blue pill. It scores zero on buyer self-selection because nothing in the frame says phone, email, domain, API or ops, and zero on distinctness because it is the template the other three void-object frames are built from. There is no idea trapped inside this one.",
+    "rescue_path": "kill"
+   }
+  ],
+  "keepers": [
+   "receipt",
+   "notebook-todo",
+   "sidewalk-chalkboard",
+   "courtesy-notice"
+  ]
+ }
+}
