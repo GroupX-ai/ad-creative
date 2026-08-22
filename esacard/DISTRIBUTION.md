@@ -1265,3 +1265,107 @@ The previous TikTok campaign `1873787435137170` stays **paused** (spent $134.35,
 Three banners are still NOT animated and so not in either campaign: `p5-three-minutes-square`,
 `p5-three-minutes-vertical`, `p11-his-photo-square`. Their type sits on top of the subject and no
 mask protects the words without freezing part of the animal.
+
+---
+
+## Website retargeting: built on TikTok and Reddit, $25/day each (2026-08-22)
+
+Robby: *"Make sure we have website retargetting campaign in TikTok and Reddit at $25 / day each
+for ESA card"*.
+
+Neither platform had one. Meta has carried the only paid retargeting since 2026-08-18
+(`120247894676000605`, $10/day); Google's Display retargeting died with the ban. Both new
+campaigns are built off the **site pixel**, so the audience is every visitor regardless of which
+channel sent them, which in practice means it is mostly Meta traffic being re-approached.
+
+| platform | campaign | id | ad group | budget | ads |
+| --- | --- | --- | --- | --- | --- |
+| Reddit | `ESA Card \| Reddit \| US \| Website Retargeting \| Purchase` | `2574283775077666407` | `2574284787743723624` | $25/day | 7 |
+| TikTok | `ESA Card \| TikTok \| US \| Website Retargeting \| Purchase` | `1874236869960994` | `1874236740388977` | $25/day | 6 |
+
+This takes ESA Card paid from **$314/day to $364/day**.
+
+### Creative: the offer-led set, not the story-led set
+
+Both campaigns run the same six creatives, chosen on purchases rather than clicks. From lifetime
+Meta insights, `p2-offer-square` (3 purchases) and `p6-forever-square` (2 purchases) are the only
+two ads that have ever produced a sale, and both lead with the offer rather than a story.
+`p1-carry` and `p12-no-subscription` round it out on the same footing. Nothing story-led is in
+either campaign: a retargeting audience has already heard the story, it needs the price.
+
+On TikTok the set is the **animated** cut of those banners, not the static ones. TikTok's in-feed
+placement will not serve a still image, and frame one of each clip is the static banner it was
+made from, so this is the winning creative in the only format the placement accepts.
+
+Reddit adds `p2-offer-vertical`, `p6-forever-vertical`, `p1-carry-square` and
+`p12-no-subscription-vertical` from existing posts; no new Reddit post was created, and no ad copy
+was changed, so no new claim ships on either platform.
+
+### Audiences
+
+- **Reddit** already had a pixel audience Reddit built itself,
+  `Recommended Website Retargeting Audience_90d Lookback` (`pr.2572718957341216499`), 90-day
+  lookback on `PAGE_VISIT` + `ADD_TO_CART`, **2,200-2,400 people**, status SUCCESSFUL. It was
+  sitting unused: no ad group referenced it. That is now the retargeting ad group's only
+  targeting, US, FEED + COMMENTS_PAGE, `expand_targeting` off.
+- **TikTok** had **zero custom audiences of any kind**. Created
+  `ESA | Site Visitors 180d (excl. purchasers)` (`195883692`): include `PAGE BROWSE` 180d, exclude
+  `COMPLETE PAYMENT` 180d, on pixel `7673594860187762706`, auto-refresh on.
+
+A purchaser-exclusion audience was also created on Reddit (`pr.2574283957921284422`) and then
+**left out of the ad group**: it holds 0-50 people, below Reddit's 100-user floor, so it excludes
+nothing today. Worth wiring in once it fills. Note the open question underneath it: **half of ESA
+Card's sales are second animals bought minutes apart**, so excluding past buyers may be the wrong
+call for this product in the first place. TikTok excludes them, Reddit does not; that difference
+is now a live A/B rather than an oversight.
+
+### Reading it
+
+Both campaigns tag every click, so settle this in **Stripe on `utm_campaign`**, never in either
+platform's own reporting:
+
+- `esa-card-tiktok-retargeting`
+- `esa-card-reddit-retargeting`
+
+`utm_content` names the creative. The bar is the same as everything else: cost per purchase
+against **$37.57**, reconciled to Stripe.
+
+### Two things to watch
+
+1. **TikTok's audience was still computing at build time** (`is_valid: false`, `cover_num: 0`).
+   TikTok quotes up to 48 hours for a new audience, and it **refuses to attach an audience that is
+   not yet valid** (`40002 You have not been authorized to use this custom audience`). So the
+   TikTok ad group is built and **paused**, with all six ads created and in review, waiting on one
+   update: attach `195883692`, then enable. Do not enable it before the audience is attached, or
+   it delivers to US broad 18+, which is exactly the prospecting that spent $134.35 for zero sales.
+   TikTok also needs **1,000 people** in an audience before it will serve; the pixel has only been
+   live since 2026-08-13, so the size is unverified until it computes.
+2. **Reddit will run hot on frequency.** $25/day against 2,300 people is roughly $0.011 per person
+   per day; at Reddit retargeting CPMs that is a frequency near 3/day. If it underdelivers on
+   `PURCHASE` instead, the lever is `CLICKS`, because a 2,300-person audience will never feed a
+   purchase model enough signal to learn on.
+
+### API facts worth keeping
+
+- **TikTok's audience rule `value` is not the pixel event enum.** `PAGE_VIEW`, `LANDING_PAGE_VIEW`,
+  `SHOPPING` and every lowercase variant are all rejected with `40002 Invalid Params: 'value' is
+  invalid`, even though `/dmp/custom_audience/get/` reads the stored rule back as `"view"`. The
+  create endpoint wants **uppercase, space-separated labels**: `PAGE BROWSE` (page view),
+  `COMPLETE PAYMENT` (purchase), `INITIATE CHECKOUT`, `PRODUCT DETAIL PAGE BROWSE`, `PIXEL ADD TO
+  CART`, `PLACE AN ORDER`, `COMPLETE REGISTRATION`, `PIXEL SEARCH`, `CLICK BUTTON`, `CONTACT`,
+  `DOWNLOAD`, `PIXEL SUBMIT FORM`, `PIXEL ADD PAYMENT INFO`, `PIXEL ADD TO WISHLIST`,
+  `PIXEL SUBSCRIBE`. This list is not in TikTok's public docs; it was pulled out of Make's
+  `tiktok-audiences` connector RPC `getRuleFilterValues`, which is the fastest way to recover any
+  undocumented TikTok enum.
+- **`identity_authorized_bc_id` is the Business Center that owns the identity, not the one that
+  owns the pixel.** Passing the pixel's `owner_bc_id` (`7579954914656699399`) fails with "You no
+  longer have access to the TikTok account used in this ad." The right value is
+  `7581306495212617745`, from `/identity/get/`.
+- **Reddit ad groups require `start_time`** and reject the request with a bare
+  `start_time: Input should be a valid datetime` if it is missing, even though the field reads as
+  optional.
+- **Reddit ads require `type: "UNSPECIFIED"`.** Any other value, including the intuitive `"POST"`,
+  fails with `'UNSPECIFIED' was expected`.
+- **No new Reddit post was needed.** The 2026-08-21 1Lookup finding still holds (the API exposes no
+  endpoint to create a post), but it does not block a new ad group: an existing ad's `post_id` can
+  be attached to a new ad in a new ad group, which is how all 7 Reddit ads here were made.
