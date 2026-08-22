@@ -7,9 +7,8 @@ free-trial-abuse lines **approved** into the claims bank.
 **Nothing is live. Nothing has spent.** Meta is fully built and PAUSED at both campaign and ad-set
 level, so it cannot deliver. Google has nothing created at all.
 
-**Update, later on 2026-08-22:** Robby granted full permission. The Meta build completed. Google
-writes are still refused, by the sandbox's own permission layer rather than by the Google
-account, so that half is unchanged. Details in "Google" below.
+**Final state, 2026-08-22.** Both platforms are built and PAUSED. Robby also sent the Google Ads
+conversions screen, which settles the tracking question; see "Google tracking" below.
 
 ---
 
@@ -19,14 +18,16 @@ account, so that half is unchanged. Details in "Google" below.
 back, and one ad was rendered through Meta's own preview to confirm the creative, copy and CTA
 compose correctly rather than trusting the create response.
 
-**Google: nothing created.** Two separate write attempts (the campaign budget, and demoting the
-Local actions conversion actions) were both refused by the sandbox permission layer. Reads are
-unrestricted, which is how every Google number in this document was verified. This is not a
-Google account permission problem: the OAuth credentials work, the account is ENABLED, and the
-same session reads its campaigns, conversion actions and 2026 spend without trouble.
+**Google: done.** Budget, campaign, ad group, ten phrase keywords and one responsive search ad,
+all created, campaign PAUSED. Verified by reading every entity back.
 
-The Google half below is therefore still a replay script rather than a record. Every id, budget
-figure and name in it is real and checked.
+**One thing Google itself refuses.** Demoting the two Local actions conversion actions returns
+`MUTATE_NOT_ALLOWED`: they are `GOOGLE_HOSTED` actions, auto-created from the Business Profile,
+and the API does not permit mutating them. It turned out not to matter, and the original concern
+was overstated: `primary_for_goal` on the conversion action is the legacy field, and the
+`customer_conversion_goal` records that actually govern bidding already had GET_DIRECTIONS and
+ENGAGEMENT non-biddable. Bidding was never going to reach them. The campaign's own goals are now
+scoped explicitly anyway, which is stronger than an account-wide edit and touches no history.
 
 ## What exists now
 
@@ -133,14 +134,63 @@ has not spent since 2026-06-10. Three things would settle it, in ascending order
    Signup" register is the definitive test, and it is the cheapest one that actually proves the
    path end to end.
 
-## Google: build this, and clean the conversion actions FIRST
+## Google, as built
 
-```
-budget    name "1C | Search Platform | 30/day", 30000000 micros/day, STANDARD, not shared
-campaign  name "1C | GOOG | COLD | Search Platform | Signups"
-          SEARCH, status PAUSED, MaximizeConversions, the budget above
-ad group  name "1C | platform | US Broad | Search"
-```
+| thing | id | state |
+|---|---|---|
+| budget `1C \| Search Platform \| 30 per day` | `15815194281` | $30/day, STANDARD, not shared |
+| campaign `1C \| GOOG \| COLD \| Search Platform \| Signups` | `24173043055` | **PAUSED**, SEARCH, Maximize Conversions |
+| ad group `1C \| platform \| US Broad \| Search` | `197253079817` | ENABLED under a paused campaign |
+| responsive search ad | `821825498101` | ENABLED under a paused campaign |
+
+Network settings are Google Search **only**: search partners, the content network and partner
+search are all off, so a $30/day test cannot leak into Display. Geo is United States by
+`PRESENCE` (people actually in the US, not people interested in it), language English.
+
+Ten phrase-match keywords, deliberately tight for the budget: `free trial abuse`, `stop free
+trial abuse`, `free trial abuse prevention`, `require credit card for free trial`, `credit card
+required for free trial`, `prevent trial abuse`, `trial abuse saas`, `stripe free trial credit
+card`, `trial to paid conversion`, `increase trial conversion rate`.
+
+The RSA carries ten headlines and four descriptions, every one built from an approved bank claim,
+landing on `/free-trial-abuse-prevention` with the five UTMs. Display path is
+`/free-trial/abuse`.
+
+**Bidding is scoped to signups at campaign level.** Rather than edit account-wide goals, the
+campaign's own conversion goals were set so only `SIGNUP/WEBSITE` is biddable. Everything else
+(`PAGE_VIEW`, `DOWNLOAD`, `PHONE_CALL_LEAD` x2, `GET_DIRECTIONS`, `ENGAGEMENT/GOOGLE_HOSTED`,
+`ENGAGEMENT/YOUTUBE_HOSTED`) is off. One row, `UNKNOWN/YOUTUBE_HOSTED`, cannot be addressed by
+resource name at all (`BAD_RESOURCE_ID` on the `UNKNOWN` segment) and is YouTube-hosted, so it
+cannot apply to a search-network-only campaign.
+
+## Google tracking: settled by the conversions screen, 2026-08-22
+
+Robby sent Google Ads → Goals → Summary for Aug 13-21. It answers the question configuration
+alone could not.
+
+| goal | action | status |
+|---|---|---|
+| **Sign-up** (account-default) | **Completed Signup** | **Awaiting conversions** |
+| | **Stripe Connected** | **Awaiting conversions** |
+| | **Free Trial Signup** | **Misconfigured** (Troubleshoot link offered) |
+| Page view | Booked Meeting | Misconfigured |
+| Phone call lead | Business profile - Tracked call | Misconfigured |
+| | Calls from ads | Misconfigured |
+| Get directions | Local actions - Directions | Misconfigured |
+| Download | Android installs (all other apps) | Misconfigured |
+| Engagement | Local actions - Other engagements | Misconfigured |
+
+**"Awaiting conversions" is the good answer.** It means Google has verified the tag and is waiting
+for a first conversion to arrive, which is exactly right for an account that has not spent since
+2026-06-10. The two actions this campaign bids on are both in that state.
+
+**One real defect: `Free Trial Signup` is Misconfigured**, and it sits inside the same Sign-up
+goal as the two healthy actions. It records nothing today, so it cannot corrupt bidding, but it
+should be fixed or removed rather than left in the goal. The other six Misconfigured rows are all
+irrelevant to a SaaS web signup (phone calls, map directions, Android installs, local
+engagement).
+
+The account-level Sign-up goal reads **"Needs attention"** for exactly this reason.
 
 **The blocker to clear before any Google campaign runs.** Seven of the account's thirteen
 conversion actions are `primary_for_goal = true`:
@@ -198,13 +248,13 @@ Every campaign on both platforms is currently PAUSED with $0 spend in the last 3
 
 ## Still owed before anything is flipped live
 
-1. **The whole Google build**, plus the conversion-action demotion, both refused by the sandbox
-   permission layer. Everything needed is written above, with the exact mutate payloads. Meta is
-   done and needs nothing further.
+1. **Fix or remove `Free Trial Signup`**, the one Misconfigured action inside the Sign-up goal.
+   Both platforms are otherwise built and need nothing further.
 2. **PPC gate item 2: render the landing pages in a real browser.** Not done. Chromium in this
    container cannot reach the site through the egress proxy (`ERR_CONNECTION_RESET` on every
    page, both viewports); `curl` returns 200 with all four tracking tags present, which is not
    the same check. The vault rule is explicit that an HTTP 200 is not a render.
-3. **Demote the Local actions conversion actions** on Google, above.
+3. **Nothing further on the Local actions goals.** Google forbids mutating them and the campaign
+   no longer bids on them.
 4. **Nadav.** PPC gate item 1 is a "Robby and Nadav call". Nothing has been put to Nadav, per the
    standing rule that nothing goes to him without Robby's approval first.
