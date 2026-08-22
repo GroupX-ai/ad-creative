@@ -48,53 +48,83 @@ export const BATCH = "2026-08-21-b14-relaunch";
 // The copy. Eight pairs, every line traced. This never varies by territory.
 // ---------------------------------------------------------------------------
 export const COPY = {
-  door: {
-    headline: "Only let real customers through the door.",
+  // ROUND 3. Robby on round 2: "Most of these banners are absolutely retarded. They are talking
+  // about pricing or throwing numbers that nobody understands. This is not how you write
+  // marketing banners."
+  //
+  // He is right and the cause was a process error, not taste. The copy was built from the
+  // approved CLAIMS bank, and a claims bank is a list of what may legally be said, never a list
+  // of what is worth saying. Compliance got used as the creative brief. Twelve of twenty-six
+  // banners led on a price ("Free forever under $10K MRR"), four led on a hedged statistic
+  // ("2-3x improvement is the typical range"), and two threw bare numbers at a stranger who has
+  // no idea what 12% or 57% refers to. None of them said what actually happens to the buyer.
+  //
+  // The videos already tell that story and the banners were not inheriting a word of it. So the
+  // copy is rebuilt on the same sequence the clips use, in the buyer's own words:
+  //   THE PROBLEM   fake cards get into your free trial, over and over
+  //   THE MOMENT    the trial ends and the payment fails
+  //   THE FIX       every signup gets a card check at the door
+  //   THE OUTCOME   only real customers get in
+  //
+  // Three rules this set holds to, each the direct inverse of a round-2 failure:
+  //   1. No price in any headline. The offer lives in the button ("Start free") and nowhere else.
+  //   2. No bare or hedged number as a headline. The one proof concept gives its numbers a
+  //      subject and a verb so a stranger can parse them.
+  //   3. No jargon: no "trial-to-paid conversion", no "MRR", no "typical range", no "vendor
+  //      lock-in" on any banner.
+  //
+  // TRACES. Most of these lines are LIVE SITE COPY on /free-trial-abuse-prevention,
+  // /require-credit-card-for-free-trial and the homepage, but the abuse vocabulary is NOT yet in
+  // AD-CREATIVE-PLAYBOOK.md, which is the binding bank. Every line below records where it is
+  // live. Robby: the bank needs these added before this set ships. It is the same gap flagged
+  // twice already, and your own direction for these ads is now pointed straight at it.
+  fakecard: {
+    headline: "They signed up with a fake card.",
+    subheadline: "Then the trial ended and the payment failed.",
+    cta: "Start free",
+    trace: "LIVE, not yet in the bank: 'Signs up on a virtual card' and 'Card declined at billing' and 'Failed first invoices' (DashboardPreviewLive.tsx); 'virtual credit cards' and 'a verified card is the hardest credential to fake' (/free-trial-abuse-prevention)",
+  },
+  abuse: {
+    headline: "Free trial abuse is draining your revenue.",
+    subheadline: "Every signup gets a card check at the door.",
+    cta: "Start free",
+    trace: "LIVE, not yet in the bank: 'Free trial abuse (repeat signups, disposable emails, virtual cards) quietly drains SaaS revenue' (/free-trial-abuse-prevention metadata). Subheadline is live homepage body copy, verbatim.",
+  },
+  again: {
+    headline: "Serial abusers sign up again and again.",
+    subheadline: "A verified card is the hardest credential to fake.",
+    cta: "Start free",
+    trace: "LIVE, not yet in the bank: both lines are near-verbatim from /free-trial-abuse-prevention ('Serial trial abusers sign up again and again with disposable email addresses...' and 'a verified card is the hardest credential to fake')",
+  },
+  realonly: {
+    headline: "Only real customers get into your trial.",
+    subheadline: "Every signup gets a card check at the door.",
+    cta: "Start free",
+    trace: "Headline is the LIVE homepage hero subheadline, verbatim. Subheadline is live homepage body copy, verbatim. Closest of this set to bank claim 1.",
+  },
+  declined: {
+    headline: "Card declined at billing. Again.",
+    subheadline: "Stop letting trial abusers in.",
+    cta: "Start free",
+    trace: "LIVE, not yet in the bank: 'Card declined at billing' is the site's own verdict string (DashboardPreviewLive.tsx); 'Stop letting trial abusers in.' is live on /about",
+  },
+  stoprepeat: {
+    headline: "Stop repeat signups and virtual-card abusers.",
     subheadline: "Verified before the trial starts.",
     cta: "Start free",
-    trace: "bank claim 1 verbatim (homepage metadata) + claim 3 compressed, using the live verdict wording 'before the trial started'",
+    trace: "LIVE, not yet in the bank: 'Stop repeat signups, disposable emails, and virtual-card abusers' (/free-trial-abuse-prevention metadata). Subheadline uses the live verdict wording 'blocked before the trial started'.",
+  },
+  door: {
+    headline: "A card check at the door.",
+    subheadline: "Only real customers get in.",
+    cta: "Start free",
+    trace: "Both live homepage copy: 'Every signup gets a card check at the door.' and the hero subheadline 'Only real customers get into your trial'. Closest of this set to bank claims 1 and 14.",
   },
   proof: {
-    headline: "12% to 57%",
-    subheadline: "VoiceDrop trial-to-paid. 2-3x improvement is the typical range.",
+    headline: "12% of trials paid. Then 57% did.",
+    subheadline: "VoiceDrop, after verifying every card. 2-3x improvement is the typical range.",
     cta: "Start free",
-    trace: "bank claim 5 + the claim-6 framing the bank REQUIRES whenever 57% is the headline, verbatim as it appears live in 15 places",
-  },
-  double: {
-    headline: "Double your trial-to-paid conversion.",
-    subheadline: "Without making product changes.",
-    cta: "Start free",
-    trace: "bank claims 2 and 4, both live on twelve pages",
-  },
-  free: {
-    headline: "Free forever under $10K MRR.",
-    subheadline: "No credit card required.",
-    cta: "Start free",
-    trace: "bank claims 8 and 9, both live on seven-plus pages",
-  },
-  typical: {
-    headline: "2-3x improvement is the typical range.",
-    subheadline: "Verified before the trial starts.",
-    cta: "Start free",
-    trace: "bank claim 6, safe standalone, live verbatim in 15 places",
-  },
-  trusted: {
-    headline: "Trusted by 100+ SaaS teams.",
-    subheadline: "Free forever under $10K MRR.",
-    cta: "Start free",
-    trace: "bank claim 7 verbatim (live sitewide) + claim 8",
-  },
-  setup: {
-    headline: "5-minute setup. No vendor lock-in.",
-    subheadline: "Free forever under $10K MRR.",
-    cta: "Start free",
-    trace: "bank claims 11, 12 and 8",
-  },
-  verify: {
-    headline: "Verify a real payment method before anyone enters your free trial.",
-    subheadline: "Free under $10K MRR",
-    cta: "Start free",
-    trace: "bank claim 3, first sentence, VERBATIM + claim 8. Analog register only: 11 words is over the 7-word set cap and inside the 12-word hand-lettered cap",
+    trace: "bank claim 5 + the claim-6 framing the bank REQUIRES whenever 57% is the headline. Round 2 ran the bare numerals '12% to 57%', which is exactly the 'numbers nobody understands' Robby called out: the figures now have a subject and a verb so a stranger can parse them cold.",
   },
 };
 
@@ -153,7 +183,7 @@ const PHONE_SNAP =
 export const TERRITORIES = [
   // ---------------------------------------------------- loud direct-response
   {
-    key: "hazard", family: "loud", copy: "door",
+    key: "hazard", family: "loud", copy: "abuse",
     block: (c) => [
       `A {{SHAPE_WORD}} graphic advertisement as a flat, hard-edged industrial caution label, printed rather than photographed.`,
       `The composition is one centered stack on a full-bleed color field, in this order top to bottom and in this order on every shape: the hazard band, the headline, the subheadline, the button, then an empty strip. There is no illustration, no photograph and no icon of any kind: type and flat color are the only things in the frame.`,
@@ -166,7 +196,7 @@ export const TERRITORIES = [
     ],
   },
   {
-    key: "brutalist-invert", family: "loud", copy: "double",
+    key: "brutalist-invert", family: "loud", copy: "fakecard",
     block: (c) => [
       `A {{SHAPE_WORD}} graphic advertisement in a brutalist inversion: the brand runs dark, so this frame is bright white and the type is enormous.`,
       `The composition is one left-aligned stack filling the frame, in this order top to bottom on every shape: an empty band, the headline, the subheadline, the button. No illustration, no photograph, no icon.`,
@@ -179,7 +209,7 @@ export const TERRITORIES = [
     ],
   },
   {
-    key: "ransom", family: "loud", copy: "door",
+    key: "ransom", family: "loud", copy: "again",
     block: (c) => [
       `A {{SHAPE_WORD}} punk ransom-note collage, photographed flat: individual letters cut from magazines and newspapers with visible scissor edges and paper grain, pasted down slightly crooked at different angles and sizes.`,
       `The composition is one centered block of cut-out lettering on a flat ground, in this order top to bottom on every shape: the headline, the subheadline, the button, then an empty strip.`,
@@ -209,7 +239,7 @@ export const TERRITORIES = [
     ],
   },
   {
-    key: "offerposter", family: "loud", copy: "free",
+    key: "offerposter", family: "loud", copy: "declined",
     block: (c) => [
       `A {{SHAPE_WORD}} loud retail offer poster, the kind taped inside a shop window: flat screen-printed color, enormous price type, hard edges.`,
       `The composition is one centered stack on a full-bleed color field, in this order top to bottom on every shape: a solid banner strip, the headline, the subheadline, the button, then an empty strip.`,
@@ -219,12 +249,12 @@ export const TERRITORIES = [
       `Under it the subheadline reads exactly "${c.subheadline}" in the same condensed face at roughly one quarter the headline size, in deep navy, hex ${NAVY}, on a single line inside a solid white rectangle fitted tightly around it.`,
       `Below that sits one solid rectangular button with square corners, filled deep navy, hex ${NAVY}, containing "${c.cta}" in pure white. No arrow, no icon, no starburst, no price tag shape, no second button.`,
       `The bottom eighth of the frame is plain flat violet, hex ${VIOLET}, containing nothing at all.`,
-      `${FLAT_PRINT} ${PRICE_STROKES}`,
+      FLAT_PRINT,
       NO_MARK, onlyText(c),
     ],
   },
   {
-    key: "benday", family: "loud", copy: "typical",
+    key: "benday", family: "loud", copy: "stoprepeat",
     block: (c) => [
       `A {{SHAPE_WORD}} Ben-Day pop-art panel: flat comic-book printing with visible halftone dot screens and heavy black outlines.`,
       `The composition is one centered stack, in this order top to bottom on every shape: the headline in a speech-balloon-free caption box, the subheadline, the button, then an empty strip.`,
@@ -239,7 +269,7 @@ export const TERRITORIES = [
     ],
   },
   {
-    key: "blueprint", family: "loud", copy: "setup",
+    key: "blueprint", family: "loud", copy: "door",
     block: (c) => [
       `A {{SHAPE_WORD}} engineering blueprint sheet: white line work on blue drafting paper, flat and technical.`,
       `The composition is one centered stack, in this order top to bottom on every shape: the headline, the subheadline, the button, then an empty title strip along the bottom.`,
@@ -254,7 +284,7 @@ export const TERRITORIES = [
     ],
   },
   {
-    key: "split", family: "loud", copy: "double",
+    key: "split", family: "loud", copy: "fakecard",
     block: (c) => [
       `A {{SHAPE_WORD}} hard split-screen graphic: the frame divided into two flat fields of color by one straight hard edge, with no blend between them.`,
       `The split runs across the frame so that one field sits above the other on every shape, and the dividing edge never crosses a word: every line of type sits wholly within one field.`,
@@ -268,7 +298,7 @@ export const TERRITORIES = [
     ],
   },
   {
-    key: "stickerbomb", family: "loud", copy: "trusted",
+    key: "stickerbomb", family: "loud", copy: "realonly",
     block: (c) => [
       `A {{SHAPE_WORD}} holographic sticker-bomb panel: a dense collage of blank die-cut vinyl stickers overlapping each other, photographed flat.`,
       `The composition is one clear centered plate of type sitting on top of the sticker collage, in this order top to bottom on every shape: the headline, the subheadline, the button.`,
@@ -283,7 +313,7 @@ export const TERRITORIES = [
     ],
   },
   {
-    key: "vhs", family: "loud", copy: "typical",
+    key: "vhs", family: "loud", copy: "declined",
     block: (c) => [
       `A {{SHAPE_WORD}} VHS glitch frame: a paused analog videotape still, with tracking noise, chroma bleed and horizontal scan lines across the whole image.`,
       `The composition is one centered stack of type over the noise, in this order top to bottom on every shape: the headline, the subheadline, the button, then an empty strip.`,
@@ -313,7 +343,7 @@ export const TERRITORIES = [
     ],
   },
   {
-    key: "foil", family: "loud", copy: "free",
+    key: "foil", family: "loud", copy: "realonly",
     block: (c) => [
       `A {{SHAPE_WORD}} letterpress card photographed flat: heavy cotton stock with deep debossed type and a foil-stamped line, shot under raking light.`,
       `The composition is one centered stack on the card, in this order top to bottom on every shape: the headline debossed, the subheadline foiled, the button, then an empty band.`,
@@ -323,14 +353,14 @@ export const TERRITORIES = [
       `Beneath it the subheadline reads exactly "${c.subheadline}" in the same face at roughly one third the size, foil-stamped in bright silver metallic foil with a crisp reflective edge.`,
       `Below that sits one rectangular button debossed into the paper with a thin pressed rule around it, containing "${c.cta}" foil-stamped in the same violet.`,
       `The bottom eighth of the card is plain undecorated navy paper with no impression, no foil and nothing else on it.`,
-      `${PRICE_STROKES} There is no ornament, no rule, no flourish, no crest and no decorative border anywhere on the card.`,
+      `There is no ornament, no rule, no flourish, no crest and no decorative border anywhere on the card.`,
       NO_MARK, onlyText(c),
     ],
   },
 
   // ------------------------------------------------------------- native / organic
   {
-    key: "whiteboard", family: "native", copy: "verify",
+    key: "whiteboard", family: "native", copy: "door",
     block: (c) => [
       `A {{SHAPE_WORD}} photograph taken with a handheld phone camera in available window light, the camera itself outside the frame, of a real office whiteboard with handwriting on it, in an ordinary American startup office. This is a snapshot somebody took, not an advertisement.`,
       `The whiteboard fills almost the whole frame, shot slightly off square, with the handwriting centered on it in this order on every shape: the big handwritten line, then the smaller underlined line, then the hand-drawn box.`,
@@ -342,12 +372,11 @@ export const TERRITORIES = [
       MARGIN,
       `Every handwritten line must also fit completely inside the whiteboard itself, with a clear band of blank melamine on all four sides between the writing and the board's own edges.`,
       `${PHONE_SNAP} Nothing else is on the wall and nothing rests in the tray: no marker, no eraser, no sticky note, no poster, no clock and no plant.`,
-      `${PRICE_STROKES}`,
       NO_MARK, onlyText(c),
     ],
   },
   {
-    key: "legalpad", family: "native", copy: "door",
+    key: "legalpad", family: "native", copy: "fakecard",
     block: (c) => [
       `A {{SHAPE_WORD}} photograph taken with a handheld phone camera on a desk in available daylight, the camera outside the frame, of a yellow legal pad with ballpoint handwriting on it. A snapshot, not an advertisement.`,
       `The pad fills the frame at a slight angle, its ruled blue lines and red margin rule visible, one corner slightly curled, resting on a plain bare wooden desk.`,
@@ -361,7 +390,7 @@ export const TERRITORIES = [
     ],
   },
   {
-    key: "stickies", family: "native", copy: "setup",
+    key: "stickies", family: "native", copy: "stoprepeat",
     block: (c) => [
       `A {{SHAPE_WORD}} photograph taken with a handheld phone camera in available office light, the camera outside the frame, of sticky notes pressed onto a plain painted wall. A snapshot, not an advertisement.`,
       `The notes are arranged in a loose grid filling the frame, slightly crooked, each one a plain square sticky note in yellow, violet, hex ${VIOLET}, or white, some with a corner lifting away from the wall and casting a small real shadow.`,
@@ -371,12 +400,11 @@ export const TERRITORIES = [
       `A clear area of plain painted wall at least one eighth of the frame's height runs along the bottom edge below every note, with no note, no writing, no tape and nothing else in it.`,
       MARGIN,
       `${PHONE_SNAP} Nothing else is on the wall: no poster, no photograph, no clock, no calendar and no whiteboard.`,
-      `${PRICE_STROKES}`,
       NO_MARK, onlyText(c),
     ],
   },
   {
-    key: "napkin", family: "native", copy: "double",
+    key: "napkin", family: "native", copy: "abuse",
     block: (c) => [
       `A {{SHAPE_WORD}} photograph taken with a handheld phone camera on a cafe table in available window light, the camera outside the frame, of a paper napkin with handwriting on it. A snapshot, not an advertisement.`,
       `The napkin fills most of the frame at a slight angle, softly creased with visible fold lines and an embossed edge pattern, resting on a plain dark cafe table.`,
@@ -390,7 +418,7 @@ export const TERRITORIES = [
     ],
   },
   {
-    key: "cardboard", family: "native", copy: "free",
+    key: "cardboard", family: "native", copy: "declined",
     block: (c) => [
       `A {{SHAPE_WORD}} photograph taken with a handheld phone camera in available daylight, the camera outside the frame, of a torn piece of plain brown corrugated cardboard with marker writing on it, propped against a plain wall. A snapshot, not an advertisement.`,
       `The cardboard fills the frame, its torn edges showing the fluted corrugation inside, unprinted and unlabeled on every surface.`,
@@ -399,12 +427,12 @@ export const TERRITORIES = [
       `Lower down, "${c.cta}" is written inside a rough freehand rectangle drawn in thick violet marker, hex ${VIOLET}. It is required and it must be drawn; it is not a logo or a badge.`,
       `A clear area of blank cardboard at least one eighth of the frame's height runs along the bottom edge, with no writing, no tape, no barcode, no stamp and nothing else on it.`,
       MARGIN,
-      `${PHONE_SNAP} ${PRICE_STROKES}`,
+      PHONE_SNAP,
       NO_MARK, onlyText(c),
     ],
   },
   {
-    key: "corkboard", family: "native", copy: "trusted",
+    key: "corkboard", family: "native", copy: "realonly",
     block: (c) => [
       `A {{SHAPE_WORD}} photograph taken with a handheld phone camera in available office light, the camera outside the frame, of an index card pinned to a cork noticeboard. A snapshot, not an advertisement.`,
       `The cork fills the frame with its real granular texture and a plain wooden frame edge just visible. One plain white index card is pinned at a slight angle in the middle by two plain metal pins, curling very slightly away from the board.`,
@@ -414,12 +442,11 @@ export const TERRITORIES = [
       `A clear area of bare cork at least one eighth of the frame's height runs along the bottom edge, with no card, no pin, no paper and nothing else on it.`,
       MARGIN,
       `${PHONE_SNAP} Nothing else is pinned to the board: no other card, no photograph, no flyer, no receipt and no note.`,
-      `${PRICE_STROKES}`,
       NO_MARK, onlyText(c),
     ],
   },
   {
-    key: "chalkboard", family: "native", copy: "typical",
+    key: "chalkboard", family: "native", copy: "again",
     block: (c) => [
       `A {{SHAPE_WORD}} photograph taken with a handheld phone camera in warm available light, the camera outside the frame, of a small chalkboard propped on a plain wooden surface. A snapshot, not an advertisement.`,
       `The chalkboard fills most of the frame at a slight angle, its matte black surface carrying real chalk dust and faint ghosting from previous wiping, in a plain unvarnished wooden frame.`,
@@ -447,7 +474,7 @@ export const TERRITORIES = [
     ],
   },
   {
-    key: "receipt", family: "native", copy: "free",
+    key: "receipt", family: "native", copy: "fakecard",
     block: (c) => [
       `A {{SHAPE_WORD}} photograph taken with a handheld phone camera in flat available light, the camera outside the frame, of a long thermal till receipt lying on a plain dark surface, curling slightly at one end. A snapshot, not an advertisement.`,
       `The receipt fills almost the entire frame edge to edge, shot close so the paper is the whole picture, slightly crumpled, its thermal paper faintly gray-white with one soft crease across it. The type on it is large and dark and completely legible at a glance.`,
@@ -456,12 +483,12 @@ export const TERRITORIES = [
       `Below that, "${c.cta}" is printed in the same till type inside a plain rectangle of solid violet, hex ${VIOLET}, printed onto the paper.`,
       `The lower part of the receipt below that rectangle is blank thermal paper with no print, no barcode, no total, no line items, no date, no time, no store name, no till number and no numerals of any kind on it.`,
       MARGIN,
-      `${PHONE_SNAP} ${PRICE_STROKES} Nothing else is in the frame: no coin, no card, no pen, no hand and no second receipt.`,
+      `${PHONE_SNAP} Nothing else is in the frame: no coin, no card, no pen, no hand and no second receipt.`,
       NO_MARK, onlyText(c),
     ],
   },
   {
-    key: "envelope", family: "native", copy: "setup",
+    key: "envelope", family: "native", copy: "abuse",
     block: (c) => [
       `A {{SHAPE_WORD}} photograph taken with a handheld phone camera in soft available daylight, the camera outside the frame, of a plain kraft envelope lying on a plain pale surface with handwriting across it. A snapshot, not an advertisement.`,
       `The envelope fills most of the frame at a slight angle, plain unprinted kraft paper with a visible flap seam and one soft crease, completely unmarked apart from the handwriting.`,
@@ -470,12 +497,12 @@ export const TERRITORIES = [
       `Lower down, "${c.cta}" is written inside a rough freehand rectangle drawn in thick violet marker, hex ${VIOLET}. It is required and it must be drawn; it is not a logo or a badge.`,
       `A clear area of blank kraft paper at least one eighth of the frame's height runs along the bottom edge, with no writing, no stamp, no postmark, no address, no window and nothing else on it.`,
       MARGIN,
-      `${PHONE_SNAP} ${PRICE_STROKES}`,
+      PHONE_SNAP,
       NO_MARK, onlyText(c),
     ],
   },
   {
-    key: "postit-mono", family: "native", copy: "typical",
+    key: "postit-mono", family: "native", copy: "again",
     block: (c) => [
       `A {{SHAPE_WORD}} photograph taken with a handheld phone camera very close up in available light, the camera outside the frame, of a single large sticky note stuck to a plain painted wall. A snapshot, not an advertisement.`,
       `One plain violet sticky note, hex ${VIOLET}, fills most of the frame, slightly crooked, its bottom corner lifting away from the wall and casting a small real shadow, its paper showing a faint fiber texture.`,
