@@ -351,3 +351,231 @@ fixes came with it: the fallback only moves the mark if the alternative is genui
 (it was previously capable of moving it somewhere worse), and if nowhere is clean at full size
 the mark **shrinks** to 72% and then 52% and looks again, because a small legible wordmark beats
 a large one sitting on a word.
+
+---
+
+# Round 4, 2026-08-22: Robby's two cuts, and the banners rewritten off the claims bank
+
+**Robby, on round 2's banners:** *"Most of these banners are absolutely retarded. They are
+talking about pricing or throwing numbers that nobody understands. This is not how you write
+marketing banners."*
+
+**Robby, on the videos:** *"Don't mention VoiceDrop - it's too short to explain. Don't say
+'Free under $10K' - just say start for free. Send me the scripts before you create more
+videos."*
+
+## He was right, and the cause was a process error rather than taste
+
+The round-2 banner copy was assembled straight out of `AD-CREATIVE-PLAYBOOK.md`. Counted against
+the twenty-six concepts that shipped:
+
+Counted off the round-2 prompt files rather than estimated, across all 26 concepts:
+
+| | concepts | example |
+|---|---|---|
+| carried a price anywhere in the copy | 12 of 26 | "Free forever under $10K MRR." |
+| ...of those, price as the **headline** | 4 | same |
+| headline **was** a figure | 9 of 26 | "2-3x improvement is the typical range." (4), "12% to 57%" (3), "Trusted by 100+ SaaS teams." (2) |
+| headline was jargon | 3 | "Double your trial-to-paid conversion." / "5-minute setup. No vendor lock-in." |
+
+Only three of the twenty-six led with the buyer's problem.
+
+Every one of those is a real line from the approved bank, which is exactly the problem. **A
+claims bank is a list of what may legally be said. It is never a list of what is worth saying,
+and compliance got used as the creative brief.** Not one of the twenty-six said what happens to
+the buyer. The videos already told that story and the banners were not inheriting a word of it.
+
+Three rules now hold the set, each the direct inverse of a round-2 failure:
+
+1. No price in any headline. The offer lives in the button ("Start free") and nowhere else.
+2. No bare or hedged number anywhere. After Robby's VoiceDrop cut, **no banner in the batch
+   carries a figure at all.**
+3. No jargon: no "trial-to-paid conversion", no "MRR", no "typical range", no "vendor lock-in".
+
+## The two cuts, and why the second one takes the number with it
+
+"Don't say 'Free under $10K'" is a one-line change: the end card drops to **"Start free."** and
+`make-endcard.py` builds one card instead of two.
+
+"Don't mention VoiceDrop" is not. The 12%-to-57% figure was the batch's only proof number, and
+the obvious repair, keeping the number and dropping the name, is the one move that is not
+available: **an unattributed 57% in a founder's mouth is a fabricated testimonial**, which the
+bank's own banned list already forbids. The number and its attribution leave together. So:
+
+- **b14v02's number beat** becomes bank claim 2 in plain speech, "Twice as many of them pay now."
+- **The proof end card is retired.** It existed only to carry the "2-3x improvement is the
+  typical range" framing the bank REQUIRES beside the 57% figure. No clip quotes the figure, so
+  nothing owes the framing, and `finish-videos.mjs` now routes one card for every clip.
+- **The banners' proof pair is replaced** by "Stop letting trial abusers in." (live on `/about`).
+
+## A live bug found in round 3's own scripts
+
+Round 3 took VoiceDrop out of b14v02's beats but **left `SAY_VOICEDROP` in its prompt**: a
+pronunciation block naming a word no spoken line contained any more. That is precisely the
+contradiction that made round 1's v03 speak "SaaS" after the word had been cut from its script,
+recorded in this very document as a lesson. It would have been rendered.
+
+Round 2's write-up says the contradiction was "caught by an assertion before rendering this time
+rather than after". **There was no such assertion.** It existed in the prose and nowhere in the
+code, so it caught nothing. It is now real, runs on import of
+`seedance-prompts-b14-1capture.mjs`, and therefore gates `seedance-generate.mjs` before it can
+spend anything.
+
+The first cut of that guard **passed the bug it was written to catch.** It gathered the spoken
+words from every quoted string in the prompt, and a pronunciation block quotes the very word it
+anchors, so each block satisfied itself. It now reads quoted dialogue only from the `BEATS`
+paragraphs. Both directions were tested: the corrected guard throws on a deliberately
+reintroduced `SAY_VOICEDROP`, and the three real clips import clean.
+
+**The general lesson, and this is the third time this repo has paid for it: a check described in
+a batch document is not a check.** Two of the three defects in this batch's own "process
+additions" were prose, and the one that mattered was load-bearing.
+
+## The PIL outage, and $4.60 that was nearly paid twice
+
+`banner-generate.mjs` shells out to python3/PIL to resize each render to its delivery size and
+then assert the delivered pixels. This container had no PIL. fal was paid and every PNG was
+written to disk, but the assert threw on each one, so the generator logged **20 of 23 squares as
+`failed` and exited 1** on files that were already correct and already paid for.
+
+Re-rendering them would have paid fal a second time. `_work/repair-banner-run-log.mjs` instead
+rebuilds the log from disk and **re-runs the assertion that was skipped** rather than assuming it
+would have passed: every file is opened, its real pixel size checked against the shape's delivery
+size, and anything that fails stays in `failed`. All 23 measured 1024x1024. Entries repaired this
+way carry `verifiedPostHoc: true`, so the log never claims the generator checked something it
+did not.
+
+Worth generalising: **a missing dependency in a paid pipeline should fail before the money, not
+after it.** The lint gate already runs before the first API call; the image toolchain should be
+probed there too.
+
+## The compositor destroyed the whole re-render, and nearly shipped the rejected copy back
+
+The worst defect in this batch, found only by looking at the finished files.
+
+`_work/composite-logo.py` keeps the clean render in `<batch>/nologo/` and composites the wordmark
+from that copy, so re-running is idempotent. The guard was:
+
+```python
+raw = nologo / f.name
+if not raw.exists():
+    shutil.copy2(f, raw)
+im = Image.open(raw)          # always reads the nologo copy
+```
+
+`nologo/` already held the **round-2** renders, committed to git. So after all 32 banners were
+re-rendered with the new copy, the guard saw the files already existed, skipped the refresh,
+composited from the stale copies, and **wrote the old artwork back over every one of the 32 new
+renders.** All 32 delivered files were verified byte for byte against the shas the generator had
+recorded minutes earlier: **32 of 32 clobbered, 0 survived.**
+
+Two things make this the most expensive defect here:
+
+- **$6.40 of generation was destroyed** and had to be paid a second time. Banner renders have no
+  stored fal URL, so there was nothing to re-download.
+- **It would have shipped the exact copy Robby rejected**, wearing a fresh logo, as the fix for
+  that copy. A green pipeline, a clean run log, 32 files with correct names and correct pixel
+  dimensions, and every single one carrying "Free forever under $10K MRR" and "12% to 57%".
+
+The fix keys the refresh on **content rather than existence**: the run log records the sha of
+every delivered file, so a file still hashing to its logged value is a pristine render and
+`nologo/` is refreshed from it; a file that no longer matches has already been composited, and
+the existing raw is the right source.
+
+**This is the same failure this document already recorded twice**, in a third costume: the
+captions lookup that logged "no emphasis list" and exited 0, and the naming gate whose date regex
+silently skipped b14's own files. All three are caches or lookups that answered a question they
+could not actually answer and reported success. The rule earned here: **a derived artifact must
+be keyed on the content it was derived from, never on whether a file with the right name exists.**
+
+It also says something about the QA order. Every automated check in this pipeline passed on the
+clobbered files, because every one of them checks a property (naming, pixel size, prompt lint,
+run-log completeness) rather than the artwork. **Looking at the rendered image is not the last
+step of QA, it is the only step that would have caught this.**
+
+### And two more in the same compositor, both found by looking at the pictures
+
+Re-compositing onto the correct renders put the wordmark on top of type on four frames. Two
+distinct causes, neither of which any check would have reported:
+
+**A side candidate could sit at mid-height.** The placement search slid candidates down the left
+and right edges through the full height of the frame, so on the mega-type layouts it parked the
+mark in the gap right of "IN." (c07) and in the hollow of "Again." (c08). Both scored clean,
+because a flat violet hole inside a headline genuinely has no edges in it. **Edge density
+measures whether a box is empty; it cannot measure whether a box is inside something.** Side
+candidates are now restricted to the top and bottom fifth of the frame.
+
+**The edge-map cache was keyed on `id(im)`.** This is the worst of the three, because it makes
+every score suspect rather than one placement wrong:
+
+```python
+key = id(im)                       # and the cache holds no reference to im
+if key not in _EDGES:
+    _EDGES[key] = im.convert("L").filter(ImageFilter.FIND_EDGES)
+```
+
+CPython reuses an id the moment the object behind it is collected, and this loop opens one fresh
+`Image` per file, so a later banner could collide with a freed earlier one and **be scored
+against a different banner's edge map.** It happened: c05's candidate box sits squarely over the
+violet words "the payment failed" and scored **0.00**. Cropping the box and looking at it was the
+only thing that showed it, because a wrong number and a right number are the same shape. The
+cache entry now holds the image alongside its map, which both pins the id and lets the lookup
+verify it got the right one.
+
+That is **the third lookup in this one batch keyed on a proxy instead of on the thing itself**,
+after the naming gate's date regex and the `nologo` existence check. It is worth stating as a
+standing rule rather than a third anecdote: *if a cache key is not derived from the content, the
+cache is a random number generator that happens to be right most of the time.*
+
+One placement is not measured at all. c07's render did not honour the empty top band its prompt
+reserved, so no candidate is clean; its band is named by hand in `HAND_PLACED`. **Tuning the
+scorer to fix that one frame was tried and reverted**: dropping the busy threshold from 0.35 to
+0.08 did fix c07 and broke four others, because a threshold that rejects everything does not
+choose well, it just chooses last. A per-frame override is honest about being a judgement.
+
+## What changed, file by file
+
+| file | change |
+|---|---|
+| `_scripts/banner-prompts-b14-1capture.mjs` | c01 loses its price line; c02 re-cut from the "12% to 57%" mega-numeral to "They signed up with a fake card."; c03 re-cut from bank claim 3's full sentence over a price to "A card check at the door." |
+| `_scripts/banner-prompts-b14b-1capture.mjs` | the `proof` copy pair replaced by `stopabusers`; `meganumeral` becomes `megatype`; `chrome` re-set for words |
+| `_scripts/seedance-prompts-b14-1capture.mjs` | `SAY_VOICEDROP` deleted, v02's provenance rewritten, and the pronunciation guard added |
+| `_work/make-endcard.py` | one card, closing on "Start free." |
+| `_work/finish-videos.mjs` | one card for every clip |
+| `_work/repair-banner-run-log.mjs` | new: rebuilds the log from disk after the PIL outage and the overwrite |
+| `_work/composite-logo.py` | the stale-`nologo/` bug above: the refresh is keyed on content, not existence |
+| `1Capture-Marketing/AD-CREATIVE-PLAYBOOK.md` | rule 2 rewritten, claim 3 corrected, claim 5 retired from creative, abuse vocabulary added pending sign-off |
+
+## Cost
+
+| item | qty | cost |
+|---|---|---|
+| carried forward, rounds 1-3 | | ~$78.45 |
+| round-4 banner re-render, wide set | 23 | $4.60 |
+| round-4 banner re-render, core set at three shapes | 9 | $1.80 |
+| the same 32 again, after the compositor destroyed them | 32 | $6.40 |
+| **total** | | **~$91.25** against a $60-90 budget |
+
+**The batch is now about $1.25 over the top of its budget, and the overrun is entirely the
+compositor bug**: without it round 4 would have closed at ~$84.85. Recorded rather than rounded
+away, because the whole point of tracking this is to know what defects cost.
+
+**No video was rendered in round 4**, because Robby asked for the scripts first. Re-rendering the
+three clips against the new scripts is a further **~$21** (3 x 15s at 720p, plus upscales), which
+would take the batch to roughly **$106 against a $60-90 budget**. That overrun is a decision for
+Robby, not an assumption to make quietly: the three delivered clips on disk still speak the old
+close and b14v02 still names VoiceDrop, so they are stale, not shippable, and not deleted.
+
+## Still open for Robby
+
+1. **The scripts.** Unchanged from what was sent, minus VoiceDrop. Approve or revise before any
+   video spend.
+2. **The claims-bank gap**, now flagged for the third batch running. The banner copy is live site
+   copy but was not in the bank he approved on 2026-08-21; it is written into the playbook under
+   a "pending sign-off" heading and **those banners must not ship until he clears it.**
+3. **The $21 video re-render** against a budget already at ~$85 of $60-90.
+4. **Four banners are weak at thumbnail size** and are the first to cut: c17 (legal pad), c23
+   (squared notebook), c12 (sticker bomb) and c15 (foil), all for the same reason the round-2
+   re-rolls were called: the lettering sits small in the frame. This is the fourth time
+   small-in-frame has cost a concept, and it should become a prompt-lint rule rather than a
+   review note.

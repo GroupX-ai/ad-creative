@@ -3,8 +3,8 @@
 // THE BRIEF (Robby, 2026-08-21): three videos and three banners, ~$60-90 of generation, for
 // the relaunched 1capture.io. Founder-voice pain hook fully spoken and on screen by second 2,
 // a raw screen recording of the trial page and the card check, one defendable number right
-// before the CTA, end card "Start free. Free under $10K MRR. No card." No brand name spoken,
-// no logo before second 5.
+// before the CTA, end card "Start free." (round 4: Robby dropped "Free under $10K MRR. No
+// card." from the close). No brand name spoken, no logo before second 5.
 //
 //   b14v01  Fourth Free Trial     serial trial abuse      -> /free-trial-abuse-prevention
 //   b14v02  Ten Signups           the conversion math     -> /stripe-trial-conversion
@@ -23,16 +23,15 @@
 //
 // The three defendable numbers, one per clip, each a different claim so no two ads echo:
 //   b14v01  "2-3x improvement is the typical range"  (bank claim 6, safe standalone)
-//   b14v02  "VoiceDrop went from 12% to 57%"         (bank claim 5) - CONSTRAINED by the bank:
-//           when 57% is the headline claim, "2-3x is the typical range" must be present. It is
-//           carried by the b14v02 proof end card (make-endcard.py, routed in finish-videos.mjs,
-//           which asserts the routing rather than trusting it). It is NOT burned during the
-//           number beat: nothing in this pipeline draws text over the clip except the captions.
+//   b14v02  "Twice as many of them pay now."         (bank claim 2, "Double your trial-to-paid
+//           conversion", said in plain speech). ROUND 4: this beat was the VoiceDrop 12%-to-57%
+//           proof. Robby cut VoiceDrop as too short to explain, and the number cannot outlive its
+//           attribution, so both went and the proof end card went with them.
 //   b14v03  "100+ SaaS teams"                        (bank claim 7)
 // Every number a character says about their OWN signups is in-scene fiction, marked as theirs
-// with a possessive so it cannot be read as a product statistic. No percentage the site does
-// not publish. The 12%-to-57% result belongs to VoiceDrop and is spoken with its name attached,
-// never as "we" or "our", so no testimonial is fabricated.
+// with a possessive so it cannot be read as a product statistic, and no percentage the site
+// does not publish is spoken anywhere. As of round 4 no clip quotes a customer's result at all,
+// so there is no attribution left to get wrong and no testimonial to fabricate.
 //
 // AND THE RULE THAT OUTRANKS THE REST (Robby, twice): ads sell, ads never disclaim. Not one
 // clip opens on what the product is not, on a harm, or on a competitor. b14v03 originally
@@ -136,9 +135,7 @@ const BANS = `HARD CONSTRAINTS. No on-screen text of any kind: no titles, no sub
 // b14v02 is the only clip that speaks a company name, and it is another portfolio brand's, not
 // this one's. Five compound brand names have garbled across seven batches, so it gets the house
 // per-syllable anchor: each syllable tied to its own everyday word, positive only, never naming
-// the wrong version. The proof end card carries the attribution as well, so a garble here costs
 // the audio and not the claim.
-const SAY_VOICEDROP = `NAME PRONUNCIATION. The one company name spoken in this clip is "VoiceDrop", said as two clear syllables run together into one confident word. The first syllable is "voice", exactly like the everyday English word voice, as in the sound of a person's voice. The second is "drop", exactly like the everyday English word drop, as in drop it in the mail, with the final letter p sounded crisply so the word ends closed. It is said unhurriedly, with a small pause before it.`;
 
 // Kept for the first clip that has somewhere safe to speak this brand's own name. Nothing in b14
 // uses it: the composited end card carries the name on every clip.
@@ -196,8 +193,8 @@ export const ADS = [
     format: "UGC selfie, founder at a desk, flat",
     register: "flat, worn down, matter-of-fact",
     research: "Number-led hook, stat first and the implication in the same breath, the pattern every scaled B2B advertiser in the library sweep uses exactly once per ad. The ten-signups frame echoes the live homepage's worked example ('The same 10 signups. 2 more paying customers.'), but the numbers she says are her own signup log, in-scene fiction, not site copy and not a product statistic: the site's example is an incremental gain on an unstated baseline, hers is an absolute one.",
-    approvedCopy: "'VoiceDrop went from 12% to 57%' is bank claim 5, live on nine pages. '2-3x improvement is the typical range' is bank claim 6, live on eight. Both verified 2026-08-21.",
-    claimNotes: "Bank claim 5 is CONSTRAINED: when 57% is the headline claim the 2-3x framing must be present. It is carried by the proof end card (endcard-b14-proof.png), which finish-videos.mjs asserts is routed to any clip whose beats speak 'fifty-seven'; it is NOT burned during the number beat, because nothing in this pipeline draws text over the clip except the captions. The attribution is spoken as well as printed: the line names VoiceDrop, so the result is never available to be heard as this founder's own. Her own arithmetic is marked possessive ('My last ten signups') for the same reason.",
+    approvedCopy: "'Double your trial-to-paid conversion' is bank claim 2, the live homepage eyebrow and meta title. 'Twice as many of them pay now.' is that claim said in plain speech, with no customer named and no percentage quoted. Verified against the live site 2026-08-21.",
+    claimNotes: "ROUND 4. This clip used to carry the batch's proof number, 'VoiceDrop went from 12% to 57%' (bank claim 5). Robby cut VoiceDrop from the creative: fifteen seconds is not enough to explain who VoiceDrop is, and an unattributed 57% in a founder's mouth is a fabricated testimonial, so the figure could not simply lose its name. The beat is now bank claim 2 spoken plainly. Nothing here triggers the claim-5 framing constraint any more, so the proof end card is retired and this clip takes the default card like the other two. Her own arithmetic stayed possessive ('my signups') so it never reads as a product statistic.",
     spokenWords: 33,
     hookSyllables: 7,
     aspect_ratio: "9:16",
@@ -224,7 +221,6 @@ export const ADS = [
       `13-15s: Level, unhurried, eye contact locked into the lens: "Start free."`,
       SAY_SIGNUP,
       `AUDIO. Diegetic only: quiet room tone in a small carpeted room, the faint tick of the house settling, a distant lawnmower two houses away, her sleeve brushing the desk once. No music.`,
-      SAY_VOICEDROP,
       ...common(NO_SCREENS_CLOSED_LAPTOP),
     ].join("\n\n"),
   },
@@ -271,3 +267,41 @@ export const ADS = [
     ].join("\n\n"),
   },
 ];
+
+// ---------------------------------------------------------------------------
+// GUARD: every pronunciation block a clip carries must name a word that clip
+// actually speaks.
+//
+// This has now bitten twice. Round 1's v03 spoke "SaaS" after the word had been
+// cut from its script, because the clip still carried the block naming it: the
+// model reads an anchor for an absent word as licence to say it. Round 3 then
+// reintroduced the same contradiction in v02, leaving SAY_VOICEDROP in place
+// after Robby cut VoiceDrop from the beats. The BATCH doc claimed this was
+// "caught by an assertion before rendering this time", but no such assertion
+// existed in code, only in the prose. It exists now, and it runs on import, so
+// seedance-generate.mjs cannot spend money on a contradicted prompt.
+// ---------------------------------------------------------------------------
+for (const ad of ADS) {
+  // Only the BEATS paragraphs count as spoken. Scanning the whole prompt would let a
+  // pronunciation block satisfy itself, since the block quotes the very word it anchors:
+  // the first cut of this guard did exactly that and passed the bug it was written to catch.
+  const spoken = ad.prompt
+    .split("\n\n")
+    .filter((b) => /^\d+(\.\d+)?-\d+(\.\d+)?s:/.test(b.trim()))
+    .flatMap((b) => b.match(/"[^"]+"/g) ?? [])
+    .join(" ")
+    .toLowerCase();
+  for (const block of ad.prompt.split("\n\n")) {
+    if (!/\bPRONUNCIATION\.\s/.test(block)) continue;
+    const named = block.match(/"([^"]+)"/);
+    if (!named) continue;
+    const word = named[1].toLowerCase();
+    if (!spoken.includes(word)) {
+      throw new Error(
+        `${ad.id}: carries a pronunciation block for "${named[1]}", but no spoken line ` +
+        `contains that word. Delete the block or restore the line: a block naming an absent ` +
+        `word is how round 1's v03 came back saying it.`
+      );
+    }
+  }
+}

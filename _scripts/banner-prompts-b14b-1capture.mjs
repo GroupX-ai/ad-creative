@@ -120,11 +120,11 @@ export const COPY = {
     cta: "Start free",
     trace: "Both live homepage copy: 'Every signup gets a card check at the door.' and the hero subheadline 'Only real customers get into your trial'. Closest of this set to bank claims 1 and 14.",
   },
-  proof: {
-    headline: "12% of trials paid. Then 57% did.",
-    subheadline: "VoiceDrop, after verifying every card. 2-3x improvement is the typical range.",
+  stopabusers: {
+    headline: "Stop letting trial abusers in.",
+    subheadline: "Every signup gets a card check at the door.",
     cta: "Start free",
-    trace: "bank claim 5 + the claim-6 framing the bank REQUIRES whenever 57% is the headline. Round 2 ran the bare numerals '12% to 57%', which is exactly the 'numbers nobody understands' Robby called out: the figures now have a subject and a verb so a stranger can parse them cold.",
+    trace: "LIVE, not yet in the bank: 'Stop letting trial abusers in.' is live on /about. Subheadline is live homepage body copy, verbatim. ROUND 4: this pair replaces the VoiceDrop 12%-to-57% proof pair, on Robby's instruction that VoiceDrop comes out of the creative because it is too short to explain. An unattributed 57% would be a fabricated statistic, and an attributed one needs a name he has ruled out, so the number leaves the banners entirely and lives only in the videos' spoken number beat.",
   },
 };
 
@@ -224,18 +224,18 @@ export const TERRITORIES = [
     ],
   },
   {
-    key: "meganumeral", family: "loud", copy: "proof",
+    key: "megatype", family: "loud", copy: "stopabusers",
     block: (c) => [
-      `A {{SHAPE_WORD}} graphic advertisement in a brutalist mega-numeral territory: one enormous figure, one flat color field, nothing else.`,
-      `The composition is one centered stack, in this order top to bottom on every shape: an empty band, the headline numerals, the subheadline, the button. No illustration, no photograph, no icon.`,
+      `A {{SHAPE_WORD}} graphic advertisement in a brutalist mega-type territory: one enormous word stack, one flat color field, nothing else.`,
+      `The composition is one centered stack, in this order top to bottom on every shape: an empty band, the headline, the subheadline, the button. No illustration, no photograph, no icon.`,
       `The ground is a single flat field of vivid violet, hex ${VIOLET}, edge to edge, no gradient, no texture. The top eighth of the frame is left completely empty violet, containing nothing at all.`,
-      `The headline reads exactly "${c.headline}" in a very heavy grotesque sans serif, enormously oversized, pure white, tightly tracked, set on two lines with "12% to" on the first and "57%" alone on the second, so "57%" is the single largest thing in the image.`,
+      `The headline reads exactly "${c.headline}" in a very heavy grotesque sans serif, enormously oversized so it dominates the frame, pure white, tightly tracked, set on three lines broken as "STOP LETTING" on the first, "TRIAL ABUSERS" on the second and "IN." on the third, all in capitals, so the word "IN." on its own line is the single largest thing in the image. Case is the only thing that differs from the quoted text: every word carries exactly the letters quoted, in that order.`,
       MARGIN,
-      `Beneath the numerals the subheadline reads exactly "${c.subheadline}" in a medium-weight sans serif at roughly one sixth their height, pure white at full opacity, broken across two lines after the first period. The customer name is written with exactly these nine letters and no others: V, o, i, c, e, D, r, o, p, as one continuous unbroken word with a capital V and a capital D, no space and no separator between any of its letters.`,
+      `Beneath it the subheadline reads exactly "${c.subheadline}" in a medium-weight sans serif at roughly one sixth the headline height, pure white at full opacity, in sentence case as written, broken across two lines, quiet and small against the headline.`,
       `Below it sits one solid pill-shaped button, fully rounded ends, filled pure white, containing "${c.cta}" in the same vivid violet, hex ${VIOLET}. No arrow, no icon, no shadow, no second button.`,
-      `${FLAT_PRINT} There is no upward-trending line, no bar chart and no illustration of growth of any kind: the numbers alone carry it.`,
+      `${FLAT_PRINT} There is no upward-trending line, no bar chart, no arrow and no illustration of any kind: the type alone carries it.`,
       NO_MARK,
-      onlyText(c, `The word VoiceDrop appears only inside that subheadline and must be rendered there in full: it is a customer's name, it is required, and it is the one company name allowed in this frame. `),
+      onlyText(c),
     ],
   },
   {
@@ -328,18 +328,18 @@ export const TERRITORIES = [
     ],
   },
   {
-    key: "chrome", family: "loud", copy: "proof",
+    key: "chrome", family: "loud", copy: "stopabusers",
     block: (c) => [
       `A {{SHAPE_WORD}} Y2K liquid-chrome panel: polished mirror-metal lettering on a flat field, photographed under a studio softbox.`,
       `The composition is one centered stack, in this order top to bottom on every shape: an empty band, the headline in chrome, the subheadline, the button.`,
       `The ground is a flat field of deep navy, hex ${NAVY}, edge to edge, with no gradient and no texture. The top eighth of the frame is left completely empty navy, containing nothing at all.`,
-      `The headline reads exactly "${c.headline}" rendered as thick polished liquid-chrome letterforms with soft mirrored highlights and a faint violet, hex ${VIOLET}, reflection running through them, enormously oversized, set on two lines with "12% to" on the first and "57%" alone on the second. Every letter and numeral stays completely legible and correctly formed.`,
+      `The headline reads exactly "${c.headline}" rendered as thick polished liquid-chrome letterforms with soft mirrored highlights and a faint violet, hex ${VIOLET}, reflection running through them, enormously oversized, set on three lines broken as "STOP LETTING" on the first, "TRIAL ABUSERS" on the second and "IN." on the third, all in capitals. Case is the only thing that differs from the quoted text: every word carries exactly the letters quoted, in that order. Every letter stays completely legible and correctly formed, with the chrome reflection never breaking a letterform.`,
       MARGIN,
-      `Beneath it the subheadline reads exactly "${c.subheadline}" in a flat medium-weight sans serif at roughly one sixth the height of the chrome, pure white, not chrome, broken across two lines after the first period. The customer name is written with exactly these nine letters and no others: V, o, i, c, e, D, r, o, p, as one continuous unbroken word with a capital V and a capital D.`,
+      `Beneath it the subheadline reads exactly "${c.subheadline}" in a flat medium-weight sans serif at roughly one sixth the height of the chrome, pure white, not chrome, in sentence case as written, broken across two lines.`,
       `Below it sits one solid pill-shaped button filled pure white containing "${c.cta}" in vivid violet, hex ${VIOLET}, completely flat with no chrome and no reflection.`,
       `There is no liquid blob, no orb, no swirl, no star, no lens flare and no floating object of any kind: the chrome is the lettering and nothing else.`,
       NO_MARK,
-      onlyText(c, `The word VoiceDrop appears only inside that subheadline and must be rendered there in full: it is a customer's name and it is required. `),
+      onlyText(c),
     ],
   },
   {

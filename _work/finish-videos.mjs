@@ -59,10 +59,12 @@ for (const ad of ADS) {
   if (!existsSync(screen)) { console.log(`SKIP ${ad.id}: nothing composited`); continue; }
 
   // 2. end card -------------------------------------------------------------
-  // b14v02 gets the card carrying the VoiceDrop attribution and the 2-3x framing, because
-  // the approved bank constrains the 57% figure and the spoken budget cannot carry both.
-  const card = path.join(WORK, 'endcard',
-    ad.id.includes('b14v02') ? 'endcard-b14-proof.png' : 'endcard-b14-default.png');
+  // One card for every clip as of round 4. b14v02 used to take a second card carrying the
+  // VoiceDrop attribution and the 2-3x framing, because the bank constrains the 57% figure and
+  // the spoken budget could not carry both. Robby cut VoiceDrop from the creative, so no clip
+  // quotes the figure, nothing owes the framing, and the proof card is gone.
+  const card = path.join(WORK, 'endcard', 'endcard-b14-default.png');
+  if (!existsSync(card)) throw new Error(`end card missing: ${card}. Run python3 _work/make-endcard.py`);
   const withCard = path.join(dir, `${ad.id}-1080p-screen-endcard.mp4`);
   copyFileSync(screen, withCard);
   const cardStart = durationOf(screen);

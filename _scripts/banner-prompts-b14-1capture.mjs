@@ -97,14 +97,15 @@ export const BANNERS = [
     landingPage: "/free-trial-abuse-prevention",
     headline: "Only let real customers through the door.",
     subheadline: "Verified before the trial starts.",
-    offer: "Free under $10K MRR",
     cta: "Start free",
     approvedCopy:
       "Headline is bank claim 1 verbatim ('Only let real customers through the door.', live in " +
       "the homepage metadata). Subheadline compresses bank claim 3 ('Verify a real payment " +
       "method before anyone enters your free trial', live on seven pages) and borrows the live " +
-      "verdict wording 'before the trial started' (DashboardPreviewLive.tsx line 301). Offer is " +
-      "bank claim 8, live on seven pages. Button label is the live site's own button.",
+      "verdict wording 'before the trial started' (DashboardPreviewLive.tsx line 301). Button " +
+      "label is the live site's own button. ROUND 4: the 'Free under $10K MRR' offer line is " +
+      "gone on Robby's instruction that the banners stop talking about pricing; the offer now " +
+      "lives in the button alone.",
     claimNotes:
       "Carries no percentage and no statistic, so nothing here needs the claim-5 framing. The " +
       "earlier cut claimed duplicate-card detection, which is live site copy but outside the " +
@@ -120,12 +121,12 @@ export const BANNERS = [
       `Across the upper area of the frame, entirely above the headline and touching no letter, is a single horizontal band of bold diagonal hazard stripes in vivid violet, hex #635BFF, alternating with the navy, at a 45 degree angle, hard-edged with no glow, no gradient and no texture. The band is a solid bar of stripes spanning the full width of the frame, and nothing is printed on it.`,
       `The headline reads exactly "Only let real customers through the door." set in a very heavy grotesque sans serif, in sentence case as written, in pure white, tightly tracked, the largest element in the frame, broken across three lines.`,
       `Directly under the headline, with no gap and no element between them, the subheadline reads exactly "Verified before the trial starts." in the same sans serif at roughly one third the headline size, in pure white, on its own single line, set inside a hard-edged solid crimson red rectangle, hex #DF1B41, fitted tightly around the line.`,
-      `Below the subheadline sits a single solid pill-shaped button with fully rounded ends, filled pure white, containing the words "Start free" in vivid violet, hex #635BFF, in medium-weight sans serif. The button is plain: no arrow, no icon, no shadow, no border, no second button. Immediately under the button, on its own line in pure white medium-weight sans serif at the same size as the subheadline, is the line "Free under $10K MRR", with the price written as a dollar sign then the digits one and zero then a capital K, and the last word written as the three capital letters M, R and R together as one unbroken group with no hyphen, dot or space between them.`,
-      `Below that line, the bottom eighth of the frame is left as plain flat navy, hex #0A2540, edge to edge: it contains no type, no stripe, no graphic, no mark and nothing else at all.`,
+      `Below the subheadline sits a single solid pill-shaped button with fully rounded ends, filled pure white, containing the words "Start free" in vivid violet, hex #635BFF, in medium-weight sans serif. The button is plain: no arrow, no icon, no shadow, no border, no second button.`,
+      `Below the button, the bottom eighth of the frame is left as plain flat navy, hex #0A2540, edge to edge: it contains no type, no stripe, no graphic, no mark, no price and nothing else at all.`,
       MARGIN,
       FLAT,
       NO_MARK,
-      `The ONLY text in the image is the headline "Only let real customers through the door.", the subheadline "Verified before the trial starts.", the button label "Start free" and the line "Free under $10K MRR". There are no feature chips, no badges, no ratings, no percentages, no statistics and no numerals of any kind other than the ones inside "Free under $10K MRR", no captions, no labels, no small print, no logo, no wordmark, no brand name, no company name and no other words anywhere in the frame. Every word is spelled exactly as written above.`,
+      `The ONLY text in the image is the headline "Only let real customers through the door.", the subheadline "Verified before the trial starts." and the button label "Start free". There are no feature chips, no badges, no ratings, no percentages, no statistics, no prices and no numerals of any kind anywhere in the frame, no captions, no labels, no small print, no logo, no wordmark, no brand name, no company name and no other words anywhere in the frame. Every word is spelled exactly as written above.`,
     ].join("\n\n"),
   },
 
@@ -134,39 +135,40 @@ export const BANNERS = [
     id: "1capture-platform-b14c02",
     company: "1capture",
     product: "platform",
-    concept: "twelve-to-fifty-seven",
+    concept: "fake-card",
     family: "loud direct-response",
     landingPage: "/stripe-trial-conversion",
-    headline: "12% to 57%",
-    subheadline: "VoiceDrop trial-to-paid. 2-3x improvement is the typical range.",
+    headline: "They signed up with a fake card.",
+    subheadline: "Then the trial ended and the payment failed.",
     cta: "Start free",
     approvedCopy:
-      "Bank claim 5 ('VoiceDrop went from 12% to 57% trial-to-paid', live on nine pages) paired " +
-      "with bank claim 6. The framing is the bank's exact wording, '2-3x improvement is the " +
-      "typical range', which is live verbatim in 15 places in the marketing repo; the truncated " +
-      "'2-3x is the typical range' appears nowhere on the site and is not used.",
+      "LIVE SITE COPY, not yet in the approved bank: 'Signs up on a virtual card', 'Card " +
+      "declined at billing' and 'Failed first invoices' are the site's own verdict strings " +
+      "(DashboardPreviewLive.tsx); 'virtual credit cards' and 'a verified card is the hardest " +
+      "credential to fake' are live on /free-trial-abuse-prevention. The bank needs this " +
+      "vocabulary added before the set ships; see the round-4 note in the BATCH doc.",
     claimNotes:
-      "The bank CONSTRAINS claim 5: when 57% is the headline claim the 2-3x framing must be " +
-      "present. Here it is the subheadline, so the constraint is satisfied inside the artwork " +
-      "and does not depend on which landing page the ad is pointed at. 'VoiceDrop' is a customer " +
-      "name and must render; it is spelled out letter by letter in the prompt because it is a " +
-      "nine-letter compound proper noun with an internal capital and it is the entire " +
-      "attribution for the batch's biggest number.",
+      "ROUND 4. This concept was the VoiceDrop '12% to 57%' mega-numeral. Robby: the banners " +
+      "were 'throwing numbers that nobody understands', and separately that VoiceDrop comes " +
+      "out because it is too short to explain. Both retire this cut. It now states the buyer's " +
+      "own problem in plain words and carries no figure at all, so no claim-5 framing is owed. " +
+      "The sentence describes what happens to the READER's signups; it asserts nothing about " +
+      "1Capture's results.",
     // mirror of SHAPE_SPEC.gen in banner-generate.mjs, which is what actually gets sent to fal;
     // edit both or neither.
     sizes: { square: [1024, 1024], landscape: [1200, 624], vertical: [1088, 1920] },
     shapes: ["square", "landscape", "vertical"],
     prompt: [
-      `A {{SHAPE_WORD}} graphic advertisement in a brutalist mega-numeral territory: one enormous figure, one flat color field, nothing else.`,
-      `The composition is one centered stack on a full-bleed color field, in this order from top to bottom and in this order on every shape: an empty band, then the headline numerals, then the subheadline, then the button. There is no illustration, no photograph, no icon and no visual element of any kind in this layout: type and flat color are the only things in the frame.`,
+      `A {{SHAPE_WORD}} graphic advertisement in a brutalist mega-type territory: one enormous stack of words, one flat color field, nothing else.`,
+      `The composition is one centered stack on a full-bleed color field, in this order from top to bottom and in this order on every shape: an empty band, then the headline, then the subheadline, then the button. There is no illustration, no photograph, no icon and no visual element of any kind in this layout: type and flat color are the only things in the frame.`,
       `The ground is a single flat field of vivid violet, hex #635BFF, edge to edge, with no gradient, no texture and no pattern of any kind. The top eighth of the frame is left completely empty: flat violet only, with no type, no mark, no shape and nothing in it at all. The stacked group of type begins below that empty band.`,
-      `The headline reads exactly "12% to 57%" in a very heavy grotesque sans serif, enormously oversized so it dominates the frame, in pure white, tightly tracked, set on two lines with "12% to" on the first line and "57%" alone on the second. The final "57%" is the single largest thing in the image.`,
-      `Beneath the numerals the subheadline reads exactly "VoiceDrop trial-to-paid. 2-3x improvement is the typical range." in a medium-weight sans serif at roughly one sixth the height of the numerals, in pure white at full opacity, broken across two lines after the first period, quiet and small against the figures. The customer name is written with exactly these nine letters and no others: V, o, i, c, e, D, r, o, p, as one continuous unbroken word with a capital V and a capital D. No hyphen, dot, space or separator appears between any of its letters.`,
+      `The headline reads exactly "They signed up with a fake card." in a very heavy grotesque sans serif, enormously oversized so it dominates the frame, in pure white, tightly tracked, set in capitals across four lines broken as "THEY SIGNED" on the first, "UP WITH A" on the second, "FAKE CARD." on the third, with no word split across two lines and no word hyphenated. Case is the only thing that differs from the quoted text: every word carries exactly the letters quoted, in that order. The line "FAKE CARD." is the largest thing in the image.`,
+      `Directly beneath the headline the subheadline reads exactly "Then the trial ended and the payment failed." in a medium-weight sans serif at roughly one fifth the headline height, in sentence case as written, in pure white at full opacity, broken across two lines, quiet and small against the headline.`,
       `Below the subheadline sits a single solid pill-shaped button with fully rounded ends, filled pure white, containing the words "Start free" in the same vivid violet, hex #635BFF, in medium-weight sans serif. The button is plain: no arrow, no icon, no shadow, no border, no second button.`,
       MARGIN,
-      `${FLAT} There is no arrow graphic, no upward-trending line, no bar chart and no illustration of growth of any kind: the numbers alone carry it.`,
+      `${FLAT} There is no arrow graphic, no downward-trending line, no bar chart, no payment card, no credit card, no chip, no magnetic stripe and no illustration of any kind: the type alone carries it.`,
       NO_MARK,
-      `The ONLY text in the image is the headline "12% to 57%", the subheadline "VoiceDrop trial-to-paid. 2-3x improvement is the typical range." and the button label "Start free". The word VoiceDrop appears only inside that subheadline and must be rendered there in full: it is a customer's name, it is required, and it is the one company name allowed in this frame. There are no feature chips, no badges, no ratings, no captions, no labels, no small print, no logo, no wordmark, no other brand or company name, no percentages, no multipliers and no averages other than those written above, and no other words anywhere in the frame. Every word is spelled exactly as written above.`,
+      `The ONLY text in the image is the headline "They signed up with a fake card.", the subheadline "Then the trial ended and the payment failed." and the button label "Start free". There are no feature chips, no badges, no ratings, no percentages, no statistics, no prices and no numerals of any kind anywhere in the frame, no captions, no labels, no small print, no logo, no wordmark, no brand name, no company name and no other words anywhere in the frame. Every word is spelled exactly as written above.`,
     ].join("\n\n"),
   },
 
@@ -175,23 +177,25 @@ export const BANNERS = [
     id: "1capture-platform-b14c03",
     company: "1capture",
     product: "platform",
-    concept: "verify-a-real-card",
+    concept: "card-check-at-the-door",
     family: "native/organic",
     landingPage: "/require-credit-card-for-free-trial",
-    headline: "Verify a real payment method before anyone enters your free trial.",
-    subheadline: "Free under $10K MRR",
+    headline: "A card check at the door.",
+    subheadline: "Only real customers get in.",
     cta: "Start free",
     approvedCopy:
-      "Headline is bank claim 3, first sentence, VERBATIM ('Verify a real payment method " +
-      "before anyone enters your free trial'), live on seven pages. An earlier cut compressed " +
-      "it to 'Verify a real card before anyone starts a free trial'; two judges flagged " +
-      "compression as the way copy drifts out of an approved bank, so it is quoted whole. " +
-      "Subheadline is bank claim 8, live on seven pages. Button label is the live site's own.",
+      "Both lines are LIVE homepage copy: 'Every signup gets a card check at the door.' is " +
+      "live body copy, and the second line compresses the live hero subheadline 'Only real " +
+      "customers get into your trial'. Closest of the set to bank claims 1 and 14. Button " +
+      "label is the live site's own.",
     claimNotes:
-      "No figure is claimed beyond the price, so no framing is required. Hand-lettered styles " +
-      "have twice dropped words and twice misspelled long ones, so every risky token here is " +
-      "spelled out character by character in the prompt: CUSTOMERS is gone from this cut, and " +
-      "$10K and MRR are both dictated.",
+      "ROUND 4. The previous cut set bank claim 3's full sentence as the headline over a " +
+      "'Free under $10K MRR' price line. Robby retired both: the sentence is too long to read " +
+      "at feed size, and no banner talks about pricing any more. The offer now lives in the " +
+      "button alone. Carrying no price also retires this concept's one known defect: the " +
+      "hand-lettered '$10K' rendered as '$IOK' on all three shapes and on a re-roll whose " +
+      "prompt dictated the strokes, which was reproducible and had to ship. There is now no " +
+      "numeral anywhere on the board for a marker hand to malform.",
     // mirror of SHAPE_SPEC.gen in banner-generate.mjs, which is what actually gets sent to fal;
     // edit both or neither.
     sizes: { square: [1024, 1024], landscape: [1200, 624], vertical: [1088, 1920] },
@@ -200,8 +204,8 @@ export const BANNERS = [
       `A {{SHAPE_WORD}} photograph taken with a handheld phone camera in available window light, the camera itself outside the frame, of a real office whiteboard with handwriting on it, in an ordinary American startup office in the United States. This is a snapshot somebody took, not an advertisement.`,
       `The composition is the whiteboard filling almost the whole frame, shot slightly off square, with the handwriting centered on it in the same order on every shape: the big handwritten line, then the smaller underlined line, then the hand-drawn box.`,
       `The whiteboard is an ordinary wall-mounted white melamine board with a thin aluminum tray along the bottom edge, mounted on a plain painted office wall. The board surface carries faint gray ghosting from previous erasing in the corners, one small smudge, and nothing else.`,
-      `Hand-lettered across the board in thick black dry-erase marker, in a real person's slightly uneven handwriting written entirely in block capital letters, are the words "Verify a real payment method before anyone enters your free trial." Case is the only thing that differs from the quoted text: every word carries exactly the letters quoted, in that order, but all of them are capitals. It fills most of the board across exactly three lines, broken as "VERIFY A REAL PAYMENT" on the first line, "METHOD BEFORE ANYONE" on the second, and "ENTERS YOUR FREE TRIAL." on the third, with no word split across two lines and no word hyphenated. The lettering is confident, a little crooked, with visible marker texture and one letter slightly larger than its neighbors.`,
-      `Underneath, smaller and in the same black marker, is written exactly "Free under $10K MRR". The price is four characters: a dollar sign; then a numeral one drawn as a single plain vertical stroke with no bar across its top and no bar across its foot; then a numeral zero drawn as one narrow closed oval; then a capital K. Those two middle characters are numerals and not letters, and the pair reads as the number ten. The last word is the three capital letters M, R and R together as one unbroken group with no hyphen, dot or space between them. The whole line is underlined once with a quick hand-drawn stroke.`,
+      `Hand-lettered across the board in thick black dry-erase marker, in a real person's slightly uneven handwriting written entirely in block capital letters, are the words "A card check at the door." Case is the only thing that differs from the quoted text: every word carries exactly the letters quoted, in that order, but all of them are capitals. It fills most of the board across exactly two lines, broken as "A CARD CHECK" on the first line and "AT THE DOOR." on the second, with no word split across two lines and no word hyphenated. The lettering is confident, a little crooked, with visible marker texture and one letter slightly larger than its neighbors.`,
+      `Underneath, smaller and in the same black marker, is written exactly "Only real customers get in." on a single line, in the same block capitals, underlined once with a quick hand-drawn stroke.`,
       `Lower still on the board, drawn by the same hand, is a rough rectangle outlined in thick violet dry-erase marker with the words "Start free" hand-lettered inside it in the same violet. The violet is the vivid brand violet, hex #635BFF. The rectangle is drawn freehand and slightly wobbly.`,
       `The bottom right corner of the board is left completely blank: a clean rectangle of white melamine at least one eighth of the frame's height and one quarter of its width, sitting below and to the right of everything written on the board, flat, evenly lit and fully in focus, with no writing, no marker, no smudge, no glare and nothing else in it.`,
       MARGIN,
@@ -210,7 +214,7 @@ export const BANNERS = [
       `There is nothing else on the wall and nothing resting in the tray: no marker, no eraser, no sticky notes, no poster, no clock, no plant, and no person or hand anywhere in the frame.`,
       NO_MARK,
       `The one exception is the hand-drawn violet rectangle described above. It is required and it must be drawn: it is a wobbly freehand marker outline around the words "Start free", drawn by the same hand as the rest of the board. It is not a logo, a badge or a brand mark.`,
-      `The ONLY text in the image is the handwritten headline "Verify a real payment method before anyone enters your free trial.", the handwritten line "Free under $10K MRR" and the hand-lettered button label "Start free". There are no feature chips, no badges, no ratings, no percentages, no statistics and no numerals of any kind other than the ones inside "Free under $10K MRR", no captions, no labels, no small print, no logo, no wordmark, no brand name, no company name and no other words anywhere in the frame. Every word is spelled exactly as written above. The word FREE is rendered three times in this image, once inside "YOUR FREE TRIAL.", once inside "Free under $10K MRR" and once inside "Start free": all three are required and each is spelled F, R, E, E.`,
+      `The ONLY text in the image is the handwritten headline "A card check at the door.", the handwritten line "Only real customers get in." and the hand-lettered button label "Start free". There are no feature chips, no badges, no ratings, no percentages, no statistics, no prices and no numerals of any kind anywhere in the frame, no captions, no labels, no small print, no logo, no wordmark, no brand name, no company name and no other words anywhere in the frame. Every word is spelled exactly as written above.`,
     ].join("\n\n"),
   },
 ];

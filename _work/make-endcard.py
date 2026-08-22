@@ -11,19 +11,26 @@ Needs Inter, which the live site uses and which is not committed here (876 KB):
     mkdir -p _work/fonts && curl -sSL -o _work/fonts/Inter-Variable.ttf \
       "https://raw.githubusercontent.com/google/fonts/main/ofl/inter/Inter%5Bopsz%2Cwght%5D.ttf"
 
-Two variants:
-  default  logo, domain, and the close "Start free. Free under $10K MRR. No card."
-  proof    the same plus the VoiceDrop attribution and the 2-3x framing, for
-           b14v02. The approved-claims bank CONSTRAINS the 57% figure: when it is
-           the headline claim, "2-3x improvement is the typical range" must be present. The
-           15-second word budget cannot carry both spoken, so the card carries it.
+One variant, as of round 4:
+  default  logo, domain, and the close "Start free."
+
+Robby, round 4: "Don't say 'Free under $10K' - just say start for free." So the
+card closes on those two words and nothing else. The brief's original string was
+"Start free. Free under $10K MRR. No card."; two judges had separately flagged
+its tail as ambiguous on this brand anyway (every clip sells a card check on the
+buyer's own signups and then closes on "No card"), so the instruction retires a
+line that was already in question.
+
+The proof variant is gone with it. It existed only to carry the "2-3x improvement
+is the typical range" framing that the bank REQUIRES beside the 57% figure, and
+Robby cut VoiceDrop from the creative: no clip quotes the figure any more, so
+nothing owes the framing and there is no second card to build.
 """
 import pathlib
 from PIL import Image, ImageDraw, ImageFont
 
 W, H = 1080, 1920
 INK = (10, 37, 64)        # #0A2540  tailwind ink.DEFAULT / 1capture.dark
-VIOLET = (122, 115, 255)  # #7A73FF  blurple.500, the lighter step so it holds on navy
 WHITE = (255, 255, 255)
 MUTED = (135, 146, 162)   # #8792A2  gray.400
 
@@ -46,7 +53,7 @@ def centered(draw, y, text, f, fill):
     return box[3] - box[1]
 
 
-def build(name, proof=False):
+def build(name):
     card = Image.new("RGBA", (W, H), INK + (255,))
     draw = ImageDraw.Draw(card)
 
@@ -57,26 +64,15 @@ def build(name, proof=False):
 
     # Lay the block out from a measured total height so it is optically centred
     # rather than centred on a guess.
-    f_big, f_mid, f_dom, f_small = font(104, "ExtraBold"), font(58, "SemiBold"), font(40, "Medium"), font(42, "Medium")
-    gap_after_logo, gap_after_dom, line_gap = 96, 78, 22
-    block = logo.height + gap_after_logo + 48 + gap_after_dom + 120 + line_gap + 70
-    if proof:
-        block += 116
+    f_big, f_dom = font(104, "ExtraBold"), font(40, "Medium")
+    gap_after_logo, gap_after_dom = 96, 78
+    block = logo.height + gap_after_logo + 48 + gap_after_dom + 120
     top = (H - block) // 2
 
     card.alpha_composite(logo, ((W - lw) // 2, top))
     y = top + logo.height + gap_after_logo
     y += centered(draw, y, "1capture.io", f_dom, MUTED) + gap_after_dom
-    y += centered(draw, y, "Start free.", f_big, WHITE) + line_gap + 34
-    y += centered(draw, y, "Free under $10K MRR. No card.", f_mid, VIOLET) + line_gap
-
-    if proof:
-        y += 62
-        # A hairline, then the attribution. Both lines are approved bank copy.
-        draw.line([(W // 2 - 220, y), (W // 2 + 220, y)], fill=(28, 58, 91), width=2)
-        y += 44
-        y += centered(draw, y, "VoiceDrop trial-to-paid: 12% to 57%", f_small, WHITE) + 18
-        centered(draw, y, "2-3x improvement is the typical range", f_small, WHITE)
+    centered(draw, y, "Start free.", f_big, WHITE)
 
     p = OUT / f"{name}.png"
     card.convert("RGB").save(p)
@@ -84,4 +80,3 @@ def build(name, proof=False):
 
 
 build("endcard-b14-default")
-build("endcard-b14-proof", proof=True)

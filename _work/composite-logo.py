@@ -15,7 +15,7 @@ The raw renders are kept in <batch>/nologo/ because a clean no-mark version is t
 one that belongs on Reddit, where the post is already branded with the author handle
 and a pasted wordmark undoes the native-post illusion.
 """
-import argparse, pathlib, shutil, sys
+import argparse, hashlib, json, pathlib, shutil, sys
 from PIL import Image, ImageStat, ImageFilter
 
 ROOT = pathlib.Path("/home/user/ad-creative")
@@ -48,11 +48,20 @@ FAMILY_DEFAULT = {
     "loud direct-response": {"variant": "white", "where": "bottom-center", "width": 0.30, "plate": False},
     "native/organic": {"variant": "white", "where": "bottom-right", "width": 0.26, "plate": True},
 }
+# Per-frame overrides for renders that did not honour the empty band their prompt reserved.
+# c07's mega-type headline runs into the top eighth the prompt assigned as empty, so every
+# measured candidate either clips a letter or crowds the button. Bottom-centre under the button,
+# small, on a plate, is the one clean spot and it is faster to say so than to keep tuning a
+# scorer against a single frame.
+HAND_PLACED = {
+    "1capture-platform-b14c07": {"variant": "white", "where": "bottom-center", "width": 0.20, "plate": True},
+}
+
 _manifest = WORK / "banner-manifest-b14b.json"
 if _manifest.exists():
     import json as _json
     for _id, _meta in _json.loads(_manifest.read_text()).items():
-        PLACEMENT.setdefault(_id, FAMILY_DEFAULT[_meta["family"]])
+        PLACEMENT.setdefault(_id, HAND_PLACED.get(_id) or FAMILY_DEFAULT[_meta["family"]])
 
 # Vertical banners are much taller than they are wide, so a mark sized as a fraction of the
 # width would tower; and wide leaderboards are the reverse. Scale the fraction per shape.
@@ -72,11 +81,25 @@ _EDGES = {}
 
 def _edge_map(im):
     """Cache one edge map per image: type is high-frequency, flat color and soft photo
-    backgrounds are not."""
+    backgrounds are not.
+
+    2026-08-22: this cached on `id(im)` alone and held no reference to the image. CPython reuses
+    an id as soon as the object behind it is collected, and this runs one freshly-opened Image
+    per file in a loop, so a later banner could collide with a freed earlier one and be scored
+    against SOMEBODY ELSE'S edge map. It did: c05's box over "the payment failed" scored 0.00,
+    and the wordmark was placed on the subheadline. Nothing about that looked like a failure,
+    because a wrong number and a right number are the same shape.
+
+    The entry now keeps the image itself, which both pins the id so it cannot be reused while
+    cached and lets the lookup verify it got the right one. That is the third lookup in this
+    batch keyed on a proxy rather than on the thing itself, after the naming gate's date regex
+    and the nologo existence check."""
     key = id(im)
-    if key not in _EDGES:
-        _EDGES[key] = im.convert("L").filter(ImageFilter.FIND_EDGES)
-    return _EDGES[key]
+    entry = _EDGES.get(key)
+    if entry is None or entry[0] is not im:
+        entry = (im, im.convert("L").filter(ImageFilter.FIND_EDGES))
+        _EDGES[key] = entry
+    return entry[1]
 
 
 def band_score(im, box):
@@ -98,7 +121,17 @@ def band_score(im, box):
 # square and the vertical, where there is room, and does not on the landscape, where the same
 # copy is packed into 628px of height. Rather than pay for another roll and hope, measure the
 # frame and fall back to the quietest corner, on a plate so it is legible over anything.
-BUSY = 0.35  # percent of pixels on a hard edge; anything above this has lettering in it
+# Percent of pixels in the box sitting on a hard edge. Anything above this has lettering in it,
+# and the mark shrinks and looks again.
+#
+# 2026-08-22: tightening this to 0.08 was tried and reverted. It did stop c07 clipping "STOP
+# LETTING", but on eight frames nothing then scored under the threshold, the search fell through
+# to "no clear space anywhere", and the fallback put the mark somewhere worse: on c05's
+# subheadline, on c25's handwriting, over c07's own button. A threshold that rejects everything
+# does not choose well, it just chooses last. 0.35 is the tuned value that places 30 of 32
+# frames correctly; the two it cannot place are handled by naming their band explicitly, which
+# is honest about being a per-frame judgement rather than dressing it up as a measurement.
+BUSY = 0.35
 
 
 def quietest_spot(im, bw, bh, pad):
@@ -110,14 +143,25 @@ def quietest_spot(im, bw, bh, pad):
     w, h = im.size
     cands = []
     steps = 9
+    # A side candidate may only sit in the top or bottom fifth of the frame.
+    #
+    # 2026-08-22: left@ and right@ used to slide the full height, so the scorer was free to put
+    # the wordmark at mid-height beside the headline. On the round-4 mega-type layouts it did
+    # exactly that twice: c07 tucked the mark into the gap right of "IN." and c08 dropped it into
+    # the hollow of "Again.". Both scored clean, because a flat violet hole inside a headline
+    # genuinely has no edges in it, and both read as part of the headline to a human eye. Edge
+    # density measures whether a box is empty; it cannot measure whether a box is INSIDE
+    # something. Keeping side candidates out of the vertical middle is the cheap structural fix.
+    side_limit = h * 0.20
     for i in range(steps):
         t = i / (steps - 1)
         x_edge = round(pad + t * (w - bw - 2 * pad))
         y_edge = round(pad + t * (h - bh - 2 * pad))
         cands.append((f"bottom@{i}", (x_edge, h - bh - pad)))
         cands.append((f"top@{i}", (x_edge, pad)))
-        cands.append((f"left@{i}", (pad, y_edge)))
-        cands.append((f"right@{i}", (w - bw - pad, y_edge)))
+        if y_edge <= side_limit or y_edge + bh >= h - side_limit:
+            cands.append((f"left@{i}", (pad, y_edge)))
+            cands.append((f"right@{i}", (w - bw - pad, y_edge)))
     scored = [(band_score(im, (x, y, x + bw, y + bh)), name, (x, y)) for name, (x, y) in cands]
     scored.sort()
     return scored[0]
@@ -150,6 +194,22 @@ def place(im, logo, where, pad):
     raise SystemExit(f"unknown placement {where}")
 
 
+def sha(p):
+    return hashlib.sha256(pathlib.Path(p).read_bytes()).hexdigest()[:12]
+
+
+# What the generator recorded for each delivered file, keyed by basename. A file still hashing
+# to its logged value has not been composited yet.
+def _rendered():
+    log = ROOT / "_scripts" / "banner-run-log-2026-08-21-b14-relaunch.json"
+    if not log.exists():
+        return {}
+    return {pathlib.Path(o["file"]).name: o["sha256"] for o in json.loads(log.read_text()).get("ok", [])}
+
+
+RENDERED = _rendered()
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--probe", action="store_true")
@@ -173,9 +233,21 @@ def main():
         if shape == "landscape":
             cfg = {**cfg, **LANDSCAPE_OVERRIDE}
 
-        # Keep the clean render before anything is pasted onto it.
+        # Keep the clean render before anything is pasted onto it, and composite FROM that copy
+        # so re-running is idempotent.
+        #
+        # 2026-08-22: this used to be `if not raw.exists(): copy`, which silently destroyed a
+        # whole re-render. Round 4 re-rendered all 32 banners with new copy; nologo/ still held
+        # the round-2 renders from git, so the guard skipped the refresh, the composite read the
+        # STALE copy, and every new render was overwritten with old artwork. $6.40 of generation
+        # was lost and nearly shipped as the fix for the exact copy Robby had rejected.
+        #
+        # The run log is the authority on what a pristine render looks like. If the delivered
+        # file still hashes to what the generator recorded, it IS a fresh render and nologo/ is
+        # refreshed from it. If it does not match, this file has already been composited before,
+        # and nologo/ holds the correct raw for it.
         raw = nologo / f.name
-        if not raw.exists():
+        if not raw.exists() or sha(f) == RENDERED.get(f.name):
             shutil.copy2(f, raw)
 
         im = Image.open(raw).convert("RGBA")
