@@ -37,12 +37,24 @@ const ACCOUNTS = {
     google: "8715389296",
     reddit: "a2_jdktuzsu7mws",
   },
-  // Registered 2026-08-21 for batch 14, the brand's first creative. No ad account exists on
-  // any platform yet: the PPC relaunch plan's launch gate is unfinished and 1Capture is
-  // capped at $0 spend, so there is nothing live to read. A company with no account is not
-  // an error, it just means the file check is the whole check.
+  // Registered 2026-08-21 for batch 14, the brand's first creative.
+  //
+  // 2026-08-22: the Meta account id was missing here, not absent in the world. The comment said
+  // "no ad account exists on any platform yet" and the check duly reported "no ad account yet on:
+  // meta, google, reddit", which reads as a verified fact and is not one: act_716193647985700
+  // ("1Capture", Momentum Labs, ACTIVE, USD, payment method attached) has existed all along. A
+  // missing row here is indistinguishable in the output from a missing account there, which is
+  // the same silent-skip this script was fixed for once already.
+  //
+  // Google and Reddit really are absent: no 1Capture Google Ads customer id is recorded anywhere
+  // in this repo or the marketing repo, and the PPC plan states no 1Capture Reddit account
+  // exists (gate item 4). Those stay unset until someone can name the id.
+  //
+  // Nothing is live on any of them: 1Capture is still capped at $0 and the PPC relaunch plan's
+  // launch gate is unfinished, so the file check remains the whole check for now.
   "1capture": {
     co: "1C",
+    meta: "act_716193647985700",
   },
 };
 
