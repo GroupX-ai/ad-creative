@@ -1369,3 +1369,30 @@ against **$37.57**, reconciled to Stripe.
 - **No new Reddit post was needed.** The 2026-08-21 1Lookup finding still holds (the API exposes no
   endpoint to create a post), but it does not block a new ad group: an existing ad's `post_id` can
   be attached to a new ad in a new ad group, which is how all 7 Reddit ads here were made.
+
+
+### 2026-08-22 19:10 UTC: the TikTok audience validated, and it is blocked on US size
+
+Audience `195883692` finished computing about 4 hours after creation (well inside TikTok's quoted
+48h): **`is_valid: true`, `cover_num` 8,517**. Attaching it to ad group `1874236740388977` still
+fails:
+
+    40002  Due to user privacy requirements, your TikTok audience in the US must increase to over 1000.
+
+Confirmed independently with `/ad/audience_size/estimate/` on the exact ad group targeting
+(US, TikTok placement, audience `195883692`): **`user_count` 0-1,000**, `user_count_stage: 1`.
+
+So this is a **size** blocker, not the timing one, and it is not a configuration error: the
+audience is already every page view at the maximum 180-day lookback, so there is nothing left to
+widen except geography, and dropping US-only would deliver into the international test that
+already failed. The pixel has only been live since 2026-08-13. Auto-refresh is on, so the audience
+grows on its own; the ad group stays paused until the US slice crosses 1,000.
+
+**Unreconciled, and worth stating rather than smoothing over:** `cover_num` reads 8,517 while the
+US-targetable count reads under 1,000, on a US-focused site. Both numbers come from TikTok. The
+likely explanation is that `cover_num` is not a US-deduped user count, but **that is a hypothesis,
+not verified**. The discriminating check is opening the audience in the TikTok Ads Manager UI,
+which shows the geo breakdown the API does not expose.
+
+Reddit, meanwhile, is delivering: **$2.06 spent, 114 impressions, 0 clicks** in its first hours
+(2026-08-22, account time zone), against $27.50 on the prospecting ad group the same day.
