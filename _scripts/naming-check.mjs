@@ -37,6 +37,13 @@ const ACCOUNTS = {
     google: "8715389296",
     reddit: "a2_jdktuzsu7mws",
   },
+  // Registered 2026-08-21 for batch 14, the brand's first creative. No ad account exists on
+  // any platform yet: the PPC relaunch plan's launch gate is unfinished and 1Capture is
+  // capped at $0 spend, so there is nothing live to read. A company with no account is not
+  // an error, it just means the file check is the whole check.
+  "1capture": {
+    co: "1C",
+  },
 };
 
 const acct = ACCOUNTS[COMPANY];
@@ -162,6 +169,8 @@ async function checkReddit() {
 }
 
 // ---------------------------------------------------------------- repo files
+// The day NAMING.md was written. Every batch folder dated on or after it is held to it.
+const STANDARD_FROM = "2026-08-19";
 const FILE_STATIC = new RegExp(`^[a-z0-9]+-[a-z0-9-]+-b\\d+c\\d{2}-(${SHAPES})\\.png$`);
 const FILE_VIDEO = /^[a-z0-9]+-[a-z0-9-]+-b\d+v\d{2}-[a-z0-9-]+\.mp4$/;
 
@@ -171,7 +180,11 @@ async function checkFiles() {
     if (!batch.isDirectory() || batch.name.startsWith("_")) continue;
     // Only batches that adopted the standard are checked. Older folders predate it and are
     // left alone rather than rewritten: renaming a file that a live ad points at breaks the ad.
-    if (!/^2026-08-19|^2026-09|^202[7-9]/.test(batch.name)) continue;
+    // Compare the folder's own date prefix against the day NAMING.md landed. This used to be
+    // a regex naming one date ("^2026-08-19|^2026-09|..."), which silently skipped any batch
+    // dated later in the same month: b14 on 2026-08-21 was never checked at all.
+    const day = /^(\d{4}-\d{2}-\d{2})/.exec(batch.name)?.[1];
+    if (!day || day < STANDARD_FROM) continue;
     for (const f of await readdir(path.join(base, batch.name))) {
       if (f.endsWith(".png") && !FILE_STATIC.test(f)) note("repo", "file", batch.name, f, "filename does not match NAMING.md");
       if (f.endsWith(".mp4") && !FILE_VIDEO.test(f)) note("repo", "file", batch.name, f, "filename does not match NAMING.md");
@@ -182,8 +195,12 @@ async function checkFiles() {
 // ---------------------------------------------------------------- run
 const want = (p) => PLATFORM === "all" || PLATFORM === p;
 const ran = [];
+const noAccount = [];
 for (const [name, fn] of [["meta", checkMeta], ["google", checkGoogle], ["reddit", checkReddit]]) {
   if (!want(name)) continue;
+  // No id for this platform means the account has not been created. That is a fact about the
+  // rollout, not a naming problem, so it is reported and not counted as off-standard.
+  if (!acct[name]) { noAccount.push(name); continue; }
   try { await fn(); ran.push(name); }
   catch (e) { note(name, "-", "-", "-", `could not read the account: ${e.message.slice(0, 200)}`); }
 }
@@ -192,7 +209,9 @@ if (has("files")) { try { await checkFiles(); ran.push("repo"); } catch (e) { no
 if (JSON_OUT) {
   console.log(JSON.stringify({ company: COMPANY, checked: ran, assetIds: [...seenAssetIds].sort(), problems }, null, 2));
 } else {
-  console.log(`Checked ${ran.join(", ")} for ${COMPANY}. ${seenAssetIds.size} distinct asset id(s) live.\n`);
+  console.log(`Checked ${ran.join(", ") || "nothing"} for ${COMPANY}. ${seenAssetIds.size} distinct asset id(s) live.`);
+  if (noAccount.length) console.log(`No ad account yet on: ${noAccount.join(", ")} (nothing live to read).`);
+  console.log("");
   if (!problems.length) console.log("Everything matches NAMING.md.");
   const byPlatform = {};
   for (const p of problems) (byPlatform[p.platform] ??= []).push(p);

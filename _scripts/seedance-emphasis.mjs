@@ -16,6 +16,12 @@ export const BRAND = {
   esacard: { hex: "#f2a93b", ass: "&H003BA9F2" }, // marigold, reads on warm daylight footage
   bitpredict: { hex: "#01DD82", ass: "&H0082DD01" }, // neon green, the brand's only accent
   teampredict: { hex: "#4B56FF", ass: "&H00FF564B" }, // brand indigo
+  // Added 2026-08-21 for batch 14. The Stripe-style action colour from
+  // 1Capture-Marketing/tailwind.config.js after the relaunch. The old teal brand is
+  // retired: `1capture.teal` in that config is now this same #635BFF, the legacy utility
+  // name remapped onto the new palette, so nothing in this repo should ever emit teal.
+  // ASS is &H00BBGGRR, so #635BFF reverses to &H00FF5B63.
+  "1capture": { hex: "#635BFF", ass: "&H00FF5B63" },
 };
 
 // Anything containing a digit, plus spelled-out numbers, is emphasised.
@@ -26,6 +32,13 @@ export const NUMBER_WORDS = new Set([
 ]);
 
 export const EMPHASIS = {
+  // ── batch 14, 1Capture (first batch for this brand) ──
+  // No clip speaks the brand, so there is no brand-tier word in any of these three; the
+  // composited end card is the only place the name appears.
+  "1capture-platform-b14v01-fourth-free-trial": ["fourth", "same", "real", "check", "door", "typical", "free"],
+  "1capture-platform-b14v02-ten-signups": ["never", "buying", "card", "first", "percent", "free"],
+  "1capture-platform-b14v03-a-real-card": ["real", "card", "window-shoppers", "verify", "hundred", "trust", "free"],
+
   // ── batch 1 ──
   "voicedrop-c39-cold-callers-anonymous": ["fax", "machine", "stopped", "me", "obsolete"],
   "emailchaser-c11-missing": ["none", "promotions", "tab", "primary", "whole", "time"],
@@ -232,7 +245,12 @@ export const EMPHASIS = {
 // instead of failing loudly. No real ad id ends in one of these tokens.
 export function adIdFromPath(p) {
   const base = p.split("/").pop().replace(/\.mp4$/, "");
-  return base.replace(/(-(480p|720p|1080p|fixed|trimmed|captioned|endcard))+$/, "");
+  // Every post-step suffix has to be listed here. The lookup degrades silently rather than
+  // throwing, so a missing one does not error: it just returns an id nothing matches, logs
+  // "no emphasis list" and burns every punchline word in plain white. That happened in batch
+  // 13 with "-endcard" and again on the first b14 pass with "-screen", which is the suffix
+  // _work/compose-video.mjs adds when it composites the real screen recording into a clip.
+  return base.replace(/(-(480p|720p|1080p|fixed|trimmed|captioned|endcard|screen))+$/, "");
 }
 
 export function companyFromPath(p) {

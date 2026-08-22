@@ -105,3 +105,27 @@ teampredict/2026-08-18-office-skits-2/teampredict-w6-green-ring-1080p.mp4
 esacard/2026-08-19-weird-animals/_takes/
 esacard/2026-08-19-weird-animals/*-take2-720p.mp4
 esacard/2026-08-19-weird-animals/*.log
+
+# ---------------------------------------------------------------------------
+# batch 14, 1Capture, 2026-08-21. The *-1080p-screen-endcard-captioned.mp4 files
+# are the deliverable and ARE committed, along with the 720p masters that were
+# paid for and every banner PNG. What is ignored below is intermediates that any
+# of these rebuilds from:
+#   node _work/compose-video.mjs && node _work/finish-videos.mjs
+# and the raw screen-capture frames, which are 126 MB of JPEGs that
+# _work/build-screencap.mjs turns into the two small mp4 inserts it keeps.
+1capture/2026-08-21-b14-relaunch/*-1080p.mp4
+1capture/2026-08-21-b14-relaunch/*-1080p-screen.mp4
+1capture/2026-08-21-b14-relaunch/*-1080p-screen-endcard.mp4
+1capture/2026-08-21-b14-relaunch/*.mp3
+_work/screencap/cardcheck/
+_work/screencap/trialpage/
+
+# Inter, 876 KB, which _work/make-endcard.py sets the end cards in because it is what the
+# live site uses. Fetched rather than vendored; the command is in make-endcard.py's docstring
+# and in the batch README's reproduce block.
+_work/fonts/
+
+# A symlink to the global node_modules, created so the capture scripts can resolve
+# playwright. Never part of the repo.
+node_modules
