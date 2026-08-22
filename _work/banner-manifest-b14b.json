@@ -1,0 +1,94 @@
+{
+  "1capture-platform-b14c04": {
+    "family": "loud direct-response",
+    "concept": "hazard"
+  },
+  "1capture-platform-b14c05": {
+    "family": "loud direct-response",
+    "concept": "brutalist-invert"
+  },
+  "1capture-platform-b14c06": {
+    "family": "loud direct-response",
+    "concept": "ransom"
+  },
+  "1capture-platform-b14c07": {
+    "family": "loud direct-response",
+    "concept": "meganumeral"
+  },
+  "1capture-platform-b14c08": {
+    "family": "loud direct-response",
+    "concept": "offerposter"
+  },
+  "1capture-platform-b14c09": {
+    "family": "loud direct-response",
+    "concept": "benday"
+  },
+  "1capture-platform-b14c10": {
+    "family": "loud direct-response",
+    "concept": "blueprint"
+  },
+  "1capture-platform-b14c11": {
+    "family": "loud direct-response",
+    "concept": "split"
+  },
+  "1capture-platform-b14c12": {
+    "family": "loud direct-response",
+    "concept": "stickerbomb"
+  },
+  "1capture-platform-b14c13": {
+    "family": "loud direct-response",
+    "concept": "vhs"
+  },
+  "1capture-platform-b14c14": {
+    "family": "loud direct-response",
+    "concept": "chrome"
+  },
+  "1capture-platform-b14c15": {
+    "family": "loud direct-response",
+    "concept": "foil"
+  },
+  "1capture-platform-b14c16": {
+    "family": "native/organic",
+    "concept": "whiteboard"
+  },
+  "1capture-platform-b14c17": {
+    "family": "native/organic",
+    "concept": "legalpad"
+  },
+  "1capture-platform-b14c18": {
+    "family": "native/organic",
+    "concept": "stickies"
+  },
+  "1capture-platform-b14c19": {
+    "family": "native/organic",
+    "concept": "napkin"
+  },
+  "1capture-platform-b14c20": {
+    "family": "native/organic",
+    "concept": "cardboard"
+  },
+  "1capture-platform-b14c21": {
+    "family": "native/organic",
+    "concept": "corkboard"
+  },
+  "1capture-platform-b14c22": {
+    "family": "native/organic",
+    "concept": "chalkboard"
+  },
+  "1capture-platform-b14c23": {
+    "family": "native/organic",
+    "concept": "notebook"
+  },
+  "1capture-platform-b14c24": {
+    "family": "native/organic",
+    "concept": "receipt"
+  },
+  "1capture-platform-b14c25": {
+    "family": "native/organic",
+    "concept": "envelope"
+  },
+  "1capture-platform-b14c26": {
+    "family": "native/organic",
+    "concept": "postit-mono"
+  }
+}

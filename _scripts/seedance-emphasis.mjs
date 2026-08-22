@@ -35,9 +35,9 @@ export const EMPHASIS = {
   // ── batch 14, 1Capture (first batch for this brand) ──
   // No clip speaks the brand, so there is no brand-tier word in any of these three; the
   // composited end card is the only place the name appears.
-  "1capture-platform-b14v01-fourth-free-trial": ["fourth", "same", "real", "check", "door", "typical", "free"],
-  "1capture-platform-b14v02-ten-signups": ["never", "buying", "card", "first", "percent", "free"],
-  "1capture-platform-b14v03-a-real-card": ["real", "card", "window-shoppers", "verify", "hundred", "trust", "free"],
+  "1capture-platform-b14v01-fake-credit-cards": ["fake", "credit", "cards", "failed", "abusing", "verify", "typical", "free"],
+  "1capture-platform-b14v02-payment-failed": ["failed", "fake", "cards", "verified", "percent", "free"],
+  "1capture-platform-b14v03-verify-every-user": ["verify", "every", "user", "fake", "failed", "abuse", "hundred", "free"],
 
   // ── batch 1 ──
   "voicedrop-c39-cold-callers-anonymous": ["fax", "machine", "stopped", "me", "obsolete"],

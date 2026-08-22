@@ -1,82 +1,34 @@
 {
-  "ranAt": "2026-08-22T00:50:14.629Z",
-  "mergedAt": "2026-08-22T01:57:26.327Z",
+  "ranAt": "2026-08-22T09:00:38.146Z",
   "model": "bytedance/seedance-2.5/text-to-video",
   "duration": "15",
   "resolution": "720p",
-  "note": "Merged from the take-1 run and four --only re-rolls by _work/merge-run-log.mjs, because a --only run writes a log describing just that one clip and would otherwise lose the other clips' seeds and fal source URLs. b14v01 and b14v03 each took three rolls. Take 1: both garbled \"signup\" on three transcription engines (\"startup\", \"sarnup\", \"startin' up\"). Take 2: a per-syllable pronunciation anchor fixed v03's hook but not v01, and v03's re-roll broke \"SaaS\" instead (\"OS\", \"SOES\"), which is the documented re-roll coin flip. Take 3 removed the twice-failing word from v01's line entirely and both came back word-perfect on all three engines. b14v02 was word-perfect on take 1 and was never re-rolled.",
-  "rendersBilled": 7,
-  "estimatedSpendUsd": 49.28,
-  "clips": [
+  "estimatedSpendUsd": 21.12,
+  "ok": [
     {
-      "id": "1capture-platform-b14v01-fourth-free-trial",
-      "takesRendered": 3,
-      "adoptedTake": 3,
-      "takes": [
-        {
-          "take": 1,
-          "seed": 1598178793,
-          "sourceUrl": "https://v3b.fal.media/files/b/0aa74b4c/DA557BkqDqJZBWfqtDQ7J_video.mp4",
-          "master": "1capture/2026-08-21-b14-relaunch/1capture-platform-b14v01-fourth-free-trial-720p.mp4",
-          "upscaled": "1capture/2026-08-21-b14-relaunch/1capture-platform-b14v01-fourth-free-trial-1080p.mp4"
-        },
-        {
-          "take": 2,
-          "seed": 2018393589,
-          "sourceUrl": "https://v3b.fal.media/files/b/0aa74bc5/ueFz_9u00inf2-YhaLQxr_video.mp4",
-          "master": "1capture/2026-08-21-b14-relaunch/1capture-platform-b14v01-fourth-free-trial-720p.mp4",
-          "upscaled": "1capture/2026-08-21-b14-relaunch/1capture-platform-b14v01-fourth-free-trial-1080p.mp4"
-        },
-        {
-          "take": 3,
-          "seed": 1082507440,
-          "sourceUrl": "https://v3b.fal.media/files/b/0aa74ca3/wWPeGi5ZmAqG4009e8GMz_video.mp4",
-          "master": "1capture/2026-08-21-b14-relaunch/1capture-platform-b14v01-fourth-free-trial-720p.mp4",
-          "upscaled": "1capture/2026-08-21-b14-relaunch/1capture-platform-b14v01-fourth-free-trial-1080p.mp4"
-        }
-      ]
+      "id": "1capture-platform-b14v01-fake-credit-cards",
+      "company": "1capture",
+      "seed": 815073247,
+      "sourceUrl": "https://v3b.fal.media/files/b/0aa756cf/oY4xeLhiZEkC_5kcdd2Qj_video.mp4",
+      "raw": "/home/user/ad-creative/1capture/2026-08-21-b14-relaunch/1capture-platform-b14v01-fake-credit-cards-720p.mp4",
+      "upscaled": "/home/user/ad-creative/1capture/2026-08-21-b14-relaunch/1capture-platform-b14v01-fake-credit-cards-1080p.mp4"
     },
     {
-      "id": "1capture-platform-b14v02-ten-signups",
-      "takesRendered": 1,
-      "adoptedTake": 1,
-      "takes": [
-        {
-          "take": 1,
-          "seed": 1448012411,
-          "sourceUrl": "https://v3b.fal.media/files/b/0aa74b57/aGIClSZse3VZsK0bl-md5_video.mp4",
-          "master": "1capture/2026-08-21-b14-relaunch/1capture-platform-b14v02-ten-signups-720p.mp4",
-          "upscaled": "1capture/2026-08-21-b14-relaunch/1capture-platform-b14v02-ten-signups-1080p.mp4"
-        }
-      ]
+      "id": "1capture-platform-b14v02-payment-failed",
+      "company": "1capture",
+      "seed": 588044860,
+      "sourceUrl": "https://v3b.fal.media/files/b/0aa756c3/MKQ7CmUXJPp-_B3ZZDatz_video.mp4",
+      "raw": "/home/user/ad-creative/1capture/2026-08-21-b14-relaunch/1capture-platform-b14v02-payment-failed-720p.mp4",
+      "upscaled": "/home/user/ad-creative/1capture/2026-08-21-b14-relaunch/1capture-platform-b14v02-payment-failed-1080p.mp4"
     },
     {
-      "id": "1capture-platform-b14v03-a-real-card",
-      "takesRendered": 3,
-      "adoptedTake": 3,
-      "takes": [
-        {
-          "take": 1,
-          "seed": 1980606960,
-          "sourceUrl": "https://v3b.fal.media/files/b/0aa74b48/77a6aPnuTCjN-Ok-gYhxc_video.mp4",
-          "master": "1capture/2026-08-21-b14-relaunch/1capture-platform-b14v03-a-real-card-720p.mp4",
-          "upscaled": "1capture/2026-08-21-b14-relaunch/1capture-platform-b14v03-a-real-card-1080p.mp4"
-        },
-        {
-          "take": 2,
-          "seed": 357689153,
-          "sourceUrl": "https://v3b.fal.media/files/b/0aa74c21/GFejaPyvCUqp6ImE3d9e9_video.mp4",
-          "master": "1capture/2026-08-21-b14-relaunch/1capture-platform-b14v03-a-real-card-720p.mp4",
-          "upscaled": "1capture/2026-08-21-b14-relaunch/1capture-platform-b14v03-a-real-card-1080p.mp4"
-        },
-        {
-          "take": 3,
-          "seed": 1944029256,
-          "sourceUrl": "https://v3b.fal.media/files/b/0aa74cce/EMuFk0wYDxF5T8_7giwvH_video.mp4",
-          "master": "1capture/2026-08-21-b14-relaunch/1capture-platform-b14v03-a-real-card-720p.mp4",
-          "upscaled": "1capture/2026-08-21-b14-relaunch/1capture-platform-b14v03-a-real-card-1080p.mp4"
-        }
-      ]
+      "id": "1capture-platform-b14v03-verify-every-user",
+      "company": "1capture",
+      "seed": 1244400996,
+      "sourceUrl": "https://v3b.fal.media/files/b/0aa756e4/vCsEyebNNpKGsO7cBjIt2_video.mp4",
+      "raw": "/home/user/ad-creative/1capture/2026-08-21-b14-relaunch/1capture-platform-b14v03-verify-every-user-720p.mp4",
+      "upscaled": "/home/user/ad-creative/1capture/2026-08-21-b14-relaunch/1capture-platform-b14v03-verify-every-user-1080p.mp4"
     }
-  ]
+  ],
+  "failed": []
 }

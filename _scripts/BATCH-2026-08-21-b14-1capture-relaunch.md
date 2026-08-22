@@ -227,11 +227,11 @@ Changes to shared tooling, each because this batch broke something:
 
 | item | qty | cost |
 |---|---|---|
-| video renders, 720p 15s 9:16 | 7 (3 clips; v01 and v03 took 3 rolls each) | $48.51 |
-| 1080p upscales | 7 | $0.77 |
-| banner renders, GPT Image 2 high | 12 (9 shapes, c03 re-rolled x3) | $2.40 |
-| transcription, 3 engines per take plus caption timings | ~20 passes | ~$0.30 |
-| **total** | | **~$51.98** against a $60-90 budget |
+| video renders, 720p 15s 9:16 | 10 (round 1: 7 rolls over 3 clips; round 2: 3 clean first takes) | $69.30 |
+| 1080p upscales | 10 | $1.10 |
+| banner renders, GPT Image 2 high | 38 (round 1: 12; round 2: 23 squares + 3 contrast re-rolls) | $7.60 |
+| transcription, 3 engines per take plus caption timings | ~35 passes | ~$0.45 |
+| **total** | | **~$78.45** against a $60-90 budget |
 
 The plan was to render once, QA hard, and spend the remainder only on defects QA actually found.
 It found two, and both cost two extra rolls each because the first correction fixed the wrong
@@ -268,3 +268,86 @@ roll later would have.
    the ad says out loud. Claim 6 is safe standalone so no lander support is required, but the
    message-match is imperfect: either add the line to that page or repoint the ad at
    `/stripe-trial-conversion`.
+
+---
+
+# Round 2, 2026-08-21: the script re-cut and the wide banner set
+
+**Robby, on round 1:** *"The style is really good but the script is really bad. Needs to be more
+clear: Free trial abuse / Fake **Credit** card on signups / Payments failed when the 7-day trial
+was done / Users were abusing the free trial / Now I verify every user. Also we need really
+solid, varied, best practice, disruptive, scroll stopping banners - lots of them."*
+
+## What was wrong with round 1's scripts
+
+They were clever instead of clear. Every one of them made the viewer assemble the story: "Same
+card, fourth trial" implies duplicate signups without saying what happened; "My last ten
+signups. Two paid." is arithmetic, not an event; "A real card. Every signup." is a mechanic with
+no problem attached. The judge panel had graded them on hook strength, claim safety and render
+safety, and they passed all three, because **none of those lenses asks whether a stranger who
+has never heard of the product understands what happened.**
+
+The fix was to say the actual sequence out loud, in order, in the founder's own words. All
+three clips now tell it; they differ only in where they enter:
+
+| clip | enters on | the sequence |
+|---|---|---|
+| b14v01 | the fake cards | "Fake credit cards. Every week." / "Seven days later, every payment failed." / "They were abusing the free trial. Now I verify every user." |
+| b14v02 | the failed payment | "Trial ended. Payment failed." / "Over and over. Fake cards on my signups." / "Now every card gets verified before the free trial starts." |
+| b14v03 | the fix | "I verify every user." / "Fake credit cards were killing my trials." / "Seven days later, every payment failed. That is abuse." |
+
+The seven-day trial is the **character's own** product's trial, in-scene fiction, not a 1Capture
+claim: 1Capture is free forever under $10K MRR with no card. "Free trial abuse", "virtual
+credit cards" and "serial trial abusers" are all live site copy on `/free-trial-abuse-prevention`.
+The number beat and the close are unchanged, so every defendable claim is still the same bank
+claim it was.
+
+**All three came back word-perfect on all three engines on the first take**, against seven rolls
+for the same three clips in round 1. The difference is not luck: round 1's rolls were all spent
+on "signup", a word round 2's scripts happen to use only once, in the plural, in a slow beat.
+
+One process note, because it is the same mistake twice. The re-cut moved "signup" out of two
+clips, and both still carried its pronunciation block. That is exactly the contradiction that
+made round 1's v03 speak a word that had been cut from its script. It was caught by an assertion
+before rendering this time rather than after: each clip is now checked to confirm every
+pronunciation block it carries names a word its beats actually contain.
+
+## The wide banner set
+
+`_scripts/banner-prompts-b14b-1capture.mjs`: twenty-three more concepts, built the way the
+2026-08-03 VoiceDrop "go wild" run was, which is the only method in this repo with a recorded
+win. **Hold the copy fixed, make visual style the only variable.** Eight approved copy pairs
+across twenty-three visual territories, so when one wins you know it was the treatment.
+
+Twelve loud direct-response: hazard tape, brutalist inversion, ransom note, mega-numeral, offer
+poster, Ben-Day pop, blueprint, split-screen, sticker bomb, VHS glitch, liquid chrome, foil
+letterpress. Eleven native/organic: whiteboard, legal pad, sticky notes, napkin, torn cardboard,
+corkboard, chalkboard, squared notebook, till receipt, kraft envelope, single sticky note.
+Nothing in the polished-corporate middle, which has never once been picked from this repo.
+
+The set is built from a template function taking the copy as its one variable, so the discipline
+is structural rather than remembered, and the prompt file is 23 concepts in roughly the space
+3 used to take.
+
+**Three failed review and were re-rolled**, all for the same reason: a treatment applied to the
+headline that cost it legibility at feed size. The blueprint set its headline in thin white
+outline with no fill; the letterpress blind-debossed it in the paper's own colour; the receipt
+sat small in the frame. In each case the treatment stayed and moved off the headline. That is a
+rule worth keeping: **on a scroll-stopping brief, any styling that touches the headline has to
+survive a thumbnail, and outline, deboss and small-in-frame are the three that do not.**
+
+## The logo compositor now measures type, not variance
+
+Placing a wordmark on twenty-six frames surfaced that the placement test was measuring the wrong
+thing. It scored standard deviation over the candidate area, which:
+
+- reads a flat violet field **between two lines of white type** as quiet, so the mark landed on
+  a letter on four frames; and
+- reads a hazard-stripe band as busy, even though a plate over decoration is fine.
+
+It now scores **edge density**, the percentage of pixels in the box sitting on a hard edge, which
+is what actually distinguishes lettering from a flat field or a soft photo background. Two more
+fixes came with it: the fallback only moves the mark if the alternative is genuinely cleaner
+(it was previously capable of moving it somewhere worse), and if nowhere is clean at full size
+the mark **shrinks** to 72% and then 52% and looks again, because a small legible wordmark beats
+a large one sitting on a word.

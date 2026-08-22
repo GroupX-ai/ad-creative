@@ -16,7 +16,7 @@ one that belongs on Reddit, where the post is already branded with the author ha
 and a pasted wordmark undoes the native-post illusion.
 """
 import argparse, pathlib, shutil, sys
-from PIL import Image, ImageStat
+from PIL import Image, ImageStat, ImageFilter
 
 ROOT = pathlib.Path("/home/user/ad-creative")
 WORK = ROOT / "_work"
@@ -40,6 +40,20 @@ PLACEMENT = {
     "1capture-platform-b14c03": {"variant": "white", "where": "bottom-right", "width": 0.26, "plate": True},
 }
 
+# b14b is twenty-three concepts, so placement comes from the family rather than a hand-written
+# row each. A set frame reserves a band and takes the mark bare; a photograph takes a small mark
+# on a plate in a corner, because banner rule 7 says a top-centre wordmark on a photo reads as an
+# advert instantly. Either way the measured fallback below still has the last word.
+FAMILY_DEFAULT = {
+    "loud direct-response": {"variant": "white", "where": "bottom-center", "width": 0.30, "plate": False},
+    "native/organic": {"variant": "white", "where": "bottom-right", "width": 0.26, "plate": True},
+}
+_manifest = WORK / "banner-manifest-b14b.json"
+if _manifest.exists():
+    import json as _json
+    for _id, _meta in _json.loads(_manifest.read_text()).items():
+        PLACEMENT.setdefault(_id, FAMILY_DEFAULT[_meta["family"]])
+
 # Vertical banners are much taller than they are wide, so a mark sized as a fraction of the
 # width would tower; and wide leaderboards are the reverse. Scale the fraction per shape.
 SHAPE_SCALE = {"square": 1.0, "landscape": 0.55, "vertical": 0.78, "wide": 0.62}
@@ -53,9 +67,30 @@ SHAPE_SCALE = {"square": 1.0, "landscape": 0.55, "vertical": 0.78, "wide": 0.62}
 LANDSCAPE_OVERRIDE = {"where": "bottom-left", "plate": True}
 
 
+_EDGES = {}
+
+
+def _edge_map(im):
+    """Cache one edge map per image: type is high-frequency, flat color and soft photo
+    backgrounds are not."""
+    key = id(im)
+    if key not in _EDGES:
+        _EDGES[key] = im.convert("L").filter(ImageFilter.FIND_EDGES)
+    return _EDGES[key]
+
+
 def band_score(im, box):
-    """How quiet a region is. Low std dev over a crop means nothing is there to cover."""
-    return ImageStat.Stat(im.convert("L").crop(box)).stddev[0]
+    """How much TYPE is in a region, as a percentage of its pixels that sit on a hard edge.
+
+    This was standard deviation, and standard deviation is the wrong test. It scores a flat
+    violet field between two lines of white type as quiet, so the mark landed on a letter; and
+    it scores a hazard-stripe band as busy even though a plate over decoration is fine. Edge
+    density measures the thing that actually matters: a box over flat color or a soft photo
+    background reads near zero, a box touching any lettering does not."""
+    crop = _edge_map(im).crop(box)
+    hist = crop.histogram()
+    hard = sum(hist[60:])
+    return 100.0 * hard / max(1, crop.size[0] * crop.size[1])
 
 
 # Above this, the configured band has copy in it and pasting there would sit the mark on top of
@@ -63,7 +98,7 @@ def band_score(im, box):
 # square and the vertical, where there is room, and does not on the landscape, where the same
 # copy is packed into 628px of height. Rather than pay for another roll and hope, measure the
 # frame and fall back to the quietest corner, on a plate so it is legible over anything.
-BUSY = 12.0
+BUSY = 0.35  # percent of pixels on a hard edge; anything above this has lettering in it
 
 
 def quietest_spot(im, bw, bh, pad):
@@ -155,22 +190,44 @@ def main():
         pad = int(min(w, h) * 0.05)
 
         canvas = im.copy()
-        x, y = place(canvas, logo, cfg["where"], pad)
 
-        # Everything below is measured on the box that is actually DRAWN: the mark plus its
-        # plate margin when there is a plate, so nothing is scored clean and then clipped.
-        plate = cfg["plate"]
-        where = cfg["where"]
-        m = int(logo.height * 0.55)
-        bw, bh = (logo.width + 2 * m, logo.height + 2 * m) if plate else (logo.width, logo.height)
-        bx, by = (x - m, y - m) if plate else (x, y)
-        score = band_score(im, (bx, by, bx + bw, by + bh))
-        if score > BUSY:
-            # A plate is going on regardless once we are hunting for space, so search at plate size.
-            pbw, pbh = logo.width + 2 * m, logo.height + 2 * m
+        # Find a home for the mark. Everything is measured on the box that is actually DRAWN,
+        # mark plus plate margin, so nothing is scored clean and then clipped. If the configured
+        # band has lettering in it, try the quietest edge; and if the frame is so full that
+        # nowhere is clean at full size, SHRINK the mark and look again. A smaller mark finds a
+        # gap a larger one cannot, and a small legible wordmark beats a big one sitting on a word.
+        base_w = target
+        placed = None
+        for scale in (1.0, 0.72, 0.52):
+            lw = max(60, int(base_w * scale))
+            lg = Image.open(LOGO_WHITE if cfg["variant"] == "white" else LOGO_INK).convert("RGBA")
+            lg = lg.resize((lw, max(1, round(lg.height * lw / lg.width))), Image.LANCZOS)
+            m = int(lg.height * 0.55)
+            plate = cfg["plate"]
+            where = cfg["where"]
+            x, y = place(canvas, lg, where, pad)
+            bw, bh = (lg.width + 2 * m, lg.height + 2 * m) if plate else (lg.width, lg.height)
+            bx, by = (x - m, y - m) if plate else (x, y)
+            score = band_score(im, (bx, by, bx + bw, by + bh))
+            if score <= BUSY:
+                placed = (lg, m, x, y, where, plate, score, scale)
+                break
+            pbw, pbh = lg.width + 2 * m, lg.height + 2 * m
             alt_score, alt_name, (ax, ay) = quietest_spot(im, pbw, pbh, pad)
-            print(f"  {f.name}: {where} is busy ({score:.1f}), using {alt_name} ({alt_score:.1f}) on a plate")
-            x, y, where, plate = ax + m, ay + m, alt_name, True
+            if alt_score < score:
+                score, where, plate, x, y = alt_score, alt_name, True, ax + m, ay + m
+            else:
+                plate = True
+            if score <= BUSY or scale == 0.52:
+                placed = (lg, m, x, y, where, plate, score, scale)
+                if score <= BUSY:
+                    break
+        logo, m, x, y, where, plate, score, scale = placed
+        note = "" if scale == 1.0 else f", shrunk to {int(scale * 100)}%"
+        if score > BUSY:
+            print(f"  {f.name}: no clear space anywhere (best {score:.2f}){note}; on a plate at {where}")
+        elif scale != 1.0 or where != cfg["where"]:
+            print(f"  {f.name}: moved to {where} ({score:.2f}){note}")
 
         if plate:
             # A photograph needs a ground for the mark or it disappears into the image.

@@ -18,9 +18,14 @@ Four files per clip, all kept:
 
 | id | hook | the one number |
 |---|---|---|
-| `b14v01` fourth-free-trial | "Same card, fourth trial. Same guy." | 2-3x is typical |
-| `b14v02` ten-signups | "My last ten signups. Two paid." | VoiceDrop 12% to 57% |
-| `b14v03` a-real-card | "A real card. Every signup." | 100+ SaaS teams |
+| `b14v01` fake-credit-cards | "Fake credit cards. Every week." | 2-3x is typical |
+| `b14v02` payment-failed | "Trial ended. Payment failed." | VoiceDrop 12% to 57% |
+| `b14v03` verify-every-user | "I verify every user." | 100+ SaaS teams |
+
+All three tell the same sequence and differ only in where they enter it: fake credit cards on
+signups, the trial ends seven days later, every payment fails, that is free trial abuse, and now
+every user is verified. The seven-day trial is the character's own product's, in-scene fiction;
+1Capture itself is free forever under $10K MRR with no card.
 
 No clip speaks the brand name: five compound names have been mispronounced across seven
 batches, and the composited end card carries it regardless. The screen recording is a real
@@ -30,11 +35,15 @@ forbids any brand mention before second 5.
 
 ## Banners (three shapes each)
 
-| id | concept | family |
-|---|---|---|
-| `b14c01` | "Only let real customers through the door." | loud direct-response, hazard label |
-| `b14c02` | "12% to 57%" | loud direct-response, mega-numeral |
-| `b14c03` | "Verify a real payment method before anyone enters your free trial." | native/organic, whiteboard photo |
+Twenty-six concepts. `b14c01`-`c03` ship at three shapes each; `b14c04`-`c26` are the wide
+"go wild" set at square, built by holding the approved copy fixed and making visual style the
+only variable, so a winner tells you which treatment won.
+
+Twelve loud direct-response: hazard tape, brutalist inversion, ransom note, mega-numeral, offer
+poster, Ben-Day pop, blueprint, split-screen, sticker bomb, VHS glitch, liquid chrome, foil
+letterpress. Fourteen native/organic: whiteboard x2, legal pad, sticky notes, napkin, torn
+cardboard, corkboard, chalkboard, squared notebook, till receipt, kraft envelope, single sticky
+note. Nothing polished-corporate.
 
 `nologo/` holds the same nine renders without the composited wordmark. **Use those on Reddit:**
 the post is already branded with the author handle, and a pasted wordmark undoes the
